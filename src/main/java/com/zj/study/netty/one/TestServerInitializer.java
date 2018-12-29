@@ -1,4 +1,4 @@
-package study;
+package com.zj.study.netty.one;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -9,9 +9,9 @@ public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
 
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
-		ChannelPipeline pipeliine = ch.pipeline();
-		pipeliine.addLast("httpServerCodec", new HttpServerCodec());
-		pipeliine.addLast("testHttpServerHandle", new TestHttpServerHandler());
+		ChannelPipeline pipeline = ch.pipeline();
+		pipeline.addLast("httpServerCodec", new HttpServerCodec());
+		pipeline.addLast("testHttpServerHandle", new TestHttpServerHandler());
 
 	}
 

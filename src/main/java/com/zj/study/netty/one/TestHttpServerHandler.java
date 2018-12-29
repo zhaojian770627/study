@@ -1,4 +1,4 @@
-package study;
+package com.zj.study.netty.one;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

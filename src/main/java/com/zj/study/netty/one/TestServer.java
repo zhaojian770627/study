@@ -1,4 +1,4 @@
-package study;
+package com.zj.study.netty.one;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
