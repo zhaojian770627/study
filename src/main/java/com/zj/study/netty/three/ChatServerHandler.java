@@ -14,7 +14,6 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 		Channel channel = ctx.channel();
-
 		for (Channel ch : channelGroup) {
 			if (channel != ch) {
 				ch.writeAndFlush(channel.remoteAddress() + " 发送的消息:" + msg + "\n");
