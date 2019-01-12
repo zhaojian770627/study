@@ -29,6 +29,7 @@ public class TestClientHandler extends SimpleChannelInboundHandler<DataInfo.Mess
 			msg = DataInfo.Message.newBuilder().setMType(MType.TeacherType)
 					.setTeacher(Teacher.newBuilder().setName("zhaojian").setAge(41).setCourse(3).build()).build();
 		}
+
 		ctx.writeAndFlush(msg);
 	}
 }
