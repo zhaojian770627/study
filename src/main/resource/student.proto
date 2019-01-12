@@ -6,8 +6,27 @@ option optimize_for = SPEED;
 option java_package="com.zj.study.protobuf";
 option java_outer_classname="DataInfo";
 
+message Message{
+	enum MType{
+		StudentType=1;
+		TeacherType=2;
+	}
+	
+	required MType m_type=1;
+	oneof MBody{
+		Student student=2;
+		Teacher teacher=3;
+	}
+}
+
 message Student{
 	required string name = 1;
   	optional int32 age = 2;
   	optional string address = 3;
+}
+
+message Teacher{
+	required string name = 1;
+  	optional int32 age = 2;
+  	optional int32 course = 3;
 }

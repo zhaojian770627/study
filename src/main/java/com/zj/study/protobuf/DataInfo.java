@@ -14,6 +14,1147 @@ public final class DataInfo {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface MessageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.zj.study.protobuf.Message)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+     */
+    boolean hasMType();
+    /**
+     * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+     */
+    com.zj.study.protobuf.DataInfo.Message.MType getMType();
+
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    boolean hasStudent();
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    com.zj.study.protobuf.DataInfo.Student getStudent();
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    com.zj.study.protobuf.DataInfo.StudentOrBuilder getStudentOrBuilder();
+
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    boolean hasTeacher();
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    com.zj.study.protobuf.DataInfo.Teacher getTeacher();
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    com.zj.study.protobuf.DataInfo.TeacherOrBuilder getTeacherOrBuilder();
+
+    public com.zj.study.protobuf.DataInfo.Message.MBodyCase getMBodyCase();
+  }
+  /**
+   * Protobuf type {@code com.zj.study.protobuf.Message}
+   */
+  public  static final class Message extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.zj.study.protobuf.Message)
+      MessageOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Message.newBuilder() to construct.
+    private Message(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Message() {
+      mType_ = 1;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Message(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+              int rawValue = input.readEnum();
+                @SuppressWarnings("deprecation")
+              com.zj.study.protobuf.DataInfo.Message.MType value = com.zj.study.protobuf.DataInfo.Message.MType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                mType_ = rawValue;
+              }
+              break;
+            }
+            case 18: {
+              com.zj.study.protobuf.DataInfo.Student.Builder subBuilder = null;
+              if (mBodyCase_ == 2) {
+                subBuilder = ((com.zj.study.protobuf.DataInfo.Student) mBody_).toBuilder();
+              }
+              mBody_ =
+                  input.readMessage(com.zj.study.protobuf.DataInfo.Student.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.zj.study.protobuf.DataInfo.Student) mBody_);
+                mBody_ = subBuilder.buildPartial();
+              }
+              mBodyCase_ = 2;
+              break;
+            }
+            case 26: {
+              com.zj.study.protobuf.DataInfo.Teacher.Builder subBuilder = null;
+              if (mBodyCase_ == 3) {
+                subBuilder = ((com.zj.study.protobuf.DataInfo.Teacher) mBody_).toBuilder();
+              }
+              mBody_ =
+                  input.readMessage(com.zj.study.protobuf.DataInfo.Teacher.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom((com.zj.study.protobuf.DataInfo.Teacher) mBody_);
+                mBody_ = subBuilder.buildPartial();
+              }
+              mBodyCase_ = 3;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Message_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Message_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zj.study.protobuf.DataInfo.Message.class, com.zj.study.protobuf.DataInfo.Message.Builder.class);
+    }
+
+    /**
+     * Protobuf enum {@code com.zj.study.protobuf.Message.MType}
+     */
+    public enum MType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>StudentType = 1;</code>
+       */
+      StudentType(1),
+      /**
+       * <code>TeacherType = 2;</code>
+       */
+      TeacherType(2),
+      ;
+
+      /**
+       * <code>StudentType = 1;</code>
+       */
+      public static final int StudentType_VALUE = 1;
+      /**
+       * <code>TeacherType = 2;</code>
+       */
+      public static final int TeacherType_VALUE = 2;
+
+
+      public final int getNumber() {
+        return value;
+      }
+
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static MType valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static MType forNumber(int value) {
+        switch (value) {
+          case 1: return StudentType;
+          case 2: return TeacherType;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<MType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static final com.google.protobuf.Internal.EnumLiteMap<
+          MType> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<MType>() {
+              public MType findValueByNumber(int number) {
+                return MType.forNumber(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(ordinal());
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.zj.study.protobuf.DataInfo.Message.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final MType[] VALUES = values();
+
+      public static MType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int value;
+
+      private MType(int value) {
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:com.zj.study.protobuf.Message.MType)
+    }
+
+    private int bitField0_;
+    private int mBodyCase_ = 0;
+    private java.lang.Object mBody_;
+    public enum MBodyCase
+        implements com.google.protobuf.Internal.EnumLite {
+      STUDENT(2),
+      TEACHER(3),
+      MBODY_NOT_SET(0);
+      private final int value;
+      private MBodyCase(int value) {
+        this.value = value;
+      }
+      /**
+       * @deprecated Use {@link #forNumber(int)} instead.
+       */
+      @java.lang.Deprecated
+      public static MBodyCase valueOf(int value) {
+        return forNumber(value);
+      }
+
+      public static MBodyCase forNumber(int value) {
+        switch (value) {
+          case 2: return STUDENT;
+          case 3: return TEACHER;
+          case 0: return MBODY_NOT_SET;
+          default: return null;
+        }
+      }
+      public int getNumber() {
+        return this.value;
+      }
+    };
+
+    public MBodyCase
+    getMBodyCase() {
+      return MBodyCase.forNumber(
+          mBodyCase_);
+    }
+
+    public static final int M_TYPE_FIELD_NUMBER = 1;
+    private int mType_;
+    /**
+     * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+     */
+    public boolean hasMType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+     */
+    public com.zj.study.protobuf.DataInfo.Message.MType getMType() {
+      @SuppressWarnings("deprecation")
+      com.zj.study.protobuf.DataInfo.Message.MType result = com.zj.study.protobuf.DataInfo.Message.MType.valueOf(mType_);
+      return result == null ? com.zj.study.protobuf.DataInfo.Message.MType.StudentType : result;
+    }
+
+    public static final int STUDENT_FIELD_NUMBER = 2;
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    public boolean hasStudent() {
+      return mBodyCase_ == 2;
+    }
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    public com.zj.study.protobuf.DataInfo.Student getStudent() {
+      if (mBodyCase_ == 2) {
+         return (com.zj.study.protobuf.DataInfo.Student) mBody_;
+      }
+      return com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+     */
+    public com.zj.study.protobuf.DataInfo.StudentOrBuilder getStudentOrBuilder() {
+      if (mBodyCase_ == 2) {
+         return (com.zj.study.protobuf.DataInfo.Student) mBody_;
+      }
+      return com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+    }
+
+    public static final int TEACHER_FIELD_NUMBER = 3;
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    public boolean hasTeacher() {
+      return mBodyCase_ == 3;
+    }
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    public com.zj.study.protobuf.DataInfo.Teacher getTeacher() {
+      if (mBodyCase_ == 3) {
+         return (com.zj.study.protobuf.DataInfo.Teacher) mBody_;
+      }
+      return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+    }
+    /**
+     * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+     */
+    public com.zj.study.protobuf.DataInfo.TeacherOrBuilder getTeacherOrBuilder() {
+      if (mBodyCase_ == 3) {
+         return (com.zj.study.protobuf.DataInfo.Teacher) mBody_;
+      }
+      return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasMType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasStudent()) {
+        if (!getStudent().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasTeacher()) {
+        if (!getTeacher().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, mType_);
+      }
+      if (mBodyCase_ == 2) {
+        output.writeMessage(2, (com.zj.study.protobuf.DataInfo.Student) mBody_);
+      }
+      if (mBodyCase_ == 3) {
+        output.writeMessage(3, (com.zj.study.protobuf.DataInfo.Teacher) mBody_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, mType_);
+      }
+      if (mBodyCase_ == 2) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, (com.zj.study.protobuf.DataInfo.Student) mBody_);
+      }
+      if (mBodyCase_ == 3) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, (com.zj.study.protobuf.DataInfo.Teacher) mBody_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.zj.study.protobuf.DataInfo.Message)) {
+        return super.equals(obj);
+      }
+      com.zj.study.protobuf.DataInfo.Message other = (com.zj.study.protobuf.DataInfo.Message) obj;
+
+      boolean result = true;
+      result = result && (hasMType() == other.hasMType());
+      if (hasMType()) {
+        result = result && mType_ == other.mType_;
+      }
+      result = result && getMBodyCase().equals(
+          other.getMBodyCase());
+      if (!result) return false;
+      switch (mBodyCase_) {
+        case 2:
+          result = result && getStudent()
+              .equals(other.getStudent());
+          break;
+        case 3:
+          result = result && getTeacher()
+              .equals(other.getTeacher());
+          break;
+        case 0:
+        default:
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasMType()) {
+        hash = (37 * hash) + M_TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + mType_;
+      }
+      switch (mBodyCase_) {
+        case 2:
+          hash = (37 * hash) + STUDENT_FIELD_NUMBER;
+          hash = (53 * hash) + getStudent().hashCode();
+          break;
+        case 3:
+          hash = (37 * hash) + TEACHER_FIELD_NUMBER;
+          hash = (53 * hash) + getTeacher().hashCode();
+          break;
+        case 0:
+        default:
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Message parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.zj.study.protobuf.DataInfo.Message prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zj.study.protobuf.Message}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.zj.study.protobuf.Message)
+        com.zj.study.protobuf.DataInfo.MessageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Message_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Message_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zj.study.protobuf.DataInfo.Message.class, com.zj.study.protobuf.DataInfo.Message.Builder.class);
+      }
+
+      // Construct using com.zj.study.protobuf.DataInfo.Message.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        mType_ = 1;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        mBodyCase_ = 0;
+        mBody_ = null;
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Message_descriptor;
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Message getDefaultInstanceForType() {
+        return com.zj.study.protobuf.DataInfo.Message.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Message build() {
+        com.zj.study.protobuf.DataInfo.Message result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Message buildPartial() {
+        com.zj.study.protobuf.DataInfo.Message result = new com.zj.study.protobuf.DataInfo.Message(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.mType_ = mType_;
+        if (mBodyCase_ == 2) {
+          if (studentBuilder_ == null) {
+            result.mBody_ = mBody_;
+          } else {
+            result.mBody_ = studentBuilder_.build();
+          }
+        }
+        if (mBodyCase_ == 3) {
+          if (teacherBuilder_ == null) {
+            result.mBody_ = mBody_;
+          } else {
+            result.mBody_ = teacherBuilder_.build();
+          }
+        }
+        result.bitField0_ = to_bitField0_;
+        result.mBodyCase_ = mBodyCase_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zj.study.protobuf.DataInfo.Message) {
+          return mergeFrom((com.zj.study.protobuf.DataInfo.Message)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zj.study.protobuf.DataInfo.Message other) {
+        if (other == com.zj.study.protobuf.DataInfo.Message.getDefaultInstance()) return this;
+        if (other.hasMType()) {
+          setMType(other.getMType());
+        }
+        switch (other.getMBodyCase()) {
+          case STUDENT: {
+            mergeStudent(other.getStudent());
+            break;
+          }
+          case TEACHER: {
+            mergeTeacher(other.getTeacher());
+            break;
+          }
+          case MBODY_NOT_SET: {
+            break;
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        if (!hasMType()) {
+          return false;
+        }
+        if (hasStudent()) {
+          if (!getStudent().isInitialized()) {
+            return false;
+          }
+        }
+        if (hasTeacher()) {
+          if (!getTeacher().isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zj.study.protobuf.DataInfo.Message parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zj.study.protobuf.DataInfo.Message) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int mBodyCase_ = 0;
+      private java.lang.Object mBody_;
+      public MBodyCase
+          getMBodyCase() {
+        return MBodyCase.forNumber(
+            mBodyCase_);
+      }
+
+      public Builder clearMBody() {
+        mBodyCase_ = 0;
+        mBody_ = null;
+        onChanged();
+        return this;
+      }
+
+      private int bitField0_;
+
+      private int mType_ = 1;
+      /**
+       * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+       */
+      public boolean hasMType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.Message.MType getMType() {
+        @SuppressWarnings("deprecation")
+        com.zj.study.protobuf.DataInfo.Message.MType result = com.zj.study.protobuf.DataInfo.Message.MType.valueOf(mType_);
+        return result == null ? com.zj.study.protobuf.DataInfo.Message.MType.StudentType : result;
+      }
+      /**
+       * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+       */
+      public Builder setMType(com.zj.study.protobuf.DataInfo.Message.MType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        mType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .com.zj.study.protobuf.Message.MType m_type = 1;</code>
+       */
+      public Builder clearMType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        mType_ = 1;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.zj.study.protobuf.DataInfo.Student, com.zj.study.protobuf.DataInfo.Student.Builder, com.zj.study.protobuf.DataInfo.StudentOrBuilder> studentBuilder_;
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public boolean hasStudent() {
+        return mBodyCase_ == 2;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.Student getStudent() {
+        if (studentBuilder_ == null) {
+          if (mBodyCase_ == 2) {
+            return (com.zj.study.protobuf.DataInfo.Student) mBody_;
+          }
+          return com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+        } else {
+          if (mBodyCase_ == 2) {
+            return studentBuilder_.getMessage();
+          }
+          return com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public Builder setStudent(com.zj.study.protobuf.DataInfo.Student value) {
+        if (studentBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          mBody_ = value;
+          onChanged();
+        } else {
+          studentBuilder_.setMessage(value);
+        }
+        mBodyCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public Builder setStudent(
+          com.zj.study.protobuf.DataInfo.Student.Builder builderForValue) {
+        if (studentBuilder_ == null) {
+          mBody_ = builderForValue.build();
+          onChanged();
+        } else {
+          studentBuilder_.setMessage(builderForValue.build());
+        }
+        mBodyCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public Builder mergeStudent(com.zj.study.protobuf.DataInfo.Student value) {
+        if (studentBuilder_ == null) {
+          if (mBodyCase_ == 2 &&
+              mBody_ != com.zj.study.protobuf.DataInfo.Student.getDefaultInstance()) {
+            mBody_ = com.zj.study.protobuf.DataInfo.Student.newBuilder((com.zj.study.protobuf.DataInfo.Student) mBody_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            mBody_ = value;
+          }
+          onChanged();
+        } else {
+          if (mBodyCase_ == 2) {
+            studentBuilder_.mergeFrom(value);
+          }
+          studentBuilder_.setMessage(value);
+        }
+        mBodyCase_ = 2;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public Builder clearStudent() {
+        if (studentBuilder_ == null) {
+          if (mBodyCase_ == 2) {
+            mBodyCase_ = 0;
+            mBody_ = null;
+            onChanged();
+          }
+        } else {
+          if (mBodyCase_ == 2) {
+            mBodyCase_ = 0;
+            mBody_ = null;
+          }
+          studentBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.Student.Builder getStudentBuilder() {
+        return getStudentFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.StudentOrBuilder getStudentOrBuilder() {
+        if ((mBodyCase_ == 2) && (studentBuilder_ != null)) {
+          return studentBuilder_.getMessageOrBuilder();
+        } else {
+          if (mBodyCase_ == 2) {
+            return (com.zj.study.protobuf.DataInfo.Student) mBody_;
+          }
+          return com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Student student = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.zj.study.protobuf.DataInfo.Student, com.zj.study.protobuf.DataInfo.Student.Builder, com.zj.study.protobuf.DataInfo.StudentOrBuilder> 
+          getStudentFieldBuilder() {
+        if (studentBuilder_ == null) {
+          if (!(mBodyCase_ == 2)) {
+            mBody_ = com.zj.study.protobuf.DataInfo.Student.getDefaultInstance();
+          }
+          studentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.zj.study.protobuf.DataInfo.Student, com.zj.study.protobuf.DataInfo.Student.Builder, com.zj.study.protobuf.DataInfo.StudentOrBuilder>(
+                  (com.zj.study.protobuf.DataInfo.Student) mBody_,
+                  getParentForChildren(),
+                  isClean());
+          mBody_ = null;
+        }
+        mBodyCase_ = 2;
+        onChanged();;
+        return studentBuilder_;
+      }
+
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.zj.study.protobuf.DataInfo.Teacher, com.zj.study.protobuf.DataInfo.Teacher.Builder, com.zj.study.protobuf.DataInfo.TeacherOrBuilder> teacherBuilder_;
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public boolean hasTeacher() {
+        return mBodyCase_ == 3;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.Teacher getTeacher() {
+        if (teacherBuilder_ == null) {
+          if (mBodyCase_ == 3) {
+            return (com.zj.study.protobuf.DataInfo.Teacher) mBody_;
+          }
+          return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+        } else {
+          if (mBodyCase_ == 3) {
+            return teacherBuilder_.getMessage();
+          }
+          return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public Builder setTeacher(com.zj.study.protobuf.DataInfo.Teacher value) {
+        if (teacherBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          mBody_ = value;
+          onChanged();
+        } else {
+          teacherBuilder_.setMessage(value);
+        }
+        mBodyCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public Builder setTeacher(
+          com.zj.study.protobuf.DataInfo.Teacher.Builder builderForValue) {
+        if (teacherBuilder_ == null) {
+          mBody_ = builderForValue.build();
+          onChanged();
+        } else {
+          teacherBuilder_.setMessage(builderForValue.build());
+        }
+        mBodyCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public Builder mergeTeacher(com.zj.study.protobuf.DataInfo.Teacher value) {
+        if (teacherBuilder_ == null) {
+          if (mBodyCase_ == 3 &&
+              mBody_ != com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance()) {
+            mBody_ = com.zj.study.protobuf.DataInfo.Teacher.newBuilder((com.zj.study.protobuf.DataInfo.Teacher) mBody_)
+                .mergeFrom(value).buildPartial();
+          } else {
+            mBody_ = value;
+          }
+          onChanged();
+        } else {
+          if (mBodyCase_ == 3) {
+            teacherBuilder_.mergeFrom(value);
+          }
+          teacherBuilder_.setMessage(value);
+        }
+        mBodyCase_ = 3;
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public Builder clearTeacher() {
+        if (teacherBuilder_ == null) {
+          if (mBodyCase_ == 3) {
+            mBodyCase_ = 0;
+            mBody_ = null;
+            onChanged();
+          }
+        } else {
+          if (mBodyCase_ == 3) {
+            mBodyCase_ = 0;
+            mBody_ = null;
+          }
+          teacherBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.Teacher.Builder getTeacherBuilder() {
+        return getTeacherFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      public com.zj.study.protobuf.DataInfo.TeacherOrBuilder getTeacherOrBuilder() {
+        if ((mBodyCase_ == 3) && (teacherBuilder_ != null)) {
+          return teacherBuilder_.getMessageOrBuilder();
+        } else {
+          if (mBodyCase_ == 3) {
+            return (com.zj.study.protobuf.DataInfo.Teacher) mBody_;
+          }
+          return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+        }
+      }
+      /**
+       * <code>optional .com.zj.study.protobuf.Teacher teacher = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.zj.study.protobuf.DataInfo.Teacher, com.zj.study.protobuf.DataInfo.Teacher.Builder, com.zj.study.protobuf.DataInfo.TeacherOrBuilder> 
+          getTeacherFieldBuilder() {
+        if (teacherBuilder_ == null) {
+          if (!(mBodyCase_ == 3)) {
+            mBody_ = com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+          }
+          teacherBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.zj.study.protobuf.DataInfo.Teacher, com.zj.study.protobuf.DataInfo.Teacher.Builder, com.zj.study.protobuf.DataInfo.TeacherOrBuilder>(
+                  (com.zj.study.protobuf.DataInfo.Teacher) mBody_,
+                  getParentForChildren(),
+                  isClean());
+          mBody_ = null;
+        }
+        mBodyCase_ = 3;
+        onChanged();;
+        return teacherBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.zj.study.protobuf.Message)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zj.study.protobuf.Message)
+    private static final com.zj.study.protobuf.DataInfo.Message DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.zj.study.protobuf.DataInfo.Message();
+    }
+
+    public static com.zj.study.protobuf.DataInfo.Message getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Message>
+        PARSER = new com.google.protobuf.AbstractParser<Message>() {
+      @java.lang.Override
+      public Message parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Message(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Message> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Message> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.zj.study.protobuf.DataInfo.Message getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface StudentOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.zj.study.protobuf.Student)
       com.google.protobuf.MessageOrBuilder {
@@ -856,11 +1997,785 @@ public final class DataInfo {
 
   }
 
+  public interface TeacherOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.zj.study.protobuf.Teacher)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string name = 1;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>required string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>required string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional int32 age = 2;</code>
+     */
+    boolean hasAge();
+    /**
+     * <code>optional int32 age = 2;</code>
+     */
+    int getAge();
+
+    /**
+     * <code>optional int32 course = 3;</code>
+     */
+    boolean hasCourse();
+    /**
+     * <code>optional int32 course = 3;</code>
+     */
+    int getCourse();
+  }
+  /**
+   * Protobuf type {@code com.zj.study.protobuf.Teacher}
+   */
+  public  static final class Teacher extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.zj.study.protobuf.Teacher)
+      TeacherOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Teacher.newBuilder() to construct.
+    private Teacher(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Teacher() {
+      name_ = "";
+      age_ = 0;
+      course_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Teacher(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              name_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              age_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              course_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Teacher_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Teacher_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zj.study.protobuf.DataInfo.Teacher.class, com.zj.study.protobuf.DataInfo.Teacher.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>required string name = 1;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int AGE_FIELD_NUMBER = 2;
+    private int age_;
+    /**
+     * <code>optional int32 age = 2;</code>
+     */
+    public boolean hasAge() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 age = 2;</code>
+     */
+    public int getAge() {
+      return age_;
+    }
+
+    public static final int COURSE_FIELD_NUMBER = 3;
+    private int course_;
+    /**
+     * <code>optional int32 course = 3;</code>
+     */
+    public boolean hasCourse() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 course = 3;</code>
+     */
+    public int getCourse() {
+      return course_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, age_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, course_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, age_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, course_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.zj.study.protobuf.DataInfo.Teacher)) {
+        return super.equals(obj);
+      }
+      com.zj.study.protobuf.DataInfo.Teacher other = (com.zj.study.protobuf.DataInfo.Teacher) obj;
+
+      boolean result = true;
+      result = result && (hasName() == other.hasName());
+      if (hasName()) {
+        result = result && getName()
+            .equals(other.getName());
+      }
+      result = result && (hasAge() == other.hasAge());
+      if (hasAge()) {
+        result = result && (getAge()
+            == other.getAge());
+      }
+      result = result && (hasCourse() == other.hasCourse());
+      if (hasCourse()) {
+        result = result && (getCourse()
+            == other.getCourse());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasName()) {
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+      }
+      if (hasAge()) {
+        hash = (37 * hash) + AGE_FIELD_NUMBER;
+        hash = (53 * hash) + getAge();
+      }
+      if (hasCourse()) {
+        hash = (37 * hash) + COURSE_FIELD_NUMBER;
+        hash = (53 * hash) + getCourse();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.zj.study.protobuf.DataInfo.Teacher parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.zj.study.protobuf.DataInfo.Teacher prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zj.study.protobuf.Teacher}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.zj.study.protobuf.Teacher)
+        com.zj.study.protobuf.DataInfo.TeacherOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Teacher_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Teacher_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zj.study.protobuf.DataInfo.Teacher.class, com.zj.study.protobuf.DataInfo.Teacher.Builder.class);
+      }
+
+      // Construct using com.zj.study.protobuf.DataInfo.Teacher.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        age_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        course_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zj.study.protobuf.DataInfo.internal_static_com_zj_study_protobuf_Teacher_descriptor;
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Teacher getDefaultInstanceForType() {
+        return com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Teacher build() {
+        com.zj.study.protobuf.DataInfo.Teacher result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.zj.study.protobuf.DataInfo.Teacher buildPartial() {
+        com.zj.study.protobuf.DataInfo.Teacher result = new com.zj.study.protobuf.DataInfo.Teacher(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.age_ = age_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.course_ = course_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zj.study.protobuf.DataInfo.Teacher) {
+          return mergeFrom((com.zj.study.protobuf.DataInfo.Teacher)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zj.study.protobuf.DataInfo.Teacher other) {
+        if (other == com.zj.study.protobuf.DataInfo.Teacher.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          bitField0_ |= 0x00000001;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasAge()) {
+          setAge(other.getAge());
+        }
+        if (other.hasCourse()) {
+          setCourse(other.getCourse());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        if (!hasName()) {
+          return false;
+        }
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zj.study.protobuf.DataInfo.Teacher parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zj.study.protobuf.DataInfo.Teacher) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int age_ ;
+      /**
+       * <code>optional int32 age = 2;</code>
+       */
+      public boolean hasAge() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 age = 2;</code>
+       */
+      public int getAge() {
+        return age_;
+      }
+      /**
+       * <code>optional int32 age = 2;</code>
+       */
+      public Builder setAge(int value) {
+        bitField0_ |= 0x00000002;
+        age_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 age = 2;</code>
+       */
+      public Builder clearAge() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        age_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int course_ ;
+      /**
+       * <code>optional int32 course = 3;</code>
+       */
+      public boolean hasCourse() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 course = 3;</code>
+       */
+      public int getCourse() {
+        return course_;
+      }
+      /**
+       * <code>optional int32 course = 3;</code>
+       */
+      public Builder setCourse(int value) {
+        bitField0_ |= 0x00000004;
+        course_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 course = 3;</code>
+       */
+      public Builder clearCourse() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        course_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.zj.study.protobuf.Teacher)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zj.study.protobuf.Teacher)
+    private static final com.zj.study.protobuf.DataInfo.Teacher DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.zj.study.protobuf.DataInfo.Teacher();
+    }
+
+    public static com.zj.study.protobuf.DataInfo.Teacher getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Teacher>
+        PARSER = new com.google.protobuf.AbstractParser<Teacher>() {
+      @java.lang.Override
+      public Teacher parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Teacher(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Teacher> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Teacher> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.zj.study.protobuf.DataInfo.Teacher getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zj_study_protobuf_Message_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_zj_study_protobuf_Message_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zj_study_protobuf_Student_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_zj_study_protobuf_Student_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zj_study_protobuf_Teacher_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_zj_study_protobuf_Teacher_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -871,9 +2786,16 @@ public final class DataInfo {
   static {
     java.lang.String[] descriptorData = {
       "\n\037src/main/resource/student.proto\022\025com.z" +
-      "j.study.protobuf\"5\n\007Student\022\014\n\004name\030\001 \002(" +
-      "\t\022\013\n\003age\030\002 \001(\005\022\017\n\007address\030\003 \001(\tB#\n\025com.z" +
-      "j.study.protobufB\010DataInfoH\001"
+      "j.study.protobuf\"\331\001\n\007Message\0224\n\006m_type\030\001" +
+      " \002(\0162$.com.zj.study.protobuf.Message.MTy" +
+      "pe\0221\n\007student\030\002 \001(\0132\036.com.zj.study.proto" +
+      "buf.StudentH\000\0221\n\007teacher\030\003 \001(\0132\036.com.zj." +
+      "study.protobuf.TeacherH\000\")\n\005MType\022\017\n\013Stu" +
+      "dentType\020\001\022\017\n\013TeacherType\020\002B\007\n\005MBody\"5\n\007" +
+      "Student\022\014\n\004name\030\001 \002(\t\022\013\n\003age\030\002 \001(\005\022\017\n\007ad" +
+      "dress\030\003 \001(\t\"4\n\007Teacher\022\014\n\004name\030\001 \002(\t\022\013\n\003" +
+      "age\030\002 \001(\005\022\016\n\006course\030\003 \001(\005B#\n\025com.zj.stud" +
+      "y.protobufB\010DataInfoH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -887,12 +2809,24 @@ public final class DataInfo {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_com_zj_study_protobuf_Student_descriptor =
+    internal_static_com_zj_study_protobuf_Message_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_com_zj_study_protobuf_Message_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_zj_study_protobuf_Message_descriptor,
+        new java.lang.String[] { "MType", "Student", "Teacher", "MBody", });
+    internal_static_com_zj_study_protobuf_Student_descriptor =
+      getDescriptor().getMessageTypes().get(1);
     internal_static_com_zj_study_protobuf_Student_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_zj_study_protobuf_Student_descriptor,
         new java.lang.String[] { "Name", "Age", "Address", });
+    internal_static_com_zj_study_protobuf_Teacher_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_com_zj_study_protobuf_Teacher_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_zj_study_protobuf_Teacher_descriptor,
+        new java.lang.String[] { "Name", "Age", "Course", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
