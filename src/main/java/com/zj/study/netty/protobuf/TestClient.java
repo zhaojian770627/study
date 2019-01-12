@@ -1,4 +1,4 @@
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

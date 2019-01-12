@@ -1,6 +1,6 @@
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
-import com.zj.study.protobuf.DataInfo.Message.MType;
+import com.zj.study.netty.protobuf.DataInfo.Message.MType;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

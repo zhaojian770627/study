@@ -1,4 +1,4 @@
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 

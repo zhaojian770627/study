@@ -1,4 +1,4 @@
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,18 +8,17 @@ import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 
-public class TestClientInitializer extends ChannelInitializer<SocketChannel> {
+public class TestServerInitializer extends ChannelInitializer<SocketChannel> {
 
 	@Override
 	protected void initChannel(SocketChannel ch) throws Exception {
 		ChannelPipeline pipeline = ch.pipeline();
-	
 		pipeline.addLast(new ProtobufVarint32FrameDecoder());
-		pipeline.addLast(new ProtobufDecoder(DataInfo.Student.getDefaultInstance()));
+		pipeline.addLast(new ProtobufDecoder(DataInfo.Message.getDefaultInstance()));
 		pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
 		pipeline.addLast(new ProtobufEncoder());
-		
-		pipeline.addLast(new TestClientHandler());
+
+		pipeline.addLast(new TestServerHandler());
 	}
 
 }

@@ -1,9 +1,9 @@
 syntax ="proto2";
 
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
 option optimize_for = SPEED;
-option java_package="com.zj.study.protobuf";
+option java_package="com.zj.study.netty.protobuf";
 option java_outer_classname="DataInfo";
 
 message Message{

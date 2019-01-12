@@ -1,11 +1,11 @@
-package com.zj.study.protobuf;
+package com.zj.study.netty.protobuf;
 
 import java.util.Random;
 
 import com.google.protobuf.MessageLite;
-import com.zj.study.protobuf.DataInfo.Message.MType;
-import com.zj.study.protobuf.DataInfo.Student;
-import com.zj.study.protobuf.DataInfo.Teacher;
+import com.zj.study.netty.protobuf.DataInfo.Student;
+import com.zj.study.netty.protobuf.DataInfo.Teacher;
+import com.zj.study.netty.protobuf.DataInfo.Message.MType;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
