@@ -10,9 +10,10 @@ public class Server {
 
 	public static void main(String[] args) throws IOException {
 		ServerSocket ssock = new ServerSocket(1234);
+		System.out.println("Listening");
 		while (!stop) {
-			System.out.println("Listening");
 			Socket sock = ssock.accept();
+			sock.setTcpNoDelay(true);
 			ServerHandler fh = new ServerHandler(sock);
 			fh.start();
 		}
