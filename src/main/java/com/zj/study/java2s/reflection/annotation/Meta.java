@@ -26,6 +26,7 @@ public class Meta {
 			System.out.println(anno.str() + " " + anno.val());
 
 			System.out.println(ReflectionHelper.getAnnotationParameter(anno, "str", String.class));
+			System.out.println(ReflectUtil.toString(anno));
 		} catch (NoSuchMethodException exc) {
 			System.out.println("Method Not Found.");
 		}
