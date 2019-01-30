@@ -6,6 +6,8 @@ ISBN 1932394184
 Publisher: Manning Publications Co.
 */
 
+import java.awt.Rectangle;
+
 /* Copyright 2002 -- Ira R. Forman and Nate Forman */
 /**
  * This class provides a set of static methods that extend the Java metaobject
