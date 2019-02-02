@@ -2,21 +2,21 @@ package com.zj.study.java2s.reflection.classloader;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.URL;
 
-public class TestJarClassLoader {
+public class TestLoadFromResources {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws IOException {
 		File file = new File("/home/zj/mlj.jar");
 		URL url = file.toURI().toURL();
 		JarClassLoader loader = new JarClassLoader(url);
-		Class c = loader.loadClass("ai.Eight.Main");
-		Method m = c.getMethod("main", String[].class);
-		Object o = c.newInstance();
-		InputStream in=loader.getResourceAsStream("Koala.jpg");
-//		m.invoke(o, (Object) new String[] {});
+		URL[] urls = loader.getURLs();
+		for (URL u : urls)
+			System.out.println(u.getPath());
+		Resources.setDefaultClassLoader(loader);
+		InputStream in = Resources.getResourceAsStream("Koala.jpg");
 		FileOutputStream out = new FileOutputStream("/home/zj/Koala.jpg");
 		byte[] bs = new byte[1024];
 		int len;
@@ -26,4 +26,5 @@ public class TestJarClassLoader {
 		in.close();
 		out.close();
 	}
+
 }
