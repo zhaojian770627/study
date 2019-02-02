@@ -16,7 +16,7 @@ public class TestLoader {
 		Class c = Class.forName("ai.Eight.Main", false, loader);
 		Method m = c.getMethod("main", String[].class);
 		// m.invoke(null, (Object) new String[] {});
-		ClassUtils.invokeStaticMethod(c, "main", (Object) new String[] {}, String[].class);
+		ClassUtilsA.invokeStaticMethod(c, "main", (Object) new String[] {}, String[].class);
 	}
 
 }

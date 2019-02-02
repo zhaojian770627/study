@@ -1,179 +1,120 @@
 package com.zj.study.java2s.reflection.classloader;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Properties;
+/**
+ * EasyBeans
+ * Copyright (C) 2006 Bull S.A.S.
+ * Contact: easybeans@ow2.org
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * --------------------------------------------------------------------------
+ * $Id: ClassUtils.java 3783 2008-07-30 13:44:06Z benoitf $
+ * --------------------------------------------------------------------------
+ */
 
 /**
- * Various Class Loader utilities.
+ * The <code>ClassUtils</code> class is the central point used to load classes.
  * 
- * @author Dibyendu Majumdar
- * @since 14.Jan.2005
+ * @author Guillaume Sauthier
  */
 public final class ClassUtils {
 
-	private static final String LOG_CLASS_NAME = ClassUtils.class.getName();
-
 	/**
-	 * Get the ClassLoader to use. We always use the current Thread's Context
-	 * ClassLoader. Assumption is that all threads within the application share the
-	 * same ClassLoader.
+	 * Default constructor.
 	 */
-	private static ClassLoader getClassLoader() {
-		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		if (cl == null) {
-			throw new NullPointerException();
-		}
-		return cl;
+	private ClassUtils() {
 	}
 
 	/**
-	 * A wrapper for Class.forName() so that we can change the behaviour globally
-	 * without changing the rest of the code.
-	 * 
-	 * @param name
-	 *            Name of the class to be loaded
-	 * @throws ClassNotFoundException
-	 */
-	public static Class forName(String name) throws ClassNotFoundException {
-		ClassLoader cl = getClassLoader();
-		Class clazz = null;
-
-		clazz = Class.forName(name, true, cl);
-		return clazz;
-	}
-
-	/**
-	 * Load a properties file from the classpath.
-	 * 
-	 * @param name
-	 *            Name of the properties file
-	 * @throws IOException
-	 *             If the properties file could not be loaded
-	 */
-	public static InputStream getResourceAsStream(String name) throws IOException {
-		ClassLoader cl = getClassLoader();
-		InputStream is = null;
-		is = cl.getResourceAsStream(name);
-		if (is == null) {
-			throw new IOException("Unable to load " + " " + name);
-		}
-
-		return is;
-	}
-
-	/**
-	 * Load a properties file from the classpath.
-	 * 
-	 * @param name
-	 *            Name of the properties file
-	 * @throws IOException
-	 *             If the properties file could not be loaded
-	 */
-	public static Properties getResourceAsProperties(String name) throws IOException {
-		ClassLoader cl = getClassLoader();
-		InputStream is = null;
-		is = cl.getResourceAsStream(name);
-		if (is == null) {
-			throw new IOException("Unable to load " + " " + name);
-		}
-		Properties props = new Properties();
-		props.load(is);
-
-		return props;
-	}
-
-	/**
-	 * Helper for invoking an instance method that takes a single parameter. This
-	 * method also handles parameters of primitive type.
-	 * 
-	 * @param cl
-	 *            The class that the instance belongs to
-	 * @param instance
-	 *            The object on which we will invoke the method
-	 * @param methodName
-	 *            The method name
-	 * @param param
-	 *            The parameter
-	 * @throws Throwable
-	 */
-	public static Object invokeMethod(Class cl, Object instance, String methodName, Object param) throws Throwable {
-		Class paramClass;
-		if (param instanceof Integer)
-			paramClass = Integer.TYPE;
-		else if (param instanceof Long)
-			paramClass = Long.TYPE;
-		else if (param instanceof Short)
-			paramClass = Short.TYPE;
-		else if (param instanceof Boolean)
-			paramClass = Boolean.TYPE;
-		else if (param instanceof Double)
-			paramClass = Double.TYPE;
-		else if (param instanceof Float)
-			paramClass = Float.TYPE;
-		else if (param instanceof Character)
-			paramClass = Character.TYPE;
-		else if (param instanceof Byte)
-			paramClass = Byte.TYPE;
-		else
-			paramClass = param.getClass();
-		Method method = cl.getMethod(methodName, new Class[] { paramClass });
-		try {
-			return method.invoke(instance, new Object[] { param });
-		} catch (InvocationTargetException e) {
-			throw e.getCause();
-		}
-	}
-
-	/**
-	 * Helper for invoking a static method that takes one parameter.
-	 * 
-	 * @param cl
-	 *            The class that implements the static method
-	 * @param methodName
-	 *            The method name
-	 * @param param
-	 *            A parameter
-	 * @param paramClass
-	 *            Class of the parameter
-	 * @throws Throwable
-	 */
-	public static Object invokeStaticMethod(Class cl, String methodName, Object param, Class paramClass)
-			throws Throwable {
-		Method method = cl.getMethod(methodName, new Class[] { paramClass });
-		try {
-			return method.invoke(null, new Object[] { param });
-		} catch (InvocationTargetException e) {
-			throw e.getCause();
-		}
-	}
-
-	/**
-	 * Helper for invoking a constructor with one parameter.
+	 * Look up the class in the Tread Context ClassLoader and in the "current"
+	 * ClassLoader.
 	 * 
 	 * @param className
-	 *            Class of which an instance is to be allocated
-	 * @param param
-	 *            Parameter
-	 * @param paramClass
-	 *            Type of the parameter
+	 *            The class name to load
+	 * @return the corresponding Class instance
 	 * @throws ClassNotFoundException
-	 * @throws SecurityException
-	 * @throws NoSuchMethodException
-	 * @throws IllegalArgumentException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
+	 *             if the Class was not found.
 	 */
-	public static Object createObject(String className, Object param, Class paramClass)
-			throws ClassNotFoundException, SecurityException, NoSuchMethodException, IllegalArgumentException,
-			InstantiationException, IllegalAccessException, InvocationTargetException {
-		Class clazzImpl = ClassUtils.forName(className);
-		Constructor ctor = clazzImpl.getConstructor(new Class[] { paramClass });
-		Object instance = ctor.newInstance(new Object[] { param });
-		return instance;
+	public static Class forName(final String className) throws ClassNotFoundException {
+		// Load classes from different classloaders :
+		// 1. Thread Context ClassLoader
+		// 2. ClassUtils ClassLoader
+
+		ClassLoader tccl = Thread.currentThread().getContextClassLoader();
+		Class cls = null;
+
+		try {
+			// Try with TCCL
+			cls = Class.forName(className, true, tccl);
+		} catch (ClassNotFoundException cnfe) {
+
+			// Try now with the classloader used to load ClassUtils
+			ClassLoader current = ClassUtils.class.getClassLoader();
+			try {
+				cls = Class.forName(className, true, current);
+			} catch (ClassNotFoundException cnfe2) {
+				// If this is still unknown, throw an Exception
+				throw cnfe2;
+			}
+		}
+
+		return cls;
 	}
+
+	/**
+	 * Look up the class in the Tread Context ClassLoader and in the "current"
+	 * ClassLoader.
+	 * 
+	 * @param className
+	 *            The class name to load
+	 * @param clazz
+	 *            a class used to get classloader
+	 * @return the corresponding Class instance
+	 * @throws ClassNotFoundException
+	 *             if the Class was not found.
+	 */
+	public static Class forName(final String className, final Class clazz) throws ClassNotFoundException {
+		// Load classes from different classloaders :
+		// 1. Thread Context ClassLoader
+		// 2. ClassUtils ClassLoader
+
+		ClassLoader tccl = Thread.currentThread().getContextClassLoader();
+		Class cls = null;
+
+		try {
+			// Try with TCCL
+			cls = Class.forName(className, true, tccl);
+		} catch (ClassNotFoundException cnfe) {
+
+			// Try now with the classloader used to load ClassUtils
+			ClassLoader current = clazz.getClassLoader();
+			if (current != null) {
+				try {
+					cls = Class.forName(className, true, current);
+				} catch (ClassNotFoundException cnfe2) {
+					// If this is still unknown, throw an Exception
+					throw new ClassNotFoundException("Class Not found in current ThreadClassLoader '" + tccl
+							+ "' and in '" + current + "' classloaders.", cnfe2);
+				}
+			} else {
+				// rethrow exception
+				throw cnfe;
+			}
+		}
+
+		return cls;
+	}
+
 }
