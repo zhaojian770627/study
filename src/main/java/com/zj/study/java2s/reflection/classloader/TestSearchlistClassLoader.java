@@ -10,7 +10,6 @@ public class TestSearchlistClassLoader {
 		File file = new File("/home/zj/mlj.jar");
 		URL url = file.toURI().toURL();
 		JarClassLoader loader = new JarClassLoader(url);
-		Class[] cs = loader.getClass().getClasses();
 		SearchlistClassLoader list = new SearchlistClassLoader();
 		list.add(loader);
 		Class c = Class.forName("ai.Eight.Main", false, loader);
