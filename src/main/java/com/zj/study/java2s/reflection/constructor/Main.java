@@ -1,10 +1,16 @@
 package com.zj.study.java2s.reflection.constructor;
 
-import java.lang.reflect.Constructor;
-
 public class Main {
-	public static void main(String[] argv) throws Exception {
-		Constructor con = java.awt.Point.class.getConstructor(new Class[] { int.class, int.class });
-		java.awt.Point obj = (java.awt.Point) con.newInstance(new Object[] { new Integer(123), new Integer(123) });
+	public static void main(String args[]) throws Exception {
+		String name = "java.lang.String";
+		String methodName = "toLowerCase";
+
+		Class cl = Class.forName(name);
+		java.lang.reflect.Constructor constructor = cl.getConstructor(new Class[] { String.class });
+		Object invoker = constructor.newInstance(new Object[] { "AAA" });
+		Class arguments[] = new Class[] {};
+		java.lang.reflect.Method objMethod = cl.getMethod(methodName, arguments);
+		Object result = objMethod.invoke(invoker, (Object[]) arguments);
+		System.out.println(result);
 	}
 }
