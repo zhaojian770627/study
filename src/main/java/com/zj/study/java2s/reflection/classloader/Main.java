@@ -1,4 +1,5 @@
 package com.zj.study.java2s.reflection.classloader;
+
 import java.lang.reflect.Constructor;
 
 /*
@@ -24,41 +25,50 @@ import java.lang.reflect.Constructor;
  */
 
 public class Main {
+	public static void main(String[] argv) throws Exception {
+		Constructor c = getCompatibleConstructor(JarClassLoader.class, null);
+		if (c != null)
+			System.out.println(c);
+		else
+			System.out.println("not found constructor");
+	}
 
-  /////////////////////////////////////////////////////////////////////////
-  //                           Coercion Methods                          //
-  /////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////
+	// Coercion Methods //
+	/////////////////////////////////////////////////////////////////////////
 
-  /**
-   * Get a compatible constructor for the given value type
-   *
-   * @param type       Class to look for constructor in
-   * @param valueType  Argument type for constructor
-   * @return           Constructor or null
-   */
-  public static Constructor getCompatibleConstructor(final Class type,
-                                                     final Class valueType)
-  {
-     // first try and find a constructor with the exact argument type
-     try {
-        return type.getConstructor(new Class[] { valueType });
-     }
-     catch (Exception ignore) {
-        // if the above failed, then try and find a constructor with
-        // an compatible argument type
+	/**
+	 * Get a compatible constructor for the given value type
+	 *
+	 * @param type
+	 *            Class to look for constructor in
+	 * @param valueType
+	 *            Argument type for constructor
+	 * @return Constructor or null
+	 */
+	public static Constructor getCompatibleConstructor(final Class type, final Class valueType) {
+		// first try and find a constructor with the exact argument type
+		try {
+			if (valueType == null)
+				return type.getConstructor();
+			else
+				return type.getConstructor(new Class[] { valueType });
+		} catch (Exception ignore) {
+			// if the above failed, then try and find a constructor with
+			// an compatible argument type
 
-        // get an array of compatible types
-        Class[] types = type.getClasses();
+			// get an array of compatible types
+			Class[] types = type.getClasses();
 
-        for (int i=0; i<types.length; i++) {
-           try {
-              return type.getConstructor(new Class[] { types[i] });
-           }
-           catch (Exception ignore2) {}
-        }
-     }
+			for (int i = 0; i < types.length; i++) {
+				try {
+					return type.getConstructor(new Class[] { types[i] });
+				} catch (Exception ignore2) {
+				}
+			}
+		}
 
-     // if we get this far, then we can't find a compatible constructor
-     return null;
-  }
+		// if we get this far, then we can't find a compatible constructor
+		return null;
+	}
 }
