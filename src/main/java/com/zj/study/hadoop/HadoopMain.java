@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -18,9 +18,9 @@ public class HadoopMain {
 		Configuration conf = new Configuration();
 		conf.set("fs.defaultFS", "hdfs://hadoop1:9000/");
 		fs = FileSystem.get(new URI("hdfs://hadoop1:9000/"), conf, "hadoop");
-		Path dst = new Path("hdfs://hadoop1:9000/aaa");
+		Path dst = new Path("hdfs://hadoop1:9000/aaa.txt");
 		FSDataOutputStream os = fs.create(dst);
-		FileInputStream is = new FileInputStream("/home/zj/aaa");
+		FileInputStream is = new FileInputStream("/home/zj/aaa.txt");
 		IOUtils.copy(is, os);
 		os.close();
 		is.close();
