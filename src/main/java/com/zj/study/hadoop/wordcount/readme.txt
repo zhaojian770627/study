@@ -1,0 +1,1 @@
+hadoop jar wc.jar com.zj.study.hadoop.wordcount.WCRunner
