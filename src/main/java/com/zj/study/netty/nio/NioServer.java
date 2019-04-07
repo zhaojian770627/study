@@ -56,8 +56,8 @@ public class NioServer {
 							System.out.println(client + ":" + receivedMessage);
 						}
 					}
-					selectionKeys.clear();
 				}
+				selectionKeys.clear();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
