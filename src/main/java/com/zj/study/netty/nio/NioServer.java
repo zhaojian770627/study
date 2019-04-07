@@ -39,10 +39,14 @@ public class NioServer {
 						client.configureBlocking(false);
 						client.register(selector, SelectionKey.OP_READ);
 						String key = "[" + UUID.randomUUID().toString() + "]";
-
+						selectionKey.attach(key);
 						clientMap.put(key, client);
 					} else if (selectionKey.isReadable()) {
 						client = (SocketChannel) selectionKey.channel();
+
+						if (selectionKey.attachment() != null)
+							System.out.println("attachment:" + selectionKey.attachment().toString());
+
 						ByteBuffer readBuffer = ByteBuffer.allocate(1024);
 						int count = client.read(readBuffer);
 						if (count > 0) {
@@ -52,6 +56,7 @@ public class NioServer {
 							System.out.println(client + ":" + receivedMessage);
 						}
 					}
+					selectionKeys.clear();
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
