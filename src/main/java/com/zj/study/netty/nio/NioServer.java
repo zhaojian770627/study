@@ -44,8 +44,8 @@ public class NioServer {
 					} else if (selectionKey.isReadable()) {
 						client = (SocketChannel) selectionKey.channel();
 
-						if (selectionKey.attachment() != null)
-							System.out.println("attachment:" + selectionKey.attachment().toString());
+						String clientKey = selectionKey.attachment() != null ? selectionKey.attachment().toString()
+								: "Unknow Client";
 
 						ByteBuffer readBuffer = ByteBuffer.allocate(1024);
 						int count = client.read(readBuffer);
@@ -54,7 +54,15 @@ public class NioServer {
 							Charset charset = Charset.forName("utf-8");
 							String receivedMessage = String.valueOf(charset.decode(readBuffer).array());
 							System.out.println(client + ":" + receivedMessage);
+
+							for (SocketChannel channel : clientMap.values()) {
+								ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
+								writeBuffer.put((clientKey + ":" + receivedMessage).getBytes());
+								writeBuffer.flip();
+								channel.write(writeBuffer);
+							}
 						}
+
 					}
 				}
 				selectionKeys.clear();
