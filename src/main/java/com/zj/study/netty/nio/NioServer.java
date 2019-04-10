@@ -37,9 +37,9 @@ public class NioServer {
 						ServerSocketChannel server = (ServerSocketChannel) selectionKey.channel();
 						client = server.accept();
 						client.configureBlocking(false);
-						client.register(selector, SelectionKey.OP_READ);
+						SelectionKey sk = client.register(selector, SelectionKey.OP_READ);
 						String key = "[" + UUID.randomUUID().toString() + "]";
-						selectionKey.attach(key);
+						sk.attach(key);
 						clientMap.put(key, client);
 					} else if (selectionKey.isReadable()) {
 						client = (SocketChannel) selectionKey.channel();
