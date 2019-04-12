@@ -10,6 +10,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
+import java.util.function.BiConsumer;
 
 public class NioTest13 {
 
@@ -38,6 +39,14 @@ public class NioTest13 {
 
 		inputRandomAccessFile.close();
 		outputRandomAccessFile.close();
+
+		Charset.availableCharsets().forEach(new BiConsumer<String, Charset>() {
+
+			@Override
+			public void accept(String t, Charset u) {
+				System.out.println(t + "," + u);
+			}
+		});
 	}
 
 }
