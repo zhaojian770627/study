@@ -2,3 +2,6 @@
 
 
 hadoop jar wc.jar com.zj.study.hadoop.wordcount.WCRunner
+
+hadoop jar wc.jar com.zj.study.hadoop.sortMR.SortFlowSumRunner /
+hadoop jar sort.jar com.zj.study.hadoop.sortMR.SortFlowSumRunner /flow/srcdata /flow/output1
