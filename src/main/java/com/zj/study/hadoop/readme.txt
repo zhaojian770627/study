@@ -6,3 +6,5 @@ hadoop jar wc.jar com.zj.study.hadoop.wordcount.WCRunner
 hadoop jar wc.jar com.zj.study.hadoop.sortMR.SortFlowSumRunner /
 hadoop jar sort.jar com.zj.study.hadoop.sortMR.SortFlowSumRunner /flow/srcdata /flow/output1
 hadoop jar area.jar com.zj.study.hadoop.areaMR.AreaSumRunner /flow/srcdata /flow/output
+hadoop jar ii.jar com.zj.study.hadoop.ii.InverseIndexStepOne /ii/data /ii/stepone
+hadoop jar ii.jar com.zj.study.hadoop.ii.InverseIndexStepTwo /ii/stepone /ii/stepwo
