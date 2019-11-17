@@ -2,12 +2,11 @@ package com.zj.study.framework.lock;
 
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
-import java.util.concurrent.TimeUnit;
 
 public class SumArray {
 	private static class SumTask extends RecursiveTask<Integer> {
 
-		private static final int THRESHOLD = MakeArray.ARRAY_LENGTH / 100;
+		private static final int THRESHOLD = MakeArray.ARRAY_LENGTH / 10;
 		private int src[];
 		private int fromIndex;
 		private int toIndex;
@@ -20,20 +19,14 @@ public class SumArray {
 
 		@Override
 		protected Integer compute() {
-			int total = 0;
 			if (toIndex - fromIndex < THRESHOLD) {
+				int total = 0;
 				for (int index = fromIndex; index <= toIndex; index++) {
-					try {
-						TimeUnit.MILLISECONDS.sleep(1);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					total = total + src[index];
 				}
 				return total;
 			} else {
-				int mid = (toIndex - fromIndex) / 2;
+				int mid = (toIndex + fromIndex) / 2;
 				SumTask leftTask = new SumTask(src, fromIndex, mid);
 				SumTask rightTask = new SumTask(src, mid + 1, toIndex);
 				System.out.println(String.format("拆分left[%d]mid[%d]right[%d]", fromIndex, mid, toIndex));
