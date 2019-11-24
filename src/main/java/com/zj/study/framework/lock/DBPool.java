@@ -50,7 +50,6 @@ public class DBPool {
 		if (conn != null) {
 			synchronized (resourcePool) {
 				resourcePool.addLast(conn);
-				resourcePool.notifyAll();
 			}
 		}
 	}

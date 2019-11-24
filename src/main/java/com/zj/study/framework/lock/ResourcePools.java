@@ -21,4 +21,26 @@ public class ResourcePools {
 			resourcePool.addLast(UUID.randomUUID().toString());
 		}
 	}
+
+	// 在mills时间内还拿不到数据库连接，返回一个null
+	public String fetchConn(long mills) throws InterruptedException {
+		availRes.acquire();
+		String result = null;
+		synchronized (resourcePool) {
+			result = resourcePool.removeFirst();
+		}
+		availPos.release();
+		return result;
+	}
+
+	// 放回数据库连接
+	public void releaseConn(String conn) throws InterruptedException {
+		if (conn != null) {
+			availPos.acquire();
+			synchronized (resourcePool) {
+				resourcePool.addLast(conn);
+			}
+			availRes.release();
+		}
+	}
 }
