@@ -23,7 +23,7 @@ public class ResourcePools {
 	}
 
 	// 在mills时间内还拿不到数据库连接，返回一个null
-	public String fetchConn(long mills) throws InterruptedException {
+	public String fetchConn() throws InterruptedException {
 		availRes.acquire();
 		String result = null;
 		synchronized (resourcePool) {
@@ -36,6 +36,7 @@ public class ResourcePools {
 	// 放回数据库连接
 	public void releaseConn(String conn) throws InterruptedException {
 		if (conn != null) {
+			System.out.println("当前有" + availRes.getQueueLength() + "个线程等待数据库连接,可用连接数 " + availRes.availablePermits());
 			availPos.acquire();
 			synchronized (resourcePool) {
 				resourcePool.addLast(conn);
