@@ -23,7 +23,6 @@ public class TestMyLock {
 					} finally {
 						lock.unlock();
 					}
-					System.out.println(Thread.currentThread().getName() + "--没有获取到锁");
 					try {
 						TimeUnit.SECONDS.sleep(2);
 					} catch (InterruptedException e) {
