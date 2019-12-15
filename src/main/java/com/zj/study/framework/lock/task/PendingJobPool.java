@@ -79,7 +79,6 @@ public class PendingJobPool {
 		public void run() {
 			ITaskProcesser<T, R> taskProcessor = (ITaskProcesser<T, R>) jobInfo.getTaskRrocesser();
 			TaskResult<R> result = null;
-			System.out.println("PendingTask execute");
 			try {
 				result = taskProcessor.taskExecute(processData);
 				if (null == result) {
@@ -96,7 +95,6 @@ public class PendingJobPool {
 			} finally {
 				jobInfo.addTaskResult(result);
 			}
-			System.out.println("PendingTask complete");
 		}
 
 	}

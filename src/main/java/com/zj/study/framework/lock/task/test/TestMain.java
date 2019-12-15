@@ -10,7 +10,7 @@ import com.zj.study.framework.lock.task.TaskResult;
 public class TestMain {
 
 	private final static String JOB_NAME = "计算数值";
-	private final static int JOB_LENGTH = 5;
+	private final static int JOB_LENGTH = 1000;
 
 	private static class QueryResult implements Runnable {
 		private PendingJobPool pool;

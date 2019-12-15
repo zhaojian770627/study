@@ -12,7 +12,7 @@ public class TestTask implements ITaskProcesser<Integer, Integer> {
 	@Override
 	public TaskResult<Integer> taskExecute(Integer data) {
 		Random r = new Random();
-		int flag = r.nextInt();
+		int flag = r.nextInt(500);
 		SleepTools.ms(flag);
 		if (flag <= 300) {
 			Integer retValue = data.intValue() + flag;
