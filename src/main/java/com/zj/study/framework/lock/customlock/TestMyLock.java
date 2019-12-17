@@ -1,13 +1,12 @@
-package com.zj.study.framework.lock;
+package com.zj.study.framework.lock.customlock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class TestMyLock {
 
 	public void test() {
-		final Lock lock = new ReentrantLock();
+		final Lock lock = new ObjectLock("123");
 		class Worker extends Thread {
 			public void run() {
 				while (true) {

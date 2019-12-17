@@ -1,17 +1,31 @@
-package com.zj.study.framework.lock;
+package com.zj.study.framework.lock.customlock;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedLongSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
-public class SelfLock implements Lock {
+public class ObjectLock implements Lock {
+	private final Sync sycn;
+
+	public ObjectLock(String lockKey) {
+		super();
+		sycn = new Sync(lockKey);
+	}
+
+	private static ConcurrentHashMap<String, Object> lockMap = new ConcurrentHashMap<>();
 
 	private static class Sync extends AbstractQueuedLongSynchronizer {
+		private final String lockKey;
+
+		public Sync(String lockKey) {
+			this.lockKey = lockKey;
+		}
 
 		@Override
 		protected boolean tryAcquire(long arg) {
-			if (compareAndSetState(0, 1)) {
+			if (lockMap.putIfAbsent(lockKey, lockKey) == null) {
 				setExclusiveOwnerThread(Thread.currentThread());
 				return true;
 			}
@@ -20,17 +34,18 @@ public class SelfLock implements Lock {
 
 		@Override
 		protected boolean tryRelease(long arg) {
-			if (getState() == 0)
+			if (lockMap.get(lockKey) == null)
 				throw new UnsupportedOperationException();
 
 			setExclusiveOwnerThread(null);
 			setState(0);
+			lockMap.remove(lockKey);
 			return true;
 		}
 
 		@Override
 		protected boolean isHeldExclusively() {
-			return getState() == 1;
+			return lockMap.contains(lockKey);
 		}
 
 		Condition newCondition() {
@@ -38,8 +53,6 @@ public class SelfLock implements Lock {
 		}
 
 	}
-
-	private final Sync sycn = new Sync();
 
 	@Override
 	public void lock() {
