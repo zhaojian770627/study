@@ -13,80 +13,54 @@ import java.util.concurrent.locks.Lock;
  *
  */
 public class ObjectLock implements Lock {
-	private final Sync sycn;
+	private final String lockkey;
 
-	public ObjectLock(String lockKey) {
+	public ObjectLock(String lockkey) {
 		super();
-		sycn = new Sync(lockKey);
+		this.lockkey = lockkey;
 	}
 
-	private static ConcurrentHashMap<String, Object> lockMap = new ConcurrentHashMap<>();
-
-	private static class Sync extends AbstractQueuedSynchronizer {
-		private final String lockKey;
-
-		public Sync(String lockKey) {
-			this.lockKey = lockKey;
-		}
-
-		@Override
-		protected boolean tryAcquire(int arg) {
-			if (lockMap.putIfAbsent(lockKey, lockKey) == null) {
-				setExclusiveOwnerThread(Thread.currentThread());
-				return true;
-			}
-			return false;
-		}
-
-		@Override
-		protected boolean tryRelease(int arg) {
-			if (lockMap.get(lockKey) == null)
-				throw new UnsupportedOperationException();
-
-			setExclusiveOwnerThread(null);
-			lockMap.remove(lockKey);
-			return true;
-		}
-
-		@Override
-		protected boolean isHeldExclusively() {
-			return lockMap.contains(lockKey);
-		}
-
-		Condition newCondition() {
-			return new ConditionObject();
-		}
-
-	}
+	private static ConcurrentHashMap<String, ObjectLock2> lockMap = new ConcurrentHashMap<>();
 
 	@Override
 	public void lock() {
-		sycn.acquire(1);
+		ObjectLock2 lock = lockMap.putIfAbsent(lockkey, new ObjectLock2());
+		if (lock == null) {
+			lock = lockMap.get(lockkey);
+		} else
+			lock.addref();
+
+		lock.lock();
 	}
 
 	@Override
 	public void lockInterruptibly() throws InterruptedException {
-		sycn.acquireInterruptibly(1);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public boolean tryLock() {
-		return sycn.tryAcquire(1);
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
-		return sycn.tryAcquireNanos(1, unit.toNanos(time));
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public void unlock() {
-		sycn.release(1);
+		ObjectLock2 lock = lockMap.get(lockkey);
+		lock.decref();
 	}
 
 	@Override
 	public Condition newCondition() {
-		return sycn.newCondition();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
