@@ -9,10 +9,11 @@ public class TestObjectLock {
 
 	public void test() {
 		final Lock lock1 = new ObjectLock("1");
-		final Lock lock2 = new ObjectLock("2");
+		final Lock lock2 = new ObjectLock("1");
 		class Worker extends Thread {
 			public void run() {
 				int r = Tools.getRandomInt(2);
+				System.out.println("r:" + r);
 				Lock lock;
 				if (r == 0)
 					lock = lock1;
