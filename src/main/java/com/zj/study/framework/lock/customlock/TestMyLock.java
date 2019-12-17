@@ -2,29 +2,20 @@ package com.zj.study.framework.lock.customlock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-
-import com.zj.study.framework.lock.Tools;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class TestMyLock {
 
 	public void test() {
-		final Lock lock1 = new ObjectLock("1");
-		final Lock lock2 = new ObjectLock("2");
+		final Lock lock = new ReentrantLock();
 		class Worker extends Thread {
 			public void run() {
-				int r = Tools.getRandomInt(2);
-				Lock lock;
-				if (r == 0)
-					lock = lock1;
-				else
-					lock = lock2;
-
 				while (true) {
 					lock.lock();
 					try {
 						try {
 							TimeUnit.SECONDS.sleep(1);
-							System.out.println(Thread.currentThread().getName() + "++获取到lock" + (r + 1) + "锁");
+							System.out.println(Thread.currentThread().getName() + "++获取到锁");
 							TimeUnit.SECONDS.sleep(1);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
