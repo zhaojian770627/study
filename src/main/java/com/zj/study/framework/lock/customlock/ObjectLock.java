@@ -2,7 +2,7 @@ package com.zj.study.framework.lock.customlock;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.AbstractQueuedLongSynchronizer;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
@@ -16,7 +16,7 @@ public class ObjectLock implements Lock {
 
 	private static ConcurrentHashMap<String, Object> lockMap = new ConcurrentHashMap<>();
 
-	private static class Sync extends AbstractQueuedLongSynchronizer {
+	private static class Sync extends AbstractQueuedSynchronizer {
 		private final String lockKey;
 
 		public Sync(String lockKey) {
@@ -24,7 +24,7 @@ public class ObjectLock implements Lock {
 		}
 
 		@Override
-		protected boolean tryAcquire(long arg) {
+		protected boolean tryAcquire(int arg) {
 			if (lockMap.putIfAbsent(lockKey, lockKey) == null) {
 				setExclusiveOwnerThread(Thread.currentThread());
 				return true;
@@ -33,12 +33,11 @@ public class ObjectLock implements Lock {
 		}
 
 		@Override
-		protected boolean tryRelease(long arg) {
+		protected boolean tryRelease(int arg) {
 			if (lockMap.get(lockKey) == null)
 				throw new UnsupportedOperationException();
 
 			setExclusiveOwnerThread(null);
-			setState(0);
 			lockMap.remove(lockKey);
 			return true;
 		}
