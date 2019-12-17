@@ -13,7 +13,7 @@ public class TestObjectLock {
 		class Worker extends Thread {
 			public void run() {
 				int r = Tools.getRandomInt(2);
-				System.out.println("r:" + r);
+				System.out.println(Thread.currentThread().getName() + " r:" + r);
 				Lock lock;
 				if (r == 0)
 					lock = lock1;
@@ -48,7 +48,7 @@ public class TestObjectLock {
 			w.start();
 		}
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 20; i++) {
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e) {

@@ -6,6 +6,12 @@ import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * 这个是有问题的
+ * 
+ * @author zj
+ *
+ */
 public class ObjectLock implements Lock {
 	private final Sync sycn;
 
