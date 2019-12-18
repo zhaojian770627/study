@@ -11,9 +11,12 @@ public class QuestionInDBVo {
 	// 题目详情，平均长度800字节
 	private final String detail;
 
-	public QuestionInDBVo(int id, String detail) {
+	private final String sha;
+
+	public QuestionInDBVo(int id, String detail, String sha) {
 		this.id = id;
 		this.detail = detail;
+		this.sha = sha;
 	}
 
 	public int getId() {
@@ -24,4 +27,7 @@ public class QuestionInDBVo {
 		return detail;
 	}
 
+	public String getSha() {
+		return sha;
+	}
 }

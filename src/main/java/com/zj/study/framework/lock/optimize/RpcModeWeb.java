@@ -56,7 +56,11 @@ public class RpcModeWeb {
 		@Override
 		public String call() throws Exception {
 			long start = System.currentTimeMillis();
-			String localName = ProduceDocService.makeDoc(pendingDocVO);
+
+			// String localName = ProduceDocService.makeDoc(pendingDocVO);
+			// 异步生成文档
+			String localName = ProduceDocService.makeDocAsyn(pendingDocVO);
+
 			System.out.println("文档" + localName + "生成耗时：" + (System.currentTimeMillis() - start) + "ms");
 			return localName;
 		}

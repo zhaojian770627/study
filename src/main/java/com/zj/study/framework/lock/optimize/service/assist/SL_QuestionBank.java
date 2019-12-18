@@ -27,7 +27,7 @@ public class SL_QuestionBank {
         for(int i=0;i<Consts.SIZE_OF_QUESTION_BANK;i++){
             String questionContent = makeQuestionDetail(Consts.QUESTION_LENGTH);
             questionBankMap.put(i,new QuestionInDBVo(i,
-            		questionContent));
+            		questionContent,EncryptUtils.EncryptBySHA1(questionContent)));
         }
         updateQuestionTimer();//启动定期更新题库数据任务
     }
@@ -60,7 +60,7 @@ public class SL_QuestionBank {
             int questionId = random.nextInt(Consts.SIZE_OF_QUESTION_BANK);
             String questionContent = makeQuestionDetail(Consts.QUESTION_LENGTH);
             questionBankMap.put(questionId,new QuestionInDBVo(questionId,
-                    questionContent));
+                    questionContent,EncryptUtils.EncryptBySHA1(questionContent)));
             System.out.println("题目【"+questionId+"】被更新！！");
         }
     }
