@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.enjoy.cap1.config.MainConfig;
+import com.zj.study.framework.spring.cap1.config.MainConfig;
 
 public class MainTest2 { 
 	public static void main(String args[]){

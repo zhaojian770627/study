@@ -1,7 +1,9 @@
-package com.zj.study.framework.spring.cap4.config;
+package com.zj.study.framework.spring.cap4;
 
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.zj.study.framework.spring.cap4.config.Cap4MainConfig;
 
 public class Cap4Test {
 	@Test
