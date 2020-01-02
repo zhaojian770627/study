@@ -1,5 +1,6 @@
 package com.zj.study.framework.spring.cap10.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -18,9 +19,9 @@ public class LogAspects {
 	public void pointCut() {
 	}
 
-	@Before("pointCut()")
-	public void logStart() {
-		System.out.println("除法运行。。。。。");
+	@Before(value = "pointCut()")
+	public void logStart(JoinPoint joinPoint) {
+		System.out.println("除法运行。。。。。" + joinPoint.getArgs());
 	}
 
 	@After("pointCut()")
@@ -28,14 +29,15 @@ public class LogAspects {
 		System.out.println("除法结束。。。。。");
 	}
 
-	@AfterReturning("pointCut()")
-	public void logReturn() {
-		System.out.println("除法正常返回。。。。。");
+	@AfterReturning(pointcut = "pointCut()", returning = "ret")
+	public void logReturn(Object ret) {
+		System.out.println("除法正常返回。。。。。return:" + ret);
 	}
 
-	@AfterThrowing("pointCut()")
-	public void logException() {
+	@AfterThrowing(throwing = "ex", pointcut = "pointCut()")
+	public void logException(Throwable ex) {
 		System.out.println("运行异常。。。。。");
+		System.out.println(ex.getMessage());
 	}
 
 	@Around("pointCut()")

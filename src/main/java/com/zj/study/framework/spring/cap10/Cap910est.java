@@ -12,7 +12,7 @@ public class Cap910est {
 		AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(Cap10MainConfig.class);
 
 		Calculator calculator = app.getBean(Calculator.class);
-		calculator.div(3, 4);
+		calculator.div(3, 1);
 		app.close();
 
 	}
