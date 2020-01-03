@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configurable
 @ComponentScan("com.zj.study.framework.spring.cap11")
+@EnableTransactionManagement
 public class Cap11MainConfig {
 	@Bean
 	public DataSource dataSource() throws PropertyVetoException {
@@ -28,5 +32,10 @@ public class Cap11MainConfig {
 	@Bean
 	public JdbcTemplate jdbcTemplate(@Autowired DataSource dataSource) throws PropertyVetoException {
 		return new JdbcTemplate(dataSource);
+	}
+
+	@Bean
+	public PlatformTransactionManager platformTransactionManager(@Autowired DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
 	}
 }
