@@ -21,8 +21,13 @@ public class BusiApp4 {
 							TimeUnit.SECONDS.sleep(1);
 							var.set(1);
 							lock.notify();
-						} else
+
+							// ???????
 							lock.wait();
+						} else{
+							System.out.println("SetThreadZero wait-----------------");
+							lock.wait();
+						}
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
@@ -47,8 +52,13 @@ public class BusiApp4 {
 							TimeUnit.SECONDS.sleep(1);
 							var.set(0);
 							lock.notify();
-						} else
+							
+							// ???????
 							lock.wait();
+						} else{
+							System.out.println("SetThreadOne wait-----------------");
+							lock.wait();
+						}
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
