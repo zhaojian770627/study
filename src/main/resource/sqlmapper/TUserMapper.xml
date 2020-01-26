@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zj.study.framework.mybatis.mapper.TUserMapper">
+	<resultMap id="BaseResultMap" type="TUser">
+		<constructor>
+			<idArg column="id" javaType="int" />
+			<arg column="user_name" javaType="String" />
+		</constructor>
 
-	<select id="selectByPrimaryKey" resultType="com.zj.study.framework.mybatis.entity.TUser"	parameterType="java.lang.Integer">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="TINYINT" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="note" property="note" jdbcType="VARCHAR" />
+		<result column="position_id" property="positionId" jdbcType="INTEGER" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
 		select
-			id, 
-			user_name , 
-			real_name , 
-			sex, 
-			mobile, 
-			email, 
-			note,
-			position_id positionId
+		id,
+		user_name ,
+		real_name ,
+		sex,
+		mobile,
+		email,
+		note,
+		position_id positionId
 		from t_user
 		where id = #{id,jdbcType=INTEGER}
 	</select>

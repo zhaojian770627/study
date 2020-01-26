@@ -8,6 +8,9 @@
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
 
+	<typeAliases>
+		<package name="com.zj.study.framework.mybatis.entity" />
+	</typeAliases>
 
 	<!--配置environment环境 -->
 	<environments default="development">
