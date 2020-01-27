@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zj.study.framework.mybatis.mapper.TUserMapper">
 	<resultMap id="BaseResultMap" type="TUser">
+	<!-- 
 		<constructor>
 			<idArg column="id" javaType="int" />
 			<arg column="user_name" javaType="String" />
 		</constructor>
-
+ 	-->
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="user_name" property="userName" jdbcType="VARCHAR" />
 		<result column="real_name" property="realName" jdbcType="VARCHAR" />
@@ -45,4 +46,32 @@
 		#{note,jdbcType=VARCHAR},
 		#{positionId,jdbcType=INTEGER})
 	</insert>
+
+	<insert id="insert2" parameterType="TUser">
+
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into t_user (id, user_name, real_name,
+		sex, mobile,
+		email,
+		note,
+		position_id)
+		values (#{id,jdbcType=INTEGER},
+		#{userName,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{sex,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR},
+		#{positionId,jdbcType=INTEGER})
+	</insert>
+
+	<select id="selectBySymbol" resultMap="BaseResultMap">
+		select
+		${inCol}
+		from ${tableName} a
+		where a.sex = #{sex}
+		order by ${orderStr}
+	</select>
 </mapper>
