@@ -90,6 +90,22 @@ public class MybatisQuickStart {
 
 		List<TUser> list = mapper.selectBySymbol(tableName, inCol, orderStr, sex);
 		System.out.println(list.size());
+	}
+
+	// --------------------------------动态sql---------------------------------------
+	@Test
+	// if用于select，并与where配合
+	public void testSelectIfOper() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+
+		String email = null;
+		Byte sex = 2;
+//		List<TUser> list = mapper.selectIfOper(email, null);
+		List<TUser> list = mapper.selectIfandWhereOper(email, sex);
+		System.out.println(list.size());
 
 	}
 }
