@@ -2,6 +2,7 @@ package com.zj.study.framework.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -103,9 +104,96 @@ public class MybatisQuickStart {
 
 		String email = null;
 		Byte sex = 2;
-//		List<TUser> list = mapper.selectIfOper(email, null);
+		// List<TUser> list = mapper.selectIfOper(email, null);
 		List<TUser> list = mapper.selectIfandWhereOper(email, sex);
 		System.out.println(list.size());
-
 	}
+
+	@Test
+	// if用于update，并与set配合
+	public void testUpdateIfOper() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+
+		TUser user = new TUser();
+		user.setId(3);
+		user.setUserName("cindy");
+		user.setRealName("王美丽");
+		user.setEmail("xxoo@163.com");
+		user.setMobile("18695988747");
+		user.setNote("cindy's note");
+		user.setSex((byte) 2);
+		// TPosition positon = new TPosition();
+		// positon.setId(1);
+		// user.setPosition(positon);
+		// System.out.println(mapper.updateIfOper(user));
+		System.out.println(mapper.updateIfAndSetOper(user));
+	}
+
+	@Test
+	// if用于insert，并与trim配合
+	public void testInsertIfOper() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+
+		TUser user = new TUser();
+		user.setUserName("mark");
+		user.setRealName("毛毛");
+		// user.setEmail("xxoo@163.com");
+		// user.setMobile("18695988747");
+		// user.setNote("mark's note");
+		// user.setSex((byte) 1);
+		// TPosition positon = new TPosition();
+		// positon.setId(1);
+		// user.setPosition(positon);
+		// System.out.println(mapper.insertIfOper(user));
+		System.out.println(mapper.insertSelective(user));
+	}
+
+	@Test
+	// Foreach用于in查询
+	public void testForeach4In() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+
+		String[] names = new String[] { "lison", "james" };
+		List<TUser> users = mapper.selectForeach4In(names);
+		System.out.println(users.size());
+	}
+
+	@Test
+	// Foreach用于批量插入
+	public void testForeach4Insert() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+
+		TUser user1 = new TUser();
+		user1.setUserName("king");
+		user1.setRealName("李小京");
+		user1.setEmail("li@qq.com");
+		user1.setMobile("18754548787");
+		user1.setNote("king's note");
+		user1.setSex((byte) 1);
+		TUser user2 = new TUser();
+		user2.setUserName("deer");
+		user2.setRealName("陈大林");
+		user2.setEmail("chen@qq.com");
+		user2.setMobile("18723138787");
+		user2.setNote("deer's note");
+		user2.setSex((byte) 1);
+
+		int i = mapper.insertForeach4Batch(Arrays.asList(user1, user2));
+		sqlSession.commit();
+		System.out.println(i);
+	}
+	
+	
 }

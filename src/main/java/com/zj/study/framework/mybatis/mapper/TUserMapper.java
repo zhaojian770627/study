@@ -20,4 +20,16 @@ public interface TUserMapper {
 	List<TUser> selectIfOper(@Param("email") String email, @Param("sex") Byte sex);
 
 	List<TUser> selectIfandWhereOper(@Param("email") String email, @Param("sex") Byte sex);
+
+	int updateIfOper(TUser record);
+
+	int updateIfAndSetOper(TUser record);
+
+	int insertIfOper(TUser record);
+	
+    int insertSelective(TUser record);
+    
+    List<TUser> selectForeach4In(String[] names);
+    
+    int insertForeach4Batch(List<TUser> users);
 }
