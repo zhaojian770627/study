@@ -6,4 +6,5 @@ public interface TUserMapper {
 	
     TUser selectByPrimaryKey(Integer id);
     
+    int insert1(TUser record);
 }

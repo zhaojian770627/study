@@ -17,11 +17,11 @@ public class TUser {
 
 	private Integer positionId;
 
-	public TUser(Integer id, String userName) {
-		super();
-		this.id = id;
-		this.userName = userName;
-	}
+//	public TUser(Integer id, String userName) {
+//		super();
+//		this.id = id;
+//		this.userName = userName;
+//	}
 
 	public Integer getId() {
 		return id;

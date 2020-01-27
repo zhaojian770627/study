@@ -38,5 +38,25 @@ public class MybatisQuickStart {
 		System.out.println(user.toString());
 
 	}
+	
+	
+	@Test
+	// 测试插入数据自动生成id
+	public void testInsertGenerateId1() throws IOException {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+		// 4.执行查询语句并返回结果
+		TUser user1 = new TUser();
+		user1.setUserName("test1");
+		user1.setRealName("realname1");
+		user1.setEmail("myemail1");
+//		user1.setId(34);
+		mapper.insert1(user1);
+		sqlSession.commit();
+		System.out.println(user1.getId());
+	}
+
 
 }

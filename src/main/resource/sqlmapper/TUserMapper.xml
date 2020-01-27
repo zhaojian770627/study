@@ -31,4 +31,18 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 
+	<insert id="insert1" parameterType="TUser" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into t_user (id, user_name, real_name,
+		sex, mobile,
+		email,
+		note, position_id)
+		values (#{id,jdbcType=INTEGER},
+		#{userName,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{sex,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{note,jdbcType=VARCHAR},
+		#{positionId,jdbcType=INTEGER})
+	</insert>
 </mapper>
