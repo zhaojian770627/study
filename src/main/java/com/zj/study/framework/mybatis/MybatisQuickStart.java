@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -195,5 +196,40 @@ public class MybatisQuickStart {
 		System.out.println(i);
 	}
 	
+	@Test
+	// 批量更新
+	public void testBatchExcutor() {
+		// 2.获取sqlSession
+//		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, true);
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+		
+		TUser user = new TUser();
+		user.setUserName("mark");
+		user.setRealName("毛毛");
+		user.setEmail("xxoo@163.com");
+		user.setMobile("18695988747");
+		user.setNote("mark's note");
+		user.setSex((byte) 1);
+//		TPosition positon1 = new TPosition();
+//		positon1.setId(1);
+//		user.setPosition(positon1);
+		System.out.println(mapper.insertSelective(user));
+		
+		TUser user1 = new TUser();
+		user1.setId(3);
+		user1.setUserName("cindy");
+		user1.setRealName("王美丽");
+		user1.setEmail("xxoo@163.com");
+		user1.setMobile("18695988747");
+		user1.setNote("cindy's note");
+		user1.setSex((byte) 2);
+//		user.setPosition(positon1);
+		System.out.println(mapper.updateIfAndSetOper(user1));
+		
+		sqlSession.commit();
+		System.out.println("----------------");
+	}
 	
 }
