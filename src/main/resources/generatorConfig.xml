@@ -25,8 +25,15 @@
 
 
 
-		
+		<!--
 		<table schema="${jdbc_username}" tableName="t_job_history"
+			 enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		-->
+		
+		<table schema="${jdbc_username}" tableName="t_position"
 			 enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">

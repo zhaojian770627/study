@@ -6,6 +6,7 @@
 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
 	</settings>
 
 	<typeAliases>
@@ -30,6 +31,7 @@
 	<!-- 映射文件，mapper的配置文件 -->
 	<mappers>
 		<mapper resource="sqlmapper/TUserMapper.xml" />
+		<mapper resource="sqlmapper/TPositionMapper.xml" />
 	</mappers>
 
 </configuration>  

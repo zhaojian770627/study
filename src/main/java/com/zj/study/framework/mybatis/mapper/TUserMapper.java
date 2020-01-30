@@ -32,4 +32,8 @@ public interface TUserMapper {
     List<TUser> selectForeach4In(String[] names);
     
     int insertForeach4Batch(List<TUser> users);
+    
+    List<TUser> selectUserPosition1();
+    
+    List<TUser> selectUserPosition2();
 }

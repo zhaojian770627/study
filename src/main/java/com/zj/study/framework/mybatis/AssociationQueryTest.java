@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.zj.study.framework.mybatis.entity.TUser;
 import com.zj.study.framework.mybatis.mapper.TUserMapper;
 
 public class AssociationQueryTest {
@@ -35,10 +36,10 @@ public class AssociationQueryTest {
 		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
 		// 4.执行查询语句并返回结果
 		// ----------------------
-		// List<TUser> list1 = mapper.selectUserPosition1();
-		// for (TUser tUser : list1) {
-		// System.out.println(tUser);
-		// }
+//		List<TUser> list1 = mapper.selectUserPosition1();
+//		for (TUser tUser : list1) {
+//			System.out.println(tUser);
+//		}
 
 		List<TUser> list2 = mapper.selectUserPosition2();
 		for (TUser tUser : list2) {

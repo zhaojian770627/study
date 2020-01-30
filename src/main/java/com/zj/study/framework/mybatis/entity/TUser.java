@@ -15,13 +15,13 @@ public class TUser {
 
 	private String note;
 
-	private Integer positionId;
+	private TPosition position;
 
-//	public TUser(Integer id, String userName) {
-//		super();
-//		this.id = id;
-//		this.userName = userName;
-//	}
+	// public TUser(Integer id, String userName) {
+	// super();
+	// this.id = id;
+	// this.userName = userName;
+	// }
 
 	public Integer getId() {
 		return id;
@@ -79,16 +79,17 @@ public class TUser {
 		this.note = note;
 	}
 
-	public Integer getPositionId() {
-		return positionId;
+	public TPosition getPosition() {
+		return position;
 	}
 
-	public void setPositionId(Integer positionId) {
-		this.positionId = positionId;
+	public void setPosition(TPosition position) {
+		this.position = position;
 	}
 
 	@Override
 	public String toString() {
+		String positionId = (position == null ? "" : String.valueOf(position.getId()));
 		return "TUser [id=" + id + ", userName=" + userName + ", realName=" + realName + ", sex=" + sex + ", mobile="
 				+ mobile + ", email=" + email + ", note=" + note + ", positionId=" + positionId + "]";
 	}

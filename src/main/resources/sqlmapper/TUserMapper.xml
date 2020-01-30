@@ -11,8 +11,24 @@
 		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="note" property="note" jdbcType="VARCHAR" />
-		<result column="position_id" property="positionId" jdbcType="INTEGER" />
 	</resultMap>
+
+	<resultMap id="userAndPosition1" extends="BaseResultMap"
+		type="TUser">
+		<association property="position" javaType="TPosition"
+			columnPrefix="post_">
+			<id column="id" property="id" />
+			<result column="name" property="postName" />
+			<result column="note" property="note" />
+		</association>
+	</resultMap>
+
+	<resultMap id="userAndPosition2" extends="BaseResultMap"
+		type="TUser">
+		<association property="position" fetchType="lazy" column="position_id"
+			select="com.zj.study.framework.mybatis.mapper.TPositionMapper.selectByPrimaryKey" />
+	</resultMap>
+
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
@@ -125,8 +141,8 @@
 		<if test="note != null">
 			note = #{note,jdbcType=VARCHAR},
 		</if>
-		<if test="position != null"> 
-			position_id = #{position.id,jdbcType=INTEGER} 
+		<if test="position != null">
+			position_id = #{position.id,jdbcType=INTEGER}
 		</if>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -152,8 +168,8 @@
 			<if test="note != null">
 				note = #{note,jdbcType=VARCHAR},
 			</if>
-			<if test="position != null"> 
-				 position_id = #{position.id,jdbcType=INTEGER}, 
+			<if test="position != null">
+				position_id = #{position.id,jdbcType=INTEGER},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -182,8 +198,8 @@
 		<if test="note != null">
 			note,
 		</if>
-		<if test="position != null"> 
-			position_id 
+		<if test="position != null">
+			position_id
 		</if>
 		)
 		values(
@@ -208,9 +224,9 @@
 		<if test="note != null">
 			#{note,jdbcType=VARCHAR},
 		</if>
-		<if test="position != null"> 
+		<if test="position != null">
 			#{position.id,jdbcType=INTEGER}
-		 </if>
+		</if>
 		)
 	</insert>
 
@@ -297,4 +313,31 @@
 		</foreach>
 	</insert>
 
+	<select id="selectUserPosition1" resultMap="userAndPosition1">
+		select
+		a.id,
+		user_name,
+		real_name,
+		sex,
+		mobile,
+		email,
+		a.note,
+		b.id post_id,
+		b.post_name,
+		b.note post_note
+		from t_user a,
+		t_position b
+		where a.position_id = b.id
+	</select>
+
+	<select id="selectUserPosition2" resultMap="userAndPosition2">
+		select
+		a.id,
+		a.user_name,
+		a.real_name,
+		a.sex,
+		a.mobile,
+		a.position_id
+		from t_user a
+	</select>
 </mapper>
