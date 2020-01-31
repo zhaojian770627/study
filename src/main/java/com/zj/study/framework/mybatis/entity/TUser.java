@@ -1,5 +1,7 @@
 package com.zj.study.framework.mybatis.entity;
 
+import java.util.List;
+
 public class TUser {
 	private Integer id;
 
@@ -16,6 +18,8 @@ public class TUser {
 	private String note;
 
 	private TPosition position;
+
+	private List<TJobHistory> jobs;
 
 	// public TUser(Integer id, String userName) {
 	// super();
@@ -85,6 +89,14 @@ public class TUser {
 
 	public void setPosition(TPosition position) {
 		this.position = position;
+	}
+
+	public List<TJobHistory> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<TJobHistory> jobs) {
+		this.jobs = jobs;
 	}
 
 	@Override

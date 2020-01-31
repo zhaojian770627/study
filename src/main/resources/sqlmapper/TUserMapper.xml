@@ -29,6 +29,19 @@
 			select="com.zj.study.framework.mybatis.mapper.TPositionMapper.selectByPrimaryKey" />
 	</resultMap>
 
+	<resultMap id="userAndJobs1" extends="BaseResultMap" type="TUser">
+		<collection property="jobs"
+			ofType="com.zj.study.framework.mybatis.entity.TJobHistory">
+			<result column="comp_name" property="compName" jdbcType="VARCHAR" />
+			<result column="years" property="years" jdbcType="INTEGER" />
+			<result column="title" property="title" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<resultMap id="userAndJobs2" extends="BaseResultMap" type="TUser">
+		<collection property="jobs" fetchType="lazy" column="id"
+			select="com.zj.study.framework.mybatis.mapper.TJobHistoryMapper.selectByUserId" />
+	</resultMap>
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
@@ -338,6 +351,31 @@
 		a.sex,
 		a.mobile,
 		a.position_id
+		from t_user a
+	</select>
+
+	<select id="selectUserJobs1" resultMap="userAndJobs1">
+		select
+		a.id,
+		a.user_name,
+		a.real_name,
+		a.sex,
+		a.mobile,
+		b.comp_name,
+		b.years,
+		b.title
+		from t_user a,
+		t_job_history b
+		where a.id = b.user_id
+	</select>
+
+	<select id="selectUserJobs2" resultMap="userAndJobs2">
+		select
+		a.id,
+		a.user_name,
+		a.real_name,
+		a.sex,
+		a.mobile
 		from t_user a
 	</select>
 </mapper>

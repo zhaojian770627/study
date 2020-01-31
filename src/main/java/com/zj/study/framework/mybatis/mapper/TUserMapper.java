@@ -26,14 +26,18 @@ public interface TUserMapper {
 	int updateIfAndSetOper(TUser record);
 
 	int insertIfOper(TUser record);
-	
-    int insertSelective(TUser record);
-    
-    List<TUser> selectForeach4In(String[] names);
-    
-    int insertForeach4Batch(List<TUser> users);
-    
-    List<TUser> selectUserPosition1();
-    
-    List<TUser> selectUserPosition2();
+
+	int insertSelective(TUser record);
+
+	List<TUser> selectForeach4In(String[] names);
+
+	int insertForeach4Batch(List<TUser> users);
+
+	List<TUser> selectUserPosition1();
+
+	List<TUser> selectUserPosition2();
+
+	List<TUser> selectUserJobs1();
+
+	List<TUser> selectUserJobs2();
 }
