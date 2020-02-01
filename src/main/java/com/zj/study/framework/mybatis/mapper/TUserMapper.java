@@ -42,4 +42,6 @@ public interface TUserMapper {
 	List<TUser> selectUserJobs2();
 	
 	List<TUser> selectUserHealthReport();
+	
+	List<TUser> selectUserRole();
 }

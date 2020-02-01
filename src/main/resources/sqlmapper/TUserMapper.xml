@@ -63,7 +63,7 @@
 			<case value="2" resultMap="userAndHealthReportFemale" />
 		</discriminator>
 	</resultMap>
-	
+
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
@@ -405,5 +405,32 @@
 		select
 		<include refid="Base_Column_List" />
 		from t_user a
+	</select>
+
+	<resultMap type="TUser" id="userRoleInfo" extends="BaseResultMap">
+		<collection property="roles" ofType="TRole" columnPrefix="role_">
+			<result column="id" property="id" />
+			<result column="Name" property="roleName" />
+			<result column="note" property="note" />
+		</collection>
+	</resultMap>
+	
+	<select id="selectUserRole" resultMap="userRoleInfo">
+		select a.id,
+		a.user_name,
+		a.real_name,
+		a.sex,
+		a.mobile,
+		a.note,
+		b.role_id,
+		c.role_name,
+		c.note
+		role_note
+		from t_user a,
+		t_user_role b,
+		t_role c
+		where a.id = b.user_id
+		AND
+		b.role_id = c.id
 	</select>
 </mapper>

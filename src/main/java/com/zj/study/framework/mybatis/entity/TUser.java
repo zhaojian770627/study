@@ -23,6 +23,8 @@ public class TUser {
 
 	private List<HealthReport> healthReports;
 
+	private List<TRole> roles;
+
 	// public TUser(Integer id, String userName) {
 	// super();
 	// this.id = id;
@@ -107,6 +109,14 @@ public class TUser {
 
 	public void setHealthReports(List<HealthReport> healthReports) {
 		this.healthReports = healthReports;
+	}
+
+	public List<TRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<TRole> roles) {
+		this.roles = roles;
 	}
 
 	@Override

@@ -78,8 +78,23 @@ public class AssociationQueryTest {
 		// // 4.执行查询语句并返回结果
 		// // ----------------------
 		List<TUser> list = mapper.selectUserHealthReport();
-//		for (TUser tUser : list) {
-//			System.out.println(tUser);
-//		}
+		for (TUser tUser : list) {
+			System.out.println(tUser);
+		}
+	}
+
+	@Test
+	// 多对多
+	public void testManyToMany() {
+		// 2.获取sqlSession
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		// 3.获取对应mapper
+		TUserMapper mapper = sqlSession.getMapper(TUserMapper.class);
+		// 4.执行查询语句并返回结果
+		// ----------------------
+		List<TUser> list = mapper.selectUserRole();
+		for (TUser tUser : list) {
+			System.out.println(tUser.getRoles().size());
+		}
 	}
 }

@@ -23,6 +23,28 @@
 			targetProject="${project_src}" type="XMLMAPPER" />
 		<!-- shema 数据库 tableName表明 -->
 
+	<table schema="${jdbc_username}" tableName="t_role"
+		enableCountByExample="false" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableSelectByExample="false"
+		selectByExampleQueryId="false">
+	</table>
+	<table schema="${jdbc_username}" tableName="t_user_role"
+		enableCountByExample="false" enableUpdateByExample="false"
+		enableDeleteByExample="false" enableSelectByExample="false"
+		selectByExampleQueryId="false">
+	</table>
+		
+		<!--
+		<table schema="${jdbc_username}" tableName="t_health_report_male"
+			 enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
+		<table schema="${jdbc_username}" tableName="t_health_report_female"
+			 enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false">
+		</table>
 		<table schema="${jdbc_username}" tableName="t_health_report_male"
 			 enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
@@ -34,21 +56,16 @@
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
 		
-		<!--
 		<table schema="${jdbc_username}" tableName="t_job_history"
 			 enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		-->
-		<!--
 		<table schema="${jdbc_username}" tableName="t_position"
 			 enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
 			enableSelectByExample="false" selectByExampleQueryId="false">
 		</table>
-		-->
-		<!-- 	
 		<table schema="${jdbc_username}" tableName="t_user"
 			 enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"
