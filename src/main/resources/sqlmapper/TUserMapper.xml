@@ -42,6 +42,28 @@
 		<collection property="jobs" fetchType="lazy" column="id"
 			select="com.zj.study.framework.mybatis.mapper.TJobHistoryMapper.selectByUserId" />
 	</resultMap>
+
+	<resultMap id="userAndHealthReportMale" extends="userAndHealthReport"
+		type="TUser">
+		<collection property="healthReports" column="id"
+			select="com.zj.study.framework.mybatis.mapper.THealthReportMaleMapper.selectByUserId"></collection>
+	</resultMap>
+
+	<resultMap id="userAndHealthReportFemale" extends="userAndHealthReport"
+		type="TUser">
+		<collection property="healthReports" column="id"
+			select="com.zj.study.framework.mybatis.mapper.THealthReportFemaleMapper.selectByUserId"></collection>
+	</resultMap>
+
+	<resultMap id="userAndHealthReport" extends="BaseResultMap"
+		type="TUser">
+
+		<discriminator column="sex" javaType="int">
+			<case value="1" resultMap="userAndHealthReportMale" />
+			<case value="2" resultMap="userAndHealthReportFemale" />
+		</discriminator>
+	</resultMap>
+	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
@@ -376,6 +398,12 @@
 		a.real_name,
 		a.sex,
 		a.mobile
+		from t_user a
+	</select>
+
+	<select id="selectUserHealthReport" resultMap="userAndHealthReport">
+		select
+		<include refid="Base_Column_List" />
 		from t_user a
 	</select>
 </mapper>

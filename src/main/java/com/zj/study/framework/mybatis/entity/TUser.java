@@ -21,6 +21,8 @@ public class TUser {
 
 	private List<TJobHistory> jobs;
 
+	private List<HealthReport> healthReports;
+
 	// public TUser(Integer id, String userName) {
 	// super();
 	// this.id = id;
@@ -97,6 +99,14 @@ public class TUser {
 
 	public void setJobs(List<TJobHistory> jobs) {
 		this.jobs = jobs;
+	}
+
+	public List<HealthReport> getHealthReports() {
+		return healthReports;
+	}
+
+	public void setHealthReports(List<HealthReport> healthReports) {
+		this.healthReports = healthReports;
 	}
 
 	@Override
