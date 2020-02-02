@@ -10,14 +10,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
 //配置类====配置文件
 @Configuration
 @PropertySource(value = "classpath:/db.properties")
+@EnableTransactionManagement
 public class MainConfig {
 
 	// ---------------数据源相关---------------------
@@ -29,6 +30,9 @@ public class MainConfig {
 	String jdbc_username;
 	@Value("${jdbc_password}")
 	String jdbc_password;
+
+	@Value("classpath:sqlmapper/*.xml")
+	private Resource[] mapResource;
 
 	@Bean(initMethod = "init", destroyMethod = "close")
 	public DataSource dataSource() throws SQLException {
@@ -60,18 +64,22 @@ public class MainConfig {
 	}
 
 	@Bean
-	public Resource[] sqlMapper() {
-		ClassPathResource resource = new ClassPathResource("classpath*:sqlmapper/*.xml");
-		return new Resource[] { resource };
-	}
-
-	@Bean
-	public SqlSessionFactoryBean sqlSessionFactoryBean(@Autowired DataSource dataSource,
-			@Autowired Resource[] sqlMapper) {
+	public SqlSessionFactoryBean sqlSessionFactoryBean(@Autowired DataSource dataSource) {
+		System.out.println(mapResource.length);
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.zj.study.framework.mybatis.entity");
-		sqlSessionFactoryBean.setMapperLocations(sqlMapper);
+		sqlSessionFactoryBean.setMapperLocations(mapResource);
 		return sqlSessionFactoryBean;
 	}
+	/*
+	 * @Bean public MapperScannerConfigurer mapperScannerConfigurer() {
+	 * MapperScannerConfigurer mapperScannerConfigurer = new
+	 * MapperScannerConfigurer(); mapperScannerConfigurer.setBasePackage(
+	 * "com.zj.study.framework.mybatis.mapper"); return mapperScannerConfigurer; }
+	 * 
+	 * @Bean public PlatformTransactionManager platformTransactionManager(@Autowired
+	 * DataSource dataSource) { return new DataSourceTransactionManager(dataSource);
+	 * }
+	 */
 }
