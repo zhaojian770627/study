@@ -5,20 +5,26 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
 //配置类====配置文件
 @Configuration
-@PropertySource(value = "classpath:/db.properties")
+@PropertySource(value = "classpath:db.properties")
 @EnableTransactionManagement
+@MapperScan(basePackages = "com.zj.study.framework.mybatis.mapper")
+@ComponentScan("com.zj.study.framework.mybatis.spring.service")
 public class MainConfig {
 
 	// ---------------数据源相关---------------------
@@ -64,22 +70,17 @@ public class MainConfig {
 	}
 
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactoryBean(@Autowired DataSource dataSource) {
-		System.out.println(mapResource.length);
+	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setDataSource(dataSource);
 		sqlSessionFactoryBean.setTypeAliasesPackage("com.zj.study.framework.mybatis.entity");
 		sqlSessionFactoryBean.setMapperLocations(mapResource);
 		return sqlSessionFactoryBean;
 	}
-	/*
-	 * @Bean public MapperScannerConfigurer mapperScannerConfigurer() {
-	 * MapperScannerConfigurer mapperScannerConfigurer = new
-	 * MapperScannerConfigurer(); mapperScannerConfigurer.setBasePackage(
-	 * "com.zj.study.framework.mybatis.mapper"); return mapperScannerConfigurer; }
-	 * 
-	 * @Bean public PlatformTransactionManager platformTransactionManager(@Autowired
-	 * DataSource dataSource) { return new DataSourceTransactionManager(dataSource);
-	 * }
-	 */
+
+	@Bean
+	public PlatformTransactionManager platformTransactionManager(@Autowired DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
+	}
+
 }
