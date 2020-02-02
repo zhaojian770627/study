@@ -15,4 +15,8 @@ public class UserService {
 	public TUser getUserById(int id) {
 		return userMapper.selectByPrimaryKey(id);
 	}
+	
+	public void addUser(TUser user) {
+		userMapper.insert1(user);
+	}
 }

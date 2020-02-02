@@ -91,7 +91,7 @@
 		#{sex,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR},
 		#{email,jdbcType=VARCHAR},
 		#{note,jdbcType=VARCHAR},
-		#{positionId,jdbcType=INTEGER})
+		#{position.id,jdbcType=INTEGER})
 	</insert>
 
 	<insert id="insert2" parameterType="TUser">
@@ -111,7 +111,7 @@
 		#{sex,jdbcType=TINYINT}, #{mobile,jdbcType=VARCHAR},
 		#{email,jdbcType=VARCHAR},
 		#{note,jdbcType=VARCHAR},
-		#{positionId,jdbcType=INTEGER})
+		#{position.id,jdbcType=INTEGER}))
 	</insert>
 
 	<select id="selectBySymbol" resultMap="BaseResultMap">
