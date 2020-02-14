@@ -5,6 +5,8 @@ package com.zj.study.framework.lock.single;
  *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
  *
  *类说明：
+ *私有化类的应用，用的时候才初始化
+ *
  */
 public class InstanceLazy {
 	
