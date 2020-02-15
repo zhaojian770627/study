@@ -4,7 +4,7 @@
 
 	<select id="selectByPrimaryKey" resultType="com.zj.study.framework.mybatis.small.entity.TUser">
 		select
-		id, userName, realName, sex, mobile, email, note
+		id, user_name, real_name, sex, mobile, email, note
 		from t_user
 		where id =?
 	</select>

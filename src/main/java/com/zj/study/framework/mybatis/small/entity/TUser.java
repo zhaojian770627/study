@@ -6,9 +6,9 @@ public class TUser implements Serializable {
 
 	private Integer id;
 
-	private String userName;
+	private String user_name;
 
-	private String realName;
+	private String real_name;
 
 	private String mobile;
 
@@ -22,22 +22,6 @@ public class TUser implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getRealName() {
-		return realName;
-	}
-
-	public void setRealName(String realName) {
-		this.realName = realName;
 	}
 
 	public String getMobile() {
@@ -64,9 +48,25 @@ public class TUser implements Serializable {
 		this.note = note;
 	}
 
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public String getReal_name() {
+		return real_name;
+	}
+
+	public void setReal_name(String real_name) {
+		this.real_name = real_name;
+	}
+
 	@Override
 	public String toString() {
-		return "TUser [id=" + id + ", userName=" + userName + ", realName=" + realName + ", mobile=" + mobile
+		return "TUser [id=" + id + ", user_name=" + user_name + ", real_name=" + real_name + ", mobile=" + mobile
 				+ ", email=" + email + ", note=" + note + "]";
 	}
 

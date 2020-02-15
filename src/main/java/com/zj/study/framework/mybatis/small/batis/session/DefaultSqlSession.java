@@ -29,7 +29,7 @@ public class DefaultSqlSession implements SqlSession {
 	}
 
 	@Override
-	public <T> T selectOne(String statement, Object parameter) throws SQLException, ClassNotFoundException {
+	public <T> T selectOne(String statement, Object parameter) throws Exception {
 		List<Object> selectList = this.selectList(statement, parameter);
 		if (selectList != null && selectList.size() > 0) {
 			return (T) selectList.get(0);
@@ -38,7 +38,7 @@ public class DefaultSqlSession implements SqlSession {
 	}
 
 	@Override
-	public <E> List<E> selectList(String statement, Object parameter) throws SQLException, ClassNotFoundException {
+	public <E> List<E> selectList(String statement, Object parameter) throws Exception {
 		MappedStatement mappedStatement = conf.getMappedStatement(statement);
 		return executor.query(mappedStatement, parameter);
 	}
