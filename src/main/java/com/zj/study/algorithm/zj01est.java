@@ -39,7 +39,7 @@ public class zj01est {
 	/**
 	 * 洗牌1
 	 */
-	public void shuffle_lst(int[] cards) {
+	public void shuffle_1st(int[] cards) {
 		int length = cards.length;
 		Random r = new Random();
 		for (int k = 0; k < length; k++) {
@@ -50,14 +50,52 @@ public class zj01est {
 		}
 	}
 
-	@Test
+	/**
+	 * 洗牌1
+	 */
+	public void shuffle_2st(int[] cards) {
+		int length = cards.length;
+		Random r = new Random();
+		for (int k = 0; k < length; k++) {
+			int i = r.nextInt(length);
+			swap(cards, i, k);
+		}
+	}
+
+	/**
+	 * 洗牌3 正确的洗牌方式
+	 */
+	public void shuffle_correct(int[] cards) {
+		int length = cards.length;
+		Random r = new Random();
+		for (int k = 0; k < length; k++) {
+			int rind = k + r.nextInt(length - k);
+			swap(cards, rind, k);
+		}
+	}
+
 	/**
 	 * 洗牌测试
 	 */
+	@Test
 	public void testShuffle() {
-		int[] cards = createCards(10);
-		shuffle_lst(cards);
-		print(cards);
+		// result 表示 每一列表示 1.。9数字，每一行表示在这个位置上出现的次数
+		int[][] result = new int[10][10];
+		for (int i = 0; i < 1000; i++) {
+			int[] cards = createCards(10);
+			shuffle_correct(cards);
+			for (int j = 0; j < cards.length; j++) {
+				result[cards[j] - 1][j] += 1;
+			}
+		}
+		System.out.println("result");
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				System.out.print(result[i][j] + " ");
+			}
+			System.out.println();
+		}
+
 	}
 
 }
