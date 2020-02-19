@@ -98,4 +98,32 @@ public class zj01est {
 
 	}
 
+	/**
+	 * 求100内的质数
+	 */
+	@Test
+	public void testPrime() {
+		// result 表示 每一列表示 1.。9数字，每一行表示在这个位置上出现的次数
+		boolean[] bs = new boolean[100];
+		for (int i = 1; i <= 100; i++) {
+			bs[i - 1] = true;
+		}
+		bs[0] = bs[1] = bs[2] = true;
+		for (int i = 2; i <= 100; i++) {
+			if (bs[i - 1] == true) {
+				int j = i + i;
+				while (j <= 100) {
+					bs[j - 1] = false;
+					j = j + i;
+				}
+			} else
+				continue;
+		}
+		System.out.println("prime");
+		for (int i = 0; i < 100; i++) {
+			if (bs[i] == true)
+				System.out.print((i + 1) + " ");
+		}
+
+	}
 }
