@@ -1,10 +1,12 @@
 package com.zj.study.algorithm;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
 
-public class zj01est {
+public class ArrayTest {
 	@Test
 	/**
 	 * 找到丢失的数字
@@ -99,6 +101,58 @@ public class zj01est {
 	}
 
 	/**
+	 * 得到指定数字内的质数数组
+	 * 
+	 * @return
+	 */
+	Integer[] getPrimeAry(int num) {
+		boolean[] bs = new boolean[num];
+		for (int i = 1; i <= num; i++) {
+			bs[i - 1] = true;
+		}
+
+		for (int i = 2; i <= num; i++) {
+			if (bs[i - 1] == true) {
+				int j = i + i;
+				while (j <= num) {
+					bs[j - 1] = false;
+					j = j + i;
+				}
+			} else
+				continue;
+		}
+
+		List<Integer> ary = new ArrayList<>();
+		for (int i = 0; i < num; i++) {
+			if (bs[i] == true) {
+				ary.add(i + 1);
+			}
+		}
+		return ary.toArray(new Integer[ary.size()]);
+	}
+
+	boolean getPrimeFactor(int num, int[] ret) throws Exception {
+		if (ret.length < 2)
+			throw new Exception("ret space not enough");
+
+		Integer[] primes = getPrimeAry(num);
+		int i = 0;
+		int j = primes.length;
+		while (i < j) {
+			int total = primes[i] + primes[j];
+			if (total == num) {
+				ret[0] = primes[i];
+				ret[1] = primes[j];
+				return true;
+			} else if (total > num) {
+				j--;
+			} else
+				i++;
+		}
+		return false;
+	}
+
+	/**
 	 * 求100内的质数
 	 */
 	@Test
@@ -108,7 +162,6 @@ public class zj01est {
 		for (int i = 1; i <= 100; i++) {
 			bs[i - 1] = true;
 		}
-		bs[0] = bs[1] = bs[2] = true;
 		for (int i = 2; i <= 100; i++) {
 			if (bs[i - 1] == true) {
 				int j = i + i;
@@ -125,5 +178,13 @@ public class zj01est {
 				System.out.print((i + 1) + " ");
 		}
 
+	}
+
+	@Test
+	public void testPrimeFactor() throws Exception {
+		int[] ret = new int[2];
+		if (getPrimeFactor(100, ret)) {
+			System.out.println(ret[0] + " " + ret[1]);
+		}
 	}
 }
