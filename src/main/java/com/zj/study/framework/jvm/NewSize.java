@@ -4,7 +4,7 @@ package com.zj.study.framework.jvm;
  * 测试对象在Java内存中的分配
  * 
  * -Xms20m -Xmx20m -XX:+PrintGCDetails -Xmn2m -XX:SurvivorRatio=2
- * 
+ * -Xms20m -Xmx20m -XX:+PrintGCDetails -XX:NewRatio=2
  * @author zhaojian
  *
  */
