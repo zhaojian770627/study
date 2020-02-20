@@ -123,7 +123,7 @@ public class ArrayTest {
 		}
 
 		List<Integer> ary = new ArrayList<>();
-		for (int i = 0; i < num; i++) {
+		for (int i = 1; i < num; i++) {
 			if (bs[i] == true) {
 				ary.add(i + 1);
 			}
@@ -137,7 +137,7 @@ public class ArrayTest {
 
 		Integer[] primes = getPrimeAry(num);
 		int i = 0;
-		int j = primes.length;
+		int j = primes.length - 1;
 		while (i < j) {
 			int total = primes[i] + primes[j];
 			if (total == num) {
@@ -183,7 +183,7 @@ public class ArrayTest {
 	@Test
 	public void testPrimeFactor() throws Exception {
 		int[] ret = new int[2];
-		if (getPrimeFactor(100, ret)) {
+		if (getPrimeFactor(400, ret)) {
 			System.out.println(ret[0] + " " + ret[1]);
 		}
 	}
