@@ -2,6 +2,13 @@ package com.zj.study.algorithm;
 
 import java.util.Random;
 
+/**
+ * 
+ * 扫雷程序
+ * 
+ * @author zhaojian
+ *
+ */
 public class Minesweeper {
 
 	private void gen(int m, int n, int p) {
