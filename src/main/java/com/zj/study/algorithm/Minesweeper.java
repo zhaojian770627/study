@@ -58,7 +58,40 @@ public class Minesweeper {
 
 	public static void main(String[] args) {
 		Minesweeper sweeper = new Minesweeper();
-		sweeper.gen(10, 10, 8);
+		// sweeper.gen(10, 10, 8);
+
+		sweeper.genNine(5);
+	}
+
+	/**
+	 * 生成九宫格算法
+	 * 
+	 * @param n
+	 */
+	private void genNine(int n) {
+		int[][] board = new int[n][n];
+		int row = n - 1;
+		int col = (n - 1) / 2;
+
+		for (int i = 0; i < n * n; i++) {
+			board[row][col] = i + 1;
+
+			// 计算下个位置
+			if (board[(row + 1) % n][(col + 1) % n] == 0) {
+				row = (row + 1) % n;
+				col = (col + 1) % n;
+			} else {
+				row = (row - 1) % n;
+			}
+		}
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+
+				System.out.print(board[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 
 }
