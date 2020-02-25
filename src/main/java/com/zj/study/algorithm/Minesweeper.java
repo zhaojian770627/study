@@ -60,7 +60,7 @@ public class Minesweeper {
 		Minesweeper sweeper = new Minesweeper();
 		// sweeper.gen(10, 10, 8);
 
-		sweeper.genNine(5);
+		sweeper.genNine(3);
 	}
 
 	/**
@@ -73,16 +73,21 @@ public class Minesweeper {
 		int row = n - 1;
 		int col = (n - 1) / 2;
 
-		for (int i = 0; i < n * n; i++) {
-			board[row][col] = i + 1;
+		board[row][col] = 1;
+
+		for (int i = 1; i < n * n; i++) {
+			int tryrow = (row + 1) % n;
+			int trycol = (col + 1) % n;
 
 			// 计算下个位置
-			if (board[(row + 1) % n][(col + 1) % n] == 0) {
-				row = (row + 1) % n;
-				col = (col + 1) % n;
+			if (board[tryrow][trycol] == 0) {
+				row = tryrow;
+				col = trycol;
 			} else {
-				row = (row - 1) % n;
+				row = (row - 1 + n) % n;
 			}
+
+			board[row][col] = i + 1;
 		}
 
 		for (int i = 0; i < n; i++) {
