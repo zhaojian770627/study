@@ -59,8 +59,8 @@ public class Minesweeper {
 	public static void main(String[] args) {
 		Minesweeper sweeper = new Minesweeper();
 		// sweeper.gen(10, 10, 8);
-
-		sweeper.genNine(3);
+		// sweeper.genNine(3);
+		sweeper.sudokuVerify(sweeper.genNineSpace());
 	}
 
 	/**
@@ -99,4 +99,52 @@ public class Minesweeper {
 		}
 	}
 
+	private int[][] genNineSpace() {
+		int[][] ori = new int[][] { 
+				{ 5, 3, 4, 6, 7, 8, 9, 1, 2 },
+				{ 6, 7, 2, 1, 9, 5, 3, 4, 8 },
+				{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 },
+				{ 4, 2, 6, 8, 5, 3, 7, 9, 1 },
+				{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 },
+				{ 2, 8, 7, 4, 1, 9, 6, 3, 5 },
+				{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+				
+		return ori;
+	}
+
+	private boolean sudokuVerify(int board[][]) {
+		int num = board.length;
+
+		for (int row = 0; row < num; row++) {
+			int result_row = 0;
+			int result_col = 0;
+			int result_blk = 0;
+			for (int col = 0; col < num; col++) {
+				int temp = board[row][col];
+
+				if ((result_row & (1 << (temp - 1))) == 0)
+					result_row = result_row | 1 << (temp - 1);
+				else
+					return false;
+
+				temp = board[col][row];
+				if ((result_col & (1 << (temp - 1))) == 0)
+					result_col = result_col | 1 << (temp - 1);
+				else
+					return false;
+
+				int idx_row = (row / 3) * 3 + col / 3;
+				int idx_col = (row % 3) * 3 + col % 3;
+				temp = board[idx_row][idx_col];
+				if ((result_blk & (1 << (temp - 1))) == 0)
+					result_blk = result_blk | 1 << (temp - 1);
+				else
+					return false;
+			}
+		}
+
+		return true;
+	}
 }
