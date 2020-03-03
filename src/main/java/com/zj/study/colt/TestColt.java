@@ -9,8 +9,9 @@ import cern.colt.matrix.linalg.Algebra;
 public class TestColt {
 
 	public static void main(String[] args) {
-
-		int size = 100;
+		Runtime runtime = Runtime.getRuntime();
+		long startMem = runtime.freeMemory();
+		int size = 1000;
 		Random r = new Random();
 		// 生成随机的系数矩阵100个
 		DenseDoubleMatrix2D matrix = new DenseDoubleMatrix2D(size, size);
@@ -35,9 +36,9 @@ public class TestColt {
 		long start = System.currentTimeMillis();
 		DoubleMatrix2D xr = algebra.solve(matrix, D);
 		long end = System.currentTimeMillis();
+		long orz = startMem - runtime.freeMemory();
 		System.out.println("耗费时间:" + (end - start));
-		System.out.println(x);
-		System.out.println(xr);
+		System.out.println("耗费内存:" + orz / 1024 + "k");
 	}
 
 }
