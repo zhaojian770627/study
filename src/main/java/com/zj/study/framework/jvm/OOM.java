@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * 
+ * -Xms:500m  -Xmx:500m
  * 演示堆溢出
  * 
  * @author zhaojian
