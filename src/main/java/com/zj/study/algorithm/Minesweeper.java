@@ -173,4 +173,19 @@ public class Minesweeper {
 
 		return b;
 	}
+
+	/**
+	 * 旋转数组 使用原数组
+	 * 
+	 * @param a
+	 * @return
+	 */
+	private void rotate2(int[][] a) {
+		int n = a.length;
+
+		// 先旋转外圈
+		for (int i = 0; i < a.length; i++) {
+
+		}
+	}
 }
