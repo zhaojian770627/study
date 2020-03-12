@@ -61,7 +61,7 @@ public class Minesweeper {
 		// sweeper.gen(10, 10, 8);
 		// sweeper.genNine(3);
 		// System.out.println(sweeper.sudokuVerify(sweeper.genNineSpace()));
-		sweeper.rotate(sweeper.createRotate());
+		sweeper.rotate2(sweeper.createRotate());
 	}
 
 	/**
@@ -185,11 +185,12 @@ public class Minesweeper {
 
 		int[] bak = new int[a.length];
 		// 先旋转外圈
-		for (int i = 0; i < a.length; i++) {
-			for (int j = 0; j < a.length; j++) {
+		for (int i = 0; i < 1; i++) {
+			for (int j = 0; j < 1; j++) {
 				// 备份数据
 				for (int k = 1; k < a.length; k++) {
 					bak[k] = a[k][a.length - i - 1];
+					System.out.println(bak[k]);
 				}
 			}
 		}
