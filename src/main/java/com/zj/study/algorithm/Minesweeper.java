@@ -183,9 +183,15 @@ public class Minesweeper {
 	private void rotate2(int[][] a) {
 		int n = a.length;
 
+		int[] bak = new int[a.length];
 		// 先旋转外圈
 		for (int i = 0; i < a.length; i++) {
-
+			for (int j = 0; j < a.length; j++) {
+				// 备份数据
+				for (int k = 1; k < a.length; k++) {
+					bak[k] = a[k][a.length - i - 1];
+				}
+			}
 		}
 	}
 }
