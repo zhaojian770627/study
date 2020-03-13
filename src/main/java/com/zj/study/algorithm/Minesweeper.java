@@ -183,15 +183,15 @@ public class Minesweeper {
 	private void rotate2(int[][] a) {
 		int n = a.length;
 
-		int[] bak = new int[a.length];
+		int bak;
 		// 先旋转外圈
 		for (int i = 0; i < n / 2; i++) {
 			for (int j = i; j < n - i - 1; j++) {
-				bak[n - i - 1] = a[n - j - 1][n - i - 1];
+				bak = a[n - j - 1][n - i - 1];
 				a[n - j - 1][n - i - 1] = a[i][n - j - 1];
 				a[i][n - j - 1] = a[j][i];
 				a[j][i] = a[n - i - 1][j];
-				a[n - i - 1][j] = bak[n - i - 1];
+				a[n - i - 1][j] = bak;
 			}
 
 		}
