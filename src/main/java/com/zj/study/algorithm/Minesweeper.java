@@ -186,27 +186,14 @@ public class Minesweeper {
 		int[] bak = new int[a.length];
 		// 先旋转外圈
 		for (int i = 0; i < n / 2; i++) {
-			// 备份数据
-			for (int k = 1; k < n - i; k++) {
-				bak[k] = a[k][a.length - i - 1];
-//				System.out.println(bak[k]);
-			}
-
 			for (int j = i; j < n - i - 1; j++) {
-				a[j + 1][n - i - 1] = a[i][j + 1];
-			}
-
-			for (int j = i; j < n - i - 1; j++) {
+				bak[n - i - 1] = a[n - j - 1][n - i - 1];
+				a[n - j - 1][n - i - 1] = a[i][n - j - 1];
 				a[i][n - j - 1] = a[j][i];
-			}
-
-			for (int j = i; j < n - i - 1; j++) {
 				a[j][i] = a[n - i - 1][j];
+				a[n - i - 1][j] = bak[n - i - 1];
 			}
 
-			for (int j = i; j < n - i - 1; j++) {
-				a[n - i - 1][j] = bak[n - j - 1];
-			}
 		}
 
 		for (int i = 0; i < a.length; i++) {
