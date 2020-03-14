@@ -11,6 +11,8 @@ import java.util.Random;
  */
 public class Minesweeper {
 
+	private Object object;
+
 	private void gen(int m, int n, int p) {
 		int[][] board = new int[m + 2][n + 2];
 		Random r = new Random();
@@ -61,7 +63,8 @@ public class Minesweeper {
 		// sweeper.gen(10, 10, 8);
 		// sweeper.genNine(3);
 		// System.out.println(sweeper.sudokuVerify(sweeper.genNineSpace()));
-		sweeper.rotate2(sweeper.createRotate());
+//		sweeper.rotate2(sweeper.createRotate());
+		sweeper.findDisappearedNum();
 	}
 
 	/**
@@ -203,5 +206,18 @@ public class Minesweeper {
 			System.out.println();
 		}
 
+	}
+
+	private void findDisappearedNum() {
+		int[] num = { 4, 3, 2, 7, 8, 2, 3, 1 };
+		for (int i = 0; i < num.length; i++) {
+			int index = Math.abs(num[i]) - 1;
+			num[index] = -Math.abs(num[index]);
+		}
+
+		for (int i = 0; i < num.length; i++) {
+			if (num[i] > 0)
+				System.out.println(i);
+		}
 	}
 }
