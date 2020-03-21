@@ -1,4 +1,4 @@
-package com.zj.study.algorithm;
+package com.zj.study.algorithm.array;
 
 import java.util.Random;
 
