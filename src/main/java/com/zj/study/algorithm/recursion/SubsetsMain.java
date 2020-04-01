@@ -1,7 +1,9 @@
 package com.zj.study.algorithm.recursion;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class SubsetsMain {
 
@@ -33,6 +35,18 @@ public class SubsetsMain {
 			System.out.print(") ");
 		}
 		System.out.print(")");
+	}
+
+	private void subsets2(String[] ary) {
+		Queue<String> queue = new LinkedList<String>();
+		List<String> result = new ArrayList<>();
+		subsets_recursive_helper(result, queue, ary, 0);
+	}
+
+	private void subsets_recursive_helper(List<String> result, Queue<String> queue, String[] ary, int i) {
+		result.addAll(queue);
+//		queue.add(e)
+//		queue.poll();
 	}
 
 }
