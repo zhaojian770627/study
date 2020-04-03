@@ -9,7 +9,8 @@ public class SubsetsMain {
 
 	public static void main(String[] args) {
 		SubsetsMain main = new SubsetsMain();
-		main.subsets(3);
+		// main.subsets(3);
+		main.subsets2(new String[] { "a", "b", "c" });
 	}
 
 	private void subsets(int n) {
@@ -38,15 +39,27 @@ public class SubsetsMain {
 	}
 
 	private void subsets2(String[] ary) {
-		Queue<String> queue = new LinkedList<String>();
-		List<String> result = new ArrayList<>();
+		Queue<String> queue = new LinkedList<>();
+		List<String[]> result = new ArrayList<>();
 		subsets_recursive_helper(result, queue, ary, 0);
+		System.out.print("(");
+		for (String[] ss : result) {
+			System.out.print("(");
+			for (String s : ss) {
+				System.out.println(s + " ");
+			}
+			System.out.print(") ");
+		}
+		System.out.print(")");
 	}
 
-	private void subsets_recursive_helper(List<String> result, Queue<String> queue, String[] ary, int i) {
-		result.addAll(queue);
-//		queue.add(e)
-//		queue.poll();
+	private void subsets_recursive_helper(List<String[]> result, Queue<String> queue, String[] ary, int i) {
+		result.add(queue.toArray(new String[] {}));
+		for (int j = 0; j < ary.length; j++) {
+			queue.add(ary[i]);
+			subsets_recursive_helper(result, queue, ary, j + 1);
+			queue.poll();
+		}
 	}
 
 }
