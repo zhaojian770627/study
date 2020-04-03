@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class SubsetsMain {
 
@@ -39,11 +40,10 @@ public class SubsetsMain {
 	}
 
 	private void subsets2(String[] ary) {
-		Queue<String> queue = new LinkedList<>();
+		Stack<String> stack = new Stack<>();
 		List<String[]> result = new ArrayList<>();
-		subsets_recursive_helper(result, queue, ary, 0);
-		
-		
+		subsets_recursive_helper(result, stack, ary, 0);
+
 		System.out.print("[");
 		for (String[] ss : result) {
 			System.out.print("(");
@@ -56,12 +56,12 @@ public class SubsetsMain {
 	}
 
 	// [() (a ) (a b ) (a b c ) (c c ) (b ) (b c ) (c )]
-	private void subsets_recursive_helper(List<String[]> result, Queue<String> queue, String[] ary, int i) {
+	private void subsets_recursive_helper(List<String[]> result, Stack<String> queue, String[] ary, int i) {
 		result.add(queue.toArray(new String[] {}));
 		for (int j = i; j < ary.length; j++) {
-			queue.add(ary[j]);
+			queue.push(ary[j]);
 			subsets_recursive_helper(result, queue, ary, j + 1);
-			queue.poll();
+			queue.pop();
 		}
 	}
 
