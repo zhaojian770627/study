@@ -55,7 +55,8 @@ public class SubsetsMain {
 		System.out.print("]");
 	}
 
-	// [() (a ) (a b ) (a b c ) (c c ) (b ) (b c ) (c )]
+	// [() (a ) (a b ) (a b c ) (a c ) (b ) (b c ) (c ) ]
+	// 每次从递归中退出,函数全部pop,而上一层还停留指定的位置
 	private void subsets_recursive_helper(List<String[]> result, Stack<String> queue, String[] ary, int i) {
 		result.add(queue.toArray(new String[] {}));
 		for (int j = i; j < ary.length; j++) {
