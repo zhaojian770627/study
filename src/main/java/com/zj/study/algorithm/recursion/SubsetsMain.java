@@ -42,7 +42,9 @@ public class SubsetsMain {
 		Queue<String> queue = new LinkedList<>();
 		List<String[]> result = new ArrayList<>();
 		subsets_recursive_helper(result, queue, ary, 0);
-		System.out.print("(");
+		
+		
+		System.out.print("[");
 		for (String[] ss : result) {
 			System.out.print("(");
 			for (String s : ss) {
@@ -50,9 +52,10 @@ public class SubsetsMain {
 			}
 			System.out.print(") ");
 		}
-		System.out.print(")");
+		System.out.print("]");
 	}
 
+	// [() (a ) (a b ) (a b c ) (c c ) (b ) (b c ) (c )]
 	private void subsets_recursive_helper(List<String[]> result, Queue<String> queue, String[] ary, int i) {
 		result.add(queue.toArray(new String[] {}));
 		for (int j = i; j < ary.length; j++) {
