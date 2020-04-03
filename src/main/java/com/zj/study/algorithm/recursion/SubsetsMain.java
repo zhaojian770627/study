@@ -56,7 +56,7 @@ public class SubsetsMain {
 	private void subsets_recursive_helper(List<String[]> result, Queue<String> queue, String[] ary, int i) {
 		result.add(queue.toArray(new String[] {}));
 		for (int j = i; j < ary.length; j++) {
-			queue.add(ary[i]);
+			queue.add(ary[j]);
 			subsets_recursive_helper(result, queue, ary, j + 1);
 			queue.poll();
 		}
