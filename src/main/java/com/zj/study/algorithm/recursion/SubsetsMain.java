@@ -46,7 +46,7 @@ public class SubsetsMain {
 		for (String[] ss : result) {
 			System.out.print("(");
 			for (String s : ss) {
-				System.out.println(s + " ");
+				System.out.print(s + " ");
 			}
 			System.out.print(") ");
 		}
@@ -55,7 +55,7 @@ public class SubsetsMain {
 
 	private void subsets_recursive_helper(List<String[]> result, Queue<String> queue, String[] ary, int i) {
 		result.add(queue.toArray(new String[] {}));
-		for (int j = 0; j < ary.length; j++) {
+		for (int j = i; j < ary.length; j++) {
 			queue.add(ary[i]);
 			subsets_recursive_helper(result, queue, ary, j + 1);
 			queue.poll();
