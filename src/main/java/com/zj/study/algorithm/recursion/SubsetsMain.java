@@ -1,9 +1,9 @@
 package com.zj.study.algorithm.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
 public class SubsetsMain {
@@ -11,7 +11,9 @@ public class SubsetsMain {
 	public static void main(String[] args) {
 		SubsetsMain main = new SubsetsMain();
 		// main.subsets(3);
-		main.subsets2(new String[] { "a", "b", "c" });
+		main.subsets2(new String[] { "a", "b", "b" });
+		System.out.println();
+		main.subsets2_ridrep(new String[] { "a", "b", "b" });
 	}
 
 	private void subsets(int n) {
@@ -62,6 +64,35 @@ public class SubsetsMain {
 		for (int j = i; j < ary.length; j++) {
 			queue.push(ary[j]);
 			subsets_recursive_helper(result, queue, ary, j + 1);
+			queue.pop();
+		}
+	}
+
+	private void subsets2_ridrep(String[] ary) {
+		Arrays.sort(ary);
+		Stack<String> stack = new Stack<>();
+		List<String[]> result = new ArrayList<>();
+		subsets_recursive_helper_ridrep(result, stack, ary, 0);
+
+		System.out.print("[");
+		for (String[] ss : result) {
+			System.out.print("(");
+			for (String s : ss) {
+				System.out.print(s + " ");
+			}
+			System.out.print(") ");
+		}
+		System.out.print("]");
+	}
+
+	private void subsets_recursive_helper_ridrep(List<String[]> result, Stack<String> queue, String[] ary, int i) {
+		result.add(queue.toArray(new String[] {}));
+		for (int j = i; j < ary.length; j++) {
+			if (j != i && ary[j].equals(ary[j - 1]))
+				continue;
+
+			queue.push(ary[j]);
+			subsets_recursive_helper_ridrep(result, queue, ary, j + 1);
 			queue.pop();
 		}
 	}
