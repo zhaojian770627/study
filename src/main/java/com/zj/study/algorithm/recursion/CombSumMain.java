@@ -11,7 +11,7 @@ public class CombSumMain {
 	public static void main(String[] args) {
 		CombSumMain main = new CombSumMain();
 		// main.subsets(3);
-		main.combSum(new int[] { 1, 2, 3 }, 7);
+		main.combSum(new int[] { 2, 3, 6, 7 }, 20);
 	}
 
 	private void combSum(int[] ary, int sum) {
@@ -40,7 +40,7 @@ public class CombSumMain {
 		} else
 			for (int j = i; j < ary.length; j++) {
 				queue.push(ary[j]);
-				subsets_recursive_helper(result, queue, ary, remains - ary[j], j + 1);
+				subsets_recursive_helper(result, queue, ary, remains - ary[j], j);
 				queue.pop();
 			}
 	}
