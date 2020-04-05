@@ -24,18 +24,18 @@ public class PermLetterMain {
 		for (char c : rule.toCharArray()) {
 			keys.add(String.valueOf(c));
 		}
-		permHelper(word, rule, 0, "");
+		permHelper(word, 0, "");
 	}
 
-	private void permHelper(String word, String rule, int index, String prefix) {
+	private void permHelper(String word, int index, String prefix) {
 		int length = word.length();
 
 		for (int i = index; i < length; i++) {
 			String c = String.valueOf(word.charAt(i));
 			if (keys.contains(c)) {
-				permHelper(word, rule, i + 1, prefix + c);
+				permHelper(word, i + 1, prefix + c);
 				c = c.toUpperCase();
-				permHelper(word, rule, i + 1, prefix + c);
+				permHelper(word, i + 1, prefix + c);
 			} else
 				prefix += c;
 		}
