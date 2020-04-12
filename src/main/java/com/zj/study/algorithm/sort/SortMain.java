@@ -1,11 +1,11 @@
 package com.zj.study.algorithm.sort;
 
-public class SelectSortMain {
+public class SortMain {
 
 	public static void main(String[] args) {
 		int[] a = new int[] { 1, 3, 5, 7, 9, 2, 4, 6, 8, 99 };
-		SelectSortMain main = new SelectSortMain();
-		main.sort(a);
+		SortMain main = new SortMain();
+		main.selectSort(a);
 
 		print(a);
 	}
@@ -16,7 +16,7 @@ public class SelectSortMain {
 		}
 	}
 
-	private void sort(int[] a) {
+	private void selectSort(int[] a) {
 		for (int i = 0; i < a.length; i++) {
 			int min = i;
 			for (int j = i + 1; j < a.length; j++) {
