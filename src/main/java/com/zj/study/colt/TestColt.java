@@ -6,12 +6,20 @@ import cern.colt.matrix.DoubleMatrix2D;
 import cern.colt.matrix.impl.DenseDoubleMatrix2D;
 import cern.colt.matrix.linalg.Algebra;
 
+/**
+ * 
+ * 耗费时间:383797
+ *	耗费内存:3808k
+ * 
+ * @author zhaojianc
+ *
+ */
 public class TestColt {
 
 	public static void main(String[] args) {
 		Runtime runtime = Runtime.getRuntime();
 		long startMem = runtime.freeMemory();
-		int size = 1000;
+		int size = 10000;
 		Random r = new Random();
 		// 生成随机的系数矩阵100个
 		DenseDoubleMatrix2D matrix = new DenseDoubleMatrix2D(size, size);
