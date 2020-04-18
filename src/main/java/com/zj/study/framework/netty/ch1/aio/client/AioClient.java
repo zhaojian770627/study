@@ -20,6 +20,8 @@ public class AioClient {
 			return;
 
 		clientHandle = new AioClientHandler(Ch01Const.DEFAULT_SERVER_IP, Ch01Const.DEFAULT_PORT);
+		// 负责网络通讯的线程
+		new Thread(clientHandle, "Client").start();
 	}
 
 	private static boolean sendMsg(String msg) {

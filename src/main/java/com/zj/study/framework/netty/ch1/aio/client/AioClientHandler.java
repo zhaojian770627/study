@@ -30,8 +30,8 @@ public class AioClientHandler implements CompletionHandler<Void, AioClientHandle
 
 		clientChannel.connect(new InetSocketAddress(host, port), null, this);
 		try {
-			clientChannel.close();
 			latch.await();
+			clientChannel.close();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
