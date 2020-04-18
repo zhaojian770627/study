@@ -26,8 +26,7 @@ public class AioClient {
 		if ("q".equals(msg))
 			return false;
 
-		System.out.println(msg);
-
+		clientHandle.sendMessag(msg);
 		return true;
 	}
 
