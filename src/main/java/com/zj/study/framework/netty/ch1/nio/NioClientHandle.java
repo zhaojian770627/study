@@ -138,6 +138,7 @@ public class NioClientHandle implements Runnable {
 		 * 否则，此方法返回false， 稍后必须通过调用finishConnect方法完成连接操作。
 		 */
 		if (socketChannel.connect(new InetSocketAddress(host, port))) {
+			System.out.println("连接成功");
 		} else {
 			// 连接还未完成，所以注册连接就绪事件，向selector表示关注这个事件
 			socketChannel.register(selector, SelectionKey.OP_CONNECT);

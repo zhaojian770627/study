@@ -21,6 +21,7 @@ public class NioServerHandle implements Runnable {
 	public NioServerHandle(int port) throws IOException {
 		selector = Selector.open();
 		serverChannel = ServerSocketChannel.open();
+		serverChannel.configureBlocking(false);
 		serverChannel.socket().bind(new InetSocketAddress(port));
 		serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 
@@ -123,7 +124,7 @@ public class NioServerHandle implements Runnable {
 		}
 	}
 
-	private void doWrite(SocketChannel channel, String response) {
+	private void doWrite(SocketChannel channel, String response) throws IOException {
 		// 将消息编码为字节数组
 		byte[] bytes = response.getBytes();
 		// 根据数组容量创建ByteBuffer
