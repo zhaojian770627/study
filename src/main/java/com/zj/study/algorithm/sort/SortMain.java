@@ -70,4 +70,13 @@ public class SortMain {
 	void shellSort(int[] a) {
 
 	}
+
+	/**
+	 * 计数排序
+	 * 
+	 * @param a
+	 */
+	void countSort(int[] a) {
+
+	}
 }
