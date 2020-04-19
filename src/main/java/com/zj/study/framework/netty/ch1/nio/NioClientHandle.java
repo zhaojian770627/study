@@ -66,9 +66,17 @@ public class NioClientHandle implements Runnable {
 
 					key = it.next();
 					it.remove();
-
-					handleInput(key);
-
+					try {
+						handleInput(key);
+					} catch (IOException e) {
+						e.printStackTrace();
+						if (key != null) {
+							key.cancel();
+							if (key.channel() != null) {
+								key.channel().close();
+							}
+						}
+					}
 				}
 
 			} catch (IOException e) {
