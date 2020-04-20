@@ -7,7 +7,8 @@ public class SortMain {
 //		int[] a = new int[] { 3, 1, 4 };
 		SortMain main = new SortMain();
 //		main.selectSort(a);
-		main.inserSort(a);
+//		main.inserSort(a);
+		main.shellSort(a);
 		print(a);
 	}
 
@@ -53,12 +54,13 @@ public class SortMain {
 				else
 					break;
 			}
-
-			int t = a[i];
-			for (int k = i; k > j; k--) {
-				a[k] = a[k - 1];
+			if (i != j) {
+				int t = a[i];
+				for (int k = i; k > j; k--) {
+					a[k] = a[k - 1];
+				}
+				a[j] = t;
 			}
-			a[j] = t;
 		}
 	}
 
@@ -68,7 +70,11 @@ public class SortMain {
 	 * @param a
 	 */
 	void shellSort(int[] a) {
-
+		int grap = a.length / 2;
+		while (grap > 0) {
+			innerShellSort(a, grap);
+			grap = grap / 2;
+		}
 	}
 
 	/**
@@ -87,11 +93,13 @@ public class SortMain {
 					break;
 			}
 
-			int t = a[i];
-			for (int k = i; k > j; k = k - grap) {
-				a[k] = a[k - grap];
+			if (i != j) {
+				int t = a[i];
+				for (int k = i; k > j; k = k - grap) {
+					a[k] = a[k - grap];
+				}
+				a[j] = t;
 			}
-			a[j] = t;
 		}
 	}
 
