@@ -11,13 +11,13 @@ public class SortMain {
 //		main.selectSort(a);
 //		main.inserSort(a);
 //      main.shellSort(a);
-        a = main.mergeSort(a);
+        main.mergeSort(a);
         print(a);
     }
 
     private static void print(int[] a) {
         for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
+            System.out.print(a[i] + " ");
         }
     }
 
@@ -119,47 +119,38 @@ public class SortMain {
      * @param ary
      * @return
      */
-    int[] mergeSort(int[] ary) {
-        if (ary.length <= 1)
-            return ary;
-        int n = ary.length / 2;
-
-        int[] left = Arrays.copyOf(ary, n);
-        int[] right = Arrays.copyOfRange(ary, n, ary.length);
-
-        int[] a = mergeSort(left);
-        int[] b = mergeSort(right);
-
-        return merge(a, b);
+    void mergeSort(int[] ary) {
+        mergeSort(ary, 0, ary.length);
     }
 
-    /**
-     * 归并排序，进行归并
-     *
-     * @param a
-     * @param b
-     * @return
-     */
-    private int[] merge(int[] a, int[] b) {
-        int[] m = new int[a.length + b.length];
+    void mergeSort(int[] ary, int start, int end) {
+        if (start < end) {
+            int mid = (start + end) / 2;
+            mergeSort(ary, start, mid);
+            mergeSort(ary, mid + 1, end);
+            merge(ary, start, mid, end);
+        }
+    }
 
-        int i = 0;
-        int j = 0;
+    private void merge(int[] a, int start, int mid, int end) {
+        int[] tmp = new int[end - start + 1];
+        int p1 = start;
+        int p2 = mid + 1;
         int k = 0;
-        while (i < a.length && j < b.length) {
-            if (a[i] < b[j]) {
-                m[k++] = a[i++];
-            } else {
-                m[k++] = a[j++];
-            }
+
+        while (p1 < mid && p2 < end) {
+            if (a[p1] <= a[p2])
+                tmp[k++] = a[p1++];
+            else
+                tmp[k++] = a[p2++];
         }
 
-        if (i == a.length) {
-            System.arraycopy(b, j, m, k, b.length - j);
+        if (p1 == mid) {
+            System.arraycopy(a, p2, tmp, k, end - p2);
         } else {
-            System.arraycopy(a, i, m, k, a.length - i);
+            System.arraycopy(a, p1, tmp, k, mid - p1);
         }
 
-        return m;
+        System.arraycopy(tmp, 0, a, start, end - start);
     }
 }
