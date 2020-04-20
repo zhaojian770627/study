@@ -72,6 +72,30 @@ public class SortMain {
 	}
 
 	/**
+	 * 
+	 * @param a    数组
+	 * @param grap 间隙
+	 */
+	void innerShellSort(int[] a, int grap) {
+		// 两层巡皇
+		for (int i = 0; i < a.length; i = i + grap) {
+			int j = i;
+			for (; j > 0; j = j - grap) {
+				if (a[i] < a[j - grap])
+					continue;
+				else
+					break;
+			}
+
+			int t = a[i];
+			for (int k = i; k > j; k = k - grap) {
+				a[k] = a[k - grap];
+			}
+			a[j] = t;
+		}
+	}
+
+	/**
 	 * 计数排序
 	 * 
 	 * @param a
