@@ -1,7 +1,5 @@
 package com.zj.study.algorithm.sort;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
 public class SortMain {
 
     public static void main(String[] args) {
