@@ -3,8 +3,7 @@ package com.zj.study.algorithm.sort;
 public class SortMain {
 
 	public static void main(String[] args) {
-		// int[] a = new int[]{1, 3, 5, 7, 9, 2, 4, 6, 8, 99};
-		int[] a = new int[] { 1, 3 };
+		int[] a = new int[] { 1, 3, 5, 7, 9, 2, 4, 6, 8, 99 };
 		SortMain main = new SortMain();
 		// main.selectSort(a);
 		// main.inserSort(a);
