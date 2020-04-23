@@ -3,12 +3,13 @@ package com.zj.study.algorithm.sort;
 public class SortMain {
 
     public static void main(String[] args) {
-        int[] a = new int[]{1, 3, 5, 7, 9, 2, 4, 6, 8, 99};
+        int[] a = new int[]{4, 3, 5, 7, 9, 2, 1, 6, 8, 99};
         SortMain main = new SortMain();
         // main.selectSort(a);
         // main.insertSort(a);
         // main.shellSort(a);
-        main.mergeSort(a);
+//        main.mergeSort(a);
+        main.quickSort(a, 0, a.length - 1);
         print(a);
     }
 
@@ -151,7 +152,28 @@ public class SortMain {
         System.arraycopy(tmp, 0, a, start, end - start + 1);
     }
 
-    void quickSort() {
+    void quickSort(int a[], int start, int end) {
+        int mid = a[start];
 
+        int i = start + 1;
+        int j = end;
+
+        while (j > i) {
+            for (; i < j; i++) {
+                if (a[i] > mid)
+                    break;
+            }
+
+            for (; j > i; j--) {
+                if (a[j] < mid)
+                    break;
+            }
+
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+//        a[start] = a[j];
+//        a[j] = mid;
     }
 }
