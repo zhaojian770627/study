@@ -1,7 +1,5 @@
 package com.zj.study.algorithm.sort;
 
-import java.util.Arrays;
-
 public class SortMain {
 
 	public static void main(String[] args) {
@@ -11,7 +9,7 @@ public class SortMain {
 		// main.insertSort(a);
 		// main.shellSort(a);
 		// main.mergeSort(a);
-		main.quickSort(a, 0, a.length - 1);
+		main.quickSort(a);
 		print(a);
 	}
 
@@ -156,6 +154,16 @@ public class SortMain {
 		System.arraycopy(tmp, 0, a, start, end - start + 1);
 	}
 
+	/**
+	 * 
+	 * 快速排序
+	 * 
+	 * @param a
+	 */
+	void quickSort(int a[]) {
+		quickSort(a, 0, a.length - 1);
+	}
+
 	void quickSort(int a[], int start, int end) {
 		if (start > end)
 			return;
@@ -186,5 +194,8 @@ public class SortMain {
 
 		a[start] = a[j];
 		a[j] = mid;
+
+		quickSort(a, start, j - 1);
+		quickSort(a, j + 1, end);
 	}
 }
