@@ -48,7 +48,7 @@ public class SearchMain {
 	 * @param key
 	 * @return
 	 */
-	public int rotateBinarySearch(int[] a, int key) {
+	public int rotateBinarySearch(int[] a) {
 		int low = 0;
 		int high = a.length - 1;
 		while (low <= high) {
