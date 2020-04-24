@@ -157,12 +157,16 @@ public class SortMain {
 	}
 
 	void quickSort(int a[], int start, int end) {
-		int mid = a[start];
+		if (start > end)
+			return;
 
+		// 中值
+		int mid = a[start];
 		int i = start + 1;
 		int j = end;
 
 		while (i < j) {
+			// 先从右边查找,否则会移动不正确
 			for (; i < j; j--) {
 				if (a[j] <= mid)
 					break;
@@ -178,10 +182,6 @@ public class SortMain {
 				a[i] = a[j];
 				a[j] = t;
 			}
-
-			System.out.println(Arrays.toString(a));
-			System.out.println("i:" + i + " j:" + j);
-
 		}
 
 		a[start] = a[j];
