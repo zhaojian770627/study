@@ -1,21 +1,18 @@
 package com.zj.study.algorithm.search;
 
-import java.util.Arrays;
-
-import com.zj.study.algorithm.sort.SortMain;
-
 public class SearchMain {
 
 	public static void main(String[] args) {
-		int[] a = new int[] { 4, 3, 5, 7, 9, 2, 1, 6, 8, 99 };
-		SortMain sortMain = new SortMain();
-		sortMain.quickSort(a);
-
-		System.out.println(Arrays.toString(a));
-
+		// int[] a = new int[] { 4, 3, 5, 7, 9, 2, 1, 6, 8, 99 };
+		// SortMain sortMain = new SortMain();
+		// sortMain.quickSort(a);
+		//
+		// System.out.println(Arrays.toString(a));
+		// 旋转数组
+		int[] b = new int[] { 5, 6, 7, 8, 9, 99, 1, 2, 3, 4, };
 		SearchMain searchMain = new SearchMain();
 		int key = 9;
-		int index = searchMain.binarySort(a, 9);
+		int index = searchMain.binarySort(b, 9);
 
 		System.out.println("key:" + key + " index:" + index);
 	}
