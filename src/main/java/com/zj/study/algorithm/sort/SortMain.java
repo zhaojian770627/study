@@ -24,7 +24,7 @@ public class SortMain {
 	 *
 	 * @param a
 	 */
-	private void selectSort(int[] a) {
+	public void selectSort(int[] a) {
 		for (int i = 0; i < a.length; i++) {
 			int min = i;
 			for (int j = i + 1; j < a.length; j++) {
@@ -44,7 +44,7 @@ public class SortMain {
 	 *
 	 * @param a
 	 */
-	void insertSort(int[] a) {
+	public void insertSort(int[] a) {
 		// 两层巡皇
 		for (int i = 0; i < a.length; i++) {
 			int j = i;
@@ -69,7 +69,7 @@ public class SortMain {
 	 *
 	 * @param a
 	 */
-	void shellSort(int[] a) {
+	public void shellSort(int[] a) {
 		int grap = a.length / 2;
 		while (grap > 0) {
 			innerShellSort(a, grap);
@@ -119,7 +119,7 @@ public class SortMain {
 	 * @param ary
 	 * @return
 	 */
-	void mergeSort(int[] ary) {
+	public void mergeSort(int[] ary) {
 		mergeSort(ary, 0, ary.length - 1);
 	}
 
@@ -160,7 +160,7 @@ public class SortMain {
 	 * 
 	 * @param a
 	 */
-	void quickSort(int a[]) {
+	public void quickSort(int a[]) {
 		quickSort(a, 0, a.length - 1);
 	}
 
