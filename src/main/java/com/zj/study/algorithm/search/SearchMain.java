@@ -39,4 +39,30 @@ public class SearchMain {
 		}
 		return -1;
 	}
+
+	/**
+	 * 
+	 * 旋转数组查找最小值
+	 * 
+	 * @param a
+	 * @param key
+	 * @return
+	 */
+	public int rotateBinarySearch(int[] a, int key) {
+		int low = 0;
+		int high = a.length - 1;
+		while (low <= high) {
+			int mid = (low + high) >>> 1;
+
+			if (a[mid] > a[high]) {
+				low = mid;
+			}
+
+			if (a[mid] < a[high]) {
+				high = mid;
+			}
+		}
+		return a[low];
+
+	}
 }
