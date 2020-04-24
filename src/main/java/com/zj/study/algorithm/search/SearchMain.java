@@ -12,7 +12,7 @@ public class SearchMain {
 		int[] b = new int[] { 5, 6, 7, 8, 9, 99, 1, 2, 3, 4, };
 		SearchMain searchMain = new SearchMain();
 		int key = 9;
-		int index = searchMain.binarySort(b, 9);
+		int index = searchMain.binarySearch(b, 9);
 
 		System.out.println("key:" + key + " index:" + index);
 	}
@@ -24,7 +24,7 @@ public class SearchMain {
 	 * @param key
 	 * @return
 	 */
-	public int binarySort(int[] a, int key) {
+	public int binarySearch(int[] a, int key) {
 		int low = 0;
 		int high = a.length - 1;
 		while (low <= high) {
