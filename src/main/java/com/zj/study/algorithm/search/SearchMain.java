@@ -17,7 +17,7 @@ public class SearchMain {
 //		System.out.println("key:" + key + " index:" + index);
 
 		// 旋转数组查找
-		System.out.println(searchMain.rotateBinarySearch(b));
+		System.out.println(searchMain.rotateBinaryMin(b));
 
 	}
 
@@ -53,7 +53,7 @@ public class SearchMain {
 	 * @return
 	 */
 	// { 1, 2, 3, 4, 5, 6, 7, 8, 9, 99 };
-	public int rotateBinarySearch(int[] a) {
+	public int rotateBinaryMin(int[] a) {
 		int low = 0;
 		int high = a.length - 1;
 		// 这里要+1，因为里面没有对mid进行加1
@@ -62,6 +62,38 @@ public class SearchMain {
 
 			// 表明左边是排好序的
 			if (a[mid] > a[low]) {
+				// 最小值在右边
+				if (a[mid] > a[high]) {
+					low = mid;
+				} else {
+					break;
+				}
+			}
+
+			// 右边是排好序的
+			if (a[mid] < a[high]) {
+				// 最小值在左边
+				if (a[mid] < a[low]) {
+					high = mid;
+				} else
+					break;
+			}
+		}
+
+		return a[low] < a[high] ? a[low] : a[high];
+	}
+
+	// 旋转数组查找
+	public int rotateBinarySearch(int[] a, int key) {
+		int low = 0;
+		int high = a.length - 1;
+		// 这里要+1，因为里面没有对mid进行加1
+		while (low + 1 < high) {
+			int mid = (low + high) >>> 1;
+
+			// 表明左边是排好序的
+			if (a[mid] > a[low]) {
+				// 最小值在右边
 				if (a[mid] > a[high]) {
 					low = mid;
 				} else {
