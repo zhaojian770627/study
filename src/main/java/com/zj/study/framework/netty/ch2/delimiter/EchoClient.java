@@ -1,19 +1,25 @@
-package com.zj.study.framework.netty.ch2.linebase;
+package com.zj.study.framework.netty.ch2.delimiter;
 
 import java.net.InetSocketAddress;
 
+import com.zj.study.framework.netty.ch2.Ch2Const;
+
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 
 /**
  * 
- * 使用系统分割符进行分割
+ * 使用指定分割符进行分割
+ * 
+ * 固定长度的用 FixedLengthFrameDecoder
  * 
  * @author zhaojianc
  *
@@ -32,8 +38,8 @@ public class EchoClient {
 
 						@Override
 						protected void initChannel(Channel ch) throws Exception {
-							// 使用系统换行符
-							ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+							ByteBuf delimiter = Unpooled.copiedBuffer(Ch2Const.DELMITER_SYMOL.getBytes());
+							ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
 							ch.pipeline().addLast(new EchoClientHandler());
 						}
 					});
