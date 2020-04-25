@@ -53,6 +53,8 @@ public class SearchMain {
 					low = mid + 1;
 			}
 		}
+
+		System.out.println("low:" + low + " high:" + high);
 		if (a[low] == key)
 			return low;
 
