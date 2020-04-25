@@ -18,7 +18,31 @@ public class SearchMain {
 
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
-		System.out.println(searchMain.rotateBinarySearch(b, key));
+		b = new int[] { 1, 3, 5, 7, 9, 11, 13, 15, 17, 99 };
+		System.out.println(searchMain.searchInsertPos(b, 16));
+	}
+
+	// 寻找插入位置
+	public int searchInsertPos(int[] a, int key) {
+		int low = 0;
+		int high = a.length - 1;
+		while (low <= high) {
+			int mid = (low + high) >>> 1;
+			if (key < a[mid]) {
+				high = mid - 1;
+			} else if (key > a[mid]) {
+				low = mid + 1;
+			} else {
+				return mid;
+			}
+		}
+		if (a[low] >= key)
+			return low;
+
+		if (a[high] >= key)
+			return high;
+
+		return -1;
 	}
 
 	/**
