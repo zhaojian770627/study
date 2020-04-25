@@ -2,8 +2,6 @@ package com.zj.study.framework.netty.ch2.linebase;
 
 import java.net.InetSocketAddress;
 
-import com.zj.study.framework.netty.ch2.linebase.EchoClientHandler;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
