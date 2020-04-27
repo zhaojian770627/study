@@ -6,10 +6,10 @@ public class SortMain {
 		int[] a = new int[] { 4, 3, 5, 7, 9, 2, 1, 6, 8, 99 };
 		SortMain main = new SortMain();
 		// main.selectSort(a);
-		// main.insertSort(a);
+		main.insertSort(a);
 		// main.shellSort(a);
 		// main.mergeSort(a);
-		main.quickSort(a);
+//		main.quickSort(a);
 		print(a);
 	}
 
@@ -21,6 +21,8 @@ public class SortMain {
 
 	/**
 	 * 选择排序
+	 * 
+	 * 选择最小值与i进行交换
 	 *
 	 * @param a
 	 */
@@ -41,11 +43,13 @@ public class SortMain {
 
 	/**
 	 * 插入排序
+	 * 
+	 * 选择小的数插入到前面对应位置
 	 *
 	 * @param a
 	 */
 	public void insertSort(int[] a) {
-		// 两层巡皇
+		// 两层循环
 		for (int i = 0; i < a.length; i++) {
 			int j = i;
 			for (; j > 0; j--) {
@@ -78,10 +82,8 @@ public class SortMain {
 	}
 
 	/**
-	 * @param a
-	 *            数组
-	 * @param grap
-	 *            间隙
+	 * @param a    数组
+	 * @param grap 间隙
 	 */
 	void innerShellSort(int[] a, int grap) {
 		// 两层巡皇
