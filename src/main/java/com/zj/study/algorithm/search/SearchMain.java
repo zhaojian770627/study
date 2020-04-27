@@ -22,6 +22,43 @@ public class SearchMain {
 		System.out.println(searchMain.searchInsertPos(b, 8));
 	}
 
+	/**
+	 * 
+	 * 寻找一个数的起止范围
+	 * 
+	 * @param a
+	 * @param key
+	 * @return
+	 */
+	public int searchRange(int[] a, int key) {
+		// search left
+		int low = 0;
+		int high = a.length - 1;
+		// 这里要+1，因为里面没有对mid进行加1
+		while (low + 1 < high) {
+			// 判断是否是排好序的
+			int mid = (low + high) >>> 1;
+
+			if (a[mid] == key) {
+				high = mid;
+			} else if (a[mid] < key) {
+				low = mid + 1;
+			} else {
+				high = mid - 1;
+			}
+		}
+
+		int lpos;
+		if (a[low] == key) {
+			lpos = low;
+		} else if (a[high] == key) {
+			lpos = high;
+		} else
+			lpos = -1;
+
+		return lpos;
+	}
+
 	// 寻找插入位置
 	public int searchInsertPos(int[] a, int key) {
 		int low = 0;
