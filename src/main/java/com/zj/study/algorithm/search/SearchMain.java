@@ -1,5 +1,7 @@
 package com.zj.study.algorithm.search;
 
+import cern.colt.Arrays;
+
 public class SearchMain {
 
 	public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class SearchMain {
 		// System.out.println(searchMain.rotateBinaryMin(b));
 		b = new int[] { 1, 2 };
 //		System.out.println(searchMain.searchInsertPos(b, 8));
-		System.out.println(searchMain.searchRange(b, 2));
+		System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
 	}
 
 	/**
