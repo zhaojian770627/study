@@ -18,7 +18,7 @@ public class SearchMain {
 
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
-		b = new int[] { 1,2 };
+		b = new int[] { 1, 2 };
 //		System.out.println(searchMain.searchInsertPos(b, 8));
 		System.out.println(searchMain.searchRange(b, 2));
 	}
@@ -31,13 +31,12 @@ public class SearchMain {
 	 * @param key
 	 * @return
 	 */
-	public int searchRange(int[] a, int key) {
+	public int[] searchRange(int[] a, int key) {
 		// search left
 		int low = 0;
 		int high = a.length - 1;
-		// 这里要+1，因为里面没有对mid进行加1
+		// 这里要+1，因为里面没有对mid进行加1,寻找最小的值
 		while (low + 1 < high) {
-			// 判断是否是排好序的
 			int mid = (low + high) >>> 1;
 
 			if (a[mid] == key) {
@@ -54,10 +53,34 @@ public class SearchMain {
 			lpos = low;
 		} else if (a[high] == key) {
 			lpos = high;
-		} else
-			lpos = -1;
+		} else {
+			return new int[] { -1, -1 };
+		}
 
-		return lpos;
+		low = 0;
+		high = a.length - 1;
+		while (low + 1 < high) {
+			int mid = (low + high) >>> 1;
+
+			if (a[mid] == key) {
+				low = mid;
+			} else if (a[mid] < key) {
+				low = mid + 1;
+			} else {
+				high = mid - 1;
+			}
+		}
+
+		int rpos;
+		if (a[low] == key) {
+			rpos = low;
+		} else if (a[high] == key) {
+			rpos = high;
+		} else {
+			return new int[] { -1, -1 };
+		}
+
+		return new int[] { lpos, rpos };
 	}
 
 	// 寻找插入位置
