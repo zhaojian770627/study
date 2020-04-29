@@ -18,8 +18,9 @@ public class SearchMain {
 
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
-		b = new int[] { 1, 3, 5, 7, 9, 11, 13, 15, 17, 99 };
-		System.out.println(searchMain.searchInsertPos(b, 8));
+		b = new int[] { 1,2 };
+//		System.out.println(searchMain.searchInsertPos(b, 8));
+		System.out.println(searchMain.searchRange(b, 2));
 	}
 
 	/**
