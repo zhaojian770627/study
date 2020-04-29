@@ -20,7 +20,7 @@ public class SearchMain {
 
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
-		b = new int[] { 1, 2 };
+		b = new int[] { 1, 2, 2, 2 };
 //		System.out.println(searchMain.searchInsertPos(b, 8));
 		System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
 	}
@@ -74,10 +74,10 @@ public class SearchMain {
 		}
 
 		int rpos;
-		if (a[low] == key) {
-			rpos = low;
-		} else if (a[high] == key) {
+		if (a[high] == key) {
 			rpos = high;
+		} else if (a[low] == key) {
+			rpos = low;
 		} else {
 			return new int[] { -1, -1 };
 		}
