@@ -53,7 +53,7 @@ public class ClientMsgPackEcho {
 		}
 	}
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws InterruptedException {
+		new ClientMsgPackEcho("127.0.0.1").start();
 	}
 }
