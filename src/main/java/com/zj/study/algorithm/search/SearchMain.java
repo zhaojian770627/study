@@ -27,6 +27,40 @@ public class SearchMain {
 
 	/**
 	 * 
+	 * 在流中搜索一个元素
+	 * 
+	 * @param as
+	 * @param key
+	 * @return
+	 */
+	public int searchFirst(int[] as, int key) {
+		int length = as.length;
+
+		int left = 0;
+		int right = 1;
+
+		while (right < length) {
+			if (as[right] > key) {
+				left = right;
+				right = 2 * right;
+			}
+
+			if (right > length)
+				right = length - 1;
+		}
+
+		if (right < length) {
+			int b[] = new int[right - left + 1];
+			System.arraycopy(as, left, b, 0, right - left + 1);
+			int pos = searchRange(b, key)[0];
+			if (pos != -1)
+				return left + pos;
+		}
+		return -1;
+	}
+
+	/**
+	 * 
 	 * 寻找一个数的起止范围
 	 * 
 	 * @param a
