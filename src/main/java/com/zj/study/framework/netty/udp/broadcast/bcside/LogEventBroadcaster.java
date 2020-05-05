@@ -1,4 +1,4 @@
-package com.zj.study.framework.netty.udp.bcside;
+package com.zj.study.framework.netty.udp.broadcast.bcside;
 
 import java.net.InetSocketAddress;
 

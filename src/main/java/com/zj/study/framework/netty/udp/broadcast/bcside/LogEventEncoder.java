@@ -1,4 +1,4 @@
-package cn.enjoyedu.broadcast.bcside;
+package com.zj.study.framework.netty.udp.broadcast.bcside;
 
 import java.net.InetSocketAddress;
 import java.util.List;
