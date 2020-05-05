@@ -1,7 +1,5 @@
 package com.zj.study.algorithm.search;
 
-import cern.colt.Arrays;
-
 public class SearchMain {
 
 	public static void main(String[] args) {
@@ -23,7 +21,7 @@ public class SearchMain {
 		b = new int[] { 1, 2, 2, 2, 3, 3, 4 };
 //		System.out.println(searchMain.searchInsertPos(b, 8));
 //		System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
-		System.out.println(searchMain.searchFirst(b, 3));
+		System.out.println(searchMain.searchFirst(b, 7));
 	}
 
 	/**
@@ -47,8 +45,10 @@ public class SearchMain {
 			} else
 				break;
 
-			if (right > length)
+			if (right > length) {
 				right = length - 1;
+				break;
+			}
 		}
 
 		if (right < length) {
