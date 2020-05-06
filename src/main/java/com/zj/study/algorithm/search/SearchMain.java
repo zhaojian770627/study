@@ -19,14 +19,14 @@ public class SearchMain {
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
 		b = new int[] { 1, 4 };
-		System.out.println(searchMain.searchInsertPos(b, 5));
+//		System.out.println(searchMain.searchInsertPos(b, 5));
 //		System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
 //		System.out.println(searchMain.searchFirst(b, 7));
 
-//		int[] houses = new int[] { 1, 2, 3 };
-//		int[] heaters = new int[] { 2 };
-//
-//		System.out.println(searchMain.findRadius(houses, heaters));
+		int[] houses = new int[] { 1, 2, 3 };
+		int[] heaters = new int[] { 2 };
+
+		System.out.println(searchMain.findRadius(houses, heaters));
 	}
 
 	private int findRadius(int[] houses, int[] heaters) {
