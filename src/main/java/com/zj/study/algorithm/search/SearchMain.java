@@ -18,10 +18,40 @@ public class SearchMain {
 
 		// 旋转数组查找
 		// System.out.println(searchMain.rotateBinaryMin(b));
-		b = new int[] { 1, 2, 2, 2, 3, 3, 4 };
-//		System.out.println(searchMain.searchInsertPos(b, 8));
+		b = new int[] { 1, 4 };
+		System.out.println(searchMain.searchInsertPos(b, 5));
 //		System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
-		System.out.println(searchMain.searchFirst(b, 7));
+//		System.out.println(searchMain.searchFirst(b, 7));
+
+//		int[] houses = new int[] { 1, 2, 3 };
+//		int[] heaters = new int[] { 2 };
+//
+//		System.out.println(searchMain.findRadius(houses, heaters));
+	}
+
+	private int findRadius(int[] houses, int[] heaters) {
+		int ans = 0;
+		for (int hourse : houses) {
+			// 寻找插入位置
+			int pos = searchInsertPos(heaters, hourse);
+			int left = Integer.MAX_VALUE;
+			int right = Integer.MAX_VALUE;
+			if (heaters[pos] == hourse) {
+				left = 0;
+				right = 0;
+			} else {
+				if (pos == 0)
+					left = Integer.MAX_VALUE;
+				else
+					left = hourse - heaters[pos - 1];
+
+				if (pos >= heaters.length)
+					right = Integer.MAX_VALUE;
+			}
+			ans = Math.max(ans, Math.min(left, right));
+		}
+
+		return ans;
 	}
 
 	/**
@@ -125,7 +155,7 @@ public class SearchMain {
 	public int searchInsertPos(int[] a, int key) {
 		int low = 0;
 		int high = a.length - 1;
-		while (low <= high) {
+		while (low < high - 1) {
 			int mid = (low + high) >>> 1;
 			if (key < a[mid]) {
 				high = mid - 1;
@@ -135,15 +165,13 @@ public class SearchMain {
 				return mid;
 			}
 		}
-		System.out.println(low);
-		System.out.println(high);
 		if (a[low] >= key)
 			return low;
 
 		if (a[high] >= key)
 			return high;
 
-		return -1;
+		return high + 1;
 	}
 
 	/**
