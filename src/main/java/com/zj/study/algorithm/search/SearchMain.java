@@ -36,17 +36,18 @@ public class SearchMain {
 			int pos = searchInsertPos(heaters, hourse);
 			int left = Integer.MAX_VALUE;
 			int right = Integer.MAX_VALUE;
-			if (heaters[pos] == hourse) {
-				left = 0;
-				right = 0;
+			if (pos < heaters.length) {
+				if (heaters[pos] == hourse) {
+					left = 0;
+					right = 0;
+				} else {
+					if (pos == 0)
+						left = Integer.MAX_VALUE;
+					else
+						left = hourse - heaters[pos - 1];
+				}
 			} else {
-				if (pos == 0)
-					left = Integer.MAX_VALUE;
-				else
-					left = hourse - heaters[pos - 1];
-
-				if (pos >= heaters.length)
-					right = Integer.MAX_VALUE;
+				right = Integer.MAX_VALUE;
 			}
 			ans = Math.max(ans, Math.min(left, right));
 		}
