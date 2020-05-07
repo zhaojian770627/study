@@ -23,8 +23,14 @@ public class SearchMain {
 		// System.out.println(Arrays.toString(searchMain.searchRange(b, 2)));
 		// System.out.println(searchMain.searchFirst(b, 7));
 
-		int[] houses = new int[] { 1, 2, 3 };
-		int[] heaters = new int[] { 2 };
+//		int[] houses = new int[] { 1, 2, 3 };
+//		int[] heaters = new int[] { 2 };
+
+//		int[] houses = new int[] { 1, 2, 3, 4 };
+//		int[] heaters = new int[] { 1, 4 };
+
+		int[] houses = new int[] { 1, 12, 23, 34 };
+		int[] heaters = new int[] { 12, 24 };
 
 		System.out.println(searchMain.findRadius(houses, heaters));
 	}
@@ -52,12 +58,9 @@ public class SearchMain {
 				left = hourse - heaters[pos - 1];
 				right = Integer.MAX_VALUE;
 			}
-
-			System.out.println("left:" + left + " right:" + right);
-
+//			System.out.println("left:" + left + " right:" + right);
 			ans = Math.max(ans, Math.min(left, right));
-
-			System.out.println("ans:" + ans);
+//			System.out.println("ans:" + ans);
 		}
 
 		return ans;
