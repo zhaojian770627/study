@@ -49,12 +49,15 @@ public class SearchMain {
 					right = heaters[pos] - hourse;
 				}
 			} else {
+				left = hourse - heaters[pos - 1];
 				right = Integer.MAX_VALUE;
 			}
 
 			System.out.println("left:" + left + " right:" + right);
 
 			ans = Math.max(ans, Math.min(left, right));
+
+			System.out.println("ans:" + ans);
 		}
 
 		return ans;
