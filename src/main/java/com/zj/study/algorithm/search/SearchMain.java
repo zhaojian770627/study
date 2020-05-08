@@ -35,6 +35,13 @@ public class SearchMain {
 		System.out.println(searchMain.findRadius(houses, heaters));
 	}
 
+	/**
+	 * 寻找管道
+	 * 
+	 * @param houses
+	 * @param heaters
+	 * @return
+	 */
 	private int findRadius(int[] houses, int[] heaters) {
 		int ans = 0;
 		for (int hourse : houses) {
