@@ -29,10 +29,11 @@ public class SearchMain {
 //		int[] houses = new int[] { 1, 2, 3, 4 };
 //		int[] heaters = new int[] { 1, 4 };
 
-		int[] houses = new int[] { 1, 12, 23, 34 };
-		int[] heaters = new int[] { 12, 24 };
+//		int[] houses = new int[] { 1, 12, 23, 34 };
+//		int[] heaters = new int[] { 12, 24 };
 
-		System.out.println(searchMain.findRadius(houses, heaters));
+//		System.out.println(searchMain.findRadius(houses, heaters));
+		System.out.println(searchMain.sqrt(36));
 	}
 
 	private int sqrt(int x) {
