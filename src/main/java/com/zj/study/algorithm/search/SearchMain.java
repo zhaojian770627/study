@@ -35,6 +35,29 @@ public class SearchMain {
 		System.out.println(searchMain.findRadius(houses, heaters));
 	}
 
+	private int sqrt(int x) {
+		if (x == 0)
+			return 0;
+
+		int low = 0;
+		int high = x;
+
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+
+			int tmp = x / mid;
+			if (mid == tmp)
+				return mid;
+
+			if (mid < tmp)
+				low = mid + 1;
+			else
+				high = mid - 1;
+		}
+
+		return high;
+	}
+
 	/**
 	 * 寻找管道
 	 * 
