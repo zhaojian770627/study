@@ -27,7 +27,7 @@ public class TestKryoCodeC {
 			attachment.put("ciyt --> " + i, "lilinfeng " + i);
 		}
 		myHeader.setAttachment(attachment);
-		myMessage.setMyHeader(myHeader);
+		myMessage.setMessageHeader(myHeader);
 		myMessage.setBody("abcdefg-----------------------AAAAAA");
 		return myMessage;
 	}

@@ -14,7 +14,7 @@ public final class Message {
 		return myHeader;
 	}
 
-	public final void setMyHeader(MessageHeader myHeader) {
+	public final void setMessageHeader(MessageHeader myHeader) {
 		this.myHeader = myHeader;
 	}
 
