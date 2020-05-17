@@ -7,6 +7,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
+import io.netty.handler.timeout.ReadTimeoutHandler;
 
 public class ClientInit extends ChannelInitializer<SocketChannel> {
 
@@ -23,6 +24,14 @@ public class ClientInit extends ChannelInitializer<SocketChannel> {
 
 		/* 序列化，将消息实体转换为字节数组准备进行网络传输 */
 		ch.pipeline().addLast("MessageEncoder", new KryoEncoder());
-	}
 
+		/* 超时检测 */
+		ch.pipeline().addLast("readTimeoutHandler", new ReadTimeoutHandler(10));
+
+		/* 发出登录请求 */
+		ch.pipeline().addLast("LoginAuthHandler", new LoginAuthReqHandler());
+
+		/* 发出心跳请求 */
+		ch.pipeline().addLast("HeartBeatHandler", new HeartBeatReqHandler());
+	}
 }
