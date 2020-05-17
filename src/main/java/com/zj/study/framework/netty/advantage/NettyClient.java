@@ -9,6 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.zj.study.framework.netty.advantage.vo.Message;
+import com.zj.study.framework.netty.advantage.vo.MessageHeader;
+import com.zj.study.framework.netty.advantage.vo.MessageType;
 import com.zj.study.framework.netty.advantage.vo.NettyConstant;
 
 import io.netty.bootstrap.Bootstrap;
@@ -19,7 +22,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-public class NettyClient {
+public class NettyClient implements Runnable {
 	private static final Log LOG = LogFactory.getLog(NettyClient.class);
 
 	private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -84,9 +87,35 @@ public class NettyClient {
 		}
 	}
 
+	@Override
+	public void run() {
+		try {
+			connect(NettyConstant.REMOTE_PORT, NettyConstant.REMOTE_IP);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) throws Exception {
 		NettyClient nettyClient = new NettyClient();
 		nettyClient.connect(NettyConstant.REMOTE_PORT, NettyConstant.REMOTE_IP);
 	}
 
+	/*------------以下方法供业务方使用--------------------------*/
+	public void send(String message) {
+		if (channel == null || !channel.isActive()) {
+			throw new IllegalStateException("和服务器还未未建立起有效连接！，" + "请稍后再试！！");
+		}
+		Message msg = new Message();
+		MessageHeader myHeader = new MessageHeader();
+		myHeader.setType(MessageType.SERVICE_REQ.value());
+		msg.setMessageHeader(myHeader);
+		msg.setBody(message);
+		channel.writeAndFlush(msg);
+	}
+
+	public void close() {
+		userClose = true;
+		channel.close();
+	}
 }
