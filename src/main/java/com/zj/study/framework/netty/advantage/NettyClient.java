@@ -1,0 +1,92 @@
+package com.zj.study.framework.netty.advantage;
+
+import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.zj.study.framework.netty.advantage.vo.NettyConstant;
+
+import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
+
+public class NettyClient {
+	private static final Log LOG = LogFactory.getLog(NettyClient.class);
+
+	private ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+
+	private EventLoopGroup group = new NioEventLoopGroup();
+	/* 是否用户主动关闭连接的标志值 */
+	private volatile boolean userClose = false;
+	/* 连接是否成功关闭的标志值 */
+	private volatile boolean connected = false;
+	private Channel channel;
+
+	private AtomicInteger loginRetryCount;
+
+	public boolean isConnected() {
+		return connected;
+	}
+
+	private void connect(int port, String host) throws Exception {
+		try {
+			Bootstrap b = new Bootstrap();
+			b.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
+					.handler(new ClientInit());
+			// 发起异步连接操作
+			ChannelFuture future;
+			future = b.connect(new InetSocketAddress(host, port)).sync();
+			channel = future.sync().channel();
+			/* 连接成功后通知等待线程，连接已经建立 */
+			synchronized (this) {
+				this.connected = true;
+				this.notifyAll();
+			}
+			future.channel().closeFuture().sync();
+		} finally {
+			if (!userClose) {/* 非用户主动关闭，说明发生了网络问题，需要进行重连操作 */
+				System.out.println("发现异常，可能发生了服务器异常或网络问题，" + "准备进行重连.....");
+				// 再次发起重连操作
+				executor.execute(new Runnable() {
+
+					@Override
+					public void run() {
+						try {
+							TimeUnit.SECONDS.sleep(1);
+							try {
+								// 发起重连操作
+								connect(NettyConstant.REMOTE_PORT, NettyConstant.REMOTE_IP);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			} else {/* 用户主动关闭，释放资源 */
+				channel = null;
+				group.shutdownGracefully().sync();
+				synchronized (this) {
+					this.connected = false;
+					this.notifyAll();
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) throws Exception {
+		NettyClient nettyClient = new NettyClient();
+		nettyClient.connect(NettyConstant.REMOTE_PORT, NettyConstant.REMOTE_IP);
+	}
+
+}
