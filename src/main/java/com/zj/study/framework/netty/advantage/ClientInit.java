@@ -1,25 +1,12 @@
 package com.zj.study.framework.netty.advantage;
 
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.socket.SocketChannel;
 
-public class ClientInit implements ChannelHandler {
-
-	@Override
-	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
+public class ClientInit extends ChannelInitializer<SocketChannel> {
 
 	@Override
-	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		// TODO Auto-generated method stub
+	protected void initChannel(SocketChannel ch) throws Exception {
 
 	}
 
