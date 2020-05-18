@@ -17,20 +17,4 @@ public class CompileMain {
 		reader.close();
 		System.out.println("end!");
 	}
-
-	void parse(char chars[]) {
-		int length = chars.length;
-		int pos = 0;
-		while (pos < length) {
-			pos++;
-		}
-	}
-
-	// 判断是否是字母
-	boolean isAlpha(char ch) {
-		if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
-			return true;
-		else
-			return false;
-	}
 }
