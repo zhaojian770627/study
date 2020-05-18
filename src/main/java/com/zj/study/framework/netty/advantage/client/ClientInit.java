@@ -1,4 +1,4 @@
-package com.zj.study.framework.netty.advantage;
+package com.zj.study.framework.netty.advantage.client;
 
 import com.zj.study.framework.netty.advantage.kryocodec.KryoDecoder;
 import com.zj.study.framework.netty.advantage.kryocodec.KryoEncoder;

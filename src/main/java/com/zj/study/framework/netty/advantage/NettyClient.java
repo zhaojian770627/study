@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.zj.study.framework.netty.advantage.client.ClientInit;
 import com.zj.study.framework.netty.advantage.vo.Message;
 import com.zj.study.framework.netty.advantage.vo.MessageHeader;
 import com.zj.study.framework.netty.advantage.vo.MessageType;
