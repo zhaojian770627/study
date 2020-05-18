@@ -9,4 +9,8 @@ public class Token {
 		tokenText = tokenText + ch;
 	}
 
+	@Override
+	public String toString() {
+		return type.name() + "\t" + tokenText;
+	}
 }

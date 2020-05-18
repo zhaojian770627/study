@@ -1,7 +1,15 @@
 package com.zj.study.compile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TokenParse {
 	Token token = new Token();
+	List<Token> tokens = new ArrayList<>();
+
+	public List<Token> getTokens() {
+		return tokens;
+	}
 
 	void parse(char chars[]) {
 		int length = chars.length;
@@ -10,6 +18,12 @@ public class TokenParse {
 
 		while (pos < length) {
 			char ch = chars[pos];
+			if (ch == ' ' || ch == '\t') {
+				tokens.add(token);
+				pos++;
+				continue;
+			}
+
 			switch (state) {
 			case Initial:
 				state = nextState(ch);
@@ -18,6 +32,7 @@ public class TokenParse {
 				if (isAlpha(ch) || isDigit(ch)) {
 					token.append(ch); // 保持标识符状态
 				} else {
+					tokens.add(token);
 					state = nextState(ch); // 退出标识符状态，并保存 Token
 				}
 				break;
@@ -27,16 +42,19 @@ public class TokenParse {
 					state = DfaState.GE;
 					token.append(ch);
 				} else {
+					tokens.add(token);
 					state = nextState(ch); // 退出 GT 状态，并保存 Token
 				}
 				break;
 			case GE:
+				tokens.add(token);
 				state = nextState(ch); // 退出当前状态，并保存 Token
 				break;
 			case IntLiteral:
 				if (isDigit(ch)) {
 					token.append(ch); // 继续保持在数字字面量状态
 				} else {
+					tokens.add(token);
 					state = nextState(ch); // 退出当前状态，并保存 Token
 				}
 				break;
@@ -47,6 +65,7 @@ public class TokenParse {
 
 	// 决定下一个状态
 	DfaState nextState(char ch) {
+		token = new Token();
 		DfaState newState = DfaState.Initial;
 		if (isAlpha(ch)) { // 第一个字符是字母
 			newState = DfaState.Id; // 进入 Id 状态
@@ -78,5 +97,11 @@ public class TokenParse {
 			return true;
 		else
 			return false;
+	}
+
+	public void outTokens() {
+		for (Token token : tokens) {
+			System.out.println(token);
+		}
 	}
 }
