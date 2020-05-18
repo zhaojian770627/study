@@ -7,7 +7,7 @@ import java.io.IOException;
 public class CompileMain {
 
 	public static void main(String[] args) throws IOException {
-		File file = new File("E:\\data.txt");// 定义一个file对象，用来初始化FileReader
+		File file = new File("d:\\test.zj");// 定义一个file对象，用来初始化FileReader
 		FileReader reader = new FileReader(file);// 定义一个fileReader对象，用来初始化BufferedReader
 		int length = (int) file.length();
 		// 这里定义字符数组的时候需要多定义一个,因为词法分析器会遇到超前读取一个字符的时候，如果是最后一个
@@ -15,6 +15,22 @@ public class CompileMain {
 		char buf[] = new char[length + 1];
 		reader.read(buf);
 		reader.close();
+		System.out.println("end!");
 	}
 
+	void parse(char chars[]) {
+		int length = chars.length;
+		int pos = 0;
+		while (pos < length) {
+			pos++;
+		}
+	}
+
+	// 判断是否是字母
+	boolean isAlpha(char ch) {
+		if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+			return true;
+		else
+			return false;
+	}
 }
