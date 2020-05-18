@@ -21,17 +21,37 @@ public class TokenParse {
 					state = nextState(ch); // 退出标识符状态，并保存 Token
 				}
 				break;
+			case GT:
+				if (ch == '=') {
+					token.type = TokenType.GE; // 转换成 GE
+					state = DfaState.GE;
+					token.append(ch);
+				} else {
+					state = nextState(ch); // 退出 GT 状态，并保存 Token
+				}
+				break;
+			case GE:
+				state = nextState(ch); // 退出当前状态，并保存 Token
+				break;
+			case IntLiteral:
+				if (isDigit(ch)) {
+					token.append(ch); // 继续保持在数字字面量状态
+				} else {
+					state = nextState(ch); // 退出当前状态，并保存 Token
+				}
+				break;
 			}
 			pos++;
 		}
 	}
 
+	// 决定下一个状态
 	DfaState nextState(char ch) {
 		DfaState newState = DfaState.Initial;
 		if (isAlpha(ch)) { // 第一个字符是字母
 			newState = DfaState.Id; // 进入 Id 状态
 			token.type = TokenType.Identifier;
-			tokenText.append(ch);
+			token.append(ch);
 		} else if (isDigit(ch)) { // 第一个字符是数字
 			newState = DfaState.IntLiteral;
 			token.type = TokenType.IntLiteral;
@@ -41,6 +61,7 @@ public class TokenParse {
 			token.type = TokenType.GT;
 			token.append(ch);
 		}
+		return newState;
 	}
 
 	// 判断是否是数字
