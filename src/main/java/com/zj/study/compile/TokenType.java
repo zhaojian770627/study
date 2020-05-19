@@ -1,6 +1,6 @@
 package com.zj.study.compile;
 
 public enum TokenType {
-	Identifier, IntLiteral, GT, GE
+	Identifier, IntLiteral, GT, GE, UNKNOWN
 
 }

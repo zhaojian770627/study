@@ -62,6 +62,12 @@ public class TokenParse {
 					state = nextState(ch); // 退出当前状态，并保存 Token
 				}
 				break;
+			case UNKNOWN:
+				tokens.add(token);
+				state = nextState(ch); // 退出当前状态，并保存 Token
+			default:
+				System.err.println("此分支不应该到达" + ch);
+				break;
 			}
 			pos++;
 		}
@@ -84,9 +90,9 @@ public class TokenParse {
 			token.type = TokenType.GT;
 			token.append(ch);
 		} else {
-			System.out.println("检测到了无法识别的字符 " + ch);
-			newState = DfaState.Initial;
-			token = null;
+			newState = DfaState.UNKNOWN;
+			token.type = TokenType.UNKNOWN;
+			token.append(ch);
 		}
 		return newState;
 	}
