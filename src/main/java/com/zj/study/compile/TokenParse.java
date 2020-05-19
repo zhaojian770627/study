@@ -27,6 +27,9 @@ public class TokenParse {
 			char ch = chars[pos];
 			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 				if (token != null) {
+					if (keyWords.contains(token.getTokenText()))
+						token.setType(TokenType.KeyWord);
+					
 					tokens.add(token);
 					token = null;
 					state = DfaState.Initial;
@@ -43,6 +46,9 @@ public class TokenParse {
 				if (isAlpha(ch) || isDigit(ch)) {
 					token.append(ch); // 保持标识符状态
 				} else {
+					if (keyWords.contains(token.getTokenText()))
+						token.setType(TokenType.KeyWord);
+
 					tokens.add(token);
 					state = nextState(ch); // 退出标识符状态，并保存 Token
 				}
@@ -58,6 +64,10 @@ public class TokenParse {
 				}
 				break;
 			case GE:
+				tokens.add(token);
+				state = nextState(ch); // 退出当前状态，并保存 Token
+				break;
+			case EQ:
 				tokens.add(token);
 				state = nextState(ch); // 退出当前状态，并保存 Token
 				break;
@@ -95,6 +105,10 @@ public class TokenParse {
 		} else if (ch == '>') { // 第一个字符是 >
 			newState = DfaState.GT;
 			token.type = TokenType.GT;
+			token.append(ch);
+		} else if (ch == '=') {
+			newState = DfaState.EQ;
+			token.type = TokenType.EQ;
 			token.append(ch);
 		} else {
 			newState = DfaState.UNKNOWN;
