@@ -27,9 +27,9 @@ public class TokenParse {
 			char ch = chars[pos];
 			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 				if (token != null) {
-					if (keyWords.contains(token.getTokenText()))
+					if (token.getType().equals(TokenType.Identifier) && keyWords.contains(token.getTokenText()))
 						token.setType(TokenType.KeyWord);
-					
+
 					tokens.add(token);
 					token = null;
 					state = DfaState.Initial;
