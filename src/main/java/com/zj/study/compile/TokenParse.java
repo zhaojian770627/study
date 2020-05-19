@@ -1,11 +1,18 @@
 package com.zj.study.compile;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TokenParse {
 	Token token = new Token();
 	List<Token> tokens = new ArrayList<>();
+
+	static Set<String> keyWords = new HashSet<>();
+	static {
+		keyWords.add("int");
+	}
 
 	public List<Token> getTokens() {
 		return tokens;
