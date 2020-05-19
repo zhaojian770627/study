@@ -18,7 +18,7 @@ public class TokenParse {
 
 		while (pos < length) {
 			char ch = chars[pos];
-			if (ch == ' ' || ch == '\t') {
+			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 				if (token != null) {
 					tokens.add(token);
 					token = null;
@@ -83,6 +83,10 @@ public class TokenParse {
 			newState = DfaState.GT;
 			token.type = TokenType.GT;
 			token.append(ch);
+		} else {
+			System.out.println("检测到了无法识别的字符 " + ch);
+			newState = DfaState.Initial;
+			token = null;
 		}
 		return newState;
 	}
