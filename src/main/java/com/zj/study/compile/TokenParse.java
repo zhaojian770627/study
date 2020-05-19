@@ -19,7 +19,11 @@ public class TokenParse {
 		while (pos < length) {
 			char ch = chars[pos];
 			if (ch == ' ' || ch == '\t') {
-				tokens.add(token);
+				if (token != null) {
+					tokens.add(token);
+					token = null;
+					state = DfaState.Initial;
+				}
 				pos++;
 				continue;
 			}
