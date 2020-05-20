@@ -12,7 +12,7 @@ public class CompileMain {
 		int length = (int) file.length();
 		char buf[] = new char[length + 1];
 		reader.read(buf);
-		buf[length] = ' ';
+		buf[length] = '\0';
 		reader.close();
 
 		TokensReader tokensReader = new TokensReader();

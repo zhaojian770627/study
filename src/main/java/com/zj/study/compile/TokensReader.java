@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.Stack;
 
 public class TokensReader {
-	Token token = new Token();
+	Token token = null;
 
 	static Set<String> keyWords = new HashSet<>();
 	static {
@@ -36,6 +36,8 @@ public class TokensReader {
 	void getTokenToBuf() {
 		int length = chars.length;
 		DfaState state = DfaState.Initial;
+
+		token = null;
 
 		while (pos < length) {
 			char ch = chars[pos];
