@@ -16,7 +16,7 @@ public class CompileMain {
 		reader.close();
 
 		TokensReader tokensReader = new TokensReader();
-
+		tokensReader.setChars(buf);
 		Token token = tokensReader.getToken();
 		while (token != null) {
 			System.out.println(token);
