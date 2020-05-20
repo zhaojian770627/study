@@ -1,6 +1,7 @@
 package com.zj.study.compile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,9 +10,10 @@ public class TokenParse {
 	Token token = new Token();
 	List<Token> tokens = new ArrayList<>();
 
-	static Set<String> keyWords = new HashSet<>();
+	static HashMap<String, TokenType> keyWords = new HashMap<>();
+
 	static {
-		keyWords.add("int");
+		keyWords.put("int", TokenType.INT);
 	}
 
 	public List<Token> getTokens() {
@@ -27,8 +29,8 @@ public class TokenParse {
 			char ch = chars[pos];
 			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 				if (token != null) {
-					if (token.getType().equals(TokenType.Identifier) && keyWords.contains(token.getTokenText()))
-						token.setType(TokenType.KeyWord);
+					if (token.getType().equals(TokenType.Identifier) && keyWords.containsKey(token.getTokenText()))
+						token.setType(keyWords.get(token.getTokenText()));
 
 					tokens.add(token);
 					token = null;
@@ -46,8 +48,8 @@ public class TokenParse {
 				if (isAlpha(ch) || isDigit(ch)) {
 					token.append(ch); // 保持标识符状态
 				} else {
-					if (keyWords.contains(token.getTokenText()))
-						token.setType(TokenType.KeyWord);
+					if (keyWords.containsKey(token.getTokenText()))
+						token.setType(keyWords.get(token.getTokenText()));
 
 					tokens.add(token);
 					state = nextState(ch); // 退出标识符状态，并保存 Token
