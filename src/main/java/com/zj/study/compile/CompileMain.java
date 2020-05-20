@@ -15,10 +15,8 @@ public class CompileMain {
 		buf[length] = ' ';
 		reader.close();
 
-		TokenParse parse = new TokenParse();
-		parse.parse(buf);
-
-		parse.outTokens();
+		TokensReader tokensReader = new TokensReader();
+		tokensReader
 
 		System.out.println("end!");
 	}

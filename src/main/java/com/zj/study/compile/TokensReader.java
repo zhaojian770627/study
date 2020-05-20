@@ -1,24 +1,24 @@
 package com.zj.study.compile;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
 public class TokensReader {
 	Token token = new Token();
 
-	// 读取位置
-	int pos = 0;
-
-	char[] chars;
-
-	Stack<Token> tokenBuf = new Stack<>();
-
 	static Set<String> keyWords = new HashSet<>();
 	static {
 		keyWords.add("int");
+	}
+
+	// 读取位置
+	int pos = 0;
+	char[] chars;
+	Stack<Token> tokenBuf = new Stack<>();
+
+	public void setChars(char[] chars) {
+		this.chars = chars;
 	}
 
 	Token getToken() {
