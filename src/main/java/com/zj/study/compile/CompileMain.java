@@ -16,7 +16,12 @@ public class CompileMain {
 		reader.close();
 
 		TokensReader tokensReader = new TokensReader();
-		tokensReader
+
+		Token token = tokensReader.getToken();
+		while (token != null) {
+			System.out.println(token);
+			token = tokensReader.getToken();
+		}
 
 		System.out.println("end!");
 	}
