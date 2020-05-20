@@ -15,12 +15,12 @@ public class CompileMain {
 		buf[length] = '\0';
 		reader.close();
 
-		TokensReader tokensReader = new TokensReader();
+		TokenReader tokensReader = new TokenReader();
 		tokensReader.setChars(buf);
-		Token token = tokensReader.getToken();
+		Token token = tokensReader.pop();
 		while (token != null) {
 			System.out.println(token);
-			token = tokensReader.getToken();
+			token = tokensReader.pop();
 		}
 
 		System.out.println("end!");

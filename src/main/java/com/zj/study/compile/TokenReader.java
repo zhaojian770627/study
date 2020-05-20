@@ -1,11 +1,9 @@
 package com.zj.study.compile;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 
-public class TokensReader {
+public class TokenReader {
 	Token token = null;
 
 	static HashMap<String, TokenType> keyWords = new HashMap<>();
@@ -22,13 +20,30 @@ public class TokensReader {
 		this.chars = chars;
 	}
 
-	Token getToken() {
+	public Token pop() {
 		if (tokenBuf.size() > 0)
 			return tokenBuf.pop();
 		else {
 			getTokenToBuf();
 			if (tokenBuf.size() > 0)
 				return tokenBuf.pop();
+			else
+				return null;
+		}
+	}
+
+	/**
+	 * 预读
+	 * 
+	 * @return
+	 */
+	public Token peek() {
+		if (tokenBuf.size() > 0)
+			return tokenBuf.peek();
+		else {
+			getTokenToBuf();
+			if (tokenBuf.size() > 0)
+				return tokenBuf.peek();
 			else
 				return null;
 		}
