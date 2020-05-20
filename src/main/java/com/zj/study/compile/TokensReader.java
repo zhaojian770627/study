@@ -1,5 +1,6 @@
 package com.zj.study.compile;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
@@ -7,9 +8,9 @@ import java.util.Stack;
 public class TokensReader {
 	Token token = null;
 
-	static Set<String> keyWords = new HashSet<>();
+	static HashMap<String, TokenType> keyWords = new HashMap<>();
 	static {
-		keyWords.add("int");
+		keyWords.put("int", TokenType.INT);
 	}
 
 	// 读取位置
@@ -43,8 +44,8 @@ public class TokensReader {
 			char ch = chars[pos];
 			if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 				if (token != null) {
-					if (token.getType().equals(TokenType.Identifier) && keyWords.contains(token.getTokenText()))
-						token.setType(TokenType.KeyWord);
+					if (token.getType().equals(TokenType.Identifier) && keyWords.containsKey(token.getTokenText()))
+						token.setType(keyWords.get(token.getTokenText()));
 
 					tokenBuf.push(token);
 					state = DfaState.Initial;
@@ -62,8 +63,8 @@ public class TokensReader {
 				if (isAlpha(ch) || isDigit(ch)) {
 					token.append(ch); // 保持标识符状态
 				} else {
-					if (keyWords.contains(token.getTokenText()))
-						token.setType(TokenType.KeyWord);
+					if (keyWords.containsKey(token.getTokenText()))
+						token.setType(keyWords.get(token.getTokenText()));
 
 					tokenBuf.push(token);
 					return;
