@@ -1,5 +1,8 @@
 package com.zj.study.compile;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -15,6 +18,24 @@ public class TokenReader {
 	int pos = 0;
 	char[] chars;
 	Stack<Token> tokenBuf = new Stack<>();
+
+	private String filePath;
+
+	public TokenReader(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public void initReader() throws IOException {
+		File file = new File(filePath);// 定义一个file对象，用来初始化FileReader
+		FileReader reader = new FileReader(file);// 定义一个fileReader对象，用来初始化BufferedReader
+		int length = (int) file.length();
+		char buf[] = new char[length + 1];
+		reader.read(buf);
+		buf[length] = '\0';
+		reader.close();
+
+		setChars(buf);
+	}
 
 	public void setChars(char[] chars) {
 		this.chars = chars;

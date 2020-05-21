@@ -8,9 +8,11 @@ import com.zj.study.compile.ast.SimpleASTNode;
 
 public class SimpleCalculator {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public static void main(String[] args) throws Exception {
+		TokenReader tokenReader = new TokenReader("d:\\test.zj");
+		tokenReader.initReader();
+		SimpleCalculator calator = new SimpleCalculator(tokenReader);
+		calator.intDeclare();
 	}
 
 	private TokenReader tokenReader;

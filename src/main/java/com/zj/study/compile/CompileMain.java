@@ -1,22 +1,12 @@
 package com.zj.study.compile;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class CompileMain {
 
 	public static void main(String[] args) throws IOException {
-		File file = new File("d:\\test.zj");// 定义一个file对象，用来初始化FileReader
-		FileReader reader = new FileReader(file);// 定义一个fileReader对象，用来初始化BufferedReader
-		int length = (int) file.length();
-		char buf[] = new char[length + 1];
-		reader.read(buf);
-		buf[length] = '\0';
-		reader.close();
-
-		TokenReader tokensReader = new TokenReader();
-		tokensReader.setChars(buf);
+		TokenReader tokensReader = new TokenReader("d:\\test.zj");
+		tokensReader.init();
 		Token token = tokensReader.pop();
 		while (token != null) {
 			System.out.println(token);
