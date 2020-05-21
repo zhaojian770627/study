@@ -46,7 +46,7 @@ public class SimpleCalculator {
 				node = new SimpleASTNode(ASTNodeType.IntDeclaration, token.getTokenText());
 
 				token = tokenReader.peek(); // 预读
-				if (token != null && token.getType().equals(TokenType.EQ)) { // 匹配等号
+				if (token != null && token.getType().equals(TokenType.Assignment)) { // 匹配等号
 					tokenReader.pop(); // 消耗掉等号
 
 					SimpleASTNode child = additive(); // 匹配一个表达式
