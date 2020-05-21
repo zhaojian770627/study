@@ -12,7 +12,7 @@ public class SimpleCalculator {
 		TokenReader tokenReader = new TokenReader("d:\\test.zj");
 		tokenReader.initReader();
 		SimpleCalculator calator = new SimpleCalculator(tokenReader);
-		calator.intDeclare();
+		SimpleASTNode node = calator.intDeclare();
 	}
 
 	private TokenReader tokenReader;
@@ -26,10 +26,12 @@ public class SimpleCalculator {
 	 * MatchIntDeclare(){ MatchToken(Int); // 匹配 Int 关键字 MatchIdentifier(); // 匹配标识符
 	 * MatchToken(equal); // 匹配等号 MatchExpression(); // 匹配表达式 }
 	 * 
+	 * @return
+	 * 
 	 * @throws Exception
 	 * 
 	 */
-	public void intDeclare() throws Exception {
+	public SimpleASTNode intDeclare() throws Exception {
 		SimpleASTNode node = null;
 		Token token = tokenReader.peek(); // 预读
 
@@ -53,6 +55,8 @@ public class SimpleCalculator {
 			}
 
 		}
+
+		return node;
 	}
 
 	private SimpleASTNode additive() throws Exception {

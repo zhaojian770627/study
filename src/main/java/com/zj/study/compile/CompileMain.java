@@ -6,7 +6,7 @@ public class CompileMain {
 
 	public static void main(String[] args) throws IOException {
 		TokenReader tokensReader = new TokenReader("d:\\test.zj");
-		tokensReader.init();
+		tokensReader.initReader();
 		Token token = tokensReader.pop();
 		while (token != null) {
 			System.out.println(token);
