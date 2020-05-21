@@ -159,7 +159,7 @@ public class TokenReader {
 			token.append(ch);
 		} else if (ch == '=') {
 			newState = DfaState.EQ;
-			token.type = TokenType.EQ;
+			token.type = TokenType.Assignment;
 			token.append(ch);
 		} else {
 			newState = DfaState.UNKNOWN;

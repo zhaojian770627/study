@@ -36,17 +36,17 @@ public class SimpleCalculator {
 		SimpleASTNode node = null;
 		Token token = tokenReader.peek(); // 预读
 
-		if (token != null && token.getType() == TokenType.INT) { // 匹配 Int
+		if (token != null && token.getType().equals(TokenType.INT)) { // 匹配 Int
 			token = tokenReader.pop();
 
-			if (tokenReader.peek().getType() == TokenType.Identifier) { // 匹配标识符
+			if (tokenReader.peek().getType().equals(TokenType.Identifier)) { // 匹配标识符
 				token = tokenReader.pop(); // 消耗掉标识符
 				// 创建当前节点，并把变量名记到 AST 节点的文本值中，
 				// 这里新建一个变量子节点也是可以的
 				node = new SimpleASTNode(ASTNodeType.IntDeclaration, token.getTokenText());
 
 				token = tokenReader.peek(); // 预读
-				if (token != null && token.getType() == TokenType.Assignment) { // 匹配等号
+				if (token != null && token.getType().equals(TokenType.EQ)) { // 匹配等号
 					tokenReader.pop(); // 消耗掉等号
 
 					SimpleASTNode child = additive(); // 匹配一个表达式
