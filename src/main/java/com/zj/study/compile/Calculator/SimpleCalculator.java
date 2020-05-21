@@ -81,8 +81,24 @@ public class SimpleCalculator {
 
 		// 预读
 		Token token = tokenReader.peek();
+		if (child_1 != null && token != null) {
+			if (token.getType().equals(TokenType.STAR) || token.getType().equals(TokenType.DIV)) { // 如果获取的是乘法或者除法
+				// 丢弃
+				token = tokenReader.pop();
 
-		return null;
+				// 再次向下匹配 基础表达式
+				SimpleASTNode child_2 = primary();
+
+				if (child_2 != null) {
+					// 说明乘除后面有基础表达式
+					// 建立新的父节点，构造一棵乘除法子树
+					node = new SimpleASTNode(ASTNodeType.Multiplicative, token.getTokenText());
+					node.addChild(child_1);
+					node.addChild(child_2);
+				}
+			}
+		}
+		return node;
 	}
 
 	private SimpleASTNode primary() {
@@ -96,9 +112,14 @@ public class SimpleCalculator {
 				token = tokenReader.peek();
 				// 创建node节点，添加类型和值
 				node = new SimpleASTNode(ASTNodeType.IntLiteral, token.getTokenText());
+			} else if (token.getType().equals(TokenType.Identifier)) { // 如果是变量字面量
+				// 丢弃已读
+				token = tokenReader.peek();
+				// 创建node节点，添加类型和值
+				node = new SimpleASTNode(ASTNodeType.Identifier, token.getTokenText());
 			}
 		}
 
-		return null;
+		return node;
 	}
 }
