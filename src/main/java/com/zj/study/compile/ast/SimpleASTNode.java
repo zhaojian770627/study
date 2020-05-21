@@ -51,7 +51,7 @@ public class SimpleASTNode implements ASTNode {
 	 * @param node
 	 * @param indent 缩进字符，由tab组成，每一级多一个tab
 	 */
-	public void dumpAST(ASTNode node, String indent) {
+	public static void dumpAST(ASTNode node, String indent) {
 		System.out.println(indent + node.getType() + " " + node.getText());
 		for (ASTNode child : node.getChildren()) {
 			dumpAST(child, indent + "\t");
