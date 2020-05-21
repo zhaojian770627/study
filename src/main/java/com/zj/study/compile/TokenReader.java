@@ -10,8 +10,14 @@ public class TokenReader {
 	Token token = null;
 
 	static HashMap<String, TokenType> keyWords = new HashMap<>();
+	static HashMap<String, TokenType> Operators = new HashMap<>();
 	static {
 		keyWords.put("int", TokenType.INT);
+
+		Operators.put("+", TokenType.PLUS);
+		Operators.put("-", TokenType.SUB);
+		Operators.put("*", TokenType.PLUS);
+		Operators.put("/", TokenType.DIV);
 	}
 
 	// 读取位置
@@ -122,6 +128,9 @@ public class TokenReader {
 			case EQ:
 				tokenBuf.push(token);
 				return;
+			case Operator:
+				tokenBuf.push(token);
+				return;
 			case IntLiteral:
 				if (isDigit(ch)) {
 					token.append(ch); // 继续保持在数字字面量状态
@@ -160,6 +169,10 @@ public class TokenReader {
 		} else if (ch == '=') {
 			newState = DfaState.EQ;
 			token.type = TokenType.Assignment;
+			token.append(ch);
+		} else if (Operators.containsKey(ch)) {
+			newState = DfaState.Operator;
+			token.type = Operators.get(ch);
 			token.append(ch);
 		} else {
 			newState = DfaState.UNKNOWN;

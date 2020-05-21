@@ -67,7 +67,7 @@ public class SimpleCalculator {
 		SimpleASTNode node = child1; // 如果没有第二个子节点，就返回这个
 		Token token = tokenReader.peek();
 		if (child1 != null && token != null) {
-			if (token.getType().equals(TokenType.Plus)) {
+			if (token.getType().equals(TokenType.PLUS)) {
 				token = tokenReader.pop();
 				SimpleASTNode child2 = additive(); // 递归地解析第二个节点
 				if (child2 != null) {
@@ -91,7 +91,7 @@ public class SimpleCalculator {
 		// 预读
 		Token token = tokenReader.peek();
 		if (child_1 != null && token != null) {
-			if (token.getType().equals(TokenType.STAR) || token.getType().equals(TokenType.DIV)) { // 如果获取的是乘法或者除法
+			if (token.getType().equals(TokenType.PLUS) || token.getType().equals(TokenType.DIV)) { // 如果获取的是乘法或者除法
 				// 丢弃
 				token = tokenReader.pop();
 
