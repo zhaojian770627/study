@@ -40,6 +40,13 @@ public class MetricSearchMain {
 		return new int[] { -1, -1 };
 	}
 
+	/**
+	 * 先二分法找中间的数为第几大
+	 * 
+	 * @param m
+	 * @param k
+	 * @return
+	 */
 	private int kthSmallest(int[][] m, int k) {
 		int row = m.length;
 		int col = m[0].length;
