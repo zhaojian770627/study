@@ -7,7 +7,8 @@ public class MetricSearchMain {
 				{ 13, 18, 26, 28, 30 } };
 		MetricSearchMain main = new MetricSearchMain();
 //		System.out.println(Arrays.toString(main.searchOne(m, 55)));
-		System.out.println(main.kthSmallest(m, 10));
+		m = new int[][] { { 1, 4, 5 }, { 2, 8, 12 }, { 3, 22, 23 } };
+		System.out.println(main.kthSmallest(m, 6));
 	}
 
 	/**
