@@ -91,7 +91,7 @@ public class SimpleCalculator {
 		// 预读
 		Token token = tokenReader.peek();
 		if (child_1 != null && token != null) {
-			if (token.getType().equals(TokenType.PLUS) || token.getType().equals(TokenType.DIV)) { // 如果获取的是乘法或者除法
+			if (token.getType().equals(TokenType.STAR) || token.getType().equals(TokenType.DIV)) { // 如果获取的是乘法或者除法
 				// 丢弃
 				token = tokenReader.pop();
 
@@ -118,12 +118,12 @@ public class SimpleCalculator {
 		if (token != null) {
 			if (token.getType().equals(TokenType.IntLiteral)) { // 如果是整形字面量
 				// 丢弃已读
-				token = tokenReader.peek();
+				token = tokenReader.pop();
 				// 创建node节点，添加类型和值
 				node = new SimpleASTNode(ASTNodeType.IntLiteral, token.getTokenText());
 			} else if (token.getType().equals(TokenType.Identifier)) { // 如果是变量字面量
 				// 丢弃已读
-				token = tokenReader.peek();
+				token = tokenReader.pop();
 				// 创建node节点，添加类型和值
 				node = new SimpleASTNode(ASTNodeType.Identifier, token.getTokenText());
 			}

@@ -16,7 +16,7 @@ public class TokenReader {
 
 		Operators.put("+", TokenType.PLUS);
 		Operators.put("-", TokenType.SUB);
-		Operators.put("*", TokenType.PLUS);
+		Operators.put("*", TokenType.STAR);
 		Operators.put("/", TokenType.DIV);
 	}
 
@@ -129,6 +129,7 @@ public class TokenReader {
 				tokenBuf.push(token);
 				return;
 			case Operator:
+				token.type = Operators.get(token.getTokenText());
 				tokenBuf.push(token);
 				return;
 			case IntLiteral:
@@ -170,9 +171,8 @@ public class TokenReader {
 			newState = DfaState.EQ;
 			token.type = TokenType.Assignment;
 			token.append(ch);
-		} else if (Operators.containsKey(ch)) {
+		} else if (Operators.containsKey(String.valueOf(ch))) {
 			newState = DfaState.Operator;
-			token.type = Operators.get(ch);
 			token.append(ch);
 		} else {
 			newState = DfaState.UNKNOWN;
