@@ -33,15 +33,18 @@ public class SearchMain {
 //		int[] heaters = new int[] { 12, 24 };
 
 //		System.out.println(searchMain.findRadius(houses, heaters));
-		System.out.println(searchMain.sqrt(36));
+//		System.out.println(searchMain.sqrt(36));
+
+		int[] c = { 3, 5, 6, 3, 1, 4, 2 };
+		System.out.println(searchMain.findDuplicate(c));
 	}
 
 	/**
-	 * 查找重复
-	 * 给定一个包含n + 1个整数的数组，其中每个整数在1到n（包括1和n）之间，请证明必须存在至少一个重复的数字。 假定只有一个重复的数字，找到重复的一个。
+	 * 查找重复 给定一个包含n + 1个整数的数组，其中每个整数在1到n（包括1和n）之间，请证明必须存在至少一个重复的数字。
+	 * 假定只有一个重复的数字，找到重复的一个。
 	 * 
 	 * @param m
-	 * @return 
+	 * @return
 	 */
 	private int findDuplicate(int[] m) {
 		int low = 1;
