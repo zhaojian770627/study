@@ -36,6 +36,31 @@ public class SearchMain {
 		System.out.println(searchMain.sqrt(36));
 	}
 
+	/**
+	 * 查找重复
+	 * 给定一个包含n + 1个整数的数组，其中每个整数在1到n（包括1和n）之间，请证明必须存在至少一个重复的数字。 假定只有一个重复的数字，找到重复的一个。
+	 * 
+	 * @param m
+	 * @return 
+	 */
+	private int findDuplicate(int[] m) {
+		int low = 1;
+		int high = m.length - 1;
+
+		while (low < high) {
+			int mid = low + (high - low) / 2;
+			int count = 0;
+			for (int num : m)
+				if (num <= mid)
+					count += 1;
+			if (count <= mid)
+				low = mid + 1;
+			else
+				high = mid;
+		}
+		return low;
+	}
+
 	private int sqrt(int x) {
 		if (x == 0)
 			return 0;
