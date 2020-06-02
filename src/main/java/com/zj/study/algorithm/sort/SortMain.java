@@ -6,11 +6,12 @@ public class SortMain {
 		int[] a = new int[] { 4, 3, 5, 7, 9, 2, 1, 6, 8, 99 };
 		SortMain main = new SortMain();
 		// main.selectSort(a);
-		main.insertSort(a);
+//		main.insertSort(a);
 		// main.shellSort(a);
 		// main.mergeSort(a);
-//		main.quickSort(a);
-		print(a);
+		int[] b = { 1, 5, 8, 3, 2 };
+		main.quickSort(b);
+		print(b);
 	}
 
 	private static void print(int[] a) {
@@ -172,18 +173,18 @@ public class SortMain {
 
 		// 中值
 		int mid = a[start];
-		int i = start + 1;
+		int i = start ;
 		int j = end;
 
 		while (i < j) {
 			// 先从右边查找,否则会移动不正确
 			for (; i < j; j--) {
-				if (a[j] <= mid)
+				if (a[j] < mid)
 					break;
 			}
 
 			for (; i < j; i++) {
-				if (a[i] >= mid)
+				if (a[i] > mid)
 					break;
 			}
 

@@ -35,8 +35,11 @@ public class SearchMain {
 //		System.out.println(searchMain.findRadius(houses, heaters));
 //		System.out.println(searchMain.sqrt(36));
 
-		int[] c = { 3, 5, 6, 3, 1, 4, 2 };
-		System.out.println(searchMain.findDuplicate(c));
+//		int[] c = { 3, 5, 6, 3, 1, 4, 2 };
+//		System.out.println(searchMain.findDuplicate(c));
+
+		int[] d = { 1, 5, 8, 3, 2 };
+		System.out.println(searchMain.searchKMax(d, 4));
 	}
 
 	/**
@@ -50,12 +53,11 @@ public class SearchMain {
 		int start = 0;
 		int end = a.length - 1;
 
-		int mid = a[start];
-
 		// 进行一轮
-		int i = start + 1;
-		int j = end;
 		while (start <= end) {
+			int mid = a[start];
+			int i = start;
+			int j = end;
 			while (i < j) {
 				// 先从右边查找,否则会移动不正确
 				for (; i < j; j--) {
@@ -79,11 +81,11 @@ public class SearchMain {
 			a[j] = mid;
 
 			if (j == k)
-				return j;
+				return mid;
 			else if (j > k) {
-				end = j;
+				end = j - 1;
 			} else {
-				start = j;
+				start = j + 1;
 			}
 		}
 		return -1;
