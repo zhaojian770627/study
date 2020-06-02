@@ -40,6 +40,56 @@ public class SearchMain {
 	}
 
 	/**
+	 * 搜索第K大，采用快速排序的思路
+	 * 
+	 * @param m
+	 * @param k
+	 * @return
+	 */
+	private int searchKMax(int[] a, int k) {
+		int start = 0;
+		int end = a.length - 1;
+
+		int mid = a[start];
+
+		// 进行一轮
+		int i = start + 1;
+		int j = end;
+		while (start <= end) {
+			while (i < j) {
+				// 先从右边查找,否则会移动不正确
+				for (; i < j; j--) {
+					if (a[j] <= mid)
+						break;
+				}
+
+				for (; i < j; i++) {
+					if (a[i] >= mid)
+						break;
+				}
+
+				if (i < j) {
+					int t = a[i];
+					a[i] = a[j];
+					a[j] = t;
+				}
+			}
+
+			a[start] = a[j];
+			a[j] = mid;
+
+			if (j == k)
+				return j;
+			else if (j > k) {
+				end = j;
+			} else {
+				start = j;
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * 查找重复 给定一个包含n + 1个整数的数组，其中每个整数在1到n（包括1和n）之间，请证明必须存在至少一个重复的数字。
 	 * 假定只有一个重复的数字，找到重复的一个。
 	 * 
