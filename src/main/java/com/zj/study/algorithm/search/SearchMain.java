@@ -39,7 +39,7 @@ public class SearchMain {
 //		System.out.println(searchMain.findDuplicate(c));
 
 		int[] d = { 1, 5, 8, 3, 2 };
-		System.out.println(searchMain.searchKMax(d, 4));
+		System.out.println(searchMain.searchKMax(d, 2));
 	}
 
 	/**
