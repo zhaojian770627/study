@@ -61,12 +61,12 @@ public class SearchMain {
 			while (i < j) {
 				// 先从右边查找,否则会移动不正确
 				for (; i < j; j--) {
-					if (a[j] <= mid)
+					if (a[j] < mid)
 						break;
 				}
 
 				for (; i < j; i++) {
-					if (a[i] >= mid)
+					if (a[i] > mid)
 						break;
 				}
 
