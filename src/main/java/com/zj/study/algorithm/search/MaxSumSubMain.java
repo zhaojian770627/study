@@ -15,6 +15,12 @@ public class MaxSumSubMain {
 		System.out.println(main.sub1(a));
 	}
 
+	/**
+	 * 暴力枚举法
+	 * 
+	 * @param a
+	 * @return
+	 */
 	private int sub1(int[] a) {
 		int result = Integer.MIN_VALUE;
 
@@ -27,6 +33,29 @@ public class MaxSumSubMain {
 			}
 		}
 		return result;
+	}
+
+	/**
+	 * 分治法
+	 * 
+	 * @param a
+	 * @return
+	 */
+	private int sub2(int[] a) {
+		return sub2_helper(a, 0, a.length - 1);
+	}
+
+	private int sub2_helper(int[] a, int left, int right) {
+		if (left == right)
+			return a[left];
+
+		int mid = (left + right) / 2;
+		return Math.max(Math.max(sub2_helper(a, left, mid), sub2_helper(a, mid + 1, right)),
+				maxcrossing(a, left, mid, right));
+	}
+
+	private int maxcrossing(int[] a, int left, int mid, int right) {
+		return 0;
 	}
 
 }
