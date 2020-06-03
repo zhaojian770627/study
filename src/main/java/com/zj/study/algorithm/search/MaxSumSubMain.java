@@ -57,9 +57,22 @@ public class MaxSumSubMain {
 	private int maxcrossing(int[] a, int left, int mid, int right) {
 		int sum = 0;
 		int left_sum = Integer.MIN_VALUE;
-		
-		
-		return 0;
+
+		for (int i = mid; i >= left; i--) {
+			sum = sum + a[i];
+			if (sum > left_sum)
+				left_sum = sum;
+		}
+
+		sum = 0;
+		int right_sum = Integer.MIN_VALUE;
+		for (int i = mid + 1; i <= right; i++) {
+			sum = sum + a[i];
+			if (sum > left_sum)
+				right_sum = sum;
+		}
+
+		return left_sum + right_sum;
 	}
 
 }
