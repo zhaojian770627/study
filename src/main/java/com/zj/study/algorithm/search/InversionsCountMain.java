@@ -52,7 +52,23 @@ public class InversionsCountMain {
 		return count;
 	}
 
+	/**
+	 * 在合并排序的基础上，进行判断，在某次合并中如下
+	 * 
+	 * left:[1, 20] right:[4, 5, 6]
+	 * 
+	 * left和right都是已经排好序的，如果left中的某一个大于right的某一个，则left后续的肯定大于right后续的 后续以此判断，确实比较精妙
+	 * 
+	 * @param result
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	int merge(List<Integer> result, Integer[] left, Integer[] right) {
+		System.out.println("--------------merge-------------------");
+		System.out.println("left:" + Arrays.toString(left));
+		System.out.println("right:" + Arrays.toString(right));
+
 		int i = 0, j = 0, inv_count = 0;
 		while (i < left.length && j < right.length) {
 			if (left[i] < right[j]) {
