@@ -44,7 +44,7 @@ public class InversionsCountMain {
 		List<Integer> left = new ArrayList<>();
 		int inv_left = countInvFast(left, Arrays.copyOfRange(a, 0, middle));
 		List<Integer> right = new ArrayList<>();
-		int inv_right = countInvFast(right, Arrays.copyOfRange(a, middle, a.length));
+		int inv_right = countInvFast(right, Arrays.copyOfRange(a, middle, a.length - 1));
 
 		int count = merge(result, left.toArray(new Integer[] { 0 }), right.toArray(new Integer[] { 0 }));
 		count += inv_left + inv_right;
