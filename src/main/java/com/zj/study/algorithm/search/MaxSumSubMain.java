@@ -55,6 +55,10 @@ public class MaxSumSubMain {
 	}
 
 	private int maxcrossing(int[] a, int left, int mid, int right) {
+		int sum = 0;
+		int left_sum = Integer.MIN_VALUE;
+		
+		
 		return 0;
 	}
 
