@@ -44,7 +44,7 @@ public class InversionsCountMain {
 		List<Integer> left = new ArrayList<>();
 		int inv_left = countInvFast(left, Arrays.copyOfRange(a, 0, middle));
 		List<Integer> right = new ArrayList<>();
-		int inv_right = countInvFast(right, Arrays.copyOfRange(a, middle, a.length - 1));
+		int inv_right = countInvFast(right, Arrays.copyOfRange(a, middle, a.length));
 
 		int count = merge(result, left.toArray(new Integer[] { 0 }), right.toArray(new Integer[] { 0 }));
 		count += inv_left + inv_right;
@@ -64,9 +64,9 @@ public class InversionsCountMain {
 			}
 		}
 
-		Integer[] leftAry = Arrays.copyOfRange(left, i, left.length - 1);
+		Integer[] leftAry = Arrays.copyOfRange(left, i, left.length);
 		Collections.addAll(result, leftAry);
-		Integer[] rightAry = Arrays.copyOfRange(right, j, right.length - 1);
+		Integer[] rightAry = Arrays.copyOfRange(right, j, right.length);
 		Collections.addAll(result, rightAry);
 		return inv_count;
 	}
