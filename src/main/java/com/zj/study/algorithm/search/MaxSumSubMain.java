@@ -12,7 +12,7 @@ public class MaxSumSubMain {
 	public static void main(String[] args) {
 		int[] a = { -2, -3, 4, -1, -2, 1, 5, -3 };
 		MaxSumSubMain main = new MaxSumSubMain();
-		System.out.println(main.sub1(a));
+		System.out.println(main.sub2(a));
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class MaxSumSubMain {
 		int right_sum = Integer.MIN_VALUE;
 		for (int i = mid + 1; i <= right; i++) {
 			sum = sum + a[i];
-			if (sum > left_sum)
+			if (sum > right_sum)
 				right_sum = sum;
 		}
 
