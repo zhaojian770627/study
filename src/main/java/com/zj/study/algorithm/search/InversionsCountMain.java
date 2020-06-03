@@ -20,6 +20,7 @@ public class InversionsCountMain {
 //		System.out.println(main.countInv(a));
 		List<Integer> lst = new ArrayList<>();
 		System.out.println(main.countInvFast(lst, a));
+		System.out.println(Arrays.toString(lst.toArray()));
 	}
 
 	// O(n^2)
