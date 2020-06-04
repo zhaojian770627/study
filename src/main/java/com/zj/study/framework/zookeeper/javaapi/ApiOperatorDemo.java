@@ -1,5 +1,6 @@
 package com.zj.study.framework.zookeeper.javaapi;
 
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +26,14 @@ public class ApiOperatorDemo implements Watcher {
 //		createNode();
 //		modifyNode();
 //		deleteNode();
-		createNodeAndChild();
+//		createNodeAndChild();
+		getNode();
+	}
+
+	private static void getNode() throws KeeperException, InterruptedException {
+		// 获取指定节点下的子节点
+		List<String> childrens = zookeeper.getChildren("/node11", true);
+		System.out.println(childrens);
 	}
 
 	private static void createNodeAndChild() throws Exception {
