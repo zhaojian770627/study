@@ -1,11 +1,9 @@
 package com.zj.study.framework.zookeeper.javaapi;
 
-import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.Watcher.Event;
 import org.apache.zookeeper.ZooKeeper;
 
 public class CreateSessionDemo {
