@@ -42,6 +42,25 @@ public class SearchMain {
 		System.out.println(searchMain.searchKMax(d, 2));
 	}
 
+	private int find_extra_fast(int[] a, int[] b) {
+		int index = b.length;
+
+		int left = 0;
+		int right = b.length - 1;
+
+		while (left <= right) {
+			int mid = (left + right) / 2;
+			if (b[mid] == a[mid])
+				left = mid + 1;
+			else {
+				index = mid;
+				right = mid - 1;
+			}
+		}
+
+		return index;
+	}
+
 	/**
 	 * 搜索第K大，采用快速排序的思路
 	 * 
