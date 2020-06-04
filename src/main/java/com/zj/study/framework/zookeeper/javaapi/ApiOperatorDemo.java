@@ -1,6 +1,7 @@
 package com.zj.study.framework.zookeeper.javaapi;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
@@ -22,7 +23,32 @@ public class ApiOperatorDemo implements Watcher {
 		countDownLatch.await();
 
 //		createNode();
-		modifyNode();
+//		modifyNode();
+//		deleteNode();
+		createNodeAndChild();
+	}
+
+	private static void createNodeAndChild() throws Exception {
+		// 创建节点和子节点
+		String path = "/node11";
+
+		zookeeper.create(path, "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+		TimeUnit.SECONDS.sleep(1);
+
+		Stat stat = zookeeper.exists(path + "/node1", true);
+		if (stat == null) {// 表示节点不存在
+			zookeeper.create(path + "/node1", "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+			TimeUnit.SECONDS.sleep(1);
+		}
+		// 修改子路径
+		zookeeper.setData(path + "/node1", "deer".getBytes(), -1);
+		TimeUnit.SECONDS.sleep(1);
+	}
+
+	private static void deleteNode() throws Exception {
+		zookeeper.getData("/node1", new ApiOperatorDemo(), stat);
+		zookeeper.delete("/node1", -1);
+		Thread.sleep(2000);
 	}
 
 	private static void modifyNode() throws KeeperException, InterruptedException {
