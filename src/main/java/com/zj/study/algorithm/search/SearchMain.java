@@ -42,7 +42,7 @@ public class SearchMain {
 //		System.out.println(searchMain.searchKMax(d, 2));
 
 		int[] e = { 1, 3, 5, 7, 9, 11, 13 };
-		int[] f = { 3, 5, 7, 9, 11, 13 };
+		int[] f = { 1, 5, 7, 9, 11, 13 };
 		System.out.println(searchMain.find_extra_fast(e, f));
 	}
 
