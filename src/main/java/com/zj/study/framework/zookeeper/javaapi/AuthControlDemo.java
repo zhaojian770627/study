@@ -1,7 +1,10 @@
 package com.zj.study.framework.zookeeper.javaapi;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
@@ -26,9 +29,19 @@ public class AuthControlDemo implements Watcher {
 		ACL acl = new ACL(ZooDefs.Perms.ALL,
 				new Id("digest", DigestAuthenticationProvider.generateDigest("root:root")));
 		ACL acl2 = new ACL(ZooDefs.Perms.CREATE, new Id("ip", "192.168.1.1"));
-		
-		
-		
+
+		List<ACL> acls = new ArrayList<>();
+		acls.add(acl);
+		acls.add(acl2);
+		zookeeper.create("/auth1", "123".getBytes(), acls, CreateMode.PERSISTENT);
+		zookeeper.addAuthInfo("digest", "root:root".getBytes());
+
+		zookeeper.create("/auth1/auth1-1", "123".getBytes(), ZooDefs.Ids.CREATOR_ALL_ACL, CreateMode.EPHEMERAL);
+
+//		ZooKeeper zooKeeper1 = new ZooKeeper(CONNECTSTRING, 5000, new AuthControlDemo());
+//		countDownLatch.await();
+//		zooKeeper1.addAuthInfo("digest", "root:root".getBytes());
+//		zooKeeper1.delete("/auth1/auth1-1", -1);
 	}
 
 	@Override
