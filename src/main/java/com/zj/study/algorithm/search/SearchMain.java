@@ -38,8 +38,12 @@ public class SearchMain {
 //		int[] c = { 3, 5, 6, 3, 1, 4, 2 };
 //		System.out.println(searchMain.findDuplicate(c));
 
-		int[] d = { 1, 5, 8, 3, 2 };
-		System.out.println(searchMain.searchKMax(d, 2));
+//		int[] d = { 1, 5, 8, 3, 2 };
+//		System.out.println(searchMain.searchKMax(d, 2));
+
+		int[] e = { 1, 3, 5, 7, 9, 11, 13 };
+		int[] f = { 3, 5, 7, 9, 11, 13 };
+		System.out.println(searchMain.find_extra_fast(e, f));
 	}
 
 	private int find_extra_fast(int[] a, int[] b) {
