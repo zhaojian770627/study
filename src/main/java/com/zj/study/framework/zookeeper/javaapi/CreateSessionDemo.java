@@ -8,7 +8,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 public class CreateSessionDemo {
 
-	private final static String CONNECTSTRING = "10.6.255.181:2181";
+	private final static String CONNECTSTRING = "10.10.10.5:2181";
 	private static CountDownLatch countDownLatch = new CountDownLatch(1);
 
 	public static void main(String[] args) throws Exception {
@@ -18,9 +18,11 @@ public class CreateSessionDemo {
 				if (watchedEvent.getState() == Event.KeeperState.SyncConnected) {
 					countDownLatch.countDown();
 					System.out.println(watchedEvent.getState());
+					System.err.println("事件线程:" + Thread.currentThread().getId());
 				}
 			}
 		});
+		System.err.println("主线程:" + Thread.currentThread().getId());
 		countDownLatch.await();
 		System.out.println(zooKeeper.getState());
 	}
