@@ -2,6 +2,16 @@ package com.zj.study.compile.construction;
 
 import java.util.Stack;
 
+/**
+ * 
+ * S -> bScA
+ * S -> cbd
+ * A -> bcA
+ * A -> d
+ * 
+ * @author zhaojianc
+ *
+ */
 public class Fig0612Parser {
 	private ArgsTokenMgr tm; // 单词符号管理器
 	private Stack<Character> stk; // 词法分析器的栈
