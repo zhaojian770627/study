@@ -22,7 +22,7 @@ public class Fig0804 {
 
 	public static void main(String[] args) {
 		// 构造单词符号管理器
-		ArgsTokenMgr tm = new ArgsTokenMgr(args);
+		ArgsTokenMgr tm = new ArgsTokenMgr(new String[] { "bcbdcd" });
 		Fig0804Parser parser = new Fig0804Parser(tm);
 		parser.parse();
 	}
