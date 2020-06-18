@@ -1,4 +1,4 @@
-package com.zj.study.compile.construction;
+package com.zj.study.compile.construction.Fig0612;
 
 public class ArgsTokenMgr {
 	private int index;
