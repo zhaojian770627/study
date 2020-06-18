@@ -3,7 +3,7 @@ package com.zj.study.framework.zookeeper.lock;
 import org.I0Itec.zkclient.ZkClient;
 
 public abstract class ZookeeperAbstractLock implements Lock {
-	private static final String CONNECTION = "192.168.91.5:2181";
+	private static final String CONNECTION = "10.6.202.17:2181";
 	protected ZkClient zkClient = new ZkClient(CONNECTION);
 	String lockPath = "/lockPath";
 
@@ -31,6 +31,7 @@ public abstract class ZookeeperAbstractLock implements Lock {
 	public void unLock() {
 		// 执行完毕 直接连接
 		if (zkClient != null) {
+			zkClient.delete(lockPath);
 			zkClient.close();
 			System.out.println("######释放锁完毕######");
 		}

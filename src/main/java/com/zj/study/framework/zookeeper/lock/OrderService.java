@@ -1,5 +1,7 @@
 package com.zj.study.framework.zookeeper.lock;
 
+import java.util.concurrent.TimeUnit;
+
 public class OrderService implements Runnable {
 
 	private OrderNumGenerator orderNumGenerator = new OrderNumGenerator(); // 定义成全局的
@@ -22,12 +24,14 @@ public class OrderService implements Runnable {
 		}
 	}
 
-	public static void main(String[] args) {
-//        OrderService orderService = new OrderService();
+	public static void main(String[] args) throws InterruptedException {
+//		OrderService orderService = new OrderService();
 		for (int i = 0; i < 100; i++) { // 开启100个线程
 			// 模拟分布式锁的场景
 			new Thread(new OrderService()).start();
 		}
+
+		TimeUnit.SECONDS.sleep(60);
 	}
 
 }
