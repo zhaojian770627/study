@@ -26,12 +26,10 @@ public class OrderService implements Runnable {
 
 	public static void main(String[] args) throws InterruptedException {
 //		OrderService orderService = new OrderService();
-		for (int i = 0; i < 100; i++) { // 开启100个线程
+		for (int i = 0; i < 2; i++) { // 开启100个线程
 			// 模拟分布式锁的场景
 			new Thread(new OrderService()).start();
 		}
-
-		TimeUnit.SECONDS.sleep(60);
 	}
 
 }

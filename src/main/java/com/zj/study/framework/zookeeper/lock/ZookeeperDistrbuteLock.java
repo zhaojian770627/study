@@ -1,6 +1,7 @@
 package com.zj.study.framework.zookeeper.lock;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.I0Itec.zkclient.IZkDataListener;
 
@@ -42,6 +43,12 @@ public class ZookeeperDistrbuteLock extends ZookeeperAbstractLock {
 		zkClient.subscribeDataChanges(lockPath, iZkDataListener);
 		// 控制程序的等待
 		if (zkClient.exists(lockPath)) { // 如果 检查出 已经被创建了 就new 然后进行等待
+			// 有永远不解锁的风险
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 			countDownLatch = new CountDownLatch(1);
 			try {
 				countDownLatch.wait(); // 等待时候 就不往下走了 当为0 时候 后面的继续执行
