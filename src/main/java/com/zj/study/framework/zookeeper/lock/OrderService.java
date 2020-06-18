@@ -16,7 +16,7 @@ public class OrderService implements Runnable {
 			System.out.println(Thread.currentThread().getName() + ",number" + number);
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		} finally {
 			lock.unLock();
 		}
