@@ -3,7 +3,7 @@ package com.zj.study.framework.zookeeper.lock;
 import org.I0Itec.zkclient.ZkClient;
 
 public abstract class ZookeeperAbstractLock implements Lock {
-	private static final String CONNECTION = "10.6.202.17:2181";
+	private static final String CONNECTION = "10.10.10.5:2181";
 	protected ZkClient zkClient = new ZkClient(CONNECTION);
 	String lockPath = "/lockPath";
 

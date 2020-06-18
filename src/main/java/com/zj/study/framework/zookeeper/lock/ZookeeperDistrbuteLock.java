@@ -45,7 +45,7 @@ public class ZookeeperDistrbuteLock extends ZookeeperAbstractLock {
 			// 有永远不解锁的风险
 			countDownLatch = new CountDownLatch(1);
 			try {
-				countDownLatch.wait(); // 等待时候 就不往下走了 当为0 时候 后面的继续执行
+				countDownLatch.await(); // 等待时候 就不往下走了 当为0 时候 后面的继续执行
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
