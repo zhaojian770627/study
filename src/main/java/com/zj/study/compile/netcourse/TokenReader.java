@@ -1,4 +1,4 @@
-package com.zj.study.compile;
+package com.zj.study.compile.netcourse;
 
 import java.io.File;
 import java.io.FileReader;

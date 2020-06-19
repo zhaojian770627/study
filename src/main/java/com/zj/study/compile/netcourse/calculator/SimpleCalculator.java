@@ -1,10 +1,10 @@
-package com.zj.study.compile.Calculator;
+package com.zj.study.compile.netcourse.calculator;
 
-import com.zj.study.compile.Token;
-import com.zj.study.compile.TokenReader;
-import com.zj.study.compile.TokenType;
-import com.zj.study.compile.ast.ASTNodeType;
-import com.zj.study.compile.ast.SimpleASTNode;
+import com.zj.study.compile.netcourse.Token;
+import com.zj.study.compile.netcourse.TokenReader;
+import com.zj.study.compile.netcourse.TokenType;
+import com.zj.study.compile.netcourse.ast.ASTNodeType;
+import com.zj.study.compile.netcourse.ast.SimpleASTNode;
 
 public class SimpleCalculator {
 
