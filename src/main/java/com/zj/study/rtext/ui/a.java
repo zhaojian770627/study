@@ -1,4 +1,4 @@
-package com.zj.study.ui;
+package com.zj.study.rtext.ui;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
