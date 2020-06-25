@@ -3,6 +3,7 @@ package com.zj.study.rtext.ui;
 import javax.swing.SwingUtilities;
 
 import org.fife.rtext.AWTExceptionHandler;
+import org.fife.rtext.RTextPreferences;
 
 public class RText {
 
@@ -14,7 +15,8 @@ public class RText {
 
 			@Override
 			public void run() {
-
+				String lafName = RTextPreferences.getLookAndFeelToLoad();
+				System.out.println(lafName);
 			}
 		});
 	}
