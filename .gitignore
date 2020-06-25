@@ -4,3 +4,7 @@
 /.settings/
 /.idea/
 /study.iml
+*.zip
+*.jar
+/icongroups/
+/plugins/
