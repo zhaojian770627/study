@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.util.Arrays;
 import java.util.List;
-//from   ww w  .  ja  v  a2s  .co m
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
