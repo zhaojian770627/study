@@ -1,9 +1,13 @@
 package com.zj.study.algorithm.divideconquer;
 
+import cern.colt.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
-
+		Main main = new Main();
+		int[] ary = { 1, 3, 5, 7, 2, 4, 6, 8 };
+		main.shuffleArray(ary, 0, ary.length - 1);
 	}
 
 	/**
@@ -33,11 +37,14 @@ public class Main {
 			int tv = a[i];
 			a[i] = a[temp];
 			a[temp] = tv;
+			temp++;
 		}
+
+		System.out.println(Arrays.toString(a));
 
 		// Recursively doing for
 		// first half and second half
 		shuffleArray(a, left, mid);
-		shuffleArray(a, mid, right);
+		shuffleArray(a, mid + 1, right);
 	}
 }
