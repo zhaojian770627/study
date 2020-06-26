@@ -8,3 +8,5 @@
 *.jar
 /icongroups/
 /plugins/
+/lnfs/
+localizations.xml

@@ -1,20 +1,13 @@
 package com.zj.study.rtext.ui;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.GapContent;
 
 public class a {
-	public static void main(String[] args) {
-		JFrame.setDefaultLookAndFeelDecorated(true);
-		JFrame f = new JFrame("Demo");
-		f.setSize(500, 500);
-		f.setVisible(true);
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
-		});
+	public static void main(String[] args) throws BadLocationException {
+		GapContent content = new GapContent();
+		content.insertString(0, "1234567890");
+		content.insertString(5, "10");
+		System.out.println(content.getString(0, 1));
 	}
 }
