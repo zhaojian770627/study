@@ -1,7 +1,5 @@
 package com.zj.study.algorithm.divideconquer;
 
-import cern.colt.Arrays;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -9,7 +7,8 @@ public class Main {
 		int[] ary = { 1, 3, 5, 7, 2, 4, 6, 8 };
 //		main.shuffleArray(ary, 0, ary.length - 1);
 
-		int[] height = { 3, 1, 2, 5, 1 };
+//		int[] height = { 3, 1, 2, 5, 1 };
+		int[] height = { 1, 1, 8 };
 		System.out.println(main.minSteps(height));
 	}
 
@@ -62,8 +61,15 @@ public class Main {
 			if (height[i] < height[m])
 				m = i;
 
-		return Math.min(right - left, minStepHelper(height, left, m, height[m])
-				+ minStepHelper(height, m + 1, right, height[m]) + height[m] - h);
+		System.out.println("----------------------------------------------");
+		System.out.println("left:" + left + " right:" + right + " h:" + h);
+		System.out.println("right-left:" + (right - left));
+		int m2 = minStepHelper(height, left, m, height[m]);
+		System.out.println("m2:" + m2);
+		int m3 = minStepHelper(height, m + 1, right, height[m]);
+		System.out.println("height[m]:" + height[m]);
+
+		return Math.min(right - left, m2 + m3 + height[m] - h);
 
 	}
 }
