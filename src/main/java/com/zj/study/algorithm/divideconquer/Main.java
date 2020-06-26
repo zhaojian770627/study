@@ -54,7 +54,7 @@ public class Main {
 	}
 
 	int minStepHelper(int[] height, int left, int right, int h) {
-		if (left > right)
+		if (left >= right)
 			return 0;
 
 		int m = left;
