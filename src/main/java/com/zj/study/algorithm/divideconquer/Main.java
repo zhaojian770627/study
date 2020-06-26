@@ -7,7 +7,10 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		int[] ary = { 1, 3, 5, 7, 2, 4, 6, 8 };
-		main.shuffleArray(ary, 0, ary.length - 1);
+//		main.shuffleArray(ary, 0, ary.length - 1);
+
+		int[] height = { 3, 1, 2, 5, 1 };
+		System.out.println(main.minSteps(height));
 	}
 
 	/**
@@ -44,5 +47,23 @@ public class Main {
 		// first half and second half
 		shuffleArray(a, left, mid);
 		shuffleArray(a, mid + 1, right);
+	}
+
+	public int minSteps(int[] height) {
+		return minStepHelper(height, 0, height.length, 0);
+	}
+
+	int minStepHelper(int[] height, int left, int right, int h) {
+		if (left > right)
+			return 0;
+
+		int m = left;
+		for (int i = left; i < right; i++)
+			if (height[i] < height[m])
+				m = i;
+
+		return Math.min(right - left, minStepHelper(height, left, m, height[m])
+				+ minStepHelper(height, m + 1, right, height[m]) + height[m] - h);
+
 	}
 }
