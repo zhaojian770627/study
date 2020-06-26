@@ -40,8 +40,6 @@ public class Main {
 			temp++;
 		}
 
-		System.out.println(Arrays.toString(a));
-
 		// Recursively doing for
 		// first half and second half
 		shuffleArray(a, left, mid);
