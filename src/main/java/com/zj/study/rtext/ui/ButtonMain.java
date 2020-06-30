@@ -1,13 +1,20 @@
 package com.zj.study.rtext.ui;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+
 public class ButtonMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel"); 
 		JFrame jf = new JFrame("测试窗口");
 		jf.setSize(200, 200);
 		jf.setLocationRelativeTo(null);
@@ -35,7 +42,8 @@ public class ButtonMain {
 		});
 
 		panel.add(btn);
-
+		String lafName = UIManager.getLookAndFeel().getName();
+		System.out.println(lafName);
 		jf.setContentPane(panel);
 		jf.setVisible(true);
 	}
