@@ -1,5 +1,7 @@
 package com.zj.study.swing.treetable;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTree;
@@ -15,10 +17,12 @@ public class TestMain {
 		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
 		JTree tree = new JTree();
 		MyTreeModel model = new MyTreeModel("aaa");
 		JTreeTable treeTable = new JTreeTable(model);
-		panel.add(treeTable);
+		panel.add(treeTable, BorderLayout.CENTER);
+
 		jf.setContentPane(panel);
 		jf.setVisible(true);
 	}
