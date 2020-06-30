@@ -2,34 +2,39 @@ package com.zj.study.swing.treetable;
 
 public class MyTreeModel extends AbstractTreeTableModel {
 
-	public MyTreeModel(Object root) {
+	private Node data;
+
+	public MyTreeModel(Node root) {
 		super(root);
+		this.data = root;
 	}
 
 	@Override
 	public int getColumnCount() {
-		return 2;
+		return data.getValues().length;
 	}
 
 	@Override
 	public String getColumnName(int column) {
-		return "ab";
+		return "value" + column;
 	}
 
 	@Override
 	public Object getValueAt(Object node, int column) {
-		return "a";
+		Node n = (Node) node;
+		return "data" + n.getValues()[column];
 	}
 
 	@Override
 	public Object getChild(Object parent, int index) {
-
-		return "b";
+		Node p = (Node) parent;
+		return p.childs.get(index);
 	}
 
 	@Override
 	public int getChildCount(Object parent) {
-		return 2;
+		Node p = (Node) parent;
+		return p.getChilds().size();
 	}
 
 }
