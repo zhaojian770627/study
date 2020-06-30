@@ -8,6 +8,8 @@ package com.zj.study.swing.treetable2.test;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.zj.study.swing.treetable2.JTreeTable;
 import com.zj.study.swing.treetable2.TreeTableModel;
@@ -27,6 +29,10 @@ public class JTreeTableSimpleExample {
 	}
 
 	private static void createAndShowGUI() {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception evt) {
+		}
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
