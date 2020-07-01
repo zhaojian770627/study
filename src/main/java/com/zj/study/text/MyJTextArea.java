@@ -130,7 +130,7 @@ public class MyJTextArea extends JTextComponent {
 	 * @see #getUIClassID
 	 * @see #readObject
 	 */
-	private static final String uiClassID = "TextAreaUI";
+	private static final String uiClassID = "MyJTextArea";
 
 	/**
 	 * Constructs a new TextArea. A default model is set, the initial string is

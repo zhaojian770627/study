@@ -23,6 +23,7 @@ public class JTextAreaExample {
 	public JTextAreaExample() {
 		JFrame frame = new JFrame("TreeTable");
 		MyJTextArea textArea = new MyJTextArea();
+//		JTextArea textArea = new JTextArea();
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -35,5 +36,6 @@ public class JTextAreaExample {
 		frame.pack();
 		frame.setSize(600, 800);
 		frame.show();
+//		textArea.insert("abcd", 0);
 	}
 }
