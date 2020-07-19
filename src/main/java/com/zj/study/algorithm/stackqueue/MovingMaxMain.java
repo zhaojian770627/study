@@ -15,7 +15,7 @@ public class MovingMaxMain {
 
 		int[] ary = { 12, 1, 78, 90, 57, 89, 56 };
 
-		main.movingMax(ary, 3);
+		main.movingMaxUseDeque(ary, 3);
 
 //		main.testDeque();
 	}
@@ -24,13 +24,20 @@ public class MovingMaxMain {
 		Stack<Integer> qi = new Stack<>();
 		qi.push(0);
 		qi.push(1);
+		qi.push(2);
+		qi.push(4);
 
-//		qi.pop();
-
-		System.out.println(qi.firstElement());
+		qi.remove(0);
+		qi.remove(0);
 	}
 
-	private void movingMax(int[] ary, int k) {
+	/**
+	 * 堆栈版
+	 * 
+	 * @param ary
+	 * @param k
+	 */
+	private void movingMaxUseStack(int[] ary, int k) {
 		int n = ary.length;
 
 		Stack<Integer> qi = new Stack<>();
@@ -55,5 +62,38 @@ public class MovingMaxMain {
 		}
 
 		System.out.println(ary[qi.firstElement()]);
+	}
+
+	/**
+	 * 队列版
+	 * 
+	 * @param ary
+	 * @param k
+	 */
+	private void movingMaxUseDeque(int[] ary, int k) {
+		int n = ary.length;
+
+		Deque<Integer> qi = new ArrayDeque<>();
+
+		for (int i = 0; i < k; i++) {
+			while (qi.size() > 0 && ary[i] >= ary[qi.peek()])
+				qi.pop();
+
+			qi.push(i);
+		}
+
+		for (int i = k; i < n; i++) {
+			System.out.println(ary[qi.getLast()]);
+
+			while (qi.size() > 0 && qi.getLast() <= i - k)
+				qi.pollLast();
+
+			while (qi.size() > 0 && ary[i] >= ary[qi.peek()])
+				qi.pop();
+
+			qi.push(i);
+		}
+
+		System.out.println(ary[qi.getLast()]);
 	}
 }
