@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  * A TreeTable example, showing a JTreeTable, operating on the local file
@@ -22,8 +23,8 @@ public class JTextAreaExample {
 
 	public JTextAreaExample() {
 		JFrame frame = new JFrame("TreeTable");
-		MyJTextArea textArea = new MyJTextArea();
-//		JTextArea textArea = new JTextArea();
+//		MyJTextArea textArea = new MyJTextArea();
+		JTextArea textArea = new JTextArea();
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -31,6 +32,8 @@ public class JTextAreaExample {
 				System.exit(0);
 			}
 		});
+
+		textArea.setText("abcd\neeeee");
 
 		frame.getContentPane().add(new JScrollPane(textArea));
 		frame.pack();
