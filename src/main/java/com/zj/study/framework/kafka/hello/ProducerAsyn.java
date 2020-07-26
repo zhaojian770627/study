@@ -1,7 +1,6 @@
 package com.zj.study.framework.kafka.hello;
 
 import java.util.Properties;
-import java.util.concurrent.Future;
 
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
