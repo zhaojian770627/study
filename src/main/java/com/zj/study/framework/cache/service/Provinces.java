@@ -1,6 +1,8 @@
 package com.zj.study.framework.cache.service;
 
-public class Provinces {
+import java.io.Serializable;
+
+public class Provinces implements Serializable {
 	private Integer id;
 	private String province;
 
