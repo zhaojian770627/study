@@ -8,7 +8,7 @@ public class CacheMain {
 
 	public static void main(String[] args) throws IOException {
 		AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(MainConfig.class);
-		System.out.println(app.getBean(SimpleBean.class));
+		System.out.println(app.getBean(FacadeBean.class));
 		System.in.read();
 	}
 

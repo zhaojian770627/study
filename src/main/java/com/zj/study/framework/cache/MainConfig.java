@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -23,11 +24,11 @@ import org.springframework.jmx.export.MBeanExporter;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configurable
-//@EnableCaching
+@EnableCaching
 @ComponentScan("com.zj.study.framework.cache")
 public class MainConfig {
 	@Bean
-	public MBeanExporter mbeanExporter(SimpleBean simpleBean) {
+	public MBeanExporter mbeanExporter(FacadeBean simpleBean) {
 		MBeanExporter exporter = new MBeanExporter();
 		Map<String, Object> beans = new HashMap<String, Object>();
 		beans.put("zj:name=cacheFacade", simpleBean);
@@ -70,7 +71,7 @@ public class MainConfig {
 		// RedisSentinelConfiguration redisConfig = new RedisSentinelConfiguration();
 		// 集群redis
 		// RedisClusterConfiguration redisConfig = new RedisClusterConfiguration();
-		redisConfig.setHostName("192.168.3.11");
+		redisConfig.setHostName("10.10.10.4");
 		redisConfig.setPassword(RedisPassword.of("123456a"));
 		redisConfig.setPort(6379);
 		redisConfig.setDatabase(0);
