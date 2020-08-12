@@ -1,16 +1,17 @@
 package com.zj.study.framework.cache;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -36,11 +37,19 @@ public class MainConfig {
 		return exporter;
 	}
 
+//	@Bean
+//	public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+//		return RedisCacheManager.builder(connectionFactory)
+//				.cacheDefaults(RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(20))) // 缓存时间绝对过期时间20s
+//				.transactionAware().build();
+//	}
+
 	@Bean
-	public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-		return RedisCacheManager.builder(connectionFactory)
-				.cacheDefaults(RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofSeconds(20))) // 缓存时间绝对过期时间20s
-				.transactionAware().build();
+	public CacheManager cacheManager() {
+		// configure and return an implementation of Spring's CacheManager SPI
+		SimpleCacheManager cacheManager = new SimpleCacheManager();
+		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("default")));
+		return cacheManager;
 	}
 
 	@Bean
