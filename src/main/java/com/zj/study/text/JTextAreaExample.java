@@ -34,6 +34,7 @@ public class JTextAreaExample {
 //		MyJTextArea textArea = new MyJTextArea();
 		JTextArea textArea = new JTextArea();
 		JButton topButton = new JButton("TOP");
+		JButton leftButton = new JButton("LEFT");
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -46,13 +47,21 @@ public class JTextAreaExample {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				textArea.getUI().viewToModel(textArea, new Point(10, 10));
+				int index = textArea.getUI().viewToModel(textArea, new Point(10, 15));
+				JOptionPane.showMessageDialog(null, String.valueOf(index));
+			}
+		});
+		leftButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
 
 		textArea.setText("abcd\neeeee");
 		frame.getContentPane().setLayout(new BorderLayout());
-		frame.getContentPane().add(new JScrollPane(topButton), BorderLayout.NORTH);
+		frame.getContentPane().add(topButton, BorderLayout.NORTH);
+		frame.getContentPane().add(leftButton, BorderLayout.WEST);
 		frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 		frame.pack();
 		frame.setSize(600, 800);
