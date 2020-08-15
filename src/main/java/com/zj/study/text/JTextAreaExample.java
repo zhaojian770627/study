@@ -13,17 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.apache.jute.compiler.JBuffer;
-
-/**
- * A TreeTable example, showing a JTreeTable, operating on the local file
- * system.
- *
- * @version %I% %G%
- *
- * @author Philip Milne
- */
-
 public class JTextAreaExample {
 	public static void main(String[] args) {
 		new JTextAreaExample();
@@ -47,7 +36,7 @@ public class JTextAreaExample {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int index = textArea.getUI().viewToModel(textArea, new Point(10, 15));
+				int index = textArea.getUI().viewToModel(textArea, new Point(10, 10));
 				JOptionPane.showMessageDialog(null, String.valueOf(index));
 			}
 		});
