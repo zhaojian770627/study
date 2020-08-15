@@ -47,13 +47,13 @@ public class JTextAreaExample {
 			}
 		});
 
-		textArea.setText("abcd\neeeee");
+		textArea.setText("abcdeeeeeabcdeeeeeabcdeeeeeabcdeeeeeabcdeeeee");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(topButton, BorderLayout.NORTH);
 		frame.getContentPane().add(leftButton, BorderLayout.WEST);
 		frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 		frame.pack();
-		frame.setSize(600, 800);
+		frame.setSize(200, 200);
 		frame.show();
 //		textArea.insert("abcd", 0);
 	}
