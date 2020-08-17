@@ -25,11 +25,13 @@
 	<dubbo:consumer check="false" />
 
 	<!-- 声明需要暴露的服务接口 -->
-	<dubbo:service interface="com.enjoy.service.GHService"
+	<dubbo:service
+		interface="com.zj.study.framework.tcc.one.service.GHService"
 		ref="ghService" />
 
 	<dubbo:reference
-		interface="com.enjoy.service.NHService" id="nhService" />
+		interface="com.zj.study.framework.tcc.one.service.NHService"
+		id="nhService" />
 
 
 </beans>
