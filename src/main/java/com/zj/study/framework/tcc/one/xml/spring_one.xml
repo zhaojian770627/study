@@ -8,14 +8,19 @@
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         ">
 
-	<context:component-scan base-package="com.zj.study.framework.tcc.one" />
+	<context:component-scan
+		base-package="com.zj.study.framework.tcc.one.*" />
+
+	<bean id="mainConfig"
+		class="com.zj.study.framework.tcc.one.MainConfig"></bean>
 	<!-- 引入配置文件 -->
+
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location"
 			value="classpath:/com/zj/study/framework/tcc/one/xml/jdbc_one.properties" />
 	</bean>
+
 	<import resource="spring-datasource_one.xml" />
-	<import resource="dubbo_one.xml" />
-	<!-- <import resource="tcc.xml"/> -->
+	<import resource="dubbo_one.xml" /> <!--<import resource="tcc.xml"/> -->
 </beans>

@@ -10,6 +10,9 @@ public class OneMain {
 	public static void main(String[] args) throws IOException {
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"classpath:/com/zj/study/framework/tcc/one/xml/spring_one.xml");
+
+
+		System.in.read();
 	}
 
 }

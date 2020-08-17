@@ -32,6 +32,4 @@
 	<dubbo:reference
 		interface="com.zj.study.framework.tcc.one.service.NHService"
 		id="nhService" />
-
-
 </beans>
