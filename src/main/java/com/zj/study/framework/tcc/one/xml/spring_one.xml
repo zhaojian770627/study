@@ -8,7 +8,7 @@
         http://www.springframework.org/schema/context/spring-context-4.0.xsd
         ">
 
-	<context:component-scan base-package="com.enjoy" />
+	<context:component-scan base-package="com.zj.study.framework.tcc.one" />
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
