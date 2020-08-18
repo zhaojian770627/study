@@ -16,4 +16,8 @@ public class FacadeBean {
 	public Provinces getProvinces() {
 		return provincesService.detail(1);
 	}
+
+	public String getReponse(String input) {
+		return input == null ? "NOINPUT" : input;
+	}
 }
