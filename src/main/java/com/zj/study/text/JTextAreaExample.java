@@ -43,7 +43,7 @@ public class JTextAreaExample {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int index = textArea.getUI().viewToModel(textArea, new Point(10, 10));
+				int index = textArea.getUI().viewToModel(textArea, new Point(1, 23));
 				JOptionPane.showMessageDialog(null, String.valueOf(index));
 			}
 		});
@@ -54,21 +54,21 @@ public class JTextAreaExample {
 			}
 		});
 
-		myArea.addMouseListener(new MouseAdapter() {
+		textArea.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
-				JOptionPane.showMessageDialog(null, "X:" + e.getX() + " Y:" + e.getY());
+//				JOptionPane.showMessageDialog(null, "X:" + e.getX() + " Y:" + e.getY());
 			}
 
 		});
 
-		textArea.setText("abcdeeeeeabcdeeeeeabcdeeeeeabcdeeeeeabcdeeeee");
+		textArea.setText("abcdeeeeeabc\ndeeeeeabcdeeeeeabcd\neeeeeabcdeeeee");
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(topButton, BorderLayout.NORTH);
 		frame.getContentPane().add(leftButton, BorderLayout.WEST);
-		frame.getContentPane().add(new JScrollPane(myArea), BorderLayout.CENTER);
+		frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 		frame.pack();
 		frame.setSize(200, 200);
 		frame.show();
