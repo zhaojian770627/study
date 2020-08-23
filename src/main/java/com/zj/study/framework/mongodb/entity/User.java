@@ -3,7 +3,9 @@ package com.zj.study.framework.mongodb.entity;
 import java.math.BigDecimal;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection="users")
 public class User {
 	
 	private ObjectId id;
