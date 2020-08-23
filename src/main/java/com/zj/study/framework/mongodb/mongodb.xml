@@ -12,7 +12,7 @@
 	<!-- <context:property-placeholder location="classpath:/com/myapp/mongodb/config/mongo.properties" 
 		/> -->
 	<!-- mongodb连接池配置 -->
-	<mongo:mongo-client host="10.10.10.4" port="27022" id="mongo">
+	<mongo:mongo-client host="10.10.10.4" port="27022">
 		<mongo:client-options
 			write-concern="ACKNOWLEDGED" connections-per-host="100"
 			threads-allowed-to-block-for-connection-multiplier="5"
@@ -20,7 +20,7 @@
 	</mongo:mongo-client>
 
 	<!-- mongodb数据库工厂配置 -->
-	<mongo:db-factory dbname="zj" mongo-ref="mongo" />
+	<mongo:db-factory dbname="zj" mongo-ref="mongoClient" />
 
 	<mongo:mapping-converter
 		base-package="com.zj.study.framework.mongodb.entity">
