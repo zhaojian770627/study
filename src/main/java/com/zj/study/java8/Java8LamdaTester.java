@@ -1,9 +1,9 @@
 package com.zj.study.java8;
 
-public class Java8Tester {
+public class Java8LamdaTester {
 
 	public static void main(String args[]) {
-		Java8Tester tester = new Java8Tester();
+		Java8LamdaTester tester = new Java8LamdaTester();
 
 		// 类型声明
 		MathOperation addition = (int a, int b) -> a + b;
