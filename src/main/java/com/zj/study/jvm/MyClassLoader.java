@@ -66,7 +66,8 @@ public class MyClassLoader extends ClassLoader {
 	}
 
 	public static void main(String[] args) throws Exception {
-		MyClassLoader loader1 = new MyClassLoader("loader1", "D:\\git\\TestClass.class");
+		String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\zj\\study\\jvm\\TestClass.class";
+		MyClassLoader loader1 = new MyClassLoader("loader1", path);
 		test(loader1);
 	}
 
