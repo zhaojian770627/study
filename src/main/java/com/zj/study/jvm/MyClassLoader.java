@@ -60,17 +60,18 @@ public class MyClassLoader extends ClassLoader {
 		return data;
 	}
 
-	public static void test(ClassLoader classLoader) throws Exception {
-		Class<?> clazz = classLoader.loadClass("com.zj.study.jvm.TestClass");
-		System.out.println(clazz.getClassLoader());
-		Object object = clazz.newInstance();
-		System.out.println(object);
-	}
-
 	public static void main(String[] args) throws Exception {
 		String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\zj\\study\\jvm\\TestClass.class";
 		MyClassLoader loader1 = new MyClassLoader("loader1", path);
-		test(loader1);
+		Class<?> clazzA = loader1.loadClass("com.zj.study.jvm.TestClass");
+		System.out.println(clazzA.getClassLoader() + " " + clazzA.hashCode());
+		Object objectA = clazzA.newInstance();
+		System.out.println(objectA);
+
+		Class<?> clazzB = loader1.loadClass("com.zj.study.jvm.TestClass");
+		System.out.println(clazzB.getClassLoader() + " " + clazzB.hashCode());
+		Object objectB = clazzB.newInstance();
+		System.out.println(objectB);
 	}
 
 }
