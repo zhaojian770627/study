@@ -29,6 +29,7 @@ public class MyClassLoader extends ClassLoader {
 
 	@Override
 	protected Class<?> findClass(String className) throws ClassNotFoundException {
+		System.out.println(classLoaderName);
 		byte[] data = this.loadClassData(className);
 		return this.defineClass(className, data, 0, data.length);
 	}
@@ -61,6 +62,7 @@ public class MyClassLoader extends ClassLoader {
 
 	public static void test(ClassLoader classLoader) throws Exception {
 		Class<?> clazz = classLoader.loadClass("com.zj.study.jvm.TestClass");
+		System.out.println(clazz.getClassLoader());
 		Object object = clazz.newInstance();
 		System.out.println(object);
 	}
