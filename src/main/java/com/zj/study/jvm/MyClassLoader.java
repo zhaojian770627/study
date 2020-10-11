@@ -62,13 +62,15 @@ public class MyClassLoader extends ClassLoader {
 
 	public static void main(String[] args) throws Exception {
 		String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\zj\\study\\jvm\\TestClass.class";
+
 		MyClassLoader loader1 = new MyClassLoader("loader1", path);
 		Class<?> clazzA = loader1.loadClass("com.zj.study.jvm.TestClass");
 		System.out.println(clazzA.getClassLoader() + " " + clazzA.hashCode());
 		Object objectA = clazzA.newInstance();
 		System.out.println(objectA);
 
-		Class<?> clazzB = loader1.loadClass("com.zj.study.jvm.TestClass");
+		MyClassLoader loader2 = new MyClassLoader(loader1, "loader2", path);
+		Class<?> clazzB = loader2.loadClass("com.zj.study.jvm.TestClass");
 		System.out.println(clazzB.getClassLoader() + " " + clazzB.hashCode());
 		Object objectB = clazzB.newInstance();
 		System.out.println(objectB);
