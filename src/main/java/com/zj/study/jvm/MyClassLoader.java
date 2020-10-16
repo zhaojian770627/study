@@ -6,20 +6,20 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class MyClassLoader extends ClassLoader {
-	private String path;
+	private String basePath;
 	private String classLoaderName;
 	private final String fileExtension = ".class";
 
 	public MyClassLoader(String classLoaderName, String basePath) {
 		super();
 		this.classLoaderName = classLoaderName;
-		this.path = basePath;
+		this.basePath = basePath;
 	}
 
 	public MyClassLoader(ClassLoader parent, String classLoaderName, String basePath) {
 		super(parent);
 		this.classLoaderName = classLoaderName;
-		this.path = basePath;
+		this.basePath = basePath;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class MyClassLoader extends ClassLoader {
 
 	@Override
 	protected Class<?> findClass(String className) throws ClassNotFoundException {
-		System.out.println(classLoaderName);
+		System.err.println("findClass executed!");
 		byte[] data = this.loadClassData(className);
 		return this.defineClass(className, data, 0, data.length);
 	}
@@ -39,8 +39,9 @@ public class MyClassLoader extends ClassLoader {
 		byte[] data = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
+		className = className.replace(".", "/");
 		try {
-			is = new FileInputStream(new File(path));
+			is = new FileInputStream(new File(basePath + className + fileExtension));
 			int ch = 0;
 			while (-1 != (ch = is.read())) {
 				baos.write(ch);
@@ -60,20 +61,16 @@ public class MyClassLoader extends ClassLoader {
 		return data;
 	}
 
+	public static void test(ClassLoader classLoader) throws Exception {
+		Class<?> clazz = classLoader.loadClass("com.zj.study.jvm.TestClass");
+		Object object = clazz.newInstance();
+		System.out.println(object);
+	}
+
 	public static void main(String[] args) throws Exception {
-		String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\zj\\study\\jvm\\TestClass.class";
-
+		String path = System.getProperty("user.dir") + "\\src\\main\\java\\";
 		MyClassLoader loader1 = new MyClassLoader("loader1", path);
-		Class<?> clazzA = loader1.loadClass("com.zj.study.jvm.TestClass");
-		System.out.println(clazzA.getClassLoader() + " " + clazzA.hashCode());
-		Object objectA = clazzA.newInstance();
-		System.out.println(objectA);
-
-		MyClassLoader loader2 = new MyClassLoader(loader1, "loader2", path);
-		Class<?> clazzB = loader2.loadClass("com.zj.study.jvm.TestClass");
-		System.out.println(clazzB.getClassLoader() + " " + clazzB.hashCode());
-		Object objectB = clazzB.newInstance();
-		System.out.println(objectB);
+		test(loader1);
 	}
 
 }
