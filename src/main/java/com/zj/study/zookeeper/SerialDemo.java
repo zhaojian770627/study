@@ -9,9 +9,15 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 
 import org.apache.jute.BinaryInputArchive;
 import org.apache.jute.BinaryOutputArchive;
+import org.apache.zookeeper.data.StatPersisted;
+import org.apache.zookeeper.server.DataNode;
+import org.apache.zookeeper.server.DataTree;
+import org.apache.zookeeper.server.persistence.FileSnap;
+import org.apache.zookeeper.server.persistence.Util;
 import org.junit.Test;
 
 public class SerialDemo {
@@ -63,6 +69,18 @@ public class SerialDemo {
 			inputStream.close();
 			outputStream.close();
 		}
+	}
+
+	@Test
+	public void testFileSnap() throws IOException {
+		String path = "D:\\tmp\\";
+		FileSnap fileSnap = new FileSnap(new File(path));
+		File snapshotFile = new File(path, Util.makeSnapshotName(1L));
+		DataTree dt = new DataTree();
+		DataNode node = new DataNode(null, new byte[0], -1L, new StatPersisted());
+		dt.addDataNode("/aaa", node);
+		fileSnap.serialize(dt, new HashMap<Long, Integer>(), snapshotFile);
+		fileSnap.close();
 	}
 
 }
