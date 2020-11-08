@@ -1,5 +1,9 @@
 package com.zj.study.jvm;
 
+import java.sql.Driver;
+import java.util.Iterator;
+import java.util.ServiceLoader;
+
 /*
  * 线程上下文加载器的一般使用模式(获取-使用-还原)
  * 
@@ -22,10 +26,20 @@ package com.zj.study.jvm;
 public class UseContextClassLoader {
 
 	public static void main(String[] args) {
-		System.out.println(Thread.currentThread().getContextClassLoader());
-		System.out.println(Thread.class.getClassLoader());
-		
-		System.out.println(UseContextClassLoader.class.getClassLoader());
+		// 改掉默认的线程上下文类加载器,	驱动就加载不出来了
+		Thread.currentThread().setContextClassLoader(UseContextClassLoader.class.getClassLoader().getParent());
+
+		ServiceLoader<Driver> loader = ServiceLoader.load(Driver.class);
+		Iterator<Driver> iterator = loader.iterator();
+
+		while (iterator.hasNext()) {
+			Driver driver = iterator.next();
+
+			System.out.println("driver:" + driver.getClass() + ",loader: " + driver.getClass().getClassLoader());
+		}
+
+		System.out.println("当前线程上下文类加载器:" + Thread.currentThread().getContextClassLoader());
+		System.out.println("ServiceLoader的类加载器:" + ServiceLoader.class.getClassLoader());
 	}
 
 }
