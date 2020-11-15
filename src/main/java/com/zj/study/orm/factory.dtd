@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT beans (bean*) >
+<!ELEMENT bean (property*) >
+<!ATTLIST bean
+	id ID #REQUIRED
+	class CDATA #REQUIRED
+	scope (singlton|prototype|session|request) "singlton"
+>
