@@ -1,4 +1,4 @@
-package com.zj.study.jvm;
+package com.zj.study.freemarker;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
