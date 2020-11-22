@@ -6,3 +6,9 @@
 	class CDATA #REQUIRED
 	scope (singlton|prototype|session|request) "singlton"
 >
+<!ELEMENT property (#PCDATA) >
+<!ATTLIST property
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+	type (string|int|long|double|float) #IMPLIED
+>

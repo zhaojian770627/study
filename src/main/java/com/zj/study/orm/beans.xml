@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans SYSTEM "./factory.dtd">
+<beans>
+	<bean class="com.zj.study.orm.bean.User" id="bossID">
+		<property name="id" value="1000" type="long"></property>
+		<property name="name" value="zj"></property>
+		<property name="password" value="123" type="long"></property>
+		<property name="phone" value="123456789"></property>
+		<property name="email" value="123456789@qq.com"></property>
+	</bean>
+</beans>
