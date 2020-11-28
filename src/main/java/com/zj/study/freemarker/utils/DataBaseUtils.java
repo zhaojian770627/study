@@ -70,6 +70,7 @@ public class DataBaseUtils {
 				columnList.add(cn);
 			}
 			columns.close();
+			tab.setColumns(columnList);
 			listTables.add(tab);
 		}
 		tablesRs.close();
@@ -91,6 +92,10 @@ public class DataBaseUtils {
 		List<Table> dbTables = getDBTables(db);
 		dbTables.forEach(t -> {
 			System.out.println(t.getKey());
+			List<Column> columns = t.getColumns();
+			columns.forEach(c -> {
+				System.out.println(c.toString());
+			});
 		});
 	}
 }

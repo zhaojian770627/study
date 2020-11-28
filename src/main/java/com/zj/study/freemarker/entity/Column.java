@@ -43,4 +43,10 @@ public class Column {
 	public void setColumnKey(String columnKey) {
 		this.columnKey = columnKey;
 	}
+	@Override
+	public String toString() {
+		return "Column [columnName=" + columnName + ", columnName2=" + columnName2 + ", columnType=" + columnType
+				+ ", columnDbType=" + columnDbType + ", columnComment=" + columnComment + ", columnKey=" + columnKey
+				+ "]";
+	}
 }
