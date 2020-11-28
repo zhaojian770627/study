@@ -1,8 +1,10 @@
 package com.zj.study.freemarker.entity;
 
-import org.apache.commons.lang3.StringUtils;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.google.common.base.Strings;
+import org.apache.commons.lang3.StringUtils;
 
 public class Settings {
 	private String project = "example";
@@ -26,4 +28,57 @@ public class Settings {
 		pathAll = pPackage.replace(".", "/");
 	}
 
+	public Map<String, Object> getSettingMap() {
+		Map<String, Object> map = new HashMap<>();
+		Field[] declaredFields = Settings.class.getFields();
+		for (Field field : declaredFields) {
+			field.setAccessible(true);
+			try {
+				map.put(field.getName(), field.get(this));
+			} catch (Exception e) {
+
+			}
+		} 
+		return map;
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	public String getpPackage() {
+		return pPackage;
+	}
+
+	public void setpPackage(String pPackage) {
+		this.pPackage = pPackage;
+	}
+
+	public String getProjectComent() {
+		return projectComent;
+	}
+
+	public void setProjectComent(String projectComent) {
+		this.projectComent = projectComent;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String[] getPaths() {
+		return paths;
+	}
+
+	public void setPaths(String[] paths) {
+		this.paths = paths;
+	}
 }
