@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zj.study.freemarker.entity.Column;
 import com.zj.study.freemarker.entity.DataBase;
 import com.zj.study.freemarker.entity.Table;
 
@@ -39,9 +40,39 @@ public class DataBaseUtils {
 			tab.setComment(remarks);
 			tab.setKey(keys);
 
+			// 处理表中所有字段
+			ResultSet columns = metaData.getColumns(null, null, tableName, null);
+
+			List<Column> columnList = new ArrayList<Column>();
+			while (columns.next()) {
+				Column cn = new Column();
+
+				String columnName = columns.getString("COLUMN_NAME");
+				cn.setColumnName(columnName);
+
+				String attrName = StringUtils.toJavaVariableName(columnName);
+				cn.setColumnName2(attrName);
+
+				String dbType = columns.getString("TYPE_NAME");
+				cn.setColumnDbType(dbType);
+
+				String javaType = PropertiesUtils.customMap.get(dbType);
+				cn.setColumnType(javaType);
+
+				String columnRemark = columns.getString("REMARKS");
+				cn.setColumnComment(columnRemark);
+
+				String pri = null;
+				if (StringUtils.contains(columnName, keys.split(","))) {
+					pri = "PRI";
+				}
+				cn.setColumnKey(pri);
+				columnList.add(cn);
+			}
+			columns.close();
 			listTables.add(tab);
 		}
-
+		tablesRs.close();
 		conn.close();
 		return listTables;
 
