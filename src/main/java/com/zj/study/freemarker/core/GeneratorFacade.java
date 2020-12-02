@@ -1,7 +1,6 @@
 package com.zj.study.freemarker.core;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +51,9 @@ public class GeneratorFacade {
 		return dataModel;
 	}
 
-	public static void main(String[] args) throws SQLException, IOException {
-		String templatePath = "";
-		String outPath = "";
+	public static void main(String[] args) throws Exception {
+		String templatePath = "D:\\tmp\\template";
+		String outPath = "D:\\tmp\\out";
 		Settings settings = new Settings("zj", "com.zj", "zj freemark test", "zj");
 		DataBase db = new DataBase("MYSQL", "test");
 		db.setUserName("root");
