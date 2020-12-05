@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 //配置类====配置文件
 @Configuration
 public class MainConfig {
-	private final String server = "172.20.4.220";
+	private final String server = "172.20.56.145";
 
 	private final String port = "6379";
 
-	private final String redisPassword = "ufsoft*123";
+	private final String redisPassword = "Yonyou@1988";
 
 	@Bean
 	public RedissonClient redissonClient() {
