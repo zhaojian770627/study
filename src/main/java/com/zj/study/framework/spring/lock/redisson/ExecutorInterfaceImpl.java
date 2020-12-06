@@ -2,7 +2,7 @@ package com.zj.study.framework.spring.lock.redisson;
 
 import java.util.UUID;
 
-public class ExecutorInterfaceImpl implements ExecutorInterface {
+public class ExecutorInterfaceImpl<T, V> implements ExecutorInterface {
 
 	String flag = null;
 
@@ -12,8 +12,10 @@ public class ExecutorInterfaceImpl implements ExecutorInterface {
 	}
 
 	@Override
-	public String executor(String type, Object o) {
-		return flag;
+	public <T, V> T executor(String type, V o) {
+		T t = (T) o;
+		System.err.println(flag);
+		return t;
 	}
 
 }

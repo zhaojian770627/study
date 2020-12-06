@@ -19,8 +19,8 @@ public class RedissonExecutorClientMain {
 		ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
 		ExecutorInterfaceAsyc service2 = remoteService.get(ExecutorInterfaceAsyc.class);
 		for (int i = 0; i < 100; i++) {
-			RFuture<String> future = service1.executor("aaa", "bbbb");
-			String result = future.get();
+			RFuture<Integer> future = service1.executor("aaa", 1111);
+			Integer result = future.get();
 			System.out.println(result);
 		}
 	}
