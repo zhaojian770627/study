@@ -3,8 +3,6 @@ package com.zj.study.framework.spring.lock.mdd;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.zj.study.framework.spring.lock.mdd.redisson.LockContext;
-
 public class lockTest {
 
 	public static void main(String[] args) throws InterruptedException {

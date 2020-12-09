@@ -11,7 +11,9 @@ import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
 
 import com.zj.study.framework.spring.lock.mdd.AppContext;
+import com.zj.study.framework.spring.lock.mdd.LockContext;
 import com.zj.study.framework.spring.lock.mdd.LockFacade;
+import com.zj.study.framework.spring.lock.mdd.UseType;
 
 public class RedissonLockUtil {
 
@@ -39,31 +41,19 @@ public class RedissonLockUtil {
 	public LockContext lock(String lockkey) {
 		RLock rlock = genRLock(LockType.NORMAL, lockkey);
 		rlock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(rlock, lockkey, true);
 	}
 
 	public LockContext trylock(String lockkey) {
 		RLock rlock = genRLock(LockType.NORMAL, lockkey);
 		boolean isLocked = rlock.tryLock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(rlock, lockkey, isLocked);
 	}
 
 	public LockContext trylock(String lockkey, long time, TimeUnit unit) throws InterruptedException {
 		RLock rlock = genRLock(LockType.NORMAL, lockkey);
 		boolean isLocked = rlock.tryLock(time, unit);
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(rlock, lockkey, isLocked);
 	}
 
 	// ------------------------------------读锁---------------------------------------------
@@ -76,31 +66,19 @@ public class RedissonLockUtil {
 	public LockContext readlock(String lockkey) {
 		RLock readLock = genRLock(LockType.READ, lockkey);
 		readLock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(readLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(readLock, lockkey, true);
 	}
 
 	public LockContext tryReadlock(String lockkey) {
 		RLock readLock = genRLock(LockType.READ, lockkey);
 		boolean isLocked = readLock.tryLock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(readLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(readLock, lockkey, isLocked);
 	}
 
 	public LockContext tryReadlock(String lockkey, long time, TimeUnit unit) throws InterruptedException {
 		RLock readLock = genRLock(LockType.READ, lockkey);
 		boolean isLocked = readLock.tryLock(time, unit);
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(readLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(readLock, lockkey, isLocked);
 	}
 
 	// ------------------------------------写锁---------------------------------------------
@@ -113,31 +91,19 @@ public class RedissonLockUtil {
 	public LockContext writelock(String lockkey) {
 		RLock writeLock = genRLock(LockType.WRITE, lockkey);
 		writeLock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(writeLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(writeLock, lockkey, true);
 	}
 
 	public LockContext tryWritelock(String lockkey) {
 		RLock writeLock = genRLock(LockType.WRITE, lockkey);
 		boolean isLocked = writeLock.tryLock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(writeLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(writeLock, lockkey, isLocked);
 	}
 
 	public LockContext tryWritelock(String lockkey, long time, TimeUnit unit) throws InterruptedException {
 		RLock writeLock = genRLock(LockType.WRITE, lockkey);
 		boolean isLocked = writeLock.tryLock(time, unit);
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(writeLock);
-		lockContext.setKey(lockkey);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(writeLock, lockkey, isLocked);
 	}
 
 	// ------------------------------------联锁---------------------------------------------
@@ -152,70 +118,60 @@ public class RedissonLockUtil {
 	public LockContext mlock(String[] lockkeys) {
 		RLock rlock = genRLock(LockType.NORMAL, lockkeys);
 		rlock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, true);
 	}
 
 	public LockContext mReadlock(String[] lockkeys) {
 		RLock rlock = genRLock(LockType.READ, lockkeys);
 		rlock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, true);
 	}
 
 	public LockContext mTryReadlock(String[] lockkeys) {
 		RLock rlock = genRLock(LockType.READ, lockkeys);
 		boolean isLocked = rlock.tryLock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, isLocked);
 	}
 
 	public LockContext mTryReadlock(String[] lockkeys, long time, TimeUnit unit) throws InterruptedException {
 		RLock rlock = genRLock(LockType.READ, lockkeys);
 		boolean isLocked = rlock.tryLock(time, unit);
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, isLocked);
 	}
 
 	public LockContext mWritelock(String[] lockkeys) {
 		RLock rlock = genRLock(LockType.WRITE, lockkeys);
 		rlock.lock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(true);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, true);
 	}
 
 	public LockContext mTryWritelock(String[] lockkeys) {
 		RLock rlock = genRLock(LockType.WRITE, lockkeys);
 		boolean isLocked = rlock.tryLock();
-		LockContext lockContext = new LockContext();
-		lockContext.setLock(rlock);
-		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(isLocked);
-		return lockContext;
+		return newLockContext(rlock, lockkeys, isLocked);
 	}
 
 	public LockContext mTryWritelock(String[] lockkeys, long time, TimeUnit unit) throws InterruptedException {
 		RLock rlock = genRLock(LockType.WRITE, lockkeys);
 		boolean isLocked = rlock.tryLock(time, unit);
+		return newLockContext(rlock, lockkeys, isLocked);
+	}
+
+	private LockContext newLockContext(RLock rlock, String lockKey, boolean locked) {
+		LockContext lockContext = new LockContext();
+		lockContext.setLock(rlock);
+		lockContext.setKey(lockKey);
+		lockContext.setSuccess(locked);
+		lockContext.setUserType(UseType.Redisson);
+		return lockContext;
+	}
+
+	private LockContext newLockContext(RLock rlock, String[] lockkeys, boolean locked) {
 		LockContext lockContext = new LockContext();
 		lockContext.setLock(rlock);
 		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(isLocked);
+		lockContext.setSuccess(locked);
+		lockContext.setUserType(UseType.Redisson);
 		return lockContext;
 	}
 

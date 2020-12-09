@@ -1,4 +1,4 @@
-package com.zj.study.framework.spring.lock.mdd.redisson;
+package com.zj.study.framework.spring.lock.mdd;
 
 import org.redisson.api.RLock;
 
@@ -7,6 +7,9 @@ public class LockContext {
 	String[] keys;
 	boolean success;
 	RLock lock;
+
+	// 表明用了哪种实现
+	UseType userType;
 
 	public String getKey() {
 		return key;
@@ -39,5 +42,13 @@ public class LockContext {
 
 	public void setKeys(String[] lockkeys) {
 		this.keys = lockkeys;
+	}
+
+	public UseType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UseType userType) {
+		this.userType = userType;
 	}
 }
