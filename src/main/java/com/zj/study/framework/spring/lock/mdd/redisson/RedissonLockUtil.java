@@ -54,7 +54,7 @@ public class RedissonLockUtil {
 	}
 
 	public LockContext trylock(String lockkey, long time, TimeUnit unit) throws InterruptedException {
-		RLock rlock = getClient().getLock(concat(lockkey));
+		RLock rlock = genRLock(LockType.NORMAL, lockkey);
 		boolean isLocked = rlock.tryLock(time, unit);
 		LockContext lockContext = new LockContext();
 		lockContext.setLock(rlock);
@@ -242,7 +242,7 @@ public class RedissonLockUtil {
 			vlock = getClient().getReadWriteLock(concatKey).writeLock();
 			break;
 		default:
-			throw new UnsupportedOperationException();
+			throw new UnsupportedOperationException(lockType.toString() + " is unsupported locktype!");
 		}
 
 		return vlock;
