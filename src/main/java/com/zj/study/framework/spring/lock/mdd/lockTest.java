@@ -1,5 +1,6 @@
 package com.zj.study.framework.spring.lock.mdd;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.zj.study.framework.spring.lock.mdd.redisson.LockContext;
@@ -12,10 +13,14 @@ public class lockTest {
 		LockContext lockContext = LockFacade.useRedisson("IA").lock("aaaa");
 		System.err.println("lock success!");
 
-		TimeUnit.SECONDS.sleep(100);
+		TimeUnit.SECONDS.sleep(10);
+		List<String> listLockKeys = LockFacade.listLockKeys("IA");
+
+		for (String lockKey : listLockKeys)
+			System.err.println(lockKey);
 
 		lockContext.unlock();
-		System.err.println("lock success!");
+		System.err.println("unlock success!");
 	}
 
 }
