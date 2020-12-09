@@ -1,10 +1,13 @@
 package com.zj.study.framework.spring.lock.mdd.redisson;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.redisson.Redisson;
 import org.redisson.RedissonMultiLock;
+import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
 
 import com.zj.study.framework.spring.lock.mdd.AppContext;
@@ -246,5 +249,16 @@ public class RedissonLockUtil {
 		}
 
 		return vlock;
+	}
+
+	public List<String> listKeys() {
+		RKeys keys = getClient().getKeys();
+		String pattern = LockFacade.lockPrex + module + ":*";
+		List<String> foundedKeysLst = new LinkedList<String>();
+		Iterable<String> foundedKeys = keys.getKeysByPattern(pattern);
+		foundedKeys.forEach(s -> {
+			foundedKeysLst.add(s);
+		});
+		return foundedKeysLst;
 	}
 }
