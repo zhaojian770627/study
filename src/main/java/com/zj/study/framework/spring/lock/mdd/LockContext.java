@@ -1,15 +1,16 @@
 package com.zj.study.framework.spring.lock.mdd;
 
-import org.redisson.api.RLock;
+import java.util.concurrent.locks.Lock;
+
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.yonyoucloud.fi.basecom.util.lock.redis.LockUtil;
+import com.zj.study.framework.spring.lock.mdd.redis.RedisLockUtil;
 
 public class LockContext {
 	String key;
 	String[] keys;
-	boolean success;
-	RLock lock;
+	private boolean locked;
+	Lock lock;
 
 	// 从加锁信息中带出来
 	private String ownerFlag;
@@ -34,19 +35,19 @@ public class LockContext {
 		this.key = key;
 	}
 
-	public boolean isSuccess() {
-		return success;
+	public boolean isLocked() {
+		return locked;
 	}
 
-	public void setSuccess(boolean success) {
-		this.success = success;
+	public void setLocked(boolean locked) {
+		this.locked = locked;
 	}
 
-	public RLock getLock() {
+	public Lock getLock() {
 		return lock;
 	}
 
-	public void setLock(RLock lock) {
+	public void setLock(Lock lock) {
 		this.lock = lock;
 	}
 
@@ -83,7 +84,7 @@ public class LockContext {
 
 	// 解锁
 	public void unlock() {
-		if (!success)
+		if (!locked)
 			return;
 		if (this.useType.equals(UseType.Redisson)) {
 			unLockUseRedisson();

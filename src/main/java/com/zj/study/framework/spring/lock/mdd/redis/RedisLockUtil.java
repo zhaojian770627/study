@@ -95,7 +95,7 @@ public class RedisLockUtil {
 		int i = 1;
 		do {
 			LockContext lockContext = lock(lockkey, delay);
-			if (lockContext.isSuccess()) {
+			if (lockContext.isLocked()) {
 				return lockContext;
 			} else {
 				if (ms_time > 500 * i) {
@@ -155,7 +155,7 @@ public class RedisLockUtil {
 	private LockContext newLockContext(String lockKey, boolean locked) {
 		LockContext lockContext = new LockContext();
 		lockContext.setKey(lockKey);
-		lockContext.setSuccess(locked);
+		lockContext.setLocked(locked);
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);
@@ -165,7 +165,7 @@ public class RedisLockUtil {
 	private LockContext newLockContext(String[] lockKeys, boolean locked) {
 		LockContext lockContext = new LockContext();
 		lockContext.setKeys(lockKeys);
-		lockContext.setSuccess(locked);
+		lockContext.setLocked(locked);
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);

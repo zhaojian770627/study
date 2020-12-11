@@ -6,9 +6,13 @@ public class lockTest {
 
 	public static void main(String[] args) throws InterruptedException {
 		AppContext.init();
-		LockContext context = LockFacade.useRedisson("CC").mlock(new String[] { "aaa", "bbb", "ccc" });
-		TimeUnit.SECONDS.sleep(10);
-		context.unlock();
+		LockContext lockContext = LockFacade.useRedisLockUtil("aaa").lock("aaaa", 20);
+		if (lockContext.isLocked()) {
+			try {
+				TimeUnit.SECONDS.sleep(10);
+			} finally {
+				lockContext.unlock();
+			}
+		}
 	}
-
 }

@@ -6,6 +6,7 @@ import redis.clients.jedis.params.SetParams;
 
 public class RedisClient {
 	private JedisPool pool = null;
+	private final int dbindex;
 
 	/**
 	 * 传入ip和端口号构建redis 连接
@@ -13,8 +14,15 @@ public class RedisClient {
 	 * @param ip   ip
 	 * @param prot 端口
 	 */
-	public RedisClient(JedisPool pool) {
+	public RedisClient(JedisPool pool, int dbindex) {
 		this.pool = pool;
+		this.dbindex = dbindex;
+	}
+
+	Jedis getJedis() {
+		Jedis jedis = pool.getResource();
+		jedis.select(dbindex);
+		return jedis;
 	}
 
 	public String get(String key) {
@@ -22,7 +30,7 @@ public class RedisClient {
 		String value = null;
 
 		try {
-			jedis = pool.getResource();
+			jedis = getJedis();
 			value = jedis.get(key);
 		} finally {
 			if (jedis != null)
@@ -35,7 +43,7 @@ public class RedisClient {
 		Jedis jedis = null;
 
 		try {
-			jedis = pool.getResource();
+			jedis = getJedis();
 			jedis.expire(key, times);
 		} finally {
 			if (jedis != null)
@@ -47,7 +55,7 @@ public class RedisClient {
 		Jedis jedis = null;
 		try {
 			String result;
-			jedis = pool.getResource();
+			jedis = getJedis();
 //			result = jedis.set(key, value, "nx", "ex", duration);
 			result = jedis.set(key, value, SetParams.setParams().nx().ex(duration));
 			return "OK".equalsIgnoreCase(result);
@@ -61,7 +69,7 @@ public class RedisClient {
 	public Long del(String... keys) {
 		Jedis jedis = null;
 		try {
-			jedis = pool.getResource();
+			jedis = getJedis();
 			return jedis.del(keys);
 		} finally {
 			if (jedis != null) {

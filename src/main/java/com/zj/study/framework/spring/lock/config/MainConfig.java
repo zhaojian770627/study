@@ -37,7 +37,7 @@ public class MainConfig {
 		config.setMaxWaitMillis(100);
 		config.setTestOnBorrow(true);
 		JedisPool pool = new JedisPool(config, server, Integer.valueOf(port), 100000, redisPassword);
-		RedisClient jedisUtil = new RedisClient(pool);
+		RedisClient jedisUtil = new RedisClient(pool, 6);
 		return jedisUtil;
 	}
 }
