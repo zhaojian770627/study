@@ -10,7 +10,6 @@ import com.zj.study.framework.spring.lock.config.RedisConf;
 import com.zj.study.framework.spring.lock.mdd.redis.RedisLockUtil;
 import com.zj.study.framework.spring.lock.mdd.redisson.RedissonLockUtil;
 
-@Service
 public class LockFacade {
 	@Value("${redis.server}")
 	private String server;
