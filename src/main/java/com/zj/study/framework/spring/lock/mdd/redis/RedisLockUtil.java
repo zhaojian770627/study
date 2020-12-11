@@ -16,7 +16,7 @@ public class RedisLockUtil {
 
 	private String ownerFlag;
 
-	public RedisLockUtil(String module) {
+	public RedisLockUtil(String module, RedisClient redisClient) {
 		this.module = module;
 	}
 

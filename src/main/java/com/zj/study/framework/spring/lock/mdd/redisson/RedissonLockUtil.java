@@ -10,6 +10,7 @@ import org.redisson.Redisson;
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 
 import com.zj.study.framework.spring.lock.mdd.AppContext;
 import com.zj.study.framework.spring.lock.mdd.LockContext;
@@ -20,7 +21,7 @@ public class RedissonLockUtil {
 
 	final String module;
 
-	public RedissonLockUtil(String module) {
+	public RedissonLockUtil(String module, RedissonClient redissonClient) {
 		this.module = module;
 	}
 
@@ -158,7 +159,7 @@ public class RedissonLockUtil {
 		LockContext lockContext = new LockContext();
 		lockContext.setLock(rlock);
 		lockContext.setKey(lockKey);
-		lockContext.setSuccess(locked);
+		lockContext.setLocked(locked);
 		lockContext.setUserType(UseType.Redisson);
 		return lockContext;
 	}
@@ -167,7 +168,7 @@ public class RedissonLockUtil {
 		LockContext lockContext = new LockContext();
 		lockContext.setLock(rlock);
 		lockContext.setKeys(lockkeys);
-		lockContext.setSuccess(locked);
+		lockContext.setLocked(locked);
 		lockContext.setUserType(UseType.Redisson);
 		return lockContext;
 	}
@@ -183,7 +184,7 @@ public class RedissonLockUtil {
 		return new RedissonMultiLock(rlocks);
 	}
 
-	private RLock genRLock(LockType lockType, String lockKey) {
+	private Lock genRLock(LockType lockType, String lockKey) {
 		Lock vlock = null;
 		String concatKey = LockFacade.concat(module, lockKey);
 		switch (lockType) {

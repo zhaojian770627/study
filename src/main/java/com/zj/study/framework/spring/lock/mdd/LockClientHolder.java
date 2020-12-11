@@ -6,14 +6,23 @@ import com.zj.study.framework.spring.lock.mdd.redis.RedisClient;
 
 public class LockClientHolder {
 
-	public void setRedissonClient(RedissonClient redissonClient) {
-		// TODO Auto-generated method stub
+	private RedissonClient redissonClient;
+	private RedisClient redisClient;
+	
+	public RedissonClient getRedissonClient() {
+		return redissonClient;
+	}
 
+	public RedisClient getRedisClient() {
+		return redisClient;
+	}
+
+	public void setRedissonClient(RedissonClient redissonClient) {
+		this.redissonClient = redissonClient;
 	}
 
 	public void setRedisClient(RedisClient redisClient) {
-		// TODO Auto-generated method stub
-
+		this.redisClient = redisClient;
 	}
 
 }

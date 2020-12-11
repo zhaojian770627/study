@@ -26,6 +26,10 @@ public class LockFacade {
 
 	LockClientHolder holder = new LockClientHolder();
 
+	public LockFacade() {
+		contructSelf();
+	};
+
 	private LockFacade contructSelf() {
 		RedisConf conf = RedisConf.setConf().setServer(server).setPort(port).setRedisPassword(redisPassword)
 				.setMainIndex(mainIndex);
@@ -40,16 +44,16 @@ public class LockFacade {
 		return LockFacade.lockPrex + module + ":" + lockey;
 	}
 
-	public static RedissonLockUtil useRedisson(String module) {
-		return new RedissonLockUtil(module);
+	public RedissonLockUtil useRedisson(String module) {
+		return new RedissonLockUtil(module, holder.getRedissonClient());
 	}
 
-	public static RedisLockUtil useRedisLockUtil(String module) {
-		return new RedisLockUtil(module);
+	public RedisLockUtil useRedisLockUtil(String module) {
+		return new RedisLockUtil(module, holder.getRedisClient());
 	}
 
-	public static List<String> listLockKeys(String module) {
-		return new RedissonLockUtil(module).listKeys();
+	public List<String> listLockKeys(String module) {
+		return new RedissonLockUtil(module, holder.getRedissonClient()).listKeys();
 	}
 
 //	public static LockUtil useLockUtil(String module) {
