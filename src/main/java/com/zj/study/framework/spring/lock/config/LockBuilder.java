@@ -13,36 +13,26 @@ import redis.clients.jedis.JedisPoolConfig;
 
 //配置类====配置文件
 @Configuration
-public class MainConfig {
-	@Value("${redis.server}")
-	private String server;
+public class LockBuilder {
 
-	@Value("${redis.port}")
-	private String port;
-
-	@Value("${redis.password}")
-	private String redisPassword;
-
-	@Value("${redis.mainIndex}")
-	private int mainIndex;
-	@Bean
-	public RedissonClient redissonClient() {
+	public static RedissonClient BuildRedissonClient(RedisConf conf) {
 		Config config = new Config();
-		String address = "redis://" + server + ":" + port;
-		config.useSingleServer().setAddress(address).setPassword(redisPassword).setDatabase(6);
+		String address = "redis://" + conf.getServer() + ":" + conf.getPort();
+		config.useSingleServer().setAddress(address).setPassword(conf.getRedisPassword())
+				.setDatabase(conf.getMainIndex());
 		RedissonClient redisson = Redisson.create(config);
 		return redisson;
 	}
 
-	@Bean
-	public RedisClient redisClient() {
+	public static RedisClient BuildRedisClient(RedisConf conf) {
 		JedisPoolConfig config = new JedisPoolConfig();
 		config.setMaxTotal(500);
 		config.setMaxIdle(5);
 		config.setMaxWaitMillis(100);
 		config.setTestOnBorrow(true);
-		JedisPool pool = new JedisPool(config, server, Integer.valueOf(port), 100000, redisPassword);
-		RedisClient jedisUtil = new RedisClient(pool, 6);
+		JedisPool pool = new JedisPool(config, conf.getServer(), Integer.valueOf(conf.getPort()), 100000,
+				conf.getRedisPassword());
+		RedisClient jedisUtil = new RedisClient(pool, conf.getMainIndex());
 		return jedisUtil;
 	}
 }
