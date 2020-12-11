@@ -1,6 +1,9 @@
 package com.zj.study.framework.spring.lock.mdd;
 
 import org.redisson.api.RLock;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+
+import com.yonyoucloud.fi.basecom.util.lock.redis.LockUtil;
 
 public class LockContext {
 	String key;
@@ -8,8 +11,20 @@ public class LockContext {
 	boolean success;
 	RLock lock;
 
+	// 从加锁信息中带出来
+	private String ownerFlag;
+	private String module;
+
+	public String getOwnerFlag() {
+		return ownerFlag;
+	}
+
+	public void setOwnerFlag(String ownerFlag) {
+		this.ownerFlag = ownerFlag;
+	}
+
 	// 表明用了哪种实现
-	UseType userType;
+	UseType useType;
 
 	public String getKey() {
 		return key;
@@ -35,20 +50,56 @@ public class LockContext {
 		this.lock = lock;
 	}
 
-	public void unlock() {
-		if (success)
-			lock.unlock();
+	private void unLockUseLockUtil() {
+		if (this.keys != null) {
+			RedisLockUtil.unLock(module, keys, ownerFlag);
+		} else
+			RedisLockUtil.unLock(module, key, ownerFlag);
+	}
+
+	private void unLockUseRedisson() {
+		lock.unlock();
 	}
 
 	public void setKeys(String[] lockkeys) {
 		this.keys = lockkeys;
 	}
 
-	public UseType getUserType() {
-		return userType;
+	public UseType getUseType() {
+		return useType;
 	}
 
-	public void setUserType(UseType userType) {
-		this.userType = userType;
+	public void setUserType(UseType useType) {
+		this.useType = useType;
+	}
+
+	public String getModule() {
+		return module;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
+	}
+
+	// 解锁
+	public void unlock() {
+		if (!success)
+			return;
+		if (this.useType.equals(UseType.Redisson)) {
+			unLockUseRedisson();
+		} else {
+			unLockUseLockUtil();
+		}
+	}
+
+	/**
+	 * 事务完成后放锁，不管事务成功和失败
+	 * 
+	 * 此方法必须放在Spring管理的事务中
+	 * 
+	 */
+	public void unlockAfterTrans() {
+		LockReleseAfterTran lockRelese = new LockReleseAfterTran(this);
+		TransactionSynchronizationManager.registerSynchronization(lockRelese);
 	}
 }

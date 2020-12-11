@@ -23,10 +23,6 @@ public class RedissonLockUtil {
 		this.module = module;
 	}
 
-	String concat(String lockey) {
-		return LockFacade.lockPrex + module + ":" + lockey;
-	}
-
 	private Redisson getClient() {
 		return (Redisson) AppContext.getBean("redissonClient");
 	}
@@ -187,9 +183,8 @@ public class RedissonLockUtil {
 	}
 
 	private RLock genRLock(LockType lockType, String lockKey) {
-		concat(lockKey);
 		RLock vlock = null;
-		String concatKey = concat(lockKey);
+		String concatKey = LockFacade.concat(module, lockKey);
 		switch (lockType) {
 		case NORMAL:
 			vlock = getClient().getLock(concatKey);
