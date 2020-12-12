@@ -4,13 +4,15 @@ import java.util.concurrent.locks.Lock;
 
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.zj.study.framework.spring.lock.mdd.redis.RedisLockUtil;
+import com.zj.study.framework.spring.lock.mdd.redis.RedisLockWrap;
 
 public class LockContext {
 	String key;
 	String[] keys;
 	private boolean locked;
 	Lock lock;
+
+	RedisLockWrap redisLockUtil;
 
 	// 从加锁信息中带出来
 	private String ownerFlag;
@@ -53,9 +55,9 @@ public class LockContext {
 
 	private void unLockUseLockUtil() {
 		if (this.keys != null) {
-			RedisLockUtil.unLock(module, keys, ownerFlag);
+			redisLockUtil.unLock(module, keys, ownerFlag);
 		} else
-			RedisLockUtil.unLock(module, key, ownerFlag);
+			redisLockUtil.unLock(module, key, ownerFlag);
 	}
 
 	private void unLockUseRedisson() {
@@ -80,6 +82,14 @@ public class LockContext {
 
 	public void setModule(String module) {
 		this.module = module;
+	}
+	
+	public RedisLockWrap getRedisLockUtil() {
+		return redisLockUtil;
+	}
+
+	public void setRedisLockUtil(RedisLockWrap redisLockUtil) {
+		this.redisLockUtil = redisLockUtil;
 	}
 
 	// 解锁

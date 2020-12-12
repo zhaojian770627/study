@@ -10,23 +10,23 @@ import org.redisson.Redisson;
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 
-import com.zj.study.framework.spring.lock.mdd.AppContext;
 import com.zj.study.framework.spring.lock.mdd.LockContext;
 import com.zj.study.framework.spring.lock.mdd.LockFacade;
 import com.zj.study.framework.spring.lock.mdd.UseType;
 
-public class RedissonLockUtil {
+public class RedissonWrap {
 
 	final String module;
+	private Redisson redisson;
 
-	public RedissonLockUtil(String module, RedissonClient redissonClient) {
+	public RedissonWrap(String module, Redisson redisson) {
 		this.module = module;
+		this.redisson = redisson;
 	}
 
 	private Redisson getClient() {
-		return (Redisson) AppContext.getBean("redissonClient");
+		return this.redisson;
 	}
 
 	// ------------------------------------独占锁---------------------------------------------

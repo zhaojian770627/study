@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.zj.study.framework.spring.lock.config.LockBuilder;
 import com.zj.study.framework.spring.lock.config.RedisConf;
-import com.zj.study.framework.spring.lock.mdd.redis.RedisLockUtil;
-import com.zj.study.framework.spring.lock.mdd.redisson.RedissonLockUtil;
+import com.zj.study.framework.spring.lock.mdd.redis.RedisLockWrap;
+import com.zj.study.framework.spring.lock.mdd.redisson.RedissonWrap;
 
 public class LockFacade implements InitializingBean {
 	@Value("${redis.address}")
@@ -43,16 +43,16 @@ public class LockFacade implements InitializingBean {
 		return LockFacade.lockPrex + module + ":" + lockey;
 	}
 
-	public RedissonLockUtil useRedisson(String module) {
-		return new RedissonLockUtil(module, holder.getRedissonClient());
+	public RedissonWrap useRedisson(String module) {
+		return new RedissonWrap(module, holder.getRedissonClient());
 	}
 
-	public RedisLockUtil useRedisLockUtil(String module) {
-		return new RedisLockUtil(module, holder.getRedisClient());
+	public RedisLockWrap useRedisLockUtil(String module) {
+		return new RedisLockWrap(module, holder.getRedisClient());
 	}
 
 	public List<String> listLockKeys(String module) {
-		return new RedissonLockUtil(module, holder.getRedissonClient()).listKeys();
+		return new RedissonWrap(module, holder.getRedissonClient()).listKeys();
 	}
 
 	@Override

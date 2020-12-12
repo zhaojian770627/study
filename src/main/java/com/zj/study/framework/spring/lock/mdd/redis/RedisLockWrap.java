@@ -6,18 +6,17 @@ import java.util.List;
 
 import org.springframework.util.StringUtils;
 
-import com.zj.study.framework.spring.lock.mdd.AppContext;
 import com.zj.study.framework.spring.lock.mdd.LockContext;
 import com.zj.study.framework.spring.lock.mdd.LockFacade;
 import com.zj.study.framework.spring.lock.mdd.UseType;
 
-public class RedisLockUtil {
+public class RedisLockWrap {
 	final String module;
 
 	private String ownerFlag;
 	private RedisClient redisClient;
 
-	public RedisLockUtil(String module, RedisClient redisClient) {
+	public RedisLockWrap(String module, RedisClient redisClient) {
 		this.module = module;
 		this.redisClient = redisClient;
 	}
@@ -162,6 +161,7 @@ public class RedisLockUtil {
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);
+		lockContext.setRedisLockUtil(this);
 		return lockContext;
 	}
 
@@ -172,10 +172,11 @@ public class RedisLockUtil {
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);
+		lockContext.setRedisLockUtil(this);
 		return lockContext;
 	}
 
-	public RedisLockUtil setOwnerFlag(String request) {
+	public RedisLockWrap setOwnerFlag(String request) {
 		this.ownerFlag = request;
 		return this;
 	}
