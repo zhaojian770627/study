@@ -12,7 +12,7 @@ public class LockContext {
 	private boolean locked;
 	Lock lock;
 
-	RedisLockWrap redisLockUtil;
+	RedisLockWrap redisLockWrap;
 
 	// 从加锁信息中带出来
 	private String ownerFlag;
@@ -55,9 +55,9 @@ public class LockContext {
 
 	private void unLockUseLockUtil() {
 		if (this.keys != null) {
-			redisLockUtil.unLock(module, keys, ownerFlag);
+			redisLockWrap.unLock(module, keys, ownerFlag);
 		} else
-			redisLockUtil.unLock(module, key, ownerFlag);
+			redisLockWrap.unLock(module, key, ownerFlag);
 	}
 
 	private void unLockUseRedisson() {
@@ -83,13 +83,13 @@ public class LockContext {
 	public void setModule(String module) {
 		this.module = module;
 	}
-	
-	public RedisLockWrap getRedisLockUtil() {
-		return redisLockUtil;
+
+	public RedisLockWrap getRedisLockWrap() {
+		return redisLockWrap;
 	}
 
-	public void setRedisLockUtil(RedisLockWrap redisLockUtil) {
-		this.redisLockUtil = redisLockUtil;
+	public void setRedisLockWrap(RedisLockWrap redisLockWrap) {
+		this.redisLockWrap = redisLockWrap;
 	}
 
 	// 解锁

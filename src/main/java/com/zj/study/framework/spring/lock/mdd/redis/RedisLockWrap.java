@@ -161,7 +161,7 @@ public class RedisLockWrap {
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);
-		lockContext.setRedisLockUtil(this);
+		lockContext.setRedisLockWrap(this);
 		return lockContext;
 	}
 
@@ -172,7 +172,7 @@ public class RedisLockWrap {
 		lockContext.setUserType(UseType.LockUtil);
 		lockContext.setOwnerFlag(ownerFlag);
 		lockContext.setModule(module);
-		lockContext.setRedisLockUtil(this);
+		lockContext.setRedisLockWrap(this);
 		return lockContext;
 	}
 

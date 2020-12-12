@@ -13,7 +13,6 @@ public class lockTest {
 				TimeUnit.SECONDS.sleep(10);
 			} finally {
 				lockContext.unlock();
-				lockContext.unlockAfterTrans();
 			}
 		}
 	}

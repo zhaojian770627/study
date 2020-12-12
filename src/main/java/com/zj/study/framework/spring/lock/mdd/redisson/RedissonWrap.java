@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 
-import org.redisson.Redisson;
 import org.redisson.RedissonMultiLock;
 import org.redisson.api.RKeys;
 import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 
 import com.zj.study.framework.spring.lock.mdd.LockContext;
 import com.zj.study.framework.spring.lock.mdd.LockFacade;
@@ -18,15 +18,15 @@ import com.zj.study.framework.spring.lock.mdd.UseType;
 public class RedissonWrap {
 
 	final String module;
-	private Redisson redisson;
+	private RedissonClient redissonClient;
 
-	public RedissonWrap(String module, Redisson redisson) {
+	public RedissonWrap(String module, RedissonClient redissonClient) {
 		this.module = module;
-		this.redisson = redisson;
+		this.redissonClient = redissonClient;
 	}
 
-	private Redisson getClient() {
-		return this.redisson;
+	private RedissonClient getClient() {
+		return this.redissonClient;
 	}
 
 	// ------------------------------------独占锁---------------------------------------------
