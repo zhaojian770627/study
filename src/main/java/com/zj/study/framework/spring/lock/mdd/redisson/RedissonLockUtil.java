@@ -177,8 +177,8 @@ public class RedissonLockUtil {
 		Arrays.sort(lockkeys);
 		RLock[] rlocks = new RLock[lockkeys.length];
 		for (int pos = 0; pos < lockkeys.length; pos++) {
-			RLock vlock = genRLock(lockType, lockkeys[pos]);
-			rlocks[pos] = vlock;
+			Lock vlock = genRLock(lockType, lockkeys[pos]);
+			rlocks[pos] = (RLock) vlock;
 		}
 
 		return new RedissonMultiLock(rlocks);

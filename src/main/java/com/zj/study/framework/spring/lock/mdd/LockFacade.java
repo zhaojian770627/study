@@ -2,16 +2,16 @@ package com.zj.study.framework.spring.lock.mdd;
 
 import java.util.List;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import com.zj.study.framework.spring.lock.config.LockBuilder;
 import com.zj.study.framework.spring.lock.config.RedisConf;
 import com.zj.study.framework.spring.lock.mdd.redis.RedisLockUtil;
 import com.zj.study.framework.spring.lock.mdd.redisson.RedissonLockUtil;
 
-public class LockFacade {
-	@Value("${redis.server}")
+public class LockFacade implements InitializingBean {
+	@Value("${redis.address}")
 	private String server;
 
 	@Value("${redis.port}")
@@ -26,7 +26,7 @@ public class LockFacade {
 	LockClientHolder holder = new LockClientHolder();
 
 	public LockFacade() {
-		contructSelf();
+//		contructSelf();
 	};
 
 	private LockFacade contructSelf() {
@@ -53,6 +53,11 @@ public class LockFacade {
 
 	public List<String> listLockKeys(String module) {
 		return new RedissonLockUtil(module, holder.getRedissonClient()).listKeys();
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		contructSelf();
 	}
 
 //	public static LockUtil useLockUtil(String module) {

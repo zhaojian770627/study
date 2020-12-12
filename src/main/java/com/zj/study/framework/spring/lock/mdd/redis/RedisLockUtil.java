@@ -15,13 +15,16 @@ public class RedisLockUtil {
 	final String module;
 
 	private String ownerFlag;
+	private RedisClient redisClient;
 
 	public RedisLockUtil(String module, RedisClient redisClient) {
 		this.module = module;
+		this.redisClient = redisClient;
 	}
 
-	private static RedisClient getClient() {
-		return (RedisClient) AppContext.getBean("redisClient");
+	private RedisClient getClient() {
+//		return (RedisClient) AppContext.getBean("redisClient");
+		return redisClient;
 	}
 
 //	private static String getLockV() {
@@ -59,7 +62,7 @@ public class RedisLockUtil {
 		return locked;
 	}
 
-	public static void unLock(String module, String lockkey, String ownerFlag) {
+	public void unLock(String module, String lockkey, String ownerFlag) {
 		String ident = LockFacade.concat(module, lockkey);
 		String key = getClient().get(ident);
 		if (!StringUtils.isEmpty(ownerFlag)) {
@@ -71,13 +74,13 @@ public class RedisLockUtil {
 		}
 	}
 
-	public static void unLock(String module, String[] lockkeys, String ownerFlag) {
+	public void unLock(String module, String[] lockkeys, String ownerFlag) {
 		for (String lockkey : lockkeys) {
 			unLock(module, lockkey, ownerFlag);
 		}
 	}
 
-	public static void expire(String module, String lockkey, String ownerFlag, int delay) {
+	public void expire(String module, String lockkey, String ownerFlag, int delay) {
 		String ident = LockFacade.concat(module, lockkey);
 		String key = getClient().get(ident);
 		if (key == null)
