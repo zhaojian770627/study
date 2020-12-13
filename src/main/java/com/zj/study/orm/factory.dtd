@@ -3,7 +3,7 @@
 <!ELEMENT bean (property*) >
 <!ATTLIST bean
 	id ID #REQUIRED
-	class CDATA #REQUIRED
+	clazz CDATA #REQUIRED
 	scope (singlton|prototype|session|request) "singlton"
 >
 <!ELEMENT property (#PCDATA) >
