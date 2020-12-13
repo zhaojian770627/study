@@ -8,4 +8,7 @@
 		<property name="phone" value="123456789"></property>
 		<property name="email" value="123456789@qq.com"></property>
 	</bean>
+	<bean class="com.zj.study.orm.bean.Order" id="orderID">
+		<property name="orderNo" value="123"></property>
+	</bean>
 </beans>
