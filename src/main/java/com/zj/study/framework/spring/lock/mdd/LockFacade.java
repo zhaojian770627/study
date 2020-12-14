@@ -29,12 +29,11 @@ public class LockFacade implements InitializingBean {
 //		contructSelf();
 	};
 
-	private LockFacade contructSelf() {
+	private void contructSelf() {
 		RedisConf conf = RedisConf.setConf().setServer(server).setPort(port).setRedisPassword(redisPassword)
 				.setMainIndex(mainIndex);
 		holder.setRedissonClient(LockBuilder.BuildRedissonClient(conf));
 		holder.setRedisClient(LockBuilder.BuildRedisClient(conf));
-		return null;
 	}
 
 	public static final String lockPrex = "LOCK:FI:";
