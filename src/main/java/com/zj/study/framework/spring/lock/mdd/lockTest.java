@@ -7,12 +7,12 @@ public class lockTest {
 	public static void main(String[] args) throws InterruptedException {
 		AppContext.init();
 		LockFacade lockFacade = (LockFacade) AppContext.getBean("lockFacade");
-		LockContext lockContext = lockFacade.useRedisLockUtil("aaa").lock("aaaa", 20);
+		LockContext lockContext = lockFacade.useRedisLock("AA").lock("ZJAA", 1800, 2000);
 		if (lockContext.isLocked()) {
 			try {
 				TimeUnit.SECONDS.sleep(10);
 			} finally {
-				lockContext.unlock();
+//				lockContext.unlock();
 			}
 		}
 	}

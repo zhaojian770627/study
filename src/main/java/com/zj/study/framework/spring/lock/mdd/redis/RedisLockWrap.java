@@ -45,6 +45,35 @@ public class RedisLockWrap {
 		return newLockContext(lockkey, locked);
 	}
 
+	/**
+	 * 要锁定的键值，锁定时间，等待锁的限定实现
+	 * 
+	 * @param lockkey
+	 * @param delay 秒
+	 * @param ms_time 毫秒
+	 * @return
+	 */
+	public LockContext lock(String lockkey, int delay, long ms_time) {
+		int i = 1;
+		do {
+			LockContext lockContext = lock(lockkey, delay);
+			if (lockContext.isLocked()) {
+				return lockContext;
+			} else {
+				if (ms_time > 500 * i) {
+					try {
+						i++;
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {
+					}
+				} else {
+					return lockContext;
+				}
+			}
+		} while (true);
+
+	}
+
 	private boolean innerLock(String lockkey, int delay) {
 		String traceid = ownerFlag == null ? "" : ownerFlag;
 		String ident = LockFacade.concat(module, lockkey);
@@ -91,27 +120,6 @@ public class RedisLockWrap {
 		} else {
 			getClient().expire(ident, delay);
 		}
-	}
-
-	public LockContext lock(String lockkey, int delay, long ms_time) {
-		int i = 1;
-		do {
-			LockContext lockContext = lock(lockkey, delay);
-			if (lockContext.isLocked()) {
-				return lockContext;
-			} else {
-				if (ms_time > 500 * i) {
-					try {
-						i++;
-						Thread.sleep(500);
-					} catch (InterruptedException e1) {
-					}
-				} else {
-					return lockContext;
-				}
-			}
-		} while (true);
-
 	}
 
 	/**

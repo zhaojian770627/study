@@ -47,7 +47,7 @@ public class LockFacade implements InitializingBean {
 		return new RedissonWrap(module, holder.getRedissonClient());
 	}
 
-	public RedisLockWrap useRedisLockUtil(String module) {
+	public RedisLockWrap useRedisLock(String module) {
 		return new RedisLockWrap(module, holder.getRedisClient());
 	}
 
