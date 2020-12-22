@@ -12,7 +12,7 @@ import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 
 import com.zj.study.framework.spring.lock.mdd.LockContext;
-import com.zj.study.framework.spring.lock.mdd.LockFacade;
+import com.zj.study.framework.spring.lock.mdd.LockService;
 import com.zj.study.framework.spring.lock.mdd.UseType;
 
 public class RedissonWrap {
@@ -186,7 +186,7 @@ public class RedissonWrap {
 
 	private Lock genRLock(LockType lockType, String lockKey) {
 		Lock vlock = null;
-		String concatKey = LockFacade.concat(module, lockKey);
+		String concatKey = LockService.concat(module, lockKey);
 		switch (lockType) {
 		case NORMAL:
 			vlock = getClient().getLock(concatKey);
@@ -206,12 +206,25 @@ public class RedissonWrap {
 
 	public List<String> listKeys() {
 		RKeys keys = getClient().getKeys();
-		String pattern = LockFacade.lockPrex + module + ":*";
+		String pattern = LockService.lockPrex + module + ":*";
 		List<String> foundedKeysLst = new LinkedList<String>();
 		Iterable<String> foundedKeys = keys.getKeysByPattern(pattern);
 		foundedKeys.forEach(s -> {
 			foundedKeysLst.add(s);
 		});
 		return foundedKeysLst;
+	}
+
+	/**
+	 * 查找key
+	 * 
+	 * @param lockKey
+	 * @return
+	 */
+	public boolean isExistsLock(String lockKey) {
+		RKeys keys = getClient().getKeys();
+		String concatKey = LockService.concat(module, lockKey);
+		Iterable<String> foundedKeys = keys.getKeysByPattern(concatKey);
+		return foundedKeys.iterator().hasNext();
 	}
 }

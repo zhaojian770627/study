@@ -3,35 +3,29 @@ package com.zj.study.framework.spring.lock.mdd;
 import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.zj.study.framework.spring.lock.config.LockBuilder;
 import com.zj.study.framework.spring.lock.config.RedisConf;
 import com.zj.study.framework.spring.lock.mdd.redis.RedisLockWrap;
 import com.zj.study.framework.spring.lock.mdd.redisson.RedissonWrap;
 
-public class LockFacade implements InitializingBean {
-	@Value("${redis.address}")
-	private String server;
+@Service
+public class LockService implements InitializingBean {
 
-	@Value("${redis.port}")
-	private String port;
-
-	@Value("${redis.password}")
-	private String redisPassword;
-
-	@Value("${redis.mainIndex}")
-	private int mainIndex;
+	@Autowired
+	RedisConf conf;
 
 	LockClientHolder holder = new LockClientHolder();
 
-	public LockFacade() {
+	public LockService() {
 //		contructSelf();
 	};
 
 	private void contructSelf() {
-		RedisConf conf = RedisConf.setConf().setServer(server).setPort(port).setRedisPassword(redisPassword)
-				.setMainIndex(mainIndex);
+//		RedisConf conf = RedisConf.setConf().setServer(server).setPort(port).setRedisPassword(redisPassword)
+//				.setMainIndex(mainIndex);
 		holder.setRedissonClient(LockBuilder.BuildRedissonClient(conf));
 		holder.setRedisClient(LockBuilder.BuildRedisClient(conf));
 	}
@@ -39,7 +33,7 @@ public class LockFacade implements InitializingBean {
 	public static final String lockPrex = "LOCK:FI:";
 
 	public static String concat(String module, String lockey) {
-		return LockFacade.lockPrex + module + ":" + lockey;
+		return LockService.lockPrex + module + ":" + lockey;
 	}
 
 	public RedissonWrap useRedisson(String module) {
@@ -52,6 +46,10 @@ public class LockFacade implements InitializingBean {
 
 	public List<String> listLockKeys(String module) {
 		return new RedissonWrap(module, holder.getRedissonClient()).listKeys();
+	}
+
+	public boolean exist(String module, String key) {
+		return new RedissonWrap(module, holder.getRedissonClient()).isExistsLock(key);
 	}
 
 	@Override

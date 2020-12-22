@@ -7,21 +7,21 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 
 import com.zj.study.framework.spring.lock.mdd.LockContext;
-import com.zj.study.framework.spring.lock.mdd.LockFacade;
+import com.zj.study.framework.spring.lock.mdd.LockService;
 import com.zj.study.framework.spring.lock.mdd.UseType;
 
 public class RedisLockWrap {
 	final String module;
 
 	private String ownerFlag;
-	private RedisClient redisClient;
+	private IRedisClient redisClient;
 
-	public RedisLockWrap(String module, RedisClient redisClient) {
+	public RedisLockWrap(String module, IRedisClient redisClient) {
 		this.module = module;
 		this.redisClient = redisClient;
 	}
 
-	private RedisClient getClient() {
+	private IRedisClient getClient() {
 //		return (RedisClient) AppContext.getBean("redisClient");
 		return redisClient;
 	}
@@ -49,7 +49,7 @@ public class RedisLockWrap {
 	 * 要锁定的键值，锁定时间，等待锁的限定实现
 	 * 
 	 * @param lockkey
-	 * @param delay 秒
+	 * @param delay   秒
 	 * @param ms_time 毫秒
 	 * @return
 	 */
@@ -76,7 +76,7 @@ public class RedisLockWrap {
 
 	private boolean innerLock(String lockkey, int delay) {
 		String traceid = ownerFlag == null ? "" : ownerFlag;
-		String ident = LockFacade.concat(module, lockkey);
+		String ident = LockService.concat(module, lockkey);
 		boolean res = getClient().setnx(ident, traceid, delay);
 		boolean locked;
 		if (!res) {
@@ -91,7 +91,7 @@ public class RedisLockWrap {
 	}
 
 	public void unLock(String module, String lockkey, String ownerFlag) {
-		String ident = LockFacade.concat(module, lockkey);
+		String ident = LockService.concat(module, lockkey);
 		String key = getClient().get(ident);
 		if (!StringUtils.isEmpty(ownerFlag)) {
 			if (ownerFlag.equals(key)) {
@@ -109,7 +109,7 @@ public class RedisLockWrap {
 	}
 
 	public void expire(String module, String lockkey, String ownerFlag, int delay) {
-		String ident = LockFacade.concat(module, lockkey);
+		String ident = LockService.concat(module, lockkey);
 		String key = getClient().get(ident);
 		if (key == null)
 			throw new RuntimeException("lock key not found,perhaps expired!");
@@ -120,6 +120,21 @@ public class RedisLockWrap {
 		} else {
 			getClient().expire(ident, delay);
 		}
+	}
+
+	/**
+	 * 判断key是否存在
+	 * 
+	 * @param lockkey
+	 * @return
+	 */
+	public boolean isExistsLock(String lockkey) {
+		String ident = LockService.concat(module, lockkey);
+		String key = getClient().get(ident);
+		if (key != null) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

@@ -7,6 +7,10 @@ import com.zj.study.framework.spring.lock.config.MainConfig;
 public class AppContext {
 	static AnnotationConfigApplicationContext app;
 
+	public static Object getBean(Class<?> clz) {
+		return app.getBean(clz);
+	}
+
 	public static Object getBean(String beanName) {
 		return app.getBean(beanName);
 	}
@@ -14,5 +18,4 @@ public class AppContext {
 	public static void init() {
 		app = new AnnotationConfigApplicationContext(MainConfig.class);
 	}
-
 }

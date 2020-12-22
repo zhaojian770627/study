@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import com.zj.study.framework.spring.lock.mdd.LockFacade;
+import com.zj.study.framework.spring.lock.mdd.LockService;
 
 //配置类====配置文件
 @Configuration()
@@ -12,7 +12,12 @@ import com.zj.study.framework.spring.lock.mdd.LockFacade;
 public class MainConfig {
 
 	@Bean
-	public LockFacade lockFacade() {
-		return new LockFacade();
+	public LockService lockService() {
+		return new LockService();
+	}
+
+	@Bean
+	public RedisConf redisConf() {
+		return new RedisConf();
 	}
 }
