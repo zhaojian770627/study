@@ -1,5 +1,8 @@
 package com.zj.study.orm.bean;
 
+import com.zj.study.orm.anno.Table;
+
+@Table("sys_user")
 public class User {
 	private long id;
 	private String name;

@@ -1,5 +1,8 @@
 package com.zj.study.orm.bean;
 
+import com.zj.study.orm.anno.Table;
+
+@Table("bz_order")
 public class Order {
 	private long id;
 	private String orderNo;
