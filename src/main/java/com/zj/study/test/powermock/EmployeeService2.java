@@ -13,4 +13,9 @@ public class EmployeeService2 {
 		EmployeeDao employeeDao = new EmployeeDao();
 		return employeeDao.getTotal();
 	}
+
+	public void createEmployee(Employee employee) {
+		EmployeeDao employeeDao = new EmployeeDao();
+		employeeDao.addEmployee(employee);
+	}
 }
