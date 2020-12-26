@@ -6,11 +6,11 @@ public class lockTest {
 		AppContext.init();
 		LockService lockService = (LockService) AppContext.getBean(LockService.class);
 
-		LockContext lockContext = lockService.useRedisLock("FIML").lock("A3", 1000);
+		LockContext lockContext = lockService.useRedisson("FIML").trylock("B0");
 		String msg = "";
 		if (lockContext.isLocked()) {
 			msg = "加锁成功";
-			lockContext.unlock();
+//			lockContext.unlock();
 		} else
 			msg = "加锁失败";
 		System.out.println(msg);
