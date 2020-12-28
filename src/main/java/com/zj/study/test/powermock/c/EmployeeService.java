@@ -1,6 +1,9 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.c;
 
-public class EmployeeService3 {
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeUtils;
+
+public class EmployeeService {
 	public int getEmployeeCount() {
 		return EmployeeUtils.getEmployeeCount();
 	}

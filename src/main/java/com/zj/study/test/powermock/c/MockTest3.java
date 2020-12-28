@@ -1,4 +1,4 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.c;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,9 @@ import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeUtils;
 
 /**
  * 测试静态方法
@@ -26,14 +29,14 @@ public class MockTest3 {
 
 	@Test
 	public void testGetEmployeeCount() {
-		final EmployeeService3 employeeService = new EmployeeService3();
+		final EmployeeService employeeService = new EmployeeService();
 		int count = employeeService.getEmployeeCount();
 		assertEquals(10, count);
 	}
 
 	@Test
 	public void testCreateEmployee() {
-		final EmployeeService3 employeeService = new EmployeeService3();
+		final EmployeeService employeeService = new EmployeeService();
 		Employee employee = new Employee();
 		employeeService.createEmployee(employee);
 		assertTrue(true);
@@ -44,7 +47,7 @@ public class MockTest3 {
 		PowerMockito.mockStatic(EmployeeUtils.class);
 		PowerMockito.when(EmployeeUtils.getEmployeeCount()).thenReturn(10);
 
-		final EmployeeService3 employeeService = new EmployeeService3();
+		final EmployeeService employeeService = new EmployeeService();
 		int count = employeeService.getEmployeeCount();
 		assertEquals(10, count);
 	}
@@ -55,7 +58,7 @@ public class MockTest3 {
 		Employee employee = new Employee();
 		PowerMockito.doNothing().when(EmployeeUtils.class);
 
-		final EmployeeService3 employeeService = new EmployeeService3();
+		final EmployeeService employeeService = new EmployeeService();
 		employeeService.createEmployee(employee);
 //		PowerMockito.verifyStatic(EmployeeUtils.class,times(1));
 	}

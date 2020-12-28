@@ -1,4 +1,4 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.b;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -11,12 +11,15 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeDao;
+
 // 显式的告诉 Junit 使用某个指定的 Runner 来运行 Test Case
 // 我们使用了 PowerMockRunner 来运行我们的测试用例，如果不指定的话我们就默认使用的
 // 是 Junit 提供的 Runner
 @RunWith(PowerMockRunner.class)
 // 这个注解是告诉PowerMock为我提前准备一个EmployeeService2的class
-@PrepareForTest(EmployeeService2.class)
+@PrepareForTest(EmployeeService.class)
 public class MockTest2 {
 
 	@After
@@ -25,7 +28,7 @@ public class MockTest2 {
 
 	@Test
 	public void testGetTotalEmployee() {
-		final EmployeeService2 service = new EmployeeService2();
+		final EmployeeService service = new EmployeeService();
 		int total = service.getTotalEmployee();
 		assertEquals(10, total);
 	}
@@ -37,7 +40,7 @@ public class MockTest2 {
 			PowerMockito.when(employeeDao.getTotal()).thenReturn(10);
 			PowerMockito.whenNew(EmployeeDao.class).withNoArguments().thenReturn(employeeDao);
 
-			EmployeeService2 service = new EmployeeService2();
+			EmployeeService service = new EmployeeService();
 			int total = service.getTotalEmployee();
 			assertEquals(10, total);
 		} catch (Exception e) {
@@ -54,7 +57,7 @@ public class MockTest2 {
 			// class，在这个例子中就是EmployeeService，
 			PowerMockito.whenNew(EmployeeDao.class).withNoArguments().thenReturn(employeeDao);
 			Employee employee = new Employee();
-			EmployeeService2 service = new EmployeeService2();
+			EmployeeService service = new EmployeeService();
 			service.createEmployee(employee);
 			Mockito.verify(employeeDao).addEmployee(employee);
 		} catch (Exception e) {

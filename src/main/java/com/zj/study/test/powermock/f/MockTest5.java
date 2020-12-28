@@ -1,4 +1,4 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.f;
 
 import org.junit.After;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.zj.study.test.powermock.Employee;
 
 /**
  * Mock final
@@ -28,7 +30,7 @@ public class MockTest5 {
 		Employee employee = new Employee();
 		PowerMockito.when(employeeDao.insertEmployee(employee)).thenReturn(true);
 
-		EmployeeService5 employeeService = new EmployeeService5(employeeDao);
+		EmployeeService employeeService = new EmployeeService(employeeDao);
 		employeeService.createEmployee(employee);
 		Mockito.verify(employeeDao).insertEmployee(employee);
 	}

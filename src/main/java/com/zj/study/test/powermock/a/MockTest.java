@@ -1,4 +1,4 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.a;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,9 @@ import org.junit.After;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeDao;
 
 public class MockTest {
 

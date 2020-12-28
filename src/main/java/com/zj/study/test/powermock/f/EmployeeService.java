@@ -1,9 +1,11 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.f;
 
-public class EmployeeService5 {
+import com.zj.study.test.powermock.Employee;
+
+public class EmployeeService {
 	private FinalEmployeeDao employeeDao;
 
-	public EmployeeService5(FinalEmployeeDao employeeDao) {
+	public EmployeeService(FinalEmployeeDao employeeDao) {
 		this.employeeDao = employeeDao;
 	}
 

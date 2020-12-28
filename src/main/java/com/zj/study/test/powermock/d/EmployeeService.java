@@ -1,6 +1,9 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.d;
 
-public class EmployeeService4 {
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeDao;
+
+public class EmployeeService {
 	public void saveOrUpdate(Employee employee) {
 		final EmployeeDao employeeDao = new EmployeeDao();
 		long count = employeeDao.getCount(employee);

@@ -1,4 +1,7 @@
-package com.zj.study.test.powermock;
+package com.zj.study.test.powermock.a;
+
+import com.zj.study.test.powermock.Employee;
+import com.zj.study.test.powermock.EmployeeDao;
 
 public class EmployeeService {
 	private EmployeeDao employeeDao;
