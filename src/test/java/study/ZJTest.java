@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import com.zj.study.test.powermock.EmployeeDao;
-import com.zj.study.test.powermock.EmployeeService;
+import com.zj.study.test.powermock.a.EmployeeService;
 
 public class ZJTest {
 

@@ -1,4 +1,4 @@
-package com.zj.study.test.powermock.f;
+package com.zj.study.test.powermock.e;
 
 import org.junit.After;
 import org.junit.Test;
