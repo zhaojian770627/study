@@ -1,7 +1,5 @@
 package com.zj.study.framework.spring.test;
 
-import static org.junit.Assert.fail;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +14,7 @@ import com.zj.study.framework.spring.cap1.config.MainConfig;
 //@ContextConfiguration(locations = "classpath:applicationContext.xml")
 //@ContextConfiguration(locations = "classpath:applicationContext.xml")
 @ContextConfiguration(classes = MainConfig.class)
-public class SpringTest1 {
+public class SpringTestUseConfig {
 
 	@Autowired
 	Person person;
