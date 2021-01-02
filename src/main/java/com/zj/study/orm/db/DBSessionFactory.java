@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.zj.study.freemarker.entity.DataBase;
-import com.zj.study.freemarker.entity.Settings;
 import com.zj.study.freemarker.utils.DataBaseUtils;
 import com.zj.study.orm.bean.User;
 
