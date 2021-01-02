@@ -79,7 +79,7 @@ public class DataBaseUtils {
 
 	}
 
-	private static Connection getConnection(DataBase db) throws SQLException {
+	public static Connection getConnection(DataBase db) throws SQLException {
 		Connection conn = java.sql.DriverManager.getConnection(db.getUrl(), db.getUserName(), db.getPassword());
 		return conn;
 	}
