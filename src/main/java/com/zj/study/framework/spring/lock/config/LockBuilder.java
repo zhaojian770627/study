@@ -49,7 +49,7 @@ public class LockBuilder {
 				if (st.length != 2) {
 					throw new IllegalArgumentException("Illegal input : config.server: ip:port,ip:port...");
 				}
-				useSentinelServers.addSentinelAddress(st[0] + ":" + st[1]);
+				useSentinelServers.addSentinelAddress(REDIS_SCHEME + st[0] + ":" + st[1]);
 			}
 			redisson = Redisson.create(config);
 		} else {

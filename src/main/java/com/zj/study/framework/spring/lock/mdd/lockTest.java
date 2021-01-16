@@ -10,7 +10,7 @@ public class lockTest {
 		String msg = "";
 		if (lockContext.isLocked()) {
 			msg = "加锁成功";
-//			lockContext.unlock();
+			lockContext.unlock();
 		} else
 			msg = "加锁失败";
 		System.out.println(msg);

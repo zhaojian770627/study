@@ -17,6 +17,7 @@ public class RedisConf {
 	@Value("${redis.mainIndex}")
 	private int mainIndex;
 
+	@Value("${redis.masterName:#{null}}")
 	private String masterName;
 
 	private int maxIdle = 10;
@@ -26,9 +27,10 @@ public class RedisConf {
 
 	private Integer timeout;
 
-	@Value("${redis.cluster}")
+	@Value("${redis.cluster:false}")
 	private Boolean isCluster;
 	
+	@Value("${redis.sentinel:false}")
 	private Boolean isSentinel;
 
 	public static RedisConf setConf() {
