@@ -1,4 +1,4 @@
-package com.geely.design.principle.dependenceinversion;
+package com.zj.study.designpattern.dependenceinversion;
 
 /**
  * Created by geely
