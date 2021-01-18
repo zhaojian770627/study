@@ -2,6 +2,14 @@ package com.zj.study.designpattern.pattern.creational.abstractfactory;
 
 /**
  * Created by geely
+ * <br>
+ * <br>
+ * Sample:
+ * <p>
+ * {@link java.sql.Connection}
+ * {@link org.apache.ibatis.session.SqlSessionFactory}
+ * >/p>
+ * 
  */
 public class Test {
     public static void main(String[] args) {
