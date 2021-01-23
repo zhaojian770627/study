@@ -5,5 +5,5 @@ import org.redisson.api.annotation.RRemoteAsync;
 
 @RRemoteAsync(ExecutorInterface.class)
 public interface ExecutorInterfaceAsyc {
-	<T,V> RFuture<T> executor(String type, V o);
+	<T, V> RFuture<ExecutorResult<T>> execute(String type, V o);
 }

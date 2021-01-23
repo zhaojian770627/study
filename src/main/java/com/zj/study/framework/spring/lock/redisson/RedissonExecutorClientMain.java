@@ -18,11 +18,11 @@ public class RedissonExecutorClientMain {
 		RRemoteService remoteService = redissonClient.getRemoteService();
 		ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
 		ExecutorInterfaceAsyc service2 = remoteService.get(ExecutorInterfaceAsyc.class);
-		for (int i = 0; i < 100; i++) {
-			RFuture<Integer> future = service1.executor("aaa", 1111);
-			Integer result = future.get();
-			System.out.println(result);
-		}
+		RFuture<ExecutorResult<Integer>> future = service1.execute("aaa", 2);
+		ExecutorResult<Integer> result = future.get();
+		System.out.println(result.isSuccess == true ? result.getData() : null);
+		app.close();
+		System.exit(0);
 	}
 
 }
