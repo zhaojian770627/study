@@ -1,5 +1,7 @@
 package com.zj.study.framework.spring.lock.redisson;
 
+import java.util.UUID;
+
 import org.redisson.Redisson;
 import org.redisson.api.RRemoteService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,12 +13,12 @@ public class RedissonExecutorServerMain {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(MainConfig.class);
 		Redisson redissonClient = (Redisson) app.getBean("redissonClient");
-
+		String flag = UUID.randomUUID().toString();
 		RRemoteService remoteService = redissonClient.getRemoteService();
-		ExecutorInterfaceImpl impl = new ExecutorInterfaceImpl();
+		ExecutorInterfaceImpl impl = new ExecutorInterfaceImpl(flag);
 
 		remoteService.register(ExecutorInterface.class, impl);
-		System.out.println("server started!");
+		System.out.println("server [" + flag + "] started!");
 	}
 
 }
