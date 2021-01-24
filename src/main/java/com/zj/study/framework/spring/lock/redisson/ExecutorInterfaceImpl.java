@@ -1,5 +1,7 @@
 package com.zj.study.framework.spring.lock.redisson;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.context.ApplicationContext;
 
 public class ExecutorInterfaceImpl implements ExecutorInterface {
@@ -26,8 +28,9 @@ public class ExecutorInterfaceImpl implements ExecutorInterface {
 		return executorResult;
 	}
 
-	private <V, T> T innerExec(String type, V v) {
+	private <V, T> T innerExec(String type, V v) throws InterruptedException {
 		Integer vi = (Integer) v;
+		TimeUnit.SECONDS.sleep(10);
 		if (vi == 1)
 			throw new RuntimeException("123");
 		return (T) vi;
