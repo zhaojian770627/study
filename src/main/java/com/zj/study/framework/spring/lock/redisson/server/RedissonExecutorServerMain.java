@@ -18,7 +18,7 @@ public class RedissonExecutorServerMain {
 		RRemoteService remoteService = redissonClient.getRemoteService();
 		ExecutorInterfaceImpl impl = new ExecutorInterfaceImpl(flag, app);
 
-		remoteService.register(ExecutorInterface.class, impl, 1);
+		remoteService.register(ExecutorInterface.class, impl, 2);
 		System.out.println("server [" + flag + "] started!");
 	}
 

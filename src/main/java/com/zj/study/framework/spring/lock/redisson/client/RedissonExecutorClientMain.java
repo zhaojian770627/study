@@ -51,7 +51,7 @@ public class RedissonExecutorClientMain {
 //		CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 		for (RFuture<ExecutorResult<Integer>> future : futures) {
 //			ExecutorResult<Integer> result = future.get();
-			ExecutorResult<Integer> result = future.get(1, TimeUnit.HOURS);
+			ExecutorResult<Integer> result = future.get();
 			System.out.println(result.isSuccess() == true ? result.getData() : null);
 		}
 		app.close();
