@@ -1,5 +1,6 @@
 package com.zj.study.framework.spring.lock.redisson;
 
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import org.redisson.Redisson;
@@ -8,6 +9,8 @@ import org.redisson.api.RRemoteService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.zj.study.framework.spring.lock.config.MainConfig;
+import com.zj.study.framework.spring.lock.redisson.task.ITaskRecord;
+import com.zj.study.framework.spring.lock.redisson.task.TaskContext;
 
 public class RedissonExecutorClientMain {
 
@@ -18,9 +21,22 @@ public class RedissonExecutorClientMain {
 		RRemoteService remoteService = redissonClient.getRemoteService();
 		ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
 		ExecutorInterfaceAsyc service2 = remoteService.get(ExecutorInterfaceAsyc.class);
-		RFuture<ExecutorResult<Integer>> future = service1.execute("aaa", 2);
-		ExecutorResult<Integer> result = future.get();
-		System.out.println(result.isSuccess == true ? result.getData() : null);
+
+		// 登记任务
+		ITaskRecord taskRecord = app.getBean(ITaskRecord.class);
+
+		TaskContext task1 = new TaskContext("task1", "任务1");
+		TaskContext task2 = new TaskContext("task2", "任务2");
+		TaskContext task3 = new TaskContext("task3", "任务2");
+
+		TaskContext[] tasks = new TaskContext[] { task1, task2, task3 };
+		taskRecord.register(Arrays.asList(tasks));
+
+		for (TaskContext task : tasks) {
+			RFuture<ExecutorResult<Integer>> future = service1.execute(task, 2);
+			ExecutorResult<Integer> result = future.get();
+			System.out.println(result.isSuccess == true ? result.getData() : null);
+		}
 		app.close();
 		System.exit(0);
 	}
