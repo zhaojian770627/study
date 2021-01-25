@@ -38,7 +38,7 @@ public class ExecutorInterfaceImpl implements ExecutorInterface {
 
 	private <V, T> T innerExec(TaskContext typetaskContext, V v) throws InterruptedException {
 		Integer vi = (Integer) v;
-		TimeUnit.SECONDS.sleep(10);
+//		TimeUnit.SECONDS.sleep(10);
 		if (vi == 1)
 			throw new RuntimeException("123");
 		return (T) vi;

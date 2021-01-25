@@ -16,6 +16,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zj.study.framework.spring.lock.mdd.LockService;
+import com.zj.study.framework.spring.lock.redisson.task.DBTaskRecord;
+import com.zj.study.framework.spring.lock.redisson.task.ITaskRecord;
 
 //配置类====配置文件
 @Configuration()
@@ -59,5 +61,10 @@ public class MainConfig {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		jdbcTemplate.setDataSource(dataSource);
 		return jdbcTemplate;
+	}
+
+	@Bean
+	public ITaskRecord taskRecord() {
+		return new DBTaskRecord();
 	}
 }

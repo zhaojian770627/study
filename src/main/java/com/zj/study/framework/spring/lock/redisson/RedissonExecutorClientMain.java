@@ -1,7 +1,11 @@
 package com.zj.study.framework.spring.lock.redisson;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.redisson.Redisson;
 import org.redisson.api.RFuture;
@@ -14,17 +18,17 @@ import com.zj.study.framework.spring.lock.redisson.task.TaskContext;
 
 public class RedissonExecutorClientMain {
 
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
+	public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
 		AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(MainConfig.class);
 		Redisson redissonClient = (Redisson) app.getBean("redissonClient");
 
 		RRemoteService remoteService = redissonClient.getRemoteService();
-		ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
+//		ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
 		ExecutorInterfaceAsyc service2 = remoteService.get(ExecutorInterfaceAsyc.class);
 
 		// 登记任务
 		ITaskRecord taskRecord = app.getBean(ITaskRecord.class);
-
+		
 		TaskContext task1 = new TaskContext("task1", "任务1");
 		TaskContext task2 = new TaskContext("task2", "任务2");
 		TaskContext task3 = new TaskContext("task3", "任务2");
@@ -32,9 +36,16 @@ public class RedissonExecutorClientMain {
 		TaskContext[] tasks = new TaskContext[] { task1, task2, task3 };
 		taskRecord.register(Arrays.asList(tasks));
 
+		List<RFuture<ExecutorResult<Integer>>> futures = new ArrayList<>();
 		for (TaskContext task : tasks) {
+			ExecutorInterfaceAsyc service1 = remoteService.get(ExecutorInterfaceAsyc.class);
 			RFuture<ExecutorResult<Integer>> future = service1.execute(task, 2);
-			ExecutorResult<Integer> result = future.get();
+			futures.add(future);
+
+		}
+		for (RFuture<ExecutorResult<Integer>> future : futures) {
+//			ExecutorResult<Integer> result = future.get();
+			ExecutorResult<Integer> result = future.get(1, TimeUnit.HOURS);
 			System.out.println(result.isSuccess == true ? result.getData() : null);
 		}
 		app.close();
