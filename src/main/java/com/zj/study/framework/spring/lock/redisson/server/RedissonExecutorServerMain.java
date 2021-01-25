@@ -1,4 +1,4 @@
-package com.zj.study.framework.spring.lock.redisson;
+package com.zj.study.framework.spring.lock.redisson.server;
 
 import java.util.UUID;
 
@@ -7,6 +7,7 @@ import org.redisson.api.RRemoteService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.zj.study.framework.spring.lock.config.MainConfig;
+import com.zj.study.framework.spring.lock.redisson.common.ExecutorInterface;
 
 public class RedissonExecutorServerMain {
 

@@ -1,4 +1,4 @@
-package com.zj.study.framework.spring.lock.redisson;
+package com.zj.study.framework.spring.lock.redisson.common;
 
 import com.zj.study.framework.spring.lock.redisson.task.TaskContext;
 

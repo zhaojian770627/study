@@ -1,4 +1,4 @@
-package com.zj.study.framework.spring.lock.redisson;
+package com.zj.study.framework.spring.lock.redisson.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +13,7 @@ import org.redisson.api.RRemoteService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.zj.study.framework.spring.lock.config.MainConfig;
+import com.zj.study.framework.spring.lock.redisson.common.ExecutorResult;
 import com.zj.study.framework.spring.lock.redisson.task.ITaskRecord;
 import com.zj.study.framework.spring.lock.redisson.task.TaskContext;
 
