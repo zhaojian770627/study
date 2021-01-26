@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zj.study.framework.spring.lock.mdd.LockService;
+import com.zj.study.framework.spring.lock.redisson.server.ServiceRegisterBean;
 import com.zj.study.framework.spring.lock.redisson.task.DBTaskRecord;
 import com.zj.study.framework.spring.lock.redisson.task.ITaskRecord;
 
@@ -66,5 +67,14 @@ public class MainConfig {
 	@Bean
 	public ITaskRecord taskRecord() {
 		return new DBTaskRecord();
+	}
+
+	@Bean
+	public ServiceRegisterBean serviceRegisterBean() {
+		return new ServiceRegisterBean();
+	}
+	@Bean
+	public VerInfo verInfo() {
+		return new VerInfo();
 	}
 }
