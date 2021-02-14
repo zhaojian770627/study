@@ -1,6 +1,8 @@
 package com.zj.study.designpattern.pattern.structural.flyweight;
 
 /**
+ * 享元模式
+ * 
  * Created by geely
  */
 public class Test {
