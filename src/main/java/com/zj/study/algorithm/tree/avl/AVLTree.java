@@ -7,6 +7,7 @@ import java.util.Enumeration;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
@@ -100,8 +101,7 @@ public class AVLTree {
 
 		@Override
 		public String toString() {
-			return title + String.valueOf(node.getValue()) + "|"
-					+ node.getHeight();
+			return title + String.valueOf(node.getValue()) + "|" + node.getHeight();
 		}
 	}
 
@@ -179,8 +179,7 @@ public class AVLTree {
 			else
 				return DoubleRotateWithLeft(T);
 		} else if (Height(T.getRight()) - Height(T.getLeft()) == 2) {
-			if (Height(T.getRight().getRight()) >= Height(T.getRight()
-					.getLeft()))
+			if (Height(T.getRight().getRight()) >= Height(T.getRight().getLeft()))
 				return SingleRotateWithRight(T);
 			else
 				return DoubleRotateWithRight(T);
@@ -193,6 +192,20 @@ public class AVLTree {
 			while (tree.getLeft() != null)
 				tree = tree.getLeft();
 		return tree;
+	}
+
+	private AVLNode floor(int num, AVLNode node) {
+		if (node == null)
+			return null;
+		if (num == node.getValue())
+			return node;
+		if (num < node.getValue())
+			return floor(num, node.getLeft());
+
+		AVLNode t = floor(num, node.getRight());
+		if (t != null)
+			return t;
+		return node;
 	}
 
 	/**
@@ -210,21 +223,52 @@ public class AVLTree {
 	private void Show() {
 		JFrame f = new JFrame("AvlTree");
 		f.setLayout(new BorderLayout());
-		f.setSize(500, 500);
+		f.setSize(600, 600);
 
 		tree = new JTree(rootNode);
 		f.add(tree, BorderLayout.CENTER);
 		JPanel operPnl = new JPanel();
 		f.add(operPnl, BorderLayout.SOUTH);
 		final JTextField jtNum = new JTextField(20);
+		JButton btnPrepare = new JButton("Prepare");
 		JButton btnAdd = new JButton("Add");
 		JButton btnDel = new JButton("Del");
+		JButton btnFloor = new JButton("Floor");
 		JButton btnClear = new JButton("Clear");
 
 		operPnl.add(jtNum);
+		operPnl.add(btnPrepare);
 		operPnl.add(btnAdd);
 		operPnl.add(btnDel);
+		operPnl.add(btnFloor);
 		operPnl.add(btnClear);
+
+		btnPrepare.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int[] data = { 40, 20, 70, 50, 10, 60, 30, 80 };
+				for (int i = 0; i < data.length; i++) {
+					avlRoot = insert(data[i], avlRoot);
+				}
+				refreshTree();
+			}
+
+		});
+
+		btnAdd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String snum = jtNum.getText();
+				if (snum.equals(""))
+					return;
+				int num = Integer.parseInt(snum);
+				AddNum(num);
+				jtNum.setText("");
+			}
+
+		});
 
 		btnAdd.addActionListener(new ActionListener() {
 
@@ -248,7 +292,21 @@ public class AVLTree {
 				if (snum.equals(""))
 					return;
 				int num = Integer.parseInt(snum);
-				DelNum(num);
+				delNum(num);
+				jtNum.setText("");
+			}
+
+		});
+
+		btnFloor.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String snum = jtNum.getText();
+				if (snum.equals(""))
+					return;
+				int num = Integer.parseInt(snum);
+				searchFloor(num);
 				jtNum.setText("");
 			}
 
@@ -259,8 +317,7 @@ public class AVLTree {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				avlRoot = null;
-				DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(
-						"Empty");
+				DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Empty");
 				DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
 				tree.setModel(treeModel);
 			}
@@ -269,8 +326,7 @@ public class AVLTree {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		/*
-		 * AVLNode avlRoot = insert(10, null); insert(11, avlRoot); insert(9,
-		 * avlRoot);
+		 * AVLNode avlRoot = insert(10, null); insert(11, avlRoot); insert(9, avlRoot);
 		 * 
 		 * addChildTree(rootNode, avlRoot);
 		 */
@@ -279,36 +335,46 @@ public class AVLTree {
 	private void AddNum(int num) {
 		avlRoot = insert(num, avlRoot);
 
-		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(
-				new AVLTreeNode(avlRoot, "Root "));
+		refreshTree();
+	}
+
+	private void refreshTree() {
+		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(new AVLTreeNode(avlRoot, "Root "));
 		addChildTree(rootNode, avlRoot);
 		DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
 		tree.setModel(treeModel);
 		expandTree(tree, new TreePath(rootNode));
 	}
 
-	private void DelNum(int num) {
+	/**
+	 * 寻找等于指定 数字或小于指定数字的最大的数字
+	 * 
+	 * @param tree
+	 * @return
+	 */
+	void searchFloor(int num) {
+		AVLNode node = floor(num, avlRoot);
+		if (node == null)
+			JOptionPane.showMessageDialog(null, "未找到");
+		else
+			JOptionPane.showMessageDialog(null, node.getValue());
+	}
+
+	private void delNum(int num) {
 		avlRoot = remove(num, avlRoot);
 		if (avlRoot == null) {
-			DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(
-					"Empty");
+			DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Empty");
 			DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
 			tree.setModel(treeModel);
 			return;
 		}
-		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode(
-				new AVLTreeNode(avlRoot, "Root "));
-		addChildTree(rootNode, avlRoot);
-		DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
-		tree.setModel(treeModel);
-		expandTree(tree, new TreePath(rootNode));
+		refreshTree();
 
 	}
 
 	private void addChildTree(DefaultMutableTreeNode root, AVLNode avlRoot) {
 		if (avlRoot.getLeft() != null) {
-			DefaultMutableTreeNode leftNode = new DefaultMutableTreeNode(
-					new AVLTreeNode(avlRoot.getLeft(), "Left  "));
+			DefaultMutableTreeNode leftNode = new DefaultMutableTreeNode(new AVLTreeNode(avlRoot.getLeft(), "Left  "));
 			addChildTree(leftNode, avlRoot.getLeft());
 			root.add(leftNode);
 		}
