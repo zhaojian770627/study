@@ -209,6 +209,25 @@ public class AVLTree {
 	}
 
 	/**
+	 * 
+	 * 判断是否是Bst树
+	 * 
+	 * @param node
+	 * @param minV
+	 * @param maxV
+	 * @return
+	 */
+	private boolean isBst(AVLNode node, int minV, int maxV) {
+		if (node == null)
+			return true;
+
+		if (node.getValue() < minV || node.getValue() > maxV)
+			return false;
+
+		return isBst(node.getLeft(), minV, node.getValue()) && isBst(node.getRight(), node.getValue(), maxV);
+	}
+
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -234,6 +253,7 @@ public class AVLTree {
 		JButton btnAdd = new JButton("Add");
 		JButton btnDel = new JButton("Del");
 		JButton btnFloor = new JButton("Floor");
+		JButton btnTest = new JButton("Test");
 		JButton btnClear = new JButton("Clear");
 
 		operPnl.add(jtNum);
@@ -241,6 +261,7 @@ public class AVLTree {
 		operPnl.add(btnAdd);
 		operPnl.add(btnDel);
 		operPnl.add(btnFloor);
+		operPnl.add(btnTest);
 		operPnl.add(btnClear);
 
 		btnPrepare.addActionListener(new ActionListener() {
@@ -298,6 +319,12 @@ public class AVLTree {
 
 		});
 
+		/**
+		 * 寻找等于指定 数字或小于指定数字的最大的数字
+		 * 
+		 * @param tree
+		 * @return
+		 */
 		btnFloor.addActionListener(new ActionListener() {
 
 			@Override
@@ -306,8 +333,23 @@ public class AVLTree {
 				if (snum.equals(""))
 					return;
 				int num = Integer.parseInt(snum);
-				searchFloor(num);
+
+				AVLNode node = floor(num, avlRoot);
+				if (node == null)
+					JOptionPane.showMessageDialog(null, "未找到");
+				else
+					JOptionPane.showMessageDialog(null, node.getValue());
+
 				jtNum.setText("");
+			}
+
+		});
+
+		btnTest.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, isBst(avlRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 			}
 
 		});
@@ -344,20 +386,6 @@ public class AVLTree {
 		DefaultTreeModel treeModel = new DefaultTreeModel(rootNode);
 		tree.setModel(treeModel);
 		expandTree(tree, new TreePath(rootNode));
-	}
-
-	/**
-	 * 寻找等于指定 数字或小于指定数字的最大的数字
-	 * 
-	 * @param tree
-	 * @return
-	 */
-	void searchFloor(int num) {
-		AVLNode node = floor(num, avlRoot);
-		if (node == null)
-			JOptionPane.showMessageDialog(null, "未找到");
-		else
-			JOptionPane.showMessageDialog(null, node.getValue());
 	}
 
 	private void delNum(int num) {
