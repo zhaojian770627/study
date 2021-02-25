@@ -69,7 +69,7 @@ public class MainConfig {
 		return new DBTaskRecord();
 	}
 
-	@Bean
+//	@Bean
 	public ServiceRegisterBean serviceRegisterBean() {
 		return new ServiceRegisterBean();
 	}
