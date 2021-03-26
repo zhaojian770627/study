@@ -13,8 +13,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class CheckMain {
 
 	public static void main(String[] args) throws Exception {
-		String accbody = "2112909038834176";
-		String period = "2021-03";
+
+		// 孙宝前
+		// String accbody = "2112909038834176";
+		// String period = "2021-03";
+		// 阚炳垚
+		String accbody = "2113050920505856";
+		String period = "2021-01";
 
 		AppContext.init();
 		Map<String, Item> detailBalance = getIADetails(accbody, period);
