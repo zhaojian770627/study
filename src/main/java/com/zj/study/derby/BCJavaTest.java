@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 
 import org.apache.derby.iapi.services.cache.CacheManager;
 import org.apache.derby.iapi.services.compiler.ClassBuilder;
+import org.apache.derby.iapi.services.compiler.MethodBuilder;
 import org.apache.derby.impl.services.bytecode.BCJava;
 import org.apache.derby.impl.services.cache.ConcurrentCacheFactory;
 import org.apache.derby.impl.services.reflect.ReflectClassesJava2;
@@ -21,9 +22,11 @@ public class BCJavaTest {
 
 		setCache(bcJava);
 
+		
 		int modifiers = Modifier.PUBLIC | Modifier.FINAL;
 
-		ClassBuilder bcClass = bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd", null);
+		ClassBuilder bcClass = bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd", "org.apache.derby.impl.sql.execute.CursorActivation");
+		beginConstructor(bcClass);
 		bcClass.getClassBytecode();
 		System.err.println(bcClass);
 	}
@@ -38,4 +41,16 @@ public class BCJavaTest {
 		vmTypeIdCacheFeild.set(bcJava, cacheManager);
 	}
 
+	private static void beginConstructor(ClassBuilder bcClass)
+	{
+		// create a constructor that just calls super.  
+		MethodBuilder realConstructor =
+			bcClass.newConstructorBuilder(Modifier.PUBLIC);
+		realConstructor.callSuper();
+		realConstructor.methodReturn();
+		realConstructor.complete();
+
+//		constructor = bcClass.newMethodBuilder(Modifier.PUBLIC, "void", "postConstructor");
+//		constructor.addThrownException(ClassName.StandardException);
+	}
 }
