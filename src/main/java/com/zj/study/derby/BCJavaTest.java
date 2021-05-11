@@ -6,6 +6,7 @@ import java.lang.reflect.Modifier;
 import org.apache.derby.iapi.services.cache.CacheManager;
 import org.apache.derby.impl.services.bytecode.BCJava;
 import org.apache.derby.impl.services.cache.ConcurrentCacheFactory;
+import org.apache.derby.impl.services.reflect.ReflectClassesJava2;
 
 public class BCJavaTest {
 
@@ -16,7 +17,8 @@ public class BCJavaTest {
 
 		int modifiers = Modifier.PUBLIC | Modifier.FINAL;
 
-//		bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd", null);
+		bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd", null);
+		System.err.println("Run success!");
 	}
 
 	private static void setCache(BCJava bcJava) throws Exception {
