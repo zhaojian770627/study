@@ -14,6 +14,7 @@ public class DerbyTest {
 	public static void main(String[] args) throws Exception {
 		SanityManager.DEBUG_SET("ClassLineNumbers");
 		SanityManager.DEBUG_SET("DumpClassFile");
+		SanityManager.DEBUG_SET("ByteCodeGenInstr");
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//derbydb;create=true");
 //		Connection conn = DriverManager.getConnection("jdbc:derby:derbydb");
