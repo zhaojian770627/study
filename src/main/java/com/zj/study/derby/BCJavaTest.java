@@ -3,6 +3,7 @@ package com.zj.study.derby;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import org.apache.derby.iapi.reference.ClassName;
 import org.apache.derby.iapi.services.cache.CacheManager;
 import org.apache.derby.iapi.services.compiler.ClassBuilder;
 import org.apache.derby.iapi.services.compiler.MethodBuilder;
@@ -50,7 +51,9 @@ public class BCJavaTest {
 		realConstructor.methodReturn();
 		realConstructor.complete();
 
-//		constructor = bcClass.newMethodBuilder(Modifier.PUBLIC, "void", "postConstructor");
-//		constructor.addThrownException(ClassName.StandardException);
+		MethodBuilder method = bcClass.newMethodBuilder(Modifier.PUBLIC, "void", "postConstructor");
+		method.addThrownException(ClassName.StandardException);
+		method.methodReturn();
+		method.complete();
 	}
 }
