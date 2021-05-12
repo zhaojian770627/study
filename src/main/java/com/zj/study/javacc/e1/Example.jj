@@ -1,30 +1,50 @@
 PARSER_BEGIN(Example)
-
 package com.zj.study.javacc.e1;
 
 /** Simple brace matcher. */
-public class Example {
-
+public class Example
+{
   /** Main entry point. */
-  public static void main(String args[]) throws ParseException {
+  public static void main(String args []) throws ParseException
+  {
     Example parser = new Example(System.in);
-    parser.Input();
+    parser.start();
   }
-
 }
 
 PARSER_END(Example)
 
-/** Root production. */
-void Input() :
-{}
+SKIP :
 {
-  MatchedBraces() ("\n"|"\r")* <EOF>
+  " "
 }
 
-/** Brace matching production. */
-void MatchedBraces() :
-{}
+SKIP :
 {
-  "{" [ MatchedBraces() ] "}"
+  "\n"
+| "\r"
+| "\r\n"
+}
+
+TOKEN :
+{
+  < PLUS : "+" >
+}
+
+TOKEN :
+{
+  < NUMBER : ([ "0"-"9" ])+ >
+}
+
+void start() :
+{
+  Token t;
+}
+{
+  t = < NUMBER > 
+  (
+  < PLUS > 
+  t = < NUMBER >
+  )* 
+  < EOF >
 }
