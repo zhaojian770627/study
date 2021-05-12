@@ -1,0 +1,50 @@
+PARSER_BEGIN(Example)
+package com.zj.study.javacc.e1;
+
+/** Simple brace matcher. */
+public class Example
+{
+  /** Main entry point. */
+  public static void main(String args []) throws ParseException
+  {
+    Example parser = new Example(System.in);
+    parser.start();
+  }
+}
+
+PARSER_END(Example)
+
+< DEFAULT >
+MORE :
+{
+  "a" : S1
+}
+
+< S1 >
+MORE :
+{
+  "b"
+  {
+    int l = image.length() - 1;
+    image.setCharAt(l, image.charAt(l));
+  }
+  : S2
+}
+
+< S2 >
+TOKEN :
+{
+  "cd"
+  {
+    StringBuider x = image;
+  }
+  : DEFAULT
+}
+
+void start() :
+{
+  Token t;
+}
+{
+  < EOF >
+}
