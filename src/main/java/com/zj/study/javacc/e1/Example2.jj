@@ -14,37 +14,31 @@ public class Example
 
 PARSER_END(Example)
 
-< DEFAULT >
-MORE :
+SKIP :
 {
-  "a" : S1
+  < [ " ", "\t", "\r", "\n" ] >
 }
 
-< S1 >
-MORE :
-{
-  "b"
-  {
-    int l = image.length() - 1;
-    image.setCharAt(l, image.charAt(l));
-  }
-  : S2
-}
-
-< S2 >
 TOKEN :
 {
-  "cd"
-  {
-    StringBuider x = image;
-  }
-  : DEFAULT
+  < WORD : ([ "a"-"z" ])+ >
 }
 
 void start() :
 {
   Token t;
+  int count = 0;
 }
 {
+  (
+    t = < WORD >
+    {
+      System.err.println(t);
+      count++;
+    }
+  )*
+  {
+    System.err.println(count);
+  }
   < EOF >
 }
