@@ -41,10 +41,15 @@ void start() :
   Token t;
 }
 {
-  t = < NUMBER > 
+  t = < NUMBER >
+  {
+	Sysstem
+  }
   (
   < PLUS > 
   t = < NUMBER >
+  {
+  }
   )* 
   < EOF >
 }
