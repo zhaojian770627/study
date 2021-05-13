@@ -23,7 +23,6 @@ public class DerbyTest {
 
 		// org.apache.derby.impl.jdbc.EmbedConnection
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//derbydb;create=true");
-//		Connection conn = DriverManager.getConnection("jdbc:derby:derbydb");
 
 		createTable(conn);
 
