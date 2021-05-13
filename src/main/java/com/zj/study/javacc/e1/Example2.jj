@@ -1,13 +1,16 @@
 PARSER_BEGIN(Example)
 package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
 
 /** Simple brace matcher. */
 public class Example
 {
   /** Main entry point. */
-  public static void main(String args []) throws ParseException
+  public static void main(String args []) throws Exception
   {
-    Example parser = new Example(System.in);
+    String info = "good good study day day up";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    Example parser = new Example(inputStream);
     parser.start();
   }
 }
