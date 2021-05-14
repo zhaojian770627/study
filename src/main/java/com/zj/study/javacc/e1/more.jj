@@ -25,7 +25,7 @@ SKIP :
 < DEFAULT >
 MORE :
 {
-  < A : "a" >
+  "a"
   {
     System.err.println("a--image:" + image);
   }
@@ -35,7 +35,7 @@ MORE :
 < S1 >
 MORE :
 {
-  < B : "b" >
+  "b"
   {
     System.err.println("b--image:" + image);
   }
