@@ -1,6 +1,7 @@
 package com.zj.study.derby.io;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Properties;
 import java.util.zip.CRC32;
 
@@ -14,7 +15,6 @@ import org.apache.derby.iapi.store.raw.ContainerKey;
 import org.apache.derby.iapi.store.raw.RawStoreFactory;
 import org.apache.derby.iapi.store.raw.log.LogInstant;
 import org.apache.derby.impl.store.raw.data.AllocPage;
-import org.apache.derby.io.StorageRandomAccessFile;
 import org.apache.derby.shared.common.sanity.SanityManager;
 
 public class FileContainerTest {
@@ -64,7 +64,7 @@ public class FileContainerTest {
 	// attempt to preallocate a larger
 	// than normal number of pages.
 
-	public static void main(String[] args) throws StandardException {
+	public static void main(String[] args) throws Exception {
 		Properties conglomProperties = new Properties();
 
 		conglomProperties.put(Property.PAGE_SIZE_PARAMETER, RawStoreFactory.PAGE_SIZE_STRING);
@@ -78,9 +78,11 @@ public class FileContainerTest {
 
 	}
 
-	private void createIdent(ContainerKey containerKey, Properties conglomProperties) throws StandardException {
+	private void createIdent(ContainerKey containerKey, Properties conglomProperties) throws Exception {
 		initContainerHeader(true);
 		createInfoFromProp(conglomProperties);
+		RandomAccessFile dataFie = new RandomAccessFile("D:\\temp\\c10.data", "rw");
+		writeRAFHeader(containerKey, dataFie, true, true);
 	}
 
 	// initialize header information so this container object can be safely
@@ -251,15 +253,15 @@ public class FileContainerTest {
 		return isReusableRecordId;
 	}
 
-	private void writeRAFHeader(Object identity, StorageRandomAccessFile file, boolean create, boolean syncFile)
+	private void writeRAFHeader(Object identity, RandomAccessFile file, boolean create, boolean syncFile)
 			throws IOException, StandardException {
 		byte[] epage;
 		epage = new byte[pageSize];
 		writeHeader(identity, file, create, epage);
-		file.sync();
+		file.getFD().sync();
 	}
 
-	protected void writeHeader(Object identity, StorageRandomAccessFile file, boolean create, byte[] epage)
+	protected void writeHeader(Object identity, RandomAccessFile file, boolean create, byte[] epage)
 			throws IOException, StandardException {
 		// write out the current containerInfo in the borrowed space to byte
 		// array containerInfo
@@ -285,7 +287,7 @@ public class FileContainerTest {
 		writeAtOffset(file, epage, 0);
 	}
 
-	void writeAtOffset(StorageRandomAccessFile file, byte[] bytes, long offset) throws IOException, StandardException {
+	void writeAtOffset(RandomAccessFile file, byte[] bytes, long offset) throws IOException, StandardException {
 		file.seek(offset);
 		file.write(bytes);
 	}
