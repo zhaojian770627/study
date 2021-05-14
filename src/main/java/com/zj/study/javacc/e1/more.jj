@@ -25,7 +25,7 @@ SKIP :
 < DEFAULT >
 MORE :
 {
-  "a"
+  < A : "a" >
   {
     System.err.println("a--image:" + image);
   }
@@ -35,7 +35,7 @@ MORE :
 < S1 >
 MORE :
 {
-  "b"
+  < B : "b" >
   {
     System.err.println("b--image:" + image);
   }
@@ -45,7 +45,7 @@ MORE :
 < S2 >
 TOKEN :
 {
-  "cd"
+  < CD : "cd" >
   {
     System.err.println("cd--image:" + image);
   }
@@ -56,5 +56,6 @@ void start() :
 {
 }
 {
+  < CD > 
   < EOF >
 }
