@@ -17,6 +17,11 @@ public class Example
 
 PARSER_END(Example)
 
+SKIP :
+{
+  < [ " ", "\t", "\r", "\n" ] >
+}
+
 < DEFAULT >
 MORE :
 {
