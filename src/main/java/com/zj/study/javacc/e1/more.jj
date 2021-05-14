@@ -54,8 +54,12 @@ TOKEN :
 
 void start() :
 {
+  Token t;
 }
 {
-  < CD > 
+  t = < CD >
+  {
+    System.err.println("CD Token:" + t);
+  }
   < EOF >
 }
