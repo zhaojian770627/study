@@ -1,5 +1,7 @@
 package com.zj.study.derby.io;
 
+import java.io.DataInput;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Properties;
@@ -8,17 +10,21 @@ import java.util.zip.CRC32;
 import org.apache.derby.iapi.error.StandardException;
 import org.apache.derby.iapi.reference.Property;
 import org.apache.derby.iapi.reference.SQLState;
+import org.apache.derby.iapi.services.io.ArrayInputStream;
 import org.apache.derby.iapi.services.io.ArrayOutputStream;
 import org.apache.derby.iapi.services.io.FormatIdOutputStream;
 import org.apache.derby.iapi.store.raw.ContainerHandle;
 import org.apache.derby.iapi.store.raw.ContainerKey;
+import org.apache.derby.iapi.store.raw.PageKey;
 import org.apache.derby.iapi.store.raw.RawStoreFactory;
 import org.apache.derby.iapi.store.raw.log.LogInstant;
 import org.apache.derby.impl.store.raw.data.AllocPage;
+import org.apache.derby.io.StorageRandomAccessFile;
 import org.apache.derby.shared.common.sanity.SanityManager;
 
 public class FileContainerTest {
 	private static final int CONTAINER_FORMAT_ID_SIZE = 4;
+	public static final long FIRST_ALLOC_PAGE_OFFSET = 0L;
 	protected static final int CHECKSUM_SIZE = 8;
 	protected static final int CONTAINER_INFO_SIZE = CONTAINER_FORMAT_ID_SIZE + 4 + 4 + 4 + 4 + 2 + 2 + 8 + 8 + 8 + 8
 			+ CHECKSUM_SIZE + 8 + 8;
@@ -65,6 +71,17 @@ public class FileContainerTest {
 	// than normal number of pages.
 
 	public static void main(String[] args) throws Exception {
+		testCreateContainer();
+		testReadContainer();
+	}
+
+	private static void testReadContainer() throws Exception {
+		FileContainerTest test = new FileContainerTest();
+		RandomAccessFile dataFie = new RandomAccessFile("D:\\temp\\c10.data", "rw");
+		test.readHeader(test.getEmbryonicPage(dataFie, FIRST_ALLOC_PAGE_OFFSET));
+	}
+
+	static void testCreateContainer() throws Exception {
 		Properties conglomProperties = new Properties();
 
 		conglomProperties.put(Property.PAGE_SIZE_PARAMETER, RawStoreFactory.PAGE_SIZE_STRING);
@@ -75,7 +92,6 @@ public class FileContainerTest {
 		FileContainerTest test = new FileContainerTest();
 		ContainerKey containerKey = new ContainerKey(0, 16);
 		test.createIdent(containerKey, conglomProperties);
-
 	}
 
 	private void createIdent(ContainerKey containerKey, Properties conglomProperties) throws Exception {
@@ -291,4 +307,77 @@ public class FileContainerTest {
 		file.seek(offset);
 		file.write(bytes);
 	}
+
+	byte[] getEmbryonicPage(RandomAccessFile file, long offset) throws IOException, StandardException {
+		file.seek(offset);
+		return getEmbryonicPage(file);
+	}
+
+	protected byte[] getEmbryonicPage(RandomAccessFile fileData) throws IOException, StandardException {
+		byte[] epage = new byte[1024 / 5];
+		fileData.readFully(epage);
+		return epage;
+	}
+
+	protected void readHeader(byte[] epage) throws Exception {
+		// read persistent container header into containerInfo
+		AllocPage.ReadContainerInfo(containerInfo, epage);
+
+		// initialize header from information stored in containerInfo
+		readHeaderFromArray(containerInfo);
+	}
+
+	private void readHeaderFromArray(byte[] a) throws Exception {
+		ArrayInputStream inStream = new ArrayInputStream(a);
+
+		inStream.setLimit(CONTAINER_INFO_SIZE);
+		int fid = inStream.readInt();
+		if (fid != 116) {
+			throw new Exception("fid is wrong");
+		}
+
+		int status = inStream.readInt();
+		pageSize = inStream.readInt();
+		spareSpace = inStream.readInt();
+		minimumRecordSize = inStream.readInt();
+		initialPages = inStream.readShort();
+		PreAllocSize = inStream.readShort();
+		firstAllocPageNumber = inStream.readLong();
+		firstAllocPageOffset = inStream.readLong();
+		containerVersion = inStream.readLong();
+		estimatedRowCount = inStream.readLong();
+		reusableRecordIdSequenceNumber = inStream.readLong();
+		lastLogInstant = null;
+
+		if (PreAllocSize == 0) // pre 2.0, we don't store this.
+			PreAllocSize = DEFAULT_PRE_ALLOC_SIZE;
+
+		long spare3 = inStream.readLong(); // read spare long
+
+		// upgrade - if this is a container that was created before
+		// initialPages was stored, it will have a zero value. Set it to the
+		// default of 1.
+		if (initialPages == 0)
+			initialPages = 1;
+
+		// container read in from disk, reset preAllocation values
+		PreAllocThreshold = PRE_ALLOC_THRESHOLD;
+
+		// validate checksum
+		long onDiskChecksum = inStream.readLong();
+		checksum.reset();
+		checksum.update(a, 0, CONTAINER_INFO_SIZE - CHECKSUM_SIZE);
+
+		if (onDiskChecksum != checksum.getValue()) {
+			throw new Exception("checksum is wrong");
+		}
+
+		allocCache.reset();
+
+		// set the in memory state
+		setDroppedState((status & FILE_DROPPED) != 0);
+		setCommittedDropState((status & FILE_COMMITTED_DROP) != 0);
+		setReusableRecordIdState((status & FILE_REUSABLE_RECORDID) != 0);
+	}
+
 }
