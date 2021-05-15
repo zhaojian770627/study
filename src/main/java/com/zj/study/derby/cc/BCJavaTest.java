@@ -12,6 +12,13 @@ import org.apache.derby.impl.services.cache.ConcurrentCacheFactory;
 import org.apache.derby.impl.services.reflect.ReflectClassesJava2;
 import org.apache.derby.shared.common.sanity.SanityManager;
 
+/**
+ * 
+ * 学习Derby的动态类生成，是直接生成字节码数组的方式
+ * 
+ * @author Administrator
+ *
+ */
 public class BCJavaTest {
 
 	public static void main(String[] args) throws Exception {
@@ -23,10 +30,10 @@ public class BCJavaTest {
 
 		setCache(bcJava);
 
-		
 		int modifiers = Modifier.PUBLIC | Modifier.FINAL;
 
-		ClassBuilder bcClass = bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd", "org.apache.derby.impl.sql.execute.CursorActivation");
+		ClassBuilder bcClass = bcJava.newClassBuilder(new ReflectClassesJava2(), "a.b.c", modifiers, "ddd",
+				"org.apache.derby.impl.sql.execute.CursorActivation");
 		beginConstructor(bcClass);
 		bcClass.getClassBytecode();
 		System.err.println(bcClass);
@@ -42,11 +49,9 @@ public class BCJavaTest {
 		vmTypeIdCacheFeild.set(bcJava, cacheManager);
 	}
 
-	private static void beginConstructor(ClassBuilder bcClass)
-	{
-		// create a constructor that just calls super.  
-		MethodBuilder realConstructor =
-			bcClass.newConstructorBuilder(Modifier.PUBLIC);
+	private static void beginConstructor(ClassBuilder bcClass) {
+		// create a constructor that just calls super.
+		MethodBuilder realConstructor = bcClass.newConstructorBuilder(Modifier.PUBLIC);
 		realConstructor.callSuper();
 		realConstructor.methodReturn();
 		realConstructor.complete();

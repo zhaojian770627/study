@@ -7,6 +7,8 @@ import java.io.RandomAccessFile;
 import java.util.zip.CRC32;
 
 /*
+ * 学习Derby的日志控制文件的生成
+ * 
   		int format id  文件格式
 		int obsolete log file version 废弃版本标志
 		long the log instant (LogCounter) of the last completed checkpoint

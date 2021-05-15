@@ -18,6 +18,13 @@ import org.apache.derby.iapi.store.raw.log.LogInstant;
 import org.apache.derby.impl.store.raw.data.AllocPage;
 import org.apache.derby.shared.common.sanity.SanityManager;
 
+/**
+ * 
+ * 学习了Derby生成文件容器的代码
+ * 
+ * @author Administrator
+ *
+ */
 public class FileContainerTest {
 	private static final int CONTAINER_FORMAT_ID_SIZE = 4;
 	public static final long FIRST_ALLOC_PAGE_OFFSET = 0L;
@@ -35,7 +42,6 @@ public class FileContainerTest {
 	// 私有变量
 	byte[] containerInfo;
 	private CRC32 checksum; // holder for the checksum
-	protected AllocationCache allocCache;
 	protected int pageSize; // size of my pages
 	protected int spareSpace; // % space kept free on page in inserts
 	protected int minimumRecordSize; // minimum space a record should
@@ -107,11 +113,6 @@ public class FileContainerTest {
 			checksum = new CRC32();
 		else
 			checksum.reset();
-
-		if (allocCache == null)
-			allocCache = new AllocationCache();
-		else
-			allocCache.reset();
 
 		if (changeContainer) {
 			pageSize = 0;

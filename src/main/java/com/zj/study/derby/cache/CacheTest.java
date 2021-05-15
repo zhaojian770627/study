@@ -5,6 +5,13 @@ import org.apache.derby.iapi.services.cache.CacheManager;
 import org.apache.derby.iapi.services.cache.Cacheable;
 import org.apache.derby.impl.services.cache.ConcurrentCacheFactory;
 
+/**
+ * 
+ * 学习下Derby的缓存器的机制
+ * 
+ * @author Administrator
+ *
+ */
 public class CacheTest {
 
 	public static void main(String[] args) throws StandardException {
