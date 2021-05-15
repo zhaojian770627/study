@@ -71,7 +71,7 @@ public class FileContainerTest {
 	// than normal number of pages.
 
 	public static void main(String[] args) throws Exception {
-		testCreateContainer();
+//		testCreateContainer();
 		testReadContainer();
 	}
 
@@ -320,6 +320,8 @@ public class FileContainerTest {
 	}
 
 	protected void readHeader(byte[] epage) throws Exception {
+		if (containerInfo == null)
+			containerInfo = new byte[CONTAINER_INFO_SIZE];
 		// read persistent container header into containerInfo
 		AllocPage.ReadContainerInfo(containerInfo, epage);
 
