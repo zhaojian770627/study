@@ -17,8 +17,11 @@ public class CacheTest {
 	public static void main(String[] args) throws StandardException {
 		ConcurrentCacheFactory cacheFactory = new ConcurrentCacheFactory();
 		CacheManager cm = cacheFactory.newCacheManager(new MyObjectFactory(), "MyObject", 64, 256);
+		Object createParameter = null;
+		cm.create("A", createParameter);
 		Cacheable myObject = cm.find("A");
 
+		System.err.println(myObject);
 	}
 
 }

@@ -4,17 +4,20 @@ import org.apache.derby.iapi.error.StandardException;
 import org.apache.derby.iapi.services.cache.Cacheable;
 
 public class MyObject implements Cacheable {
+	String value;
 
 	@Override
 	public Cacheable setIdentity(Object key) throws StandardException {
-		// TODO Auto-generated method stub
-		return null;
+		System.err.println("setIdentity:" + key);
+		this.value = key.toString();
+		return this;
 	}
 
 	@Override
 	public Cacheable createIdentity(Object key, Object createParameter) throws StandardException {
-		// TODO Auto-generated method stub
-		return null;
+		System.err.println("createIdentity:" + key);
+		this.value = key.toString();
+		return this;
 	}
 
 	@Override
@@ -41,4 +44,8 @@ public class MyObject implements Cacheable {
 
 	}
 
+	@Override
+	public String toString() {
+		return "MyObject [value=" + value + "]";
+	}
 }
