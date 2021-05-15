@@ -8,8 +8,7 @@ public class MyObjectFactory implements CacheableFactory {
 
 	@Override
 	public Cacheable newCacheable(CacheManager cm) {
-		// TODO Auto-generated method stub
-		return null;
+		return new MyObject();
 	}
 
 }
