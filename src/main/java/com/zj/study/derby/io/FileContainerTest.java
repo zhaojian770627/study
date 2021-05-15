@@ -367,14 +367,14 @@ public class FileContainerTest {
 
 		// validate checksum
 		long onDiskChecksum = inStream.readLong();
+		if (checksum == null)
+			checksum = new CRC32();
 		checksum.reset();
 		checksum.update(a, 0, CONTAINER_INFO_SIZE - CHECKSUM_SIZE);
 
 		if (onDiskChecksum != checksum.getValue()) {
 			throw new Exception("checksum is wrong");
 		}
-
-		allocCache.reset();
 
 		// set the in memory state
 		setDroppedState((status & FILE_DROPPED) != 0);
