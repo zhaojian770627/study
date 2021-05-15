@@ -1,4 +1,4 @@
-package com.zj.study.derby;
+package com.zj.study.derby.cc;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
