@@ -28,6 +28,7 @@ MORE :
   "a"
   {
     System.err.println("a--image:" + image);
+    System.err.println("amatchLength:" + lengthOfMatch);
   }
   : S1
 }
@@ -37,7 +38,10 @@ MORE :
 {
   "b"
   {
+    image.setCharAt(1, 'B');
     System.err.println("b--image:" + image);
+    System.err.println("b matchLength:" + lengthOfMatch);
+    System.err.println("b getEndColumn:" + input_stream.getEndColumn());
   }
   : S2
 }
@@ -47,7 +51,10 @@ TOKEN :
 {
   < CD : "cd" >
   {
+    matchedToken.image = image.toString();
     System.err.println("cd--image:" + image);
+    System.err.println("cd matchLength:" + lengthOfMatch);
+    System.err.println("cd status:" + curLexState);
   }
   : DEFAULT
 }
