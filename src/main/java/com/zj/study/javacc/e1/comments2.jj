@@ -8,7 +8,7 @@ public class Example
   /** Main entry point. */
   public static void main(String args []) throws Exception
   {
-    String info = "cd'aa'";
+    String info = "'aa'";
     ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
     Example parser = new Example(inputStream);
     parser.start();
@@ -60,6 +60,5 @@ void start() :
   Token t;
 }
 {
-  < CD >
-  < EOF >
+  < STRLIT > 
 }
