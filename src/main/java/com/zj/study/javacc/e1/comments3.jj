@@ -10,7 +10,7 @@ public class Example
   /** Main entry point. */
   public static void main(String args []) throws Exception
   {
-    String info = "//aabbbbddd\ncd";
+    String info = "//a\n//b\ncd";
     ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
     Example parser = new Example(inputStream);
     parser.start();
@@ -43,6 +43,24 @@ void start() :
   Token t;
 }
 {
-  < CD > 
+  t = < CD >
+  {
+    if (t.specialToken == null)
+    {
+      return;
+    }
+    // walk back the special token chain until it reaches the first special token after the previous regular token
+    Token tmp_t = t.specialToken;
+    while (tmp_t.specialToken != null)
+    {
+      tmp_t = tmp_t.specialToken;
+    }
+    // now walk the special token chain forward and print them in the process
+    while (tmp_t != null)
+    {
+      System.out.println(tmp_t.image);
+      tmp_t = tmp_t.next;
+    }
+  }
   < EOF >
 }
