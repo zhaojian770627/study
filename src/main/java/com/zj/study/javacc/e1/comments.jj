@@ -30,7 +30,11 @@ SKIP :
 < WithinComment >
 SKIP :
 {
-  "*/" : DEFAULT
+  "*/"
+  {
+    System.err.println("comment--image:" + image);
+  }
+  : DEFAULT
 }
 
 < WithinComment >
