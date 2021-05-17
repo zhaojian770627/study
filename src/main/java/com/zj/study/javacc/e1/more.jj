@@ -2,7 +2,7 @@ PARSER_BEGIN(Example)
 package com.zj.study.javacc.e1;
 import java.io.ByteArrayInputStream;
 
-/** Simple brace matcher. */
+/** more的用法. */
 public class Example
 {
   /** Main entry point. */

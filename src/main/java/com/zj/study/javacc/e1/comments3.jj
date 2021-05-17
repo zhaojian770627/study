@@ -1,0 +1,48 @@
+PARSER_BEGIN(Example)
+package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
+
+/**
+	这个例子演示了特殊token的用途，匹配的字符将被忽略
+*/
+public class Example
+{
+  /** Main entry point. */
+  public static void main(String args []) throws Exception
+  {
+    String info = "//aabbbbddd\ncd";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    Example parser = new Example(inputStream);
+    parser.start();
+  }
+}
+
+PARSER_END(Example)
+
+SPECIAL_TOKEN :
+{
+  < SINGLE_LINE_COMMENT :
+    "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+  {
+    System.err.println("image:" + image);
+  }
+}
+
+TOKEN :
+{
+  < CD : "cd" >
+}
+
+void start() :
+{
+  Token t;
+}
+{
+  < CD > 
+  < EOF >
+}
