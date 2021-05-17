@@ -1,0 +1,37 @@
+PARSER_BEGIN(Example)
+package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
+
+public class Example
+{
+  /** Main entry point. */
+  public static void main(String args []) throws Exception
+  {
+    String info = "abc";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    Example parser = new Example(inputStream);
+    parser.Input();
+  }
+}
+
+PARSER_END(Example)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+void Input() :
+{}
+{
+  "a" BC() "c"
+}
+
+void BC() :
+{}
+{
+  "b" [ "c" ]
+}
