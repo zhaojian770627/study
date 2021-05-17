@@ -1,0 +1,57 @@
+PARSER_BEGIN(Example)
+package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
+
+/** Simple brace matcher. */
+public class Example
+{
+  /** Main entry point. */
+  public static void main(String args []) throws Exception
+  {
+    String info = "/*ddddd*/cd";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    Example parser = new Example(inputStream);
+    parser.start();
+  }
+}
+
+PARSER_END(Example)
+
+SKIP :
+{
+  < [ " ", "\t", "\r", "\n" ] >
+}
+
+SKIP :
+{
+  "/*" : WithinComment
+}
+
+< WithinComment >
+SKIP :
+{
+  "*/" : DEFAULT
+}
+
+< WithinComment >
+MORE :
+{
+  < ~[ ] >
+}
+
+TOKEN :
+{
+  < CD : "cd" >
+}
+
+void start() :
+{
+  Token t;
+}
+{
+  t = < CD >
+  {
+    System.err.println("CD Token:" + t);
+  }
+  < EOF >
+}
