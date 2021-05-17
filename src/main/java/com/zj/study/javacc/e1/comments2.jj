@@ -1,0 +1,65 @@
+PARSER_BEGIN(Example)
+package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
+
+/** Simple brace matcher. */
+public class Example
+{
+  /** Main entry point. */
+  public static void main(String args []) throws Exception
+  {
+    String info = "cd'aa'";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    Example parser = new Example(inputStream);
+    parser.start();
+  }
+}
+
+PARSER_END(Example)
+
+TOKEN_MGR_DECLS :
+{
+  static int stringSize;
+}
+
+MORE :
+{
+  "'"
+  {
+    stringSize = 0;
+  }
+  : WithinString
+}
+
+< WithinString >
+TOKEN :
+{
+  < STRLIT : "'" >
+  {
+    System.out.println("Size = " + stringSize);
+  }
+  : DEFAULT
+}
+
+< WithinString >
+MORE :
+{
+  < ~[ "\n", "\r" ] >
+  {
+    stringSize++;
+  }
+}
+
+TOKEN :
+{
+  < CD : "cd" >
+}
+
+void start() :
+{
+  Token t;
+}
+{
+  < CD >
+  < EOF >
+}
