@@ -1,0 +1,129 @@
+PARSER_BEGIN(ReportFormulParser)
+package com.zj.study.javacc.e1;
+import java.io.ByteArrayInputStream;
+
+public class ReportFormulParser
+{
+  /** Main entry point. */
+  public static void main(String args []) throws Exception
+  {
+    String info = "abc";
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
+    ReportFormulParser parser = new ReportFormulParser(inputStream);
+    parser.Input();
+  }
+}
+
+PARSER_END(ReportFormulParser)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  < GLSUBJECTFORMUL :
+    "GLOpenBal"
+  | "GLCloseBal"
+  | "GLAMT"
+  | "GLNetAMT"
+  | "GLAccumAmt"
+  | "GLOpenBalQty"
+  | "GLCloseBalQty"
+  | "GLQty"
+  | "GLNetQty"
+  | "GLAccumQty" >
+| 
+  < GLCASHFORMUL :
+    "GLCFAmt"
+  | "GLCFAccumAmt" >
+| < WORD : [ "a"-"z", "A"-"Z", "_" ] ([ "a"-"z", "A"-"Z", "_", "0"-"9" ])* >
+| 
+  < LP : "(" >
+| 
+  < RP : ")" >
+| < AND : "&&" >
+| < EQ : "=" >
+| < DOT : "." >
+| < COMMA : "," >
+}
+
+void Input() :
+{}
+{
+  < GLSUBJECTFORMUL > gLSubjectFormul()
+| < GLCASHFORMUL > gLCashFormul()
+}
+
+/*
+ * 格式举例:
+ * 		GLOpenBalQty (账簿，会计期间，科目，辅助核算，方向，发生币种，返回币种，包含未记账，包含损益结转凭证，包含错误凭证）
+ */
+void gLSubjectFormul() :
+{
+  Token 	tok;
+}
+{
+  < LP > 
+  < WORD > // 账簿 
+  < COMMA > 
+  < WORD > // 会计期间 
+  < COMMA > 
+  < WORD > // 科目  
+  < COMMA > 
+  auxList()  // 辅助核算
+  < COMMA > 
+  // 方向 
+  < WORD > 
+  < COMMA > 
+  // 发生币种
+  < WORD > 
+  < COMMA > 
+  // 返回币种
+  < WORD > 
+  < COMMA > 
+  // 是否包含未记账
+  < WORD > 
+  < COMMA > 
+  // 包含损益结转凭证  
+  < WORD > 
+  < COMMA > 
+  // 包含错误凭证
+  < WORD > 
+  < COMMA > 
+  < RP > 
+  < EOF >
+}
+
+void gLCashFormul() :
+{}
+{
+  < LP > 
+  < RP > 
+  < EOF >
+}
+
+void auxList() :
+{}
+{
+  aux()
+  (
+    < AND > aux()
+  )*
+}
+
+void aux() :
+{}
+{
+  < WORD >
+  (
+    [
+      < DOT > < WORD > < EQ > < WORD >
+    | < EQ > < WORD >
+    ]
+  )
+}
