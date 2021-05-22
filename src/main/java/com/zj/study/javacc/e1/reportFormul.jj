@@ -7,7 +7,7 @@ public class ReportFormulParser
   /** Main entry point. */
   public static void main(String args []) throws Exception
   {
-    String info = "abc";
+    String info = "GLOpenBal(accbook,period,subject,aux1,direction,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
     ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
     ReportFormulParser parser = new ReportFormulParser(inputStream);
     parser.Input();
@@ -77,26 +77,19 @@ void gLSubjectFormul() :
   < COMMA > 
   auxList()  // 辅助核算
   < COMMA > 
-  // 方向 
-  < WORD > 
+  < WORD > // 方向
   < COMMA > 
-  // 发生币种
-  < WORD > 
+  < WORD > // 发生币种
   < COMMA > 
-  // 返回币种
-  < WORD > 
+  < WORD > // 返回币种 
   < COMMA > 
-  // 是否包含未记账
-  < WORD > 
+  < WORD > // 是否包含未记账 
   < COMMA > 
-  // 包含损益结转凭证  
-  < WORD > 
+  < WORD > // 包含损益结转凭证 
   < COMMA > 
-  // 包含错误凭证
-  < WORD > 
+  < WORD > // 包含错误凭证 
   < COMMA > 
-  < RP > 
-  < EOF >
+  < RP >
 }
 
 void gLCashFormul() :
