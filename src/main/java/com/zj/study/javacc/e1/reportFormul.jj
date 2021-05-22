@@ -1,16 +1,22 @@
 PARSER_BEGIN(ReportFormulParser)
 package com.zj.study.javacc.e1;
 import java.io.ByteArrayInputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ReportFormulParser
 {
   /** Main entry point. */
   public static void main(String args []) throws Exception
   {
-    String info = "GLOpenBal(accbook,period,subject,aux1,direction,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
+    String info = "GLOpenBal(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
     ByteArrayInputStream inputStream = new ByteArrayInputStream(info.getBytes("UTF-8"));
     ReportFormulParser parser = new ReportFormulParser(inputStream);
-    parser.Input();
+    Map < String, Object > paramMap = new HashMap < String, Object > ();
+    parser.Input(paramMap);
+    Tools.print(paramMap);
   }
 }
 
@@ -41,7 +47,7 @@ TOKEN :
   < GLCASHFORMUL :
     "GLCFAmt"
   | "GLCFAccumAmt" >
-| < WORD : [ "a"-"z", "A"-"Z", "_" ] ([ "a"-"z", "A"-"Z", "_", "0"-"9" ])* >
+| < WORD : ([ "a"-"z", "A"-"Z", "_", "-", "0"-"9" ])+ >
 | 
   < LP : "(" >
 | 
@@ -52,47 +58,93 @@ TOKEN :
 | < COMMA : "," >
 }
 
-void Input() :
-{}
+void Input(Map < String, Object > paramMap) :
 {
-  < GLSUBJECTFORMUL > gLSubjectFormul()
-| < GLCASHFORMUL > gLCashFormul()
+  Token 	tok;
+}
+{
+  tok = < GLSUBJECTFORMUL >
+  {
+    paramMap.put("formul", tok.image);
+  }
+  gLSubjectFormul(paramMap)
+| tok = < GLCASHFORMUL >
+  {
+    paramMap.put("formul", tok.image);
+  }
+  gLCashFormul(paramMap)
 }
 
 /*
  * 格式举例:
  * 		GLOpenBalQty (账簿，会计期间，科目，辅助核算，方向，发生币种，返回币种，包含未记账，包含损益结转凭证，包含错误凭证）
  */
-void gLSubjectFormul() :
+void gLSubjectFormul(Map < String, Object > paramMap) :
 {
   Token 	tok;
+  List < AuxItem > auxItems;
 }
 {
   < LP > 
-  < WORD > // 账簿 
+  tok = < WORD > // 账簿 
+  {
+    paramMap.put("accbook", tok.image);
+  }
   < COMMA > 
-  < WORD > // 会计期间 
+  tok = < WORD > // 会计期间
+  {
+    paramMap.put("period", tok.image);
+  }
   < COMMA > 
-  < WORD > // 科目  
+  tok = < WORD > // 科目  
+  {
+    paramMap.put("subject", tok.image);
+  }
   < COMMA > 
-  auxList()  // 辅助核算
+  auxItems = auxList(paramMap) // 辅助核算
+  {
+    if (auxItems != null && auxItems.size() > 0)
+    {
+      paramMap.put("auxItems", auxItems);
+    }
+  }
   < COMMA > 
-  < WORD > // 方向
+  tok = < WORD > // 方向
+  {
+    paramMap.put("direction", tok.image);
+  }
   < COMMA > 
-  < WORD > // 发生币种
+  tok = < WORD > // 发生币种
+  {
+    paramMap.put("occcur", tok.image);
+  }
   < COMMA > 
-  < WORD > // 返回币种 
+  tok = < WORD > // 返回币种 
+  {
+    paramMap.put("retcur", tok.image);
+  }
   < COMMA > 
-  < WORD > // 是否包含未记账 
+  tok = < WORD > // 是否包含未记账 
+  {
+    paramMap.put("includeUntally", tok.image);
+  }
   < COMMA > 
-  < WORD > // 包含损益结转凭证 
+  tok = < WORD > // 包含损益结转凭证 
+  {
+    paramMap.put("includeInCome", tok.image);
+  }
   < COMMA > 
-  < WORD > // 包含错误凭证 
-  < COMMA > 
+  tok = < WORD > // 包含错误凭证 
+  {
+    paramMap.put("includeError", tok.image);
+  }
   < RP >
+  {
+    System.out.println("Successed!!!");
+  }
 }
 
-void gLCashFormul() :
+void gLCashFormul(Map < String, Object > paramMap) :
 {}
 {
   < LP > 
@@ -100,23 +152,63 @@ void gLCashFormul() :
   < EOF >
 }
 
-void auxList() :
-{}
+List < AuxItem > auxList(Map < String, Object > paramMap) :
 {
-  aux()
+  List < AuxItem > auxList = new ArrayList < AuxItem > ();
+  AuxItem auxItem;
+}
+{
+  auxItem = aux()
+  {
+    if (auxItem != null)
+    {
+      auxList.add(auxItem);
+    }
+  }
   (
-    < AND > aux()
+    < AND > auxItem = aux()
+    {
+      if (auxItem != null)
+      {
+        auxList.add(auxItem);
+      }
+    }
   )*
+  {
+    return auxList;
+  }
 }
 
-void aux() :
-{}
+AuxItem aux() :
 {
-  < WORD >
+  AuxItem aux;
+  Token tok;
+}
+{
+  tok = < WORD >
+  {
+    aux = new AuxItem();
+    aux.setName(tok.image);
+  }
   (
     [
-      < DOT > < WORD > < EQ > < WORD >
-    | < EQ > < WORD >
+      < DOT > tok = < WORD >
+      {
+        aux.setName(aux.getName() + "." + tok.image);
+      }
+      < EQ > tok = < WORD >
+      {
+        aux.setOp("=");
+        aux.setValue(tok.image);
+      }
+    | < EQ > tok = < WORD >
+      {
+        aux.setOp("=");
+        aux.setValue(tok.image);
+      }
     ]
   )
+  {
+    return aux;
+  }
 }
