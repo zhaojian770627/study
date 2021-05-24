@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class ParserTest {
 	private SimpleCharStream charStream;
-	ReportFormulParser parser;
+	ReportFormulParser cachedParser;
 
 	public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
 		ParserTest parserTest = new ParserTest();
-		String formulStr1 = "GLOpenBal(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
+		String formulStr1 = "GLOpen(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 		String formulStr2 = "GLCloseBal(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 		String formulStr3 = "GLAMT(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 
@@ -24,15 +24,15 @@ public class ParserTest {
 
 	private void parser(String formulStr) throws UnsupportedEncodingException, ParseException {
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(formulStr.getBytes("UTF-8"));
-		if (parser == null) {
+		if (cachedParser == null) {
 			charStream = new SimpleCharStream(inputStream, null, 1, 1);
 			ReportFormulParserTokenManager tokenManager = new ReportFormulParserTokenManager(charStream);
-			parser = new ReportFormulParser(tokenManager);
+			cachedParser = new ReportFormulParser(tokenManager);
 		} else {
 			charStream.ReInit(inputStream);
 		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		parser.parser(paramMap);
+		cachedParser.parser(paramMap);
 		Tools.print(paramMap);
 	}
 }
