@@ -18,6 +18,11 @@ public class ReportFormulParser
     parser.Input(paramMap);
     Tools.print(paramMap);
   }
+
+  public void parser(Map < String, Object > paramMap) throws ParseException
+  {
+    Input(paramMap);
+  }
 }
 
 PARSER_END(ReportFormulParser)
@@ -139,10 +144,7 @@ void gLSubjectFormul(Map < String, Object > paramMap) :
     paramMap.put("includeError", tok.image);
   }
   < RP >
-  {
-    System.out.println("Successed!!!");
-  }
-}
+3}
 
 void gLCashFormul(Map < String, Object > paramMap) :
 {}
