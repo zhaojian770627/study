@@ -11,6 +11,7 @@ import org.apache.derby.iapi.reference.SQLState;
 import org.apache.derby.iapi.services.io.ArrayInputStream;
 import org.apache.derby.iapi.services.io.ArrayOutputStream;
 import org.apache.derby.iapi.services.io.FormatIdOutputStream;
+import org.apache.derby.iapi.services.io.StoredFormatIds;
 import org.apache.derby.iapi.store.raw.ContainerHandle;
 import org.apache.derby.iapi.store.raw.ContainerKey;
 import org.apache.derby.iapi.store.raw.RawStoreFactory;
@@ -73,8 +74,8 @@ public class FileContainerTest {
 	// than normal number of pages.
 
 	public static void main(String[] args) throws Exception {
-//		testCreateContainer();
-		testReadContainer();
+		testCreateContainer();
+//		testReadContainer();
 	}
 
 	private static void testReadContainer() throws Exception {
@@ -295,6 +296,10 @@ public class FileContainerTest {
 //		dataFactory.flush(lastLogInstant);
 		if (lastLogInstant != null)
 			lastLogInstant = null;
+
+		ArrayOutputStream a_out = new ArrayOutputStream(epage);
+		FormatIdOutputStream outStream = new FormatIdOutputStream(a_out);
+		outStream.writeShort(StoredFormatIds.RAW_STORE_ALLOC_PAGE);
 
 		// write it out
 		writeAtOffset(file, epage, 0);
