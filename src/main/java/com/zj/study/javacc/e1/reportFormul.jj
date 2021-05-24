@@ -144,7 +144,7 @@ void gLSubjectFormul(Map < String, Object > paramMap) :
     paramMap.put("includeError", tok.image);
   }
   < RP >
-3}
+}
 
 void gLCashFormul(Map < String, Object > paramMap) :
 {}
