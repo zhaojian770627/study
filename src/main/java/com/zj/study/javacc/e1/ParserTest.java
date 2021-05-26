@@ -11,7 +11,7 @@ public class ParserTest {
 
 	public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
 		ParserTest parserTest = new ParserTest();
-		String formulStr1 = "GLOpen(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
+		String formulStr1 = "GLOpenBal(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 		String formulStr2 = "GLCloseBal(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 		String formulStr3 = "GLAMT(junru,2020-01,6601,dept=kfb&&supper=ddd,dr,fsbz,fhbz,includeUntaller,includeSYpz,includeErrorPz)";
 
@@ -30,6 +30,8 @@ public class ParserTest {
 			cachedParser = new ReportFormulParser(tokenManager);
 		} else {
 			charStream.ReInit(inputStream);
+			ReportFormulParserTokenManager tokenManager = cachedParser.token_source;
+			cachedParser.ReInit(tokenManager);
 		}
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		cachedParser.parser(paramMap);

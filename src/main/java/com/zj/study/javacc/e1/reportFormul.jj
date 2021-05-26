@@ -1,3 +1,17 @@
+options
+{
+  STATIC = false;
+
+  LOOKAHEAD= 1;
+  DEBUG_PARSER = false;
+  DEBUG_LOOKAHEAD = false;
+  DEBUG_TOKEN_MANAGER = false;
+  ERROR_REPORTING = true;
+  USER_TOKEN_MANAGER = false;
+  CACHE_TOKENS = true;
+  UNICODE_INPUT = true;
+}
+
 PARSER_BEGIN(ReportFormulParser)
 package com.zj.study.javacc.e1;
 import java.io.ByteArrayInputStream;
