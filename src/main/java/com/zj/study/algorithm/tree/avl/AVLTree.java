@@ -210,6 +210,31 @@ public class AVLTree {
 
 	/**
 	 * 
+	 * 寻找指定长度的路径的个数
+	 * 
+	 * 算法就是每个节点都逐层推进，找一遍
+	 * 
+	 * @param node
+	 * @param target
+	 * @return
+	 */
+	private int findPathLength(AVLNode node, int target) {
+		if (node != null)
+			return innerFindPath(node, target) + findPathLength(node.getLeft(), target)
+					+ findPathLength(node.getRight(), target);
+		return 0;
+	}
+
+	private int innerFindPath(AVLNode node, int target) {
+		if (node != null)
+			return node.value == target ? 1
+					: 0 + innerFindPath(node.getLeft(), target - node.getValue())
+							+ innerFindPath(node.getRight(), target - node.getValue());
+		return 0;
+	}
+
+	/**
+	 * 
 	 * 判断是否是Bst树
 	 * 
 	 * @param node
@@ -349,7 +374,8 @@ public class AVLTree {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, isBst(avlRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+//				JOptionPane.showMessageDialog(null, isBst(avlRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+				JOptionPane.showMessageDialog(null, findPathLength(avlRoot, 60));
 			}
 
 		});
