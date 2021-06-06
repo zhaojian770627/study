@@ -47,6 +47,26 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 		upHead(data.size() - 1);
 	}
 
+	private HeapPriorityQueue<K, V>.Item getMin() {
+		if (data.size() == 0)
+			return null;
+
+		Item minItem = data.get(0);
+
+		data.set(0, data.get(data.size() - 1));
+		data.remove(data.size() - 1);
+
+		if (data.size() > 1) {
+			downHead(0);
+		}
+
+		return minItem;
+	}
+
+	private void downHead(int pos) {
+
+	}
+
 	private void upHead(int pos) {
 		int parent = parent(pos);
 		while (pos > 0 && data.get(pos).getKey().compareTo(data.get(parent).getKey()) < 0) {
