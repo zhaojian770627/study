@@ -47,7 +47,7 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 		upHead(data.size() - 1);
 	}
 
-	private HeapPriorityQueue<K, V>.Item getMin() {
+	public HeapPriorityQueue<K, V>.Item getMin() {
 		if (data.size() == 0)
 			return null;
 
