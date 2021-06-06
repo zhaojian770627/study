@@ -52,19 +52,28 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 			return null;
 
 		Item minItem = data.get(0);
-
 		data.set(0, data.get(data.size() - 1));
 		data.remove(data.size() - 1);
-
-		if (data.size() > 1) {
-			downHead(0);
-		}
-
+		downHead(0);
 		return minItem;
 	}
 
 	private void downHead(int pos) {
-
+		while (hasLeft(pos)) {
+			int leftPos = left(pos);
+			int smallPos = leftPos;
+			if (hasRight(pos)) {
+				int rightPos = right(pos);
+				if (data.get(rightPos).getKey().compareTo(data.get(leftPos).getKey()) < 0) {
+					smallPos = rightPos;
+				}
+			}
+			if (data.get(smallPos).getKey().compareTo(data.get(pos).getKey()) < 0) {
+				swap(smallPos, pos);
+				pos = smallPos;
+			} else
+				return;
+		}
 	}
 
 	private void upHead(int pos) {
