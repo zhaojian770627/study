@@ -12,9 +12,9 @@ public class BitSetTest {
 		File file = new File("d:\\temp\\bitset.data");
 		FileOutputStream out = new FileOutputStream(file);
 		FormatIdOutputStream outStream = new FormatIdOutputStream(out);
-		System.out.println(FormatableBitSet.maxBitsForSpace(5));
 		FormatableBitSet bitSet = new FormatableBitSet(8);
 		bitSet.writeExternal(outStream);
+		System.out.println(bitSet.toString());
 		outStream.close();
 	}
 }
