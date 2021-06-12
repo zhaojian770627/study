@@ -42,7 +42,7 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 		add(new Item(k, v));
 	}
 
-	private void add(Item item) {
+	public void add(Item item) {
 		data.add(item);
 		upHead(data.size() - 1);
 	}
