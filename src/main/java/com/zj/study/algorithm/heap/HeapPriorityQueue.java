@@ -47,7 +47,7 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 		upHead(data.size() - 1);
 	}
 
-	public HeapPriorityQueue<K, V>.Item getTop() {
+	public HeapPriorityQueue<K, V>.Item popTop() {
 		if (data.size() == 0)
 			return null;
 
@@ -56,6 +56,13 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 		data.remove(data.size() - 1);
 		downHead(0);
 		return minItem;
+	}
+
+	public HeapPriorityQueue<K, V>.Item getTop() {
+		if (data.size() == 0)
+			return null;
+
+		return data.get(0);
 	}
 
 	private void downHead(int pos) {
@@ -117,5 +124,9 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 		data.forEach(item -> {
 			System.out.println(item);
 		});
+	}
+
+	public int length() {
+		return data.size();
 	}
 }

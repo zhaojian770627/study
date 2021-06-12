@@ -25,17 +25,17 @@ public class HeapMain {
 		maxQueue.add(3, 3);
 		maxQueue.print();
 
-		Item min = minQueue.getTop();
+		Item min = minQueue.popTop();
 		while (min != null) {
 			System.out.println(min.getKey());
-			min = minQueue.getTop();
+			min = minQueue.popTop();
 		}
 		
 		System.out.println("--------------------------------------------------------");
-		Item max = maxQueue.getTop();
+		Item max = maxQueue.popTop();
 		while (max != null) {
 			System.out.println(max.getKey());
-			max = maxQueue.getTop();
+			max = maxQueue.popTop();
 		}
 		
 	}
