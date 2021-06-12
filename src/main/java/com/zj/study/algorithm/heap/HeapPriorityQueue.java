@@ -3,7 +3,7 @@ package com.zj.study.algorithm.heap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeapPriorityQueue<K extends Comparable, V> {
+public abstract class HeapPriorityQueue<K extends Comparable, V> {
 	public class Item {
 		K key;
 		V value;
@@ -47,7 +47,7 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 		upHead(data.size() - 1);
 	}
 
-	public HeapPriorityQueue<K, V>.Item getMin() {
+	public HeapPriorityQueue<K, V>.Item getTop() {
 		if (data.size() == 0)
 			return null;
 
@@ -64,11 +64,11 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 			int smallPos = leftPos;
 			if (hasRight(pos)) {
 				int rightPos = right(pos);
-				if (data.get(rightPos).getKey().compareTo(data.get(leftPos).getKey()) < 0) {
+				if (compare(data.get(rightPos).getKey(), data.get(leftPos).getKey())) {
 					smallPos = rightPos;
 				}
 			}
-			if (data.get(smallPos).getKey().compareTo(data.get(pos).getKey()) < 0) {
+			if (compare(data.get(smallPos).getKey(), data.get(pos).getKey())) {
 				swap(smallPos, pos);
 				pos = smallPos;
 			} else
@@ -76,15 +76,15 @@ public class HeapPriorityQueue<K extends Comparable, V> {
 		}
 	}
 
+	protected abstract boolean compare(K k1, K k2);
+
 	private void upHead(int pos) {
 		int parent = parent(pos);
-		while (pos > 0 && data.get(pos).getKey().compareTo(data.get(parent).getKey()) < 0) {
+		while (pos > 0 && compare(data.get(pos).getKey(), data.get(parent).getKey())) {
 			swap(pos, parent);
 			pos = parent;
 			parent = parent(pos);
 		}
-//		            self._swap(j, parent) 
-//		            self._upheap(parent) 
 	}
 
 	private void swap(int pos, int parent) {
