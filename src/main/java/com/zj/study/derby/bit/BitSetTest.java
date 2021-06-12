@@ -12,7 +12,8 @@ public class BitSetTest {
 		File file = new File("d:\\temp\\bitset.data");
 		FileOutputStream out = new FileOutputStream(file);
 		FormatIdOutputStream outStream = new FormatIdOutputStream(out);
-		FormatableBitSet bitSet = new FormatableBitSet(8);
+		FormatableBitSet bitSet = new FormatableBitSet(16);
+		bitSet.set(9);
 		bitSet.writeExternal(outStream);
 		System.out.println(bitSet.toString());
 		outStream.close();
