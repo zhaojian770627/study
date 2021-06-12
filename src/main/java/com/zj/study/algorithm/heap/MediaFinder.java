@@ -1,5 +1,14 @@
 package com.zj.study.algorithm.heap;
 
+/**
+ * 
+ * 取流的中位数
+ * 
+ * 将数据分为相同长度的两段，前面的设为大堆，后面的设为小堆
+ * 
+ * @author zhaojian
+ *
+ */
 public class MediaFinder {
 	MaxHeapPriorityQueue<Integer> maxQueue = new MaxHeapPriorityQueue<Integer>();
 	MinHeapPriorityQueue<Integer> minQueue = new MinHeapPriorityQueue<Integer>();
