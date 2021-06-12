@@ -18,12 +18,12 @@ public class MediaFinder {
 			if (maxQueue.getTop().getKey().compareTo(num) < 0) {
 				minQueue.add(num, num);
 				if (minQueue.length() > maxQueue.length()) {
-					maxQueue.add(minQueue.getTop());
+					maxQueue.add(minQueue.popTop());
 				}
 			} else {
 				maxQueue.add(num, num);
 				if (maxQueue.length() > minQueue.length() + 1) {
-					minQueue.add(maxQueue.getTop());
+					minQueue.add(maxQueue.popTop());
 				}
 			}
 		}
@@ -37,7 +37,7 @@ public class MediaFinder {
 
 	public static void main(String[] args) {
 		MediaFinder mediaFinder = new MediaFinder();
-		mediaFinder.add(1, 2, 3);
+		mediaFinder.add(6, 7, 8, 1, 2);
 		System.out.println(mediaFinder.getMedia());
 	}
 
