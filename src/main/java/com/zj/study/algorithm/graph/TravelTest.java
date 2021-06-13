@@ -2,7 +2,7 @@ package com.zj.study.algorithm.graph;
 
 import java.util.Map;
 
-public class GraphMain {
+public class TravelTest {
 
 	public static void main(String[] args) {
 		Graph<Integer> graph = createGraph();
