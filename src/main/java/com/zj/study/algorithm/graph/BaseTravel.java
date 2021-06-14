@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 public abstract class BaseTravel<T> implements ITravel {
 	Graph<T> graph;
 	IVisitor visitor;
@@ -41,7 +43,7 @@ public abstract class BaseTravel<T> implements ITravel {
 			visitedSet.add(curNodeId);
 			visitor.visitor(graph.getVertex(curNodeId));
 
-			if (curNodeId.equals(end)) {
+			if (!StringUtils.isEmpty(end) && curNodeId.equals(end)) {
 				return pathMap;
 			}
 
