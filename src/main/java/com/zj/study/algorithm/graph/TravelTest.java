@@ -10,7 +10,7 @@ public class TravelTest {
 		BaseTravel<Integer> travel = new BFS<>();
 		travel.setGraph(graph);
 		travel.setVisitor(new PrintVisitor());
-		Map<String, String> travelMap = travel.travel("a", "c");
+		Map<String, String> travelMap = travel.travel("a", null);
 		travelMap.forEach((k, v) -> {
 			System.out.println(v + "========>" + k);
 		});
@@ -19,8 +19,9 @@ public class TravelTest {
 	private static Graph<Integer> createGraph() {
 		Graph<Integer> graph = new Graph<Integer>(true);
 		graph.addEdge("a", "b", 10);
-//		graph.addEdge("a", "c", 11);
-		graph.addEdge("b", "c", 20);
+		graph.addEdge("a", "c", 11);
+		graph.addEdge("b", "d", 20);
+		graph.addEdge("c", "e", 20);
 		return graph;
 	}
 
