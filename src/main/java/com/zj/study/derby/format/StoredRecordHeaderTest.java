@@ -8,8 +8,11 @@ import org.apache.derby.impl.store.raw.data.StoredRecordHeader;
 public class StoredRecordHeaderTest {
 	public static void main(String[] args) throws IOException {
 		DynamicByteArrayOutputStream output = new DynamicByteArrayOutputStream();
-		StoredRecordHeader storeRecordHeader = new StoredRecordHeader();
-		storeRecordHeader.write(output);
-		
+		StoredRecordHeader recordHeader = new StoredRecordHeader();
+		recordHeader.setId(1);
+		recordHeader.setNumberFields(2);
+		recordHeader.setFirstField(0);
+		recordHeader.write(output);
+
 	}
 }
