@@ -38,4 +38,9 @@ public class Graph<T> {
 		Vertex<T> vertex = vertexMap.get(id);
 		return vertex.getConnections();
 	}
+
+	public T getCost(String from, String to) {
+		Vertex<T> vertex = vertexMap.get(from);
+		return vertex.getCost(to);
+	}
 }

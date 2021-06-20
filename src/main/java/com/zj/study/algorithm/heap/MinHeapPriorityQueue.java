@@ -1,6 +1,6 @@
 package com.zj.study.algorithm.heap;
 
-public class MinHeapPriorityQueue<V> extends HeapPriorityQueue<Comparable, V> {
+public class MinHeapPriorityQueue<K, V> extends HeapPriorityQueue<K, Comparable> {
 
 	@Override
 	protected boolean compare(Comparable k1, Comparable k2) {

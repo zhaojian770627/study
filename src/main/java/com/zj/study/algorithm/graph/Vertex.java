@@ -20,6 +20,10 @@ public class Vertex<T> {
 		return adjacent.keySet();
 	}
 
+	public T getCost(String neighbor) {
+		return adjacent.get(neighbor);
+	}
+
 	public String getId() {
 		return id;
 	}

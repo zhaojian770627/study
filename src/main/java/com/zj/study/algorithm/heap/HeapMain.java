@@ -5,8 +5,8 @@ import com.zj.study.algorithm.heap.HeapPriorityQueue.Item;
 public class HeapMain {
 
 	public static void main(String[] args) {
-		MinHeapPriorityQueue<Integer> minQueue = new MinHeapPriorityQueue<Integer>();
-		MaxHeapPriorityQueue<Integer> maxQueue = new MaxHeapPriorityQueue<Integer>();
+		MinHeapPriorityQueue<Integer, Integer> minQueue = new MinHeapPriorityQueue<Integer, Integer>();
+		MaxHeapPriorityQueue<Integer, Integer> maxQueue = new MaxHeapPriorityQueue<Integer, Integer>();
 		minQueue.add(6, 6);
 		minQueue.add(4, 4);
 		minQueue.add(8, 8);
@@ -15,7 +15,7 @@ public class HeapMain {
 		minQueue.add(30, 30);
 		minQueue.add(3, 3);
 		minQueue.print();
-		
+
 		maxQueue.add(6, 6);
 		maxQueue.add(4, 4);
 		maxQueue.add(8, 8);
@@ -30,14 +30,14 @@ public class HeapMain {
 			System.out.println(min.getKey());
 			min = minQueue.popTop();
 		}
-		
+
 		System.out.println("--------------------------------------------------------");
 		Item max = maxQueue.popTop();
 		while (max != null) {
 			System.out.println(max.getKey());
 			max = maxQueue.popTop();
 		}
-		
+
 	}
 
 }

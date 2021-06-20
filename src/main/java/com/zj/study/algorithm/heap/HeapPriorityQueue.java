@@ -3,7 +3,7 @@ package com.zj.study.algorithm.heap;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class HeapPriorityQueue<K extends Comparable, V> {
+public abstract class HeapPriorityQueue<K, V extends Comparable> {
 	public class Item {
 		K key;
 		V value;
@@ -71,11 +71,11 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 			int smallPos = leftPos;
 			if (hasRight(pos)) {
 				int rightPos = right(pos);
-				if (compare(data.get(rightPos).getKey(), data.get(leftPos).getKey())) {
+				if (compare(data.get(rightPos).getValue(), data.get(leftPos).getValue())) {
 					smallPos = rightPos;
 				}
 			}
-			if (compare(data.get(smallPos).getKey(), data.get(pos).getKey())) {
+			if (compare(data.get(smallPos).getValue(), data.get(pos).getValue())) {
 				swap(smallPos, pos);
 				pos = smallPos;
 			} else
@@ -83,11 +83,11 @@ public abstract class HeapPriorityQueue<K extends Comparable, V> {
 		}
 	}
 
-	protected abstract boolean compare(K k1, K k2);
+	protected abstract boolean compare(V k1, V k2);
 
 	private void upHead(int pos) {
 		int parent = parent(pos);
-		while (pos > 0 && compare(data.get(pos).getKey(), data.get(parent).getKey())) {
+		while (pos > 0 && compare(data.get(pos).getValue(), data.get(parent).getValue())) {
 			swap(pos, parent);
 			pos = parent;
 			parent = parent(pos);
