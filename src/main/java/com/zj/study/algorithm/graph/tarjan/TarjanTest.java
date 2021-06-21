@@ -26,7 +26,7 @@ public class TarjanTest {
 		System.out.println(result.size());
 		System.out.println("[5]====>" + result.get(0).toString());
 		System.out.println("[4]====>" + result.get(1).toString());
-		System.out.println("[1,3,2,0]====>" + result.get(2).toString());
+		System.out.println("[1, 3, 2, 0]====>" + result.get(2).toString());
 	}
 
 }
