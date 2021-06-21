@@ -3,7 +3,11 @@ package com.zj.study.derby.page;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.apache.derby.iapi.services.io.FormatableBitSet;
+import org.apache.derby.iapi.store.access.AccessFactoryGlobals;
+import org.apache.derby.iapi.store.access.conglomerate.LogicalUndo;
 import org.apache.derby.iapi.store.raw.ContainerKey;
+import org.apache.derby.iapi.store.raw.Page;
 import org.apache.derby.iapi.store.raw.PageKey;
 import org.apache.derby.iapi.store.raw.RecordHandle;
 import org.apache.derby.iapi.types.DataValueDescriptor;
@@ -39,15 +43,15 @@ public class PageTest {
 		initialRowCountFeild.setAccessible(true);
 		initialRowCountFeild.set(sp, 0);
 
-		BaseContainerHandle handler=new BaseContainerHandle(null, null, ContainerKey, null, 7);
+		BaseContainerHandle handler = new BaseContainerHandle(null, null, ContainerKey, new NoLocking(), 7);
 		Field actionsSetFeild = handler.getClass().getDeclaredField("actionsSet");
 		actionsSetFeild.setAccessible(true);
 		actionsSetFeild.set(handler, new DirectActions());
-		
+
 		Field ownerFeild = sp.getClass().getSuperclass().getSuperclass().getDeclaredField("owner");
 		ownerFeild.setAccessible(true);
 		ownerFeild.set(sp, handler);
-		
+
 		sp.initPage(0, 4096);
 		sp.setContainerRowCount(0);
 
@@ -55,14 +59,9 @@ public class PageTest {
 		Heap heap = new Heap();
 		setHeap(heap);
 		control_row[0] = heap;
-		
-//		sp.insertAtSlot(
-//                Page.FIRST_SLOT_NUMBER,
-//                control_row,
-//                (FormatableBitSet) null,
-//                (LogicalUndo) null, 
-//                Page.INSERT_OVERFLOW,
-//                AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
 	}
 
 	private static void setHeap(Heap heap) throws Exception {
