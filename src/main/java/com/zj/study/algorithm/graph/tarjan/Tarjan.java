@@ -1,12 +1,11 @@
 package com.zj.study.algorithm.graph.tarjan;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 import com.google.common.graph.MutableGraph;
-
-import edu.emory.mathcs.backport.java.util.Arrays;
 
 public class Tarjan {
 	// 输入信息
