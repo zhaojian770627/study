@@ -6,6 +6,8 @@ import java.util.Stack;
 
 import com.google.common.graph.MutableGraph;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 public class Tarjan {
 	// 输入信息
 	private MutableGraph<Integer> graph;
@@ -24,7 +26,19 @@ public class Tarjan {
 	private boolean[] isInStack;
 
 	// 构造函数
-	public Tarjan() {
+	public Tarjan(MutableGraph<Integer> graph) {
+		this.graph = graph;
+
+		int numOfNode = graph.nodes().size();
+		DFN = new int[numOfNode];
+		LOW = new int[numOfNode];
+
+		// 初始化DFN LOW所有元素都置为-1，DFN【u]=-1代表节点u还没有被访问过
+		Arrays.fill(DFN, -1);
+		Arrays.fill(LOW, -1);
+
+		this.stack = new Stack<Integer>();
+		this.isInStack = new boolean[numOfNode];
 	}
 
 }
