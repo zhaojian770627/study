@@ -7,6 +7,13 @@ import java.util.Stack;
 
 import com.google.common.graph.MutableGraph;
 
+/**
+ * 
+ * https://segmentfault.com/a/1190000039149539
+ * 
+ * @author Administrator
+ *
+ */
 public class Tarjan {
 	// 输入信息
 	private MutableGraph<Integer> graph;
