@@ -62,6 +62,9 @@ public class PageTest {
 
 		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER, control_row, (FormatableBitSet) null, (LogicalUndo) null,
 				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 1, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		System.err.println(sp.toString());
 	}
 
 	private static void setHeap(Heap heap) throws Exception {
