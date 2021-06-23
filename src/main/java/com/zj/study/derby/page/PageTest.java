@@ -64,6 +64,16 @@ public class PageTest {
 				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
 		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 1, control_row, (FormatableBitSet) null, (LogicalUndo) null,
 				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 2, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 3, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 4, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 5, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
+		sp.insertAtSlot(Page.FIRST_SLOT_NUMBER + 6, control_row, (FormatableBitSet) null, (LogicalUndo) null,
+				Page.INSERT_OVERFLOW, AccessFactoryGlobals.HEAP_OVERFLOW_THRESHOLD);
 		System.err.println(sp.toString());
 	}
 
