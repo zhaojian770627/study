@@ -1,7 +1,9 @@
 package com.zj.study.algorithm.graph.tarjan;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -24,6 +26,8 @@ public class SimpleTarjan {
 	// 节点是否在栈中，减少栈中节点的判断
 	private Set<String> isInStack;
 
+	private List<List<String>> sccsList = new ArrayList<>();
+
 	public SimpleTarjan(MutableGraph<String> graph) {
 		this.graph = graph;
 
@@ -39,21 +43,41 @@ public class SimpleTarjan {
 		this.isInStack = new HashSet<>();
 	}
 
-	public void reverse() {
+	public List<List<String>> reverse() {
+		sccsList.clear();
 		for (String node : graph.nodes()) {
 			if (DFN.get(node) == -1) {
 				tarjan(node);
 			}
 		}
+		return sccsList;
 	}
 
-	private void tarjan(String node) {
-		stack.push(node);
+	private void tarjan(String curNode) {
+		stack.push(curNode);
 		index++;
-		DFN.put(node, index);
-		LOW.put(node, index);
-		isInStack.add(node);
-		
-		
+		DFN.put(curNode, index);
+		LOW.put(curNode, index);
+		isInStack.add(curNode);
+
+		for (String succNode : graph.successors(curNode)) {
+			if (DFN.get(succNode) == -1) {
+				tarjan(succNode);
+				LOW.put(curNode, Math.min(LOW.get(curNode), LOW.get(succNode)));
+			} else if (isInStack.contains(succNode)) {
+				LOW.put(curNode, Math.min(LOW.get(curNode), LOW.get(succNode)));
+			}
+		}
+
+		List<String> cycleNodes = new ArrayList<>();
+		if (DFN.get(curNode).equals(LOW.get(curNode))) {
+			String popNode = "";
+			while (!curNode.equals(popNode)) {
+				popNode = stack.pop();
+				isInStack.remove(popNode);
+				cycleNodes.add(popNode);
+			}
+			sccsList.add(cycleNodes);
+		}
 	}
 }
