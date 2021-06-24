@@ -48,6 +48,12 @@ public class SimpleTarjan {
 	}
 
 	private void tarjan(String node) {
-
+		stack.push(node);
+		index++;
+		DFN.put(node, index);
+		LOW.put(node, index);
+		isInStack.add(node);
+		
+		
 	}
 }
