@@ -39,7 +39,7 @@ public class DerbyTest {
 	}
 
 	private static void deleteDB() {
-		File file = new File("d://data//derbydb");
+		File file = new File("d://data//debugdb");
 		deleteFile(file);
 	}
 
