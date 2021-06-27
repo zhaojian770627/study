@@ -22,8 +22,9 @@ public class DerbyTest {
 		deleteDB();
 
 		// org.apache.derby.impl.jdbc.EmbedConnection
-		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//derbydb;create=true");
+		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
 
+		/*
 		createTable(conn);
 
 		PreparedStatement pstate1 = conn.prepareStatement("select * from derbytable where id = ?");
@@ -33,7 +34,7 @@ public class DerbyTest {
 			System.out.println(rset1.getInt(1) + ">" + rset1.getString(2));
 		}
 		pstate1.close();
-
+		 */
 		conn.close();
 	}
 
