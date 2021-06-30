@@ -3,8 +3,6 @@ package com.zj.study.derby;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -24,16 +22,14 @@ public class DerbyTest {
 		// org.apache.derby.impl.jdbc.EmbedConnection
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
 
-		/*
 		createTable(conn);
 
-		PreparedStatement pstate1 = conn.prepareStatement("select * from derbytable where id = ?");
-		pstate1.setInt(1, 2);
-		ResultSet rset1 = pstate1.executeQuery();
-		while (rset1.next()) {
-			System.out.println(rset1.getInt(1) + ">" + rset1.getString(2));
-		}
-		pstate1.close();
+		/*
+		 * PreparedStatement pstate1 =
+		 * conn.prepareStatement("select * from derbytable where id = ?");
+		 * pstate1.setInt(1, 2); ResultSet rset1 = pstate1.executeQuery(); while
+		 * (rset1.next()) { System.out.println(rset1.getInt(1) + ">" +
+		 * rset1.getString(2)); } pstate1.close();
 		 */
 		conn.close();
 	}
