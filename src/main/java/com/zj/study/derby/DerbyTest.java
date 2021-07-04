@@ -44,10 +44,13 @@ public class DerbyTest {
 		state.executeUpdate("create table derbytable(id int,val varchar(128))");
 		state.close();
 
-//		Statement state2 = conn.createStatement();
-//		state2.executeUpdate("insert into derbytable values (1,'tom') ");
+		conn.setAutoCommit(false);
+		Statement state2 = conn.createStatement();
+		state2.executeUpdate("insert into derbytable values (1,'tom') ");
 //		state2.executeUpdate("insert into derbytable values (2,'jerry') ");
-//		state2.close();
+		state2.close();
+//		conn.rollback();
+		conn.commit();
 	}
 
 	public static boolean deleteFile(File dirFile) {
