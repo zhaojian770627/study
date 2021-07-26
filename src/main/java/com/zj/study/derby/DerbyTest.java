@@ -3,6 +3,8 @@ package com.zj.study.derby;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -23,15 +25,21 @@ public class DerbyTest {
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
 
 		createTable(conn);
-
-		/*
-		 * PreparedStatement pstate1 =
-		 * conn.prepareStatement("select * from derbytable where id = ?");
-		 * pstate1.setInt(1, 2); ResultSet rset1 = pstate1.executeQuery(); while
-		 * (rset1.next()) { System.out.println(rset1.getInt(1) + ">" +
-		 * rset1.getString(2)); } pstate1.close();
-		 */
+		insertData(conn);
+		selectData(conn);
 		conn.close();
+	}
+
+	private static void selectData(Connection conn) throws SQLException {
+		PreparedStatement pstate1 = conn.prepareStatement("select * from derbytable where id = ?");
+		pstate1.setInt(1, 1);
+		ResultSet rset1 = pstate1.executeQuery();
+		while (rset1.next()) {
+			System.out.println(rset1.getInt(1) + ">" + rset1.getString(2));
+		}
+		rset1.close();
+		pstate1.close();
+
 	}
 
 	private static void deleteDB() {
@@ -39,11 +47,7 @@ public class DerbyTest {
 		deleteFile(file);
 	}
 
-	private static void createTable(Connection conn) throws SQLException {
-		Statement state = conn.createStatement();
-		state.executeUpdate("create table derbytable(id int,val varchar(128))");
-		state.close();
-
+	private static void insertData(Connection conn) throws SQLException {
 		conn.setAutoCommit(false);
 		Statement state2 = conn.createStatement();
 		state2.executeUpdate("insert into derbytable values (1,'tom') ");
@@ -51,6 +55,12 @@ public class DerbyTest {
 		state2.close();
 //		conn.rollback();
 		conn.commit();
+	}
+
+	private static void createTable(Connection conn) throws SQLException {
+		Statement state = conn.createStatement();
+		state.executeUpdate("create table derbytable(id int,val varchar(128))");
+		state.close();
 	}
 
 	public static boolean deleteFile(File dirFile) {
