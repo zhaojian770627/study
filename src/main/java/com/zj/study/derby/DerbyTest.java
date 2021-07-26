@@ -55,6 +55,7 @@ public class DerbyTest {
 		state2.close();
 //		conn.rollback();
 		conn.commit();
+		conn.setAutoCommit(true);
 	}
 
 	private static void createTable(Connection conn) throws SQLException {
