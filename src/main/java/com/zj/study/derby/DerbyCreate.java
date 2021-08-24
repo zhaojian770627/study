@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 import org.apache.derby.shared.common.sanity.SanityManager;
 
-public class DerbyTest {
+public class DerbyCreate {
 
 	public static void main(String[] args) throws Exception {
 //		SanityManager.DEBUG_SET("ClassLineNumbers");
