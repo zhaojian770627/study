@@ -23,6 +23,7 @@ public class DerbyCreate {
 
 		// org.apache.derby.impl.jdbc.EmbedConnection
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
+		
 
 		createTable(conn);
 		insertData(conn);
