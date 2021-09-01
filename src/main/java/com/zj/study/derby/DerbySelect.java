@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.apache.derby.shared.common.sanity.SanityManager;
 
@@ -35,28 +34,6 @@ public class DerbySelect {
 		rset1.close();
 		pstate1.close();
 
-	}
-
-	private static void deleteDB() {
-		File file = new File("d://data//debugdb");
-		deleteFile(file);
-	}
-
-	private static void insertData(Connection conn) throws SQLException {
-		conn.setAutoCommit(false);
-		Statement state2 = conn.createStatement();
-		state2.executeUpdate("insert into derbytable values (1,'tom') ");
-//		state2.executeUpdate("insert into derbytable values (2,'jerry') ");
-		state2.close();
-//		conn.rollback();
-		conn.commit();
-		conn.setAutoCommit(true);
-	}
-
-	private static void createTable(Connection conn) throws SQLException {
-		Statement state = conn.createStatement();
-		state.executeUpdate("create table derbytable(id int,val varchar(128))");
-		state.close();
 	}
 
 	public static boolean deleteFile(File dirFile) {
