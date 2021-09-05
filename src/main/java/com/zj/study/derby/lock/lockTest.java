@@ -1,10 +1,11 @@
 package com.zj.study.derby.lock;
 
+import org.apache.derby.impl.services.locks.ConcurrentPool;
+
 public class lockTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		ConcurrentPool concurrentPool = new ConcurrentPool();
 	}
 
 }
