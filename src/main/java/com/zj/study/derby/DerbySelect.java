@@ -15,7 +15,7 @@ public class DerbySelect {
 //		SanityManager.DEBUG_SET("ClassLineNumbers");
 //		SanityManager.DEBUG_SET("DumpClassFile");
 //		SanityManager.DEBUG_SET("ByteCodeGenInstr");
-		SanityManager.DEBUG_SET("DumpParseTree");
+//		SanityManager.DEBUG_SET("DumpParseTree");
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 
 		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
@@ -29,7 +29,7 @@ public class DerbySelect {
 		pstate1.setInt(1, 1);
 		ResultSet rset1 = pstate1.executeQuery();
 		while (rset1.next()) {
-			System.out.println(rset1.getInt(1) + ">" + rset1.getString(2));
+			System.out.println(rset1.getString("val"));
 		}
 		rset1.close();
 		pstate1.close();
