@@ -8,19 +8,17 @@ public class lockTest {
 
 	public static void main(String[] args) throws StandardException {
 		ConcurrentPool concurrentPool = new ConcurrentPool();
-		MyLockOwner myLockOwner = new MyLockOwner();
+		MyLockOwner myLockOwner = new MyLockOwner(concurrentPool);
 		myLockOwner.setNestedOwner(true);
 		myLockOwner.setNestsUnder(true);
 		myLockOwner.setNoWait(true);
-
-		LockSpace lockSpace = new LockSpace();
-		lockSpace.setOwner(myLockOwner);
 
 		Object group = new Object();
 		MyLockObject myLockObject = new MyLockObject();
 		Object qualifier = new Object();
 
-		concurrentPool.lockObject(lockSpace, group, myLockObject, qualifier, C_LockFactory.TIMED_WAIT);
+		concurrentPool.lockObject(myLockOwner.getCompatibilitySpace(), group, myLockObject, qualifier,
+				C_LockFactory.TIMED_WAIT);
 	}
 
 }
