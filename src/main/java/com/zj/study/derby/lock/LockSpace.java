@@ -5,10 +5,14 @@ import org.apache.derby.iapi.services.locks.LockOwner;
 
 public class LockSpace implements CompatibilitySpace {
 
+	private LockOwner owner;
+
 	@Override
 	public LockOwner getOwner() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.owner;
 	}
 
+	public void setOwner(LockOwner owner) {
+		this.owner = owner;
+	}
 }

@@ -23,4 +23,23 @@ public class MyLockOwner implements LockOwner {
 		return this.nestsUnder;
 	}
 
+	public boolean isNoWait() {
+		return noWait;
+	}
+
+	public void setNoWait(boolean noWait) {
+		this.noWait = noWait;
+	}
+
+	public boolean isNestsUnder() {
+		return nestsUnder;
+	}
+
+	public void setNestsUnder(boolean nestsUnder) {
+		this.nestsUnder = nestsUnder;
+	}
+
+	public void setNestedOwner(boolean isNestedOwner) {
+		this.isNestedOwner = isNestedOwner;
+	}
 }
