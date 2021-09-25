@@ -17,8 +17,11 @@ public class lockTest {
 		MyLockObject myLockObject = new MyLockObject();
 		Object qualifier = new Object();
 
-		concurrentPool.lockObject(myLockOwner.getCompatibilitySpace(), group, myLockObject, qualifier,
+		boolean b = concurrentPool.lockObject(myLockOwner.getCompatibilitySpace(), group, myLockObject, qualifier,
 				C_LockFactory.TIMED_WAIT);
+		System.out.println(b == true ? "success" : false);
+		b = concurrentPool.lockObject(myLockOwner.getCompatibilitySpace(), group, myLockObject, qualifier, C_LockFactory.TIMED_WAIT);
+		System.out.println(b == true ? "success" : false);
 	}
 
 }
