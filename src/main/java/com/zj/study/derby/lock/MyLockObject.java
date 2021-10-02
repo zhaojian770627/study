@@ -9,8 +9,7 @@ public class MyLockObject implements Lockable {
 
 	@Override
 	public void lockEvent(Latch lockInfo) {
-		// TODO Auto-generated method stub
-
+		System.out.println(lockInfo);
 	}
 
 	@Override
