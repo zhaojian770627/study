@@ -51,7 +51,7 @@ public class DerbyCreate {
 		conn.setAutoCommit(false);
 		Statement state2 = conn.createStatement();
 		state2.executeUpdate("insert into derbytable values (1,'tom') ");
-//		state2.executeUpdate("insert into derbytable values (2,'jerry') ");
+		state2.executeUpdate("insert into derbytable values (2,'jerry') ");
 		state2.close();
 //		conn.rollback();
 		conn.commit();

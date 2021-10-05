@@ -1,15 +1,13 @@
 package com.zj.study.derby;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.derby.shared.common.sanity.SanityManager;
-
 public class DerbySelect {
+	Connection conn;
 
 	public static void main(String[] args) throws Exception {
 //		SanityManager.DEBUG_SET("ClassLineNumbers");
@@ -18,40 +16,29 @@ public class DerbySelect {
 //		SanityManager.DEBUG_SET("DumpParseTree");
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 
-		Connection conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
-
-		selectData(conn);
-		conn.close();
+		DerbySelect select = new DerbySelect();
+		select.selectData();
+		select.close();
 	}
 
-	private static void selectData(Connection conn) throws SQLException {
-		PreparedStatement pstate1 = conn.prepareStatement("select * from derbytable where id = ?");
+	public DerbySelect() throws SQLException {
+		conn = DriverManager.getConnection("jdbc:derby:d://data//debugdb;create=true");
+	}
+
+	private void selectData() throws SQLException {
+		PreparedStatement pstate1 = conn.prepareStatement("select * from derbytable where id = ? and val= ?");
 		pstate1.setInt(1, 1);
+		pstate1.setString(2, "tom");
 		ResultSet rset1 = pstate1.executeQuery();
 		while (rset1.next()) {
 			System.out.println(rset1.getString("val"));
 		}
 		rset1.close();
 		pstate1.close();
-
 	}
 
-	public static boolean deleteFile(File dirFile) {
-		// 如果dir对应的文件不存在，则退出
-		if (!dirFile.exists()) {
-			return false;
-		}
-
-		if (dirFile.isFile()) {
-			return dirFile.delete();
-		} else {
-
-			for (File file : dirFile.listFiles()) {
-				deleteFile(file);
-			}
-		}
-
-		return dirFile.delete();
+	private void close() throws SQLException {
+		if (conn != null)
+			conn.close();
 	}
-
 }
