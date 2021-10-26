@@ -5,6 +5,15 @@ import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 
 public class Java8FuncProgram {
+	private int num = 0;
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 
 	public static void main(String[] args) {
 		GreetingService greetService1 = message -> System.out.println("Hello " + message);
@@ -21,6 +30,14 @@ public class Java8FuncProgram {
 		System.out.println(BinaryOperator.maxBy(comparator).apply("aaaa", "bbb"));
 		Object o = BinaryOperator.maxBy(comparator);
 		System.out.println(o.getClass());
+		new Java8FuncProgram().setValue(Java8FuncProgram::setNum);
+
+	}
+
+	public void setValue(BiConsumer<Java8FuncProgram, Integer> setter) {
+		Java8FuncProgram program = new Java8FuncProgram();
+		setter.accept(program, Integer.valueOf(10));
+		System.out.println(program.getNum());
 
 	}
 
