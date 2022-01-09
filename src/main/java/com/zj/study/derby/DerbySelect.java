@@ -8,13 +8,14 @@ import java.sql.SQLException;
 
 import org.apache.derby.shared.common.sanity.SanityManager;
 
+
 public class DerbySelect {
 	Connection conn;
 
 	public static void main(String[] args) throws Exception {
-		SanityManager.DEBUG_SET("ClassLineNumbers");
-		SanityManager.DEBUG_SET("DumpClassFile");
-		SanityManager.DEBUG_SET("ByteCodeGenInstr");
+//		SanityManager.DEBUG_SET("ClassLineNumbers");
+//		SanityManager.DEBUG_SET("DumpClassFile");
+//		SanityManager.DEBUG_SET("ByteCodeGenInstr");
 		SanityManager.DEBUG_SET("DumpParseTree");
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 
